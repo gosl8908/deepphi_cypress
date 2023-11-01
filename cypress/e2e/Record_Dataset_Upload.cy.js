@@ -24,19 +24,19 @@ describe('Record Dataset Upload Test', () => {
     cy.fixture('자동화용 데이터셋.csv').then(fileContent => {
       cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({ // 학습 데이터셋
           fileContent,
-          filePath: 'C:\\cypress\\cypress\\fixtures\\자동화용 데이터셋.csv',
+          filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
           fileName: '자동화용 데이터셋.csv',
           mimeType: 'text/csv'
   });
     cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({ // 검증 데이터셋
         fileContent,
-        filePath: 'C:\\cypress\\cypress\\fixtures\\자동화용 데이터셋.csv',
+        filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
         fileName: '자동화용 데이터셋.csv',
         mimeType: 'text/csv'
 });
       cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({ // 평가 데이터셋
           fileContent,
-          filePath: 'C:\\cypress\\cypress\\fixtures\\자동화용 데이터셋.csv',
+          filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
           fileName: '자동화용 데이터셋.csv',
           mimeType: 'text/csv'
   });

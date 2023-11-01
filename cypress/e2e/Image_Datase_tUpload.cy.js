@@ -30,7 +30,7 @@ describe('Image Dataset Upload Test', () => {
         cy.fixture('자동화용 데이터셋(2D 분류).zip').then(fileContent => {
             cy.get('input[accept=".zip"][type="file"]').attachFile({
                 fileContent,
-                filePath: 'C:\\cypress\\cypress\\fixtures\\자동화용 데이터셋(2D 분류).zip',
+                filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋(2D 분류).zip',
                 fileName: '자동화용 데이터셋(2D 분류).zip',
                 mimeType: 'application/zip'
         });
