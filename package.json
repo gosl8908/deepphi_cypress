@@ -1,0 +1,21 @@
+{
+  "name": "my-cypress-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@4tw/cypress-drag-drop": "^2.2.5",
+    "cypress": "^13.4.0",
+    "cypress-file-upload": "^5.0.8",
+    "cypress-real-events": "^1.10.3"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.7"
+  }
+}
