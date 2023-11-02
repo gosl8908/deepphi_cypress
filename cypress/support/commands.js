@@ -86,7 +86,7 @@ function getCurrentDate(){
     Cypress.env('signup_id', currentDate.signup_id);
     Cypress.env('id', currentDate.id);
     Cypress.env('auto_test_id', currentDate.auto_test_id);
-    Cypress.env('Password', currentDate.password);
+    Cypress.env('password', currentDate.password);
     Cypress.env('Nickname', currentDate.Nickname);
     Cypress.env('RecordDatasetName', currentDate.Record_Dataset_name);
     Cypress.env('RecordProjectName', currentDate.Record_Project_name);
