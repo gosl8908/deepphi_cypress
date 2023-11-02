@@ -3,10 +3,11 @@ describe('SignUp Test', () => {
 
   before(() => {
     cy.setDateToEnv();
-    cy.viewport(1920, 1080); // FHD 해상도 설정
     cy.getAllCookies(); // 쿠키 삭제
     cy.getAllLocalStorage(); // 로컬 삭제
     cy.getAllSessionStorage(); // 세션 삭제
+    cy.viewport(1920, 1080); // FHD 해상도 설정
+
     
   });
 

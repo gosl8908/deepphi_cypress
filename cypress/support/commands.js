@@ -34,7 +34,7 @@ Cypress.Commands.add('ModuleAdd', (select, target, x_coordinate, y_coordinate) =
 })
 
 // 시간 선언
-import 'cypress-file-upload';
+// import 'cypress-file-upload';
 
 
 function getCurrentDate(){

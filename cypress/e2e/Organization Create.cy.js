@@ -3,10 +3,13 @@ describe('Organization Create', () => {
 
   before(() => {
     cy.setDateToEnv();
+    cy.getAllCookies(); // 쿠키 삭제
+    cy.getAllLocalStorage(); // 로컬 삭제
+    cy.getAllSessionStorage(); // 세션 삭제
     cy.viewport(1920, 1080); // FHD 해상도 설정
-    cy.clearCookies(); // 모든 쿠키 지우기
-    
+
   });
+
 
   it('Organization Create', () => {
     cy.visit(Cypress.env('prod')) 
@@ -22,7 +25,7 @@ describe('Organization Create', () => {
 
     // 단체 삭제
     cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
-    cy.get('#organization_confirm').type('단체'); // 단체명 입력
+    cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
     cy.get('.modal-button-content > .btn-danger').click(); // 삭제
 
     // 단체 생성
@@ -85,6 +88,7 @@ describe('Organization Create', () => {
   });
 
   it('Organization Credit Charge', () => {
+    cy.viewport(1920, 1080); // FHD 해상도 설정
     cy.visit(Cypress.env('prodadmin')) 
     cy.get('#username').type(Cypress.env('id')); // 이메일 입력
     cy.get('#password').type(Cypress.env('Password')); // 비밀번호 입력
@@ -96,7 +100,8 @@ describe('Organization Create', () => {
     cy.wait(3000);
     cy.get(':nth-child(2) > .form-control').type('자동화용 단체') // 단체명 입력
     cy.get('.btn-navy').click(); // 검색
-    cy.get(':nth-child(1) > :nth-child(7) > .btn').click();
+    cy.get(':nth-child(1) > :nth-child(7) > .btn').click(); // 충전
+    cy.wait(5000); // 파라미터 값 불러오기
     cy.get('.btn-blue > span').click();
     cy.get(':nth-child(1) > .text-left > .display-block > .p-dropdown > .p-dropdown-label').click(); // 크레딧 타입
     cy.get(':nth-child(1) > .p-dropdown-item').click(); // 유료
@@ -104,13 +109,14 @@ describe('Organization Create', () => {
     cy.get(':nth-child(1) > .p-dropdown-item').click(); // 리워드 적립
     cy.get('.text-right > .display-block').type('100000'); // 금액 입력
     cy.get('.wrap--input-and-button > .p-calendar__width__custom > .p-calendar > .p-inputtext').click(); // 유효기간
-    cy.get('.p-datepicker-today').click(); // 31일
+    cy.get('.p-datepicker-today').click(); // Today 
     cy.get('.text-left > .ng-untouched').type('test'); // 메모
     cy.get('.modal--btn-area > .btn-navy').click(); // 충전
     cy.get('.modal--btn-area > .btn-danger').click(); // 예
     cy.wait(3000);
     cy.contains('정상 충전되었습니다.'); // 충전 확인
     cy.get('admin-credit-alert-modal.ng-star-inserted > .modal--wrap > .modal--btn-area > .btn').click(); // 확인
+    cy.wait(3000);
   });
 
     
@@ -125,13 +131,14 @@ describe('Organization Create', () => {
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
     cy.get('.organization-changer__opener').click(); 
-    cy.get('ul > .ng-star-inserted').click(); // 단체 선택
+    cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click(); // 단체 선택
     cy.wait(3000);
     cy.get(':nth-child(7) > button').click(); // 크레딧
     cy.get('.control-box__button > .btn').click(); // 업그레이드
     cy.get(':nth-child(1) > div > .radio-item > em').click(); // 필수 체크
     cy.get('.mt3 > div > .radio-item > em').click(); // 필수 체크
     cy.get('.modal-button-content > .btn-primary').click(); // 결제
+    cy.wait(3000);
     cy.get('.modal-button-content > .btn').click(); // 확인
     cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
     
