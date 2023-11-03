@@ -12,7 +12,7 @@ describe('Image Dataset Upload Test', () => {
         cy.visit(Cypress.env('prod')) 
         cy.contains('로그인').click(); // 로그인 클릭
         cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-        cy.get('#password').type(Cypress.env('Password')); // 비밀번호 입력
+        cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
         cy.get('#kc-login').click() // 로그인 선택
         cy.wait(3000);
 
