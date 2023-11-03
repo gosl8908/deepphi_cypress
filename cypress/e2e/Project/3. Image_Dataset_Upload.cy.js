@@ -1,3 +1,4 @@
+const { loginModule } = require('./Module/moduleManager.js');
 
 describe('Image Dataset Upload Test', () => {
     before(()=>{
@@ -9,12 +10,7 @@ describe('Image Dataset Upload Test', () => {
     });
     
     it('Dataset Upload test', () => {
-        cy.visit(Cypress.env('prod')) 
-        cy.contains('로그인').click(); // 로그인 클릭
-        cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-        cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-        cy.get('#kc-login').click() // 로그인 선택
-        cy.wait(3000);
+      loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
         // 이미지 데이터셋 생성
         cy.contains('이미지 데이터셋').click(); // 데이터셋 화면 진입

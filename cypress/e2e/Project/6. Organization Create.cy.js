@@ -1,3 +1,4 @@
+const { loginModule } = require('./Module/moduleManager.js');
 
 describe('Organization Create', () => {
 
@@ -12,12 +13,7 @@ describe('Organization Create', () => {
 
 
   it('Organization Create', () => {
-    cy.visit(Cypress.env('prod')) 
-    cy.contains('로그인').click(); // 로그인 클릭
-    cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-    cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-    cy.get('#kc-login').click() // 로그인 선택
-    cy.wait(3000);
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
@@ -88,12 +84,7 @@ describe('Organization Create', () => {
   });
 
   it('Organization Credit Charge', () => {
-    cy.viewport(1920, 1080); // FHD 해상도 설정
-    cy.visit(Cypress.env('prodadmin')) 
-    cy.get('#username').type(Cypress.env('id')); // 이메일 입력
-    cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-    cy.get('#kc-login').click() // 로그인 선택
-    cy.wait(3000);
+    loginModule.login( Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password') );
 
     cy.get(':nth-child(8) > a > span').click(); // 단체관리
     cy.get('.p-panelmenu-header-link > .p-menuitem-text').click(); // 단체 리스트
@@ -121,12 +112,7 @@ describe('Organization Create', () => {
 
     
   it('Organization DISK subscribe', () => {
-    cy.visit(Cypress.env('prod')) 
-    cy.contains('로그인').click(); // 로그인 클릭
-    cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-    cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-    cy.get('#kc-login').click() // 로그인 선택
-    cy.wait(3000);
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택

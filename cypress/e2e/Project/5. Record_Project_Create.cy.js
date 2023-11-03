@@ -1,3 +1,4 @@
+const { loginModule } = require('./Module/moduleManager.js');
 
 describe('Record Project Create & Run', () => {
 
@@ -11,13 +12,7 @@ describe('Record Project Create & Run', () => {
   });
 
   it('Record Project Create & Run', () => {
-    cy.visit(Cypress.env('prod')) 
-    cy.contains('로그인').click(); // 로그인 클릭
-    cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-    cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-    cy.get('#kc-login').click() // 로그인 선택
-    cy.wait(3000);
-
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
     // 프로젝트 생성
     cy.contains('프로젝트 생성').click(); // 프로젝트 생성 
     cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // 레코드 선택

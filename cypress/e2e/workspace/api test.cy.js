@@ -1,4 +1,4 @@
-describe('SignUp Test', () => {
+describe('api test', () => {
 
   before(() => {
     // cy.setDateToEnv();
@@ -10,7 +10,7 @@ describe('SignUp Test', () => {
 
   
 
-  it('User change information', () => {
+  it('인퍼런스 서비스 api test', () => {
     cy.fixture("glass1.jpg").as('imageFile').then((fileContent) => {
       cy.request({
         method: "POST",
@@ -28,9 +28,7 @@ describe('SignUp Test', () => {
               fileContent,
                 filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\glass1.jpg',
                 fileName: 'glass1.jpg',
-                mimeType: 'image/jpeg'
-              // filename: "glass1.jpg",
-              // mimeType: "image/jpeg",
+                mimeType: 'image/jpeg',
             },
             formData: true, // 파일 업로드를 위해 formData를 사용
             failOnStatusCode: false, // 에러가 발생해도 계속 진행

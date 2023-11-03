@@ -1,5 +1,6 @@
+const { loginModule } = require('./Module/moduleManager.js');
 
-describe('Record Project Create', () => {
+describe('Project Delete', () => {
 
   before(() => {
     cy.setDateToEnv();
@@ -8,13 +9,8 @@ describe('Record Project Create', () => {
     
   });
 
-  it('Record Project Create', () => {
-    cy.visit(Cypress.env('prod')) 
-    cy.contains('로그인').click(); // 로그인 클릭
-    cy.get('#username').type(Cypress.env('auto_test_id')); // 이메일 입력
-    cy.get('#password').type(Cypress.env('password')); // 비밀번호 입력
-    cy.get('#kc-login').click() // 로그인 선택
-    cy.wait(3000);
+  it('Project Delete', () => {
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     
     for (let i = 0; i < 100; i++) { // 반복 100번
