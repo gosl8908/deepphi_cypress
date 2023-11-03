@@ -1,4 +1,4 @@
-const { loginModule } = require('./Module/moduleManager.js');
+const { loginModule , emailModule } = require('../../e2e/Module/moduleManager.js');
 
 describe('Organization Create', () => {
 
@@ -128,26 +128,7 @@ describe('Organization Create', () => {
     cy.get('.modal-button-content > .btn').click(); // 확인
     cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
     
-
-        // 테스트 결과 이메일 전송
+    emailModule.email(emailtitle, emailbody);
     
-        // 테스트 결과를 로그로 기록합니다
-        cy.log("테스트가 성공적으로 완료되었습니다.");
-
-        // 테스트 결과를 포함한 이메일을 보냅니다
-        const emailSubject = "Cypress Organization Create 테스트 결과";
-        const emailBody = "Cypress Organization Create 테스트 스위트(단체 생성, 단체 삭제, 멤버 초대, 그룹 생성, 그룹 삭제, 크레딧 충전, 디스크 구독)가 성공적으로 완료되었습니다.";
-    
-        cy.task("sendEmail", {
-          recipient: "gosl8908@deepnoid.com, js_lee@deepnoid.com",
-          subject: emailSubject,
-          body: emailBody,
-        }).then((success) => {
-          if (success) {
-            cy.log("이메일 전송 성공.");
-          } else {
-            cy.log("이메일 전송 실패.");
-          }
-        });
 });
 });

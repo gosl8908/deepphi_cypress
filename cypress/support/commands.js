@@ -65,7 +65,9 @@ function getCurrentDate(){
       Image_Project_name: `ImageProejct${year}${month}${day}${hours}${minutes}${seconds}`,
       Record_Dataset_name: `RecordDataset${year}${month}${day}${hours}${minutes}${seconds}`,
       Record_Project_name: `RecordProejct${year}${month}${day}${hours}${minutes}${seconds}`,
-      Inference_name: `Inference${year}${month}${day}${hours}${minutes}${seconds}`
+      Inference_name: `Inference${year}${month}${day}${hours}${minutes}${seconds}`,
+      emailtitle: `${year}-${month}-${day} Cypress 자동화 테스트 결과`,
+      emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 일정 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}`,
     }
   
   }  
@@ -91,4 +93,6 @@ function getCurrentDate(){
     Cypress.env('ImageDatasetName', currentDate.Image_Dataset_name);
     Cypress.env('ImageProjectName', currentDate.Image_Project_name);
     Cypress.env('InferenceName', currentDate.Image_Project_name);
+    Cypress.env('emailSubject', currentDate.emailtitle);
+    Cypress.env('emailbody', currentDate.emailbody);
   });

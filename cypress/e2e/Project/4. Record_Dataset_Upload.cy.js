@@ -1,4 +1,4 @@
-const { loginModule } = require('./Module/moduleManager.js');
+const { loginModule , emailModule } = require('../../e2e/Module/moduleManager.js');
 
 describe('Record Dataset Upload Test', () => {
   before(()=>{
@@ -50,25 +50,6 @@ describe('Record Dataset Upload Test', () => {
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크
 
-        // 테스트 결과 이메일 전송
-    
-        // 테스트 결과를 로그로 기록합니다
-        cy.log("테스트가 성공적으로 완료되었습니다.");
-
-        // 테스트 결과를 포함한 이메일을 보냅니다
-        const emailSubject = "Cypress Record Dataset Upload 테스트 결과";
-        const emailBody = "Cypress Record Dataset Upload 테스트 스위트(학습, 검증, 평가 데이터셋)가 성공적으로 완료되었습니다.";
-    
-        cy.task("sendEmail", {
-          recipient: "gosl8908@deepnoid.com, js_lee@deepnoid.com",
-          subject: emailSubject,
-          body: emailBody,
-        }).then((success) => {
-          if (success) {
-            cy.log("이메일 전송 성공.");
-          } else {
-            cy.log("이메일 전송 실패.");
-          }
-        });
+    emailModule.email(emailtitle, emailbody);
   });
 });
