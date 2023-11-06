@@ -67,6 +67,7 @@ function getCurrentDate(){
       Record_Project_name: `RecordProejct${year}${month}${day}${hours}${minutes}${seconds}`,
       Inference_name: `Inference${year}${month}${day}${hours}${minutes}${seconds}`,
       emailtitle: `${year}-${month}-${day} Cypress 자동화 테스트 결과`,
+      emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
       SignUp_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인`,
       User_change_information_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 프로필 정보 변경 3. 비밀번호 변경 4. DISK 업그레이드`,
       image_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 데이터셋 업로드 3. 변환 4. 사용 용도 수정 5. 데이터셋에 파일 포함 6. 데이터셋 이름 변경 7. 이미지 데이터셋 삭제`,
@@ -105,4 +106,5 @@ function getCurrentDate(){
     Cypress.env('Record_Dataset_Upload_emailbody', currentDate.Record_Dataset_Upload_emailbody);
     Cypress.env('Record_Project_Create_emailbody', currentDate.Record_Project_Create_emailbody);
     Cypress.env('Organization_Create_emailbody', currentDate.Organization_Create_emailbody);
+    Cypress.env('emailbody', currentDate.emailbody);
   });
