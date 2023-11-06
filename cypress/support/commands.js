@@ -67,7 +67,12 @@ function getCurrentDate(){
       Record_Project_name: `RecordProejct${year}${month}${day}${hours}${minutes}${seconds}`,
       Inference_name: `Inference${year}${month}${day}${hours}${minutes}${seconds}`,
       emailtitle: `${year}-${month}-${day} Cypress 자동화 테스트 결과`,
-      emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 일정 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}`,
+      SignUp_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인`,
+      User_change_information_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 프로필 정보 변경 3. 비밀번호 변경 4. DISK 업그레이드`,
+      image_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 데이터셋 업로드 3. 변환 4. 사용 용도 수정 5. 데이터셋에 파일 포함 6. 데이터셋 이름 변경 7. 이미지 데이터셋 삭제`,
+      Record_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 데이터셋 업로드 3. 설정 완료`,
+      Record_Project_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 프로젝트 생성 3. 리소스 설정 4. 모듈 추가 5. 모듈 연결 6. 실행 7. 시각화 생성 8. 시각화 삭제`,
+      Organization_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 단체 삭제 3. 단체 생성 4. 맴버 초대 5. 그룹 생성 6. 그룹 멤버 초대 7. 그룹 삭제 8. 크레딧 충전 9. 단체 DISK 구독`,
     }
   
   }  
@@ -93,6 +98,11 @@ function getCurrentDate(){
     Cypress.env('ImageDatasetName', currentDate.Image_Dataset_name);
     Cypress.env('ImageProjectName', currentDate.Image_Project_name);
     Cypress.env('InferenceName', currentDate.Image_Project_name);
-    Cypress.env('emailSubject', currentDate.emailtitle);
-    Cypress.env('emailbody', currentDate.emailbody);
+    Cypress.env('emailtitle', currentDate.emailtitle);
+    Cypress.env('SignUp_emailbody', currentDate.SignUp_emailbody);
+    Cypress.env('User_change_information_emailbody', currentDate.User_change_information_emailbody);
+    Cypress.env('image_Dataset_Upload_emailbody', currentDate.image_Dataset_Upload_emailbody);
+    Cypress.env('Record_Dataset_Upload_emailbody', currentDate.Record_Dataset_Upload_emailbody);
+    Cypress.env('Record_Project_Create_emailbody', currentDate.Record_Project_Create_emailbody);
+    Cypress.env('Organization_Create_emailbody', currentDate.Organization_Create_emailbody);
   });

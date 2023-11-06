@@ -84,7 +84,7 @@ describe('SignUp Test', () => {
   cy.wait(5000);
   cy.screenshot('SignUp_Completed' + Cypress.env('date+label'));
 
-  emailModule.email(emailtitle, emailbody);
+  emailModule.email(Cypress.env('emailtitle'), Cypress.env('SignUp_emailbody'));
 
 });
 });

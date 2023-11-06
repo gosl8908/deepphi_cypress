@@ -1,4 +1,4 @@
-describe('api test', () => {
+describe('인퍼런스 서비스 api test', () => {
 
   before(() => {
     // cy.setDateToEnv();
@@ -11,10 +11,13 @@ describe('api test', () => {
   
 
   it('인퍼런스 서비스 api test', () => {
-    cy.fixture("glass1.jpg").as('imageFile').then((fileContent) => {
+    let decodedFileContent; // decodedFileContent 변수를 선언
+
+    cy.fixture("dfgfdgdf_sample_20231103_163450.csv").then((fileContent) => {
       cy.request({
         method: "POST",
-        url: "https://inference.deepphi.ai/aas/1.0/api/prediction",
+        url: "https://dev-inference.deepphi.ai/dfgfdgdf/1.3/api/inference",
+        failOnStatusCode: false, // 실패 상태 코드 무시
         headers: {
           "Content-Type": "multipart/form-data",
           "Accept-Encoding": "gzip, deflate, br",
@@ -22,23 +25,20 @@ describe('api test', () => {
           "Connection": "keep-alive", // Connection 헤더 추가
         },
         form: true, // form 데이터를 사용할 것임을 명시
+        
         body: {
-          requestFile: {
-            value: {
-              fileContent,
-                filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\glass1.jpg',
-                fileName: 'glass1.jpg',
-                mimeType: 'image/jpeg',
-            },
-            formData: true, // 파일 업로드를 위해 formData를 사용
-            failOnStatusCode: false, // 에러가 발생해도 계속 진행
-            timeout: 10000, // 요청 타임아웃 설정
-            retryOnNetworkFailure: true, // 네트워크 실패 시 재시도
+          file: {
+            value: decodedFileContent, // 디코딩된 파일 내용 사용
+            options: {
+              filename: 'dfgfdgdf_sample_20231103_163450.csv',
+              mimeType: 'text/csv',
           },
         },
+      },
       }).then((response) => {
         // 여기에서 API 응답을 검사하고 원하는 테스트를 수행
-        expect(response.status).to.eq(200); // HTTP 상태 코드
+        
+        expect(response.status).to.eq(200); // 예상되는 HTTP 상태 코드
       });
     });
   });

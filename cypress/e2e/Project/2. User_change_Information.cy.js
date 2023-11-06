@@ -1,3 +1,4 @@
+const { emailModule } = require('../../e2e/Module/moduleManager.js');
 
 describe('User change information', () => {
   
@@ -60,26 +61,7 @@ describe('User change information', () => {
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
     cy.contains('이용기간'); // 결제 확인
 
-        // 테스트 결과 이메일 전송
-    
-        // 테스트 결과를 로그로 기록합니다
-        cy.log("테스트가 성공적으로 완료되었습니다.");
-
-        // 테스트 결과를 포함한 이메일을 보냅니다
-        const emailSubject = "Cypress User Change Information 테스트 결과";
-        const emailBody = "Cypress User Change Information 테스트 스위트(프로필 정보 변경, 비밀번호 변경, DISK 업그레이드)가 성공적으로 완료되었습니다.";
-    
-        cy.task("sendEmail", {
-          recipient: "gosl8908@deepnoid.com, js_lee@deepnoid.com",
-          subject: emailSubject,
-          body: emailBody,
-        }).then((success) => {
-          if (success) {
-            cy.log("이메일 전송 성공.");
-          } else {
-            cy.log("이메일 전송 실패.");
-          }
-        });
-  });
+    emailModule.email(Cypress.env('emailtitle'), Cypress.env('User_change_Information_emailbody'));
+    });
   });
 });

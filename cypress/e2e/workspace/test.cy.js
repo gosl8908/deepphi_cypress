@@ -87,6 +87,6 @@ describe('SignUp Test', () => {
     //   });
     // });
 
-    emailModule.email(emailtitle, emailbody);
+    emailModule.email(Cypress.env('emailtitle'), Cypress.env('emailbody'));
   });
 });
