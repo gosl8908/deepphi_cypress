@@ -28,13 +28,13 @@ module.exports = {
             port: 587,
             secure: false,
             auth: {
-              user: 'gosl8908@deepnoid.com',
+              user: Cypress.env('id'),
               pass: 'rnrmf0215!'
             },
           });
 
           const mailOptions = {
-            from: 'gosl8908@deepnoid.com',
+            from: Cypress.env('id'),
             to: 'gosl8908@deepnoid.com, js_lee@deepnoid.com',
             subject: subject,
             text: body,
