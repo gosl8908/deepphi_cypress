@@ -78,7 +78,7 @@ describe('Image Dataset Upload Test', () => {
         cy.wait(10000);
         cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.'); // 데이터셋 삭제 확인
         
-        emailModule.email(Cypress.env('emailtitle'), Cypress.env('Image_Dataset_Upload_emailbody'));
+        emailModule.email( Cypress.env('emailtitle'), Cypress.env('image_Dataset_Upload_emailbody') );
   });
     });
 });

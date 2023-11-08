@@ -27,6 +27,8 @@ describe('인퍼런스 서비스 api test', () => {
         } else {
         cy.log(`Unexpected response status: ${response.status}`); // 다른 응답 코드 처리
         };
+      cy.log('API 응답 결과:'); // 응답 결과 로그로 출력
+      cy.log(response.body);
       });
     });
     emailModule.email(Cypress.env('emailtitle'), Cypress.env('emailbody'));
