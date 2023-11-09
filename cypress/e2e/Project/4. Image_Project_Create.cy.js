@@ -12,6 +12,7 @@ describe('Image Project Create', () => {
 
 
   it('Image Project Create', () => {
+          // 로그인
     loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
     
         // 이미지 프로젝트 생성
@@ -21,7 +22,7 @@ describe('Image Project Create', () => {
         cy.get('#project_name').type(Cypress.env('ImageProjectName')); // 프로젝트 타이틀 입력
         cy.get('.note-editable').type(Cypress.env('ImageProjectName')); // 프로젝트 Detail 입력
         cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
-        cy.wait(3000);
+        cy.wait(5000);
 
         // 리소스 설정
         cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
@@ -82,7 +83,6 @@ describe('Image Project Create', () => {
         cy.wait(3000);
     
         //데이터셋에서 Resize 연결
-    
         cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").realHover('mouse');
         cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(200, 0).realMouseUp();
         cy.wait(3000);

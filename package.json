@@ -16,6 +16,7 @@
     "cypress-real-events": "^1.10.3"
   },
   "dependencies": {
+    "cypress-clipboard": "^1.0.3",
     "nodemailer": "^6.9.7"
   }
 }

@@ -11,6 +11,7 @@ describe('Record Test Project Create', () => {
   });
 
   it('Record Test Project Create', () => {
+    // 로그인  
     loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
     
         // 이미지 프로젝트 생성

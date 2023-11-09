@@ -13,6 +13,7 @@ describe('Organization Create', () => {
 
 
   it('Organization Create', () => {
+    // 로그인
     loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
@@ -85,6 +86,7 @@ describe('Organization Create', () => {
 
   // 단체 크레딧 충전
   it('Organization Credit Charge', () => {
+    // 로그인
     loginModule.login( Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password') );
 
     cy.get(':nth-child(8) > a > span').click(); // 단체관리

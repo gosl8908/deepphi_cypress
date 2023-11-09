@@ -1,8 +1,9 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\bin\yarn.js add real-events --dev
+  C:\Program Files\nodejs\node.exe C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\bin\yarn.js cypress run --browser=chrome --spec cypress/e2e/workspace/api test.cy.js
+  yarn cypress run --browser=chrome --spec  cypress/e2e/workspace/api test.cy.js
 
 PATH: 
-  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Bandizip\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Users\강해성\AppData\Local\Microsoft\WindowsApps;C:\Users\강해성\AppData\Roaming\npm
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Bandizip\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\강해성\AppData\Local\Microsoft\WindowsApps;C:\Users\강해성\AppData\Roaming\npm;C:\Users\강해성\AppData\Local\Programs\Microsoft VS Code\bin
 
 Yarn version: 
   1.22.19
@@ -14,17 +15,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/real-events: Not found
-      at params.callback [as _callback] (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:66145:18)
-      at self.callback (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:140890:22)
-      at Request.emit (node:events:514:28)
-      at Request.<anonymous> (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:141862:10)
-      at Request.emit (node:events:514:28)
-      at IncomingMessage.<anonymous> (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:628:28)
-      at IncomingMessage.emit (node:events:526:35)
-      at endReadableNT (node:internal/streams/readable:1408:12)
-      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+  Error: Line breaks can't be quoted on Windows
+      at quoteForCmd (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135256:11)
+      at Formatter.quote (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135415:12)
+      at [format] (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135466:28)
+      at C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135834:58
+      at Array.map (<anonymous>)
+      at [format] (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135834:26)
+      at ShellString.toString (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135830:30)
+      at sh (C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:135923:55)
+      at C:\Users\강해성\AppData\Local\node\corepack\yarn\1.22.19\lib\cli.js:61585:52
+      at Generator.next (<anonymous>)
 
 npm manifest: 
   {
@@ -39,8 +40,10 @@ npm manifest:
     "author": "",
     "license": "ISC",
     "devDependencies": {
+      "@4tw/cypress-drag-drop": "^2.2.5",
       "cypress": "^13.4.0",
-      "cypress-file-upload": "^5.0.8"
+      "cypress-file-upload": "^5.0.8",
+      "cypress-real-events": "^1.10.3"
     },
     "dependencies": {
       "nodemailer": "^6.9.7"

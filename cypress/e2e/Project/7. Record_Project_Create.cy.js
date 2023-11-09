@@ -12,7 +12,9 @@ describe('Record Project Create & Run', () => {
   });
 
   it('Record Project Create & Run', () => {
+    // 로그인
     loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+
     // 프로젝트 생성
     cy.contains('프로젝트 생성').click(); // 프로젝트 생성 
     cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // 레코드 선택

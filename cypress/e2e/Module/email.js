@@ -19,7 +19,7 @@ function email(emailtitle, emailbody) {
             cy.log("이메일 전송 실패.");
           }
         });
-}
+};
 
 module.exports ={
     email: email,

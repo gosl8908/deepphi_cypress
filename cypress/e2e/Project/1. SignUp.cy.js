@@ -1,6 +1,6 @@
 const { emailModule } = require('../../e2e/Module/moduleManager.js');
 
-describe('SignUp Test', () => {
+describe('SignUp', () => {
 
   before(() => {
     cy.setDateToEnv();
@@ -8,12 +8,10 @@ describe('SignUp Test', () => {
     cy.getAllLocalStorage(); // 로컬 삭제
     cy.getAllSessionStorage(); // 세션 삭제
     cy.viewport(1920, 1080); // FHD 해상도 설정
-
-    
   });
 
   // 일회용 이메일 만들기
-  it('SignUp1', () => {
+  it('Create email', () => {
     cy.visit('http://ruu.kr/') // 일회용 이메일 진입
 
     // 환경 변수에서 날짜 레이블 가져오기
@@ -29,7 +27,7 @@ describe('SignUp Test', () => {
   });
 
   // 회원가입 진행
-  it('SignUp2', () => {
+  it('SignUp', () => {
     cy.visit(Cypress.env('prod'))
     cy.contains('회원가입').click();
     cy.contains('모든 항목에 동의합니다').click() // 모든 항목 동의
@@ -58,7 +56,7 @@ describe('SignUp Test', () => {
   });
 
   // 이메일 인증 확인
-  it('SignUp3', () => {
+  it('Check Verify email', () => {
     cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
     cy.visit('http://ruu.kr/') // 일회용 이메일 진입
     cy.get('#id').type(text); // 이메일 입력
@@ -74,7 +72,7 @@ describe('SignUp Test', () => {
 });
 
   // 회원가입 완료 확인
-  it('SignUp4', () => {
+  it('SignUp Completed Check', () => {
     cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
   cy.visit(Cypress.env('prod'))
   cy.contains('로그인').click();

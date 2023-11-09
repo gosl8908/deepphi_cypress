@@ -9,11 +9,13 @@ describe('Image Dataset Upload Test', () => {
       cy.getAllSessionStorage(); // 세션 삭제
     });
     
-    it('Dataset Upload test', () => {
+    it('Image Dataset Upload test', () => {
+      // 로그인
       loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
         // 이미지 데이터셋 생성
         cy.contains('이미지 데이터셋').click(); // 데이터셋 화면 진입
+        cy.wait(5000);
         cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
         cy.wait(3000);
         cy.get('#dataset_name').type(Cypress.env('ImageDatasetName')); // 데이터셋 이름 입력
@@ -23,6 +25,8 @@ describe('Image Dataset Upload Test', () => {
         cy.get(':nth-child(2) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 분류 선택
         cy.get(':nth-child(1) > .folder-structure-content > .folder-structure-content__header').click(); // 유형 1 선택
         cy.get('form.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click(); // 다음
+
+        // 파일 첨부
         cy.fixture('자동화용 데이터셋(2D 분류).zip').then(fileContent => {
             cy.get('input[accept=".zip"][type="file"]').attachFile({
                 fileContent,
@@ -30,7 +34,9 @@ describe('Image Dataset Upload Test', () => {
                 fileName: '자동화용 데이터셋(2D 분류).zip',
                 mimeType: 'application/zip'
         });
-        cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click(); // 업로드
+
+        // 업로드
+        cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click();
         cy.wait(3000);
         cy.contains('성공'); // 업로드 확인
         cy.screenshot('Image_Dataset_Upload' + Cypress.env('date+label'));
