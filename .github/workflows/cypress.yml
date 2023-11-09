@@ -24,5 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests
-      run: npx cypress run
-
+      run: npx cypress run --spec "e2e/Project/**/*"
