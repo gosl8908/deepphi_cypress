@@ -28,7 +28,7 @@ describe('SignUp', () => {
 
   // 회원가입 진행
   it('SignUp', () => {
-    cy.visit(Cypress.env('prod'))
+    cy.visit(Cypress.env('prodtest'))
     cy.contains('회원가입').click();
     cy.contains('모든 항목에 동의합니다').click() // 모든 항목 동의
     cy.get('.account-button--primary').click(); // 다음
@@ -74,7 +74,7 @@ describe('SignUp', () => {
   // 회원가입 완료 확인
   it('SignUp Completed Check', () => {
     cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
-  cy.visit(Cypress.env('prod'))
+  cy.visit(Cypress.env('prodtest'))
   cy.contains('로그인').click();
   cy.get('#username').type(text+'@ruu.kr'); // 이메일 입력
   cy.get('#password').type('test123!'); // 비밀번호 입력

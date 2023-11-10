@@ -9,7 +9,7 @@ function api() {
   
         cy.request({
           method: "POST",
-          url: "https://dev-inference.deepphi.ai/1109-2/1.0/api/inference", // url 입력
+          url: "https://inference.deepphi.ai/1110-3/1.0/api/inference", // url 입력
           failOnStatusCode: false,
           headers: {
             'Content-Type': 'multipart/form-data', // Content-Type을 multipart/form-data로 설정

@@ -13,7 +13,7 @@ describe('User change information', () => {
 
   it('User change information', () => {
     cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
-    cy.visit(Cypress.env('prod')) 
+    cy.visit(Cypress.env('prodtest')) 
     cy.contains('로그인').click(); // 로그인 클릭
     cy.get('#username').type(text+'@ruu.kr'); // 이메일 입력
     cy.get('#password').type('test123!'); // 비밀번호 입력

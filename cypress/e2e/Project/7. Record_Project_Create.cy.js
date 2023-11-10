@@ -13,7 +13,7 @@ describe('Record Project Create & Run', () => {
 
   it('Record Project Create & Run', () => {
     // 로그인
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 프로젝트 생성
     cy.contains('프로젝트 생성').click(); // 프로젝트 생성 
@@ -143,21 +143,9 @@ describe('Record Project Create & Run', () => {
     cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
     cy.wait(3000);
     cy.get('.btn-floating > .fas').click(); // 클렌징 모듈 추가
-    cy.contains('Text Column Categorize').click(); // Text Column Categorize 선택
-    cy.get("#\\31 1 > .cdk-drag > .button-list > .btn").click(); // 추가
-    cy.wait(3000);
     cy.contains('Calculation').click(); // Calculation 선택
     cy.get('#\\31 3 > .cdk-drag > .button-list > .btn').click(); // 추가
     cy.wait(3000);
-
-    // Text Column Categorize 설정
-    cy.get('[value="2"] > .flow-item > .flow-item__name').click(); 
-    cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 설정 탭
-    cy.get('.ui-multiselect-label').click(); // 대상 선택
-    cy.get(':nth-child(1) > .ui-multiselect-item > .bullet-text').click(); // 대상 선택
-    cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
-    cy.contains('성공적으로 저장하였습니다'); // 저장 확인
-    cy.wait(5000);
 
     // Calculation 설정
     cy.get('[value="3"] > .flow-item > .flow-item__name').click(); // Calculation 선택

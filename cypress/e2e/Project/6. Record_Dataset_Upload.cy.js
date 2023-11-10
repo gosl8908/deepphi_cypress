@@ -11,7 +11,7 @@ describe('Record Dataset Upload Test', () => {
 
   it('Record Dataset Upload', () => {
     // 로그인
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     cy.contains('레코드 데이터셋').click(); // 데이터셋 화면 진입
     cy.wait(3000);

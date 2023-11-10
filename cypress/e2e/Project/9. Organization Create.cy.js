@@ -1,4 +1,4 @@
-const { loginModule , emailModule } = require('../../e2e/Module/moduleManager.js');
+const { loginModule , emailModule , adminloginModule} = require('../../e2e/Module/moduleManager.js');
 
 describe('Organization Create', () => {
 
@@ -8,13 +8,11 @@ describe('Organization Create', () => {
     cy.getAllLocalStorage(); // 로컬 삭제
     cy.getAllSessionStorage(); // 세션 삭제
     cy.viewport(1920, 1080); // FHD 해상도 설정
-
   });
-
 
   it('Organization Create', () => {
     // 로그인
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
@@ -86,8 +84,9 @@ describe('Organization Create', () => {
 
   // 단체 크레딧 충전
   it('Organization Credit Charge', () => {
+
     // 로그인
-    loginModule.login( Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password') );
+    adminloginModule.adminlogin( Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password') );
 
     cy.get(':nth-child(8) > a > span').click(); // 단체관리
     cy.get('.p-panelmenu-header-link > .p-menuitem-text').click(); // 단체 리스트
@@ -116,7 +115,8 @@ describe('Organization Create', () => {
     
   // 단체 DISK 구독
   it('Organization DISK subscribe', () => {
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+
+    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
@@ -124,7 +124,7 @@ describe('Organization Create', () => {
     cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click(); // 단체 선택
     cy.wait(3000);
     cy.get(':nth-child(7) > button').click(); // 크레딧
-    cy.get('.control-box__button > .btn').click(); // 업그레이드
+    cy.get('.control-box__button > .btn').eq(0).click(); // 업그레이드
     cy.get(':nth-child(1) > div > .radio-item > em').click(); // 필수 체크
     cy.get('.mt3 > div > .radio-item > em').click(); // 필수 체크
     cy.get('.modal-button-content > .btn-primary').click(); // 결제

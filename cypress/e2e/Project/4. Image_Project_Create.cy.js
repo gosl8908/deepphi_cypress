@@ -13,7 +13,7 @@ describe('Image Project Create', () => {
 
   it('Image Project Create', () => {
           // 로그인
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
     
         // 이미지 프로젝트 생성
         cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
