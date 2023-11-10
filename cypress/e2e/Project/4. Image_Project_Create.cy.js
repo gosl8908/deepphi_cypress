@@ -27,10 +27,10 @@ describe('Image Project Create', () => {
         // 리소스 설정
         cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
         cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em').click(); // 데이터 프로세싱 cpu.4
-        cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
+        // cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
         cy.get('.cpu-gpu--selector > :nth-child(2) > div > .radio-item > em').click(); // 뉴럴 네트워크 CPU
         cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em').click(); // 뉴럴 네트워크 cpu.4
-        cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
+        // cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
         cy.get('.btn-primary').click(); // 저장
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.contains('성공적으로 저장되었습니다.'); // 저장 확인
