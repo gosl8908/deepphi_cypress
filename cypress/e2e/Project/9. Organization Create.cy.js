@@ -12,7 +12,7 @@ describe('Organization Create', () => {
 
   it('Organization Create', () => {
     // 로그인
-    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
@@ -116,7 +116,7 @@ describe('Organization Create', () => {
   // 단체 DISK 구독
   it('Organization DISK subscribe', () => {
 
-    loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택

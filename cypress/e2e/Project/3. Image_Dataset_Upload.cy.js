@@ -11,7 +11,7 @@ describe('Image Dataset Upload Test', () => {
     
     it('Image Dataset Upload test', () => {
       // 로그인
-      loginModule.login( Cypress.env('prodtest'), Cypress.env('auto_test_id'), Cypress.env('password') );
+      loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
         // 이미지 데이터셋 생성
         cy.contains('이미지 데이터셋').click(); // 데이터셋 화면 진입
