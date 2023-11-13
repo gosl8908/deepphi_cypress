@@ -5,7 +5,7 @@ describe('인퍼런스 서비스 api test', () => {
   // 레코드 인퍼런스 api 호출
   it('인퍼런스 서비스 api test', () => {
     apiModule.api();
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('emailbody'));
+    // emailModule.email(Cypress.env('emailtitle'), Cypress.env('emailbody'));
   });
 });
 
