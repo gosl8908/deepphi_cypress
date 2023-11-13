@@ -7,7 +7,6 @@ describe('Organization Create', () => {
     cy.getAllCookies(); // 쿠키 삭제
     cy.getAllLocalStorage(); // 로컬 삭제
     cy.getAllSessionStorage(); // 세션 삭제
-    cy.viewport(1920, 1080); // FHD 해상도 설정
   });
 
   it('Organization Create', () => {
@@ -124,7 +123,9 @@ describe('Organization Create', () => {
     cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click(); // 단체 선택
     cy.wait(3000);
     cy.get(':nth-child(7) > button').click(); // 크레딧
+    cy.wait(5000);
     cy.get('.control-box__button > .btn').eq(0).click(); // 업그레이드
+    cy.wait(3000);
     cy.get(':nth-child(1) > div > .radio-item > em').click(); // 필수 체크
     cy.get('.mt3 > div > .radio-item > em').click(); // 필수 체크
     cy.get('.modal-button-content > .btn-primary').click(); // 결제
