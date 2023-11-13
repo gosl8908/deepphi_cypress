@@ -139,6 +139,7 @@ describe('Record Project Create & Run', () => {
 
     //클렌징 모듈 설정
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").click(); // 클렌징 모듈 선택
+    cy.wait(3000)
     cy.get(':nth-child(3) > :nth-child(2) > image').click(); // 모듈 더보기
     cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
     cy.wait(3000);
@@ -148,7 +149,7 @@ describe('Record Project Create & Run', () => {
     cy.wait(3000);
 
     // Calculation 설정
-    cy.get('[value="3"] > .flow-item > .flow-item__name').click(); // Calculation 선택
+    cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 설정탭 선택
     cy.get(':nth-child(1) > .input-form > .ui-dropdown > .ui-dropdown-trigger > .ui-dropdown-trigger-icon').click(); // 열 선택
     cy.get(':nth-child(1) > .ui-dropdown-item > div.ng-star-inserted > div').click(); // 상영시간 선택
     cy.get('.combination-column-select > .btn').click(); // 추가

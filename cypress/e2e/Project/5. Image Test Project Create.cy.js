@@ -23,7 +23,8 @@ describe('Image Test Project Create', () => {
 
         // 평가 프로젝트 생성
         cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
-        cy.get('.btn-floating > .fas').click(); // 생성
+        cy.wait(3000);
+        cy.get('.btn-floating > div').click({force: true}); // 생성
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.get('.btn-primary').click(); // 확인
         cy.get('.btn-primary').click(); // 확인

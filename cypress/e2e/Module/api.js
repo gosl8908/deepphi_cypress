@@ -1,15 +1,15 @@
 function api() {
 
     // 레코드 인퍼런스 API 호출
-    cy.fixture("자동화용 데이터셋.csv").then((fileContent) => {
+    cy.fixture("pet_adoption_30.csv").then((fileContent) => {
         const formData = new FormData(); // FormData 생성
   
         // 파일을 FormData에 추가
-        formData.append('file', new Blob([fileContent], { type: 'text/csv' }), '자동화용 데이터셋.csv'); // 첨부할 파일 입력
+        formData.append('file', new Blob([fileContent], { type: 'text/csv' }), 'pet_adoption_30.csv'); // 첨부할 파일 입력
   
         cy.request({
           method: "POST",
-          url: "https://inference.deepphi.ai/1110-19/1.0/api/inference", // url 입력
+          url: "https://inference.deepphi.ai/1113/1.0/api/inference", // url 입력
           failOnStatusCode: false,
           headers: {
             'Content-Type': 'multipart/form-data', // Content-Type을 multipart/form-data로 설정

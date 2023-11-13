@@ -71,6 +71,7 @@ describe('Image Dataset Upload Test', () => {
         // 데이터셋 이름 변경
         cy.get('.dataset-management__lnb--content > :nth-child(1) > button.ng-tns-c0-0').click(); // 인사이트 탭
         cy.get('.right-content > .btn').click(); // 수정
+        cy.wait(3000);
         cy.get("#module_name").type('DatasetNameChange'); // 이름 수정
         cy.get('.modal-button-content > .btn-primary').click(); // 저장
         cy.wait(1000);
