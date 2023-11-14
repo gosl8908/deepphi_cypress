@@ -2,7 +2,7 @@ name: Cypress Tests
 
 on:
   schedule:
-    - cron: '0 23 * * 0-4'
+    - cron: '0 02 * * 0-4' 
 
 env:
   TZ: Asia/Seoul
