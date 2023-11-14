@@ -46,14 +46,15 @@ describe('Image Dataset Upload Test', () => {
         cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 1번째 데이터셋 선택 
         cy.get('#DontShowItAgain').click(); // 팝업 다시 보지 않기
         cy.get('.text-center > .btn').click(); // 팝업 닫기
-        cy.wait(20000);
+        cy.wait(50000);
 
         // 변환
         cy.get('#convert-btn').click(); // 변환
         cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click(); // 검색된 모든 파일
-        cy.wait(30000); 
+        cy.wait(60000); 
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 변화된 파일 탭
-        cy.wait(30000);
+        cy.contains('사용 용도 수정');
+        cy.wait(60000);
 
         // 사용 용도 수정
         cy.get('#btn-edit-usage').click(); // 사용 용도 수정
