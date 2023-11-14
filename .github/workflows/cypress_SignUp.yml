@@ -2,7 +2,7 @@ name: Cypress SignUp Tests
 
 on:
   schedule:
-    - cron: '0 06 * * 0-4' 
+    - cron: '30 06 * * 0-4' 
 
 jobs:
   build:
