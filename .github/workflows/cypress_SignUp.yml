@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress SignUp Tests
 
 on:
   schedule:
