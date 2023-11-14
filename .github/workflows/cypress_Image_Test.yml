@@ -1,4 +1,4 @@
-name: Cypress SignUp Tests
+name: Cypress Image Tests
 
 on:
   push:
