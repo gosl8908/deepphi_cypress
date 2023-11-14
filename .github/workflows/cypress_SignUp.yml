@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '30 07 * * 0-4' 
+    - cron: '0 02 * * 0-4' 
 
 jobs:
   build:
@@ -24,4 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests
-      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js"
+      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js,cypress/e2e/Project/2_User_change_Information.cy.js"
