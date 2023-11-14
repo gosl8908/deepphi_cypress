@@ -4,9 +4,6 @@ on:
   schedule:
     - cron: '20 02 * * 0-4' 
 
-env:
-  TZ: Asia/Seoul
-
 jobs:
   build:
     runs-on: ubuntu-latest
