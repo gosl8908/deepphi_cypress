@@ -24,4 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests
-      run: npx cypress run --spec "e2e/Project/4. Image_Project_Create.cy.js"
+      run: npx cypress run --spec "/cypress/e2e/Project/4. Image_Project_Create.cy.js"
