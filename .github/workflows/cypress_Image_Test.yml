@@ -1,8 +1,11 @@
-name: Cypress SignUp Tests
+name: Cypress Image Tests
 
 on:
   schedule:
-    - cron: '20 02 * * 0-4' 
+    - cron: '5 01 * * 0-4'
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -21,4 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests
-      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js,cypress/e2e/Project/2_User_change_Information.cy.js"
+      run: npx cypress run --spec "cypress/e2e/Project/3_Image_Dataset_Upload.cy.js,cypress/e2e/Project/4_Image_Project_Create.cy.js,cypress/e2e/Project/5_Image Test Project Create.cy.js"
