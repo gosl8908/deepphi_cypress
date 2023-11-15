@@ -70,21 +70,21 @@ describe('Image Dataset Upload Test', () => {
         cy.wait(5000)
         cy.contains('DatasetUpload');
 
-        // // 데이터셋 이름 변경
-        // cy.get('.dataset-management__lnb--content > :nth-child(1) > button.ng-tns-c0-0').click(); // 인사이트 탭
-        // cy.get('.right-content > .btn').click(); // 수정
-        // cy.wait(3000);
-        // cy.get("#module_name").type('DatasetNameChange'); // 이름 수정
-        // cy.get('.modal-button-content > .btn-primary').click(); // 저장
-        // cy.wait(1000);
+        // 데이터셋 이름 변경
+        cy.get('.dataset-management__lnb--content > :nth-child(1) > button.ng-tns-c0-0').click(); // 인사이트 탭
+        cy.get('.right-content > .btn').click(); // 수정
+        cy.wait(3000);
+        cy.get("#module_name").eq(1).type('DatasetNameChange'); // 이름 수정
+        cy.get('.modal-button-content > .btn-primary').click(); // 저장
+        cy.wait(1000);
 
-        // // 데이터셋 삭제
-        // cy.get('#dataset-menu-btn').click(); // 메뉴 선택
-        // cy.get('.list-dropdown > li.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 데이터셋 삭제
-        // cy.contains('삭제'); // 삭제 확인 
-        // cy.get('.btn-danger').click(); // 삭제 버튼
-        // cy.wait(10000);
-        // cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.'); // 데이터셋 삭제 확인
+        // 데이터셋 삭제
+        cy.get('#dataset-menu-btn').click(); // 메뉴 선택
+        cy.get('.list-dropdown > li.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 데이터셋 삭제
+        cy.contains('삭제'); // 삭제 확인 
+        cy.get('.btn-danger').click(); // 삭제 버튼
+        cy.wait(10000);
+        cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.'); // 데이터셋 삭제 확인
         
         emailModule.email( Cypress.env('emailtitle'), Cypress.env('image_Dataset_Upload_emailbody') );
   });
