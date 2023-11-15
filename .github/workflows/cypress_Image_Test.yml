@@ -1,11 +1,11 @@
 name: Cypress Image Tests
 
 on:
+  schedule:
+    - cron: '5 01 * * 0-4'
   push:
     branches:
       - main
-  schedule:
-    - cron: '0 12 * * 0-4' 
 
 jobs:
   build:
