@@ -60,7 +60,7 @@ describe('User change information', () => {
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
     cy.contains('이용기간'); // 결제 확인
 
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('User_change_information_emailbody'));
+    emailModule.email('User change information Test ' + Cypress.env('emailtitle'), Cypress.env('User_change_information_emailbody'));
     });
   });
 });

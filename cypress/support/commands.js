@@ -78,7 +78,7 @@ function getCurrentDate(){
       emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
       SignUp_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인`,
       User_change_information_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 프로필 정보 변경 3. 비밀번호 변경 4. DISK 업그레이드`,
-      image_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 데이터셋 업로드 3. 변환 4. 사용 용도 수정 5. 데이터셋에 파일 포함 6. 데이터셋 이름 변경 7. 이미지 데이터셋 삭제`,
+      image_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 데이터셋 업로드 3. 변환 4. 사용 용도 수정 5. 데이터셋에 파일 포함`,
       image_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 프로젝트 생성 3. 리소스 설정 4. 모듈 추가 5. 모듈 연결 6. 실행`,
       image_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 평가 프로젝트 생성 3. 실행`,
       Record_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 데이터셋 업로드 3. 설정 완료`,

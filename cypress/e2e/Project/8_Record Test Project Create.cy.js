@@ -39,6 +39,6 @@ describe('Record Test Project Create', () => {
     
         cy.screenshot('Record_Test_Project_Completed'+ Cypress.env('date_label'));
       
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('Record_Test_Project_Upload_emailbody'));
+    emailModule.email('Record Test Project Create Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Test_Project_Upload_emailbody'));
   });
 });

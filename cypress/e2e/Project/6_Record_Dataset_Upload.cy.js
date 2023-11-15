@@ -50,6 +50,6 @@ describe('Record Dataset Upload Test', () => {
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크
 
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('Record_Dataset_Upload_emailbody'));
+    emailModule.email('Record Dataset Upload Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Dataset_Upload_emailbody'));
   });
 });

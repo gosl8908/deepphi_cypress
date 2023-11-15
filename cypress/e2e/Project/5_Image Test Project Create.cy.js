@@ -39,6 +39,6 @@ describe('Image Test Project Create', () => {
     
         cy.screenshot('Image_Test_Project_Completed'+ Cypress.env('date_label'));
       
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('image_Test_Project_Upload_emailbody'));
+    emailModule.email('Image Test Project Cteate Test ' + Cypress.env('emailtitle'), Cypress.env('image_Test_Project_Upload_emailbody'));
   });
 });

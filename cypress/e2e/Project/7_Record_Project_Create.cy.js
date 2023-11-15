@@ -244,6 +244,6 @@ describe('Record Project Create & Run', () => {
     cy.wait(3000);
     cy.contains('그래프를 생성해보세요.') // 삭제 확인
 
-    emailModule.email(Cypress.env('emailtitle'), Cypress.env('Record_Project_Create_emailbody'));
+    emailModule.email('Record Project Cteate Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Project_Create_emailbody'));
   });
 });
