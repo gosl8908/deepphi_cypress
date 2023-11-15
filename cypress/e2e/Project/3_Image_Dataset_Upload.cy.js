@@ -44,7 +44,8 @@ describe('Image Dataset Upload Test', () => {
         // 데이터셋 매니지먼트 화면 진입
         cy.log('첫번째 데이터셋 선택')
         cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 1번째 데이터셋 선택 
-        cy.get('#DontShowItAgain').click(); // 팝업 다시 보지 않기
+        cy.wait(5000);
+        cy.get('#DontShowItAgain').click({ force: true }); // 팝업 다시 보지 않기
         cy.get('.text-center > .btn').click(); // 팝업 닫기
         cy.wait(50000);
 
