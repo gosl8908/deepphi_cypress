@@ -3,6 +3,9 @@ name: Cypress SignUp Tests
 on:
   schedule:
     - cron: '20 02 * * 0-4' 
+  push:
+      branches:
+        - main
 
 jobs:
   build:
