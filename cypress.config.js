@@ -12,6 +12,7 @@
 const nodemailer = require("nodemailer");
 
 module.exports = {
+  pageLoadTimeout: 60000,
   projectId: 'k9i7ip',
   // ...
 

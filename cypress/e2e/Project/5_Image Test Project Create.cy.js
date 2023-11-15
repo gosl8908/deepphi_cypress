@@ -31,7 +31,7 @@ describe('Image Test Project Create', () => {
 
         cy.log('프로젝트 실행')
         //프로젝트 Run
-        cy.get('.modeler-header__run-action-button > .btn').click();
+        cy.get('.as-vertical > .flow > .modeler__status-panner > .modeler-header__run-action-button > .btn').click({force: true});
         cy.wait(5000);
     
         cy.contains('실행'); // 실행 상태 체크

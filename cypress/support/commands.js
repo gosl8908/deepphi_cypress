@@ -39,13 +39,19 @@ function getCurrentDate(){
 
     const now = new Date(); // 날짜와 시간을 원하는 형식으로 변환
     const daysOfWeek = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]; // 숫자 0부터 6까지 요일을 표시하는 배열
-    const year = now.getFullYear();  
-    const month = String(now.getMonth() + 1).padStart(2, "0");  
-    const day = String(now.getDate()).padStart(2, "0");  
-    const hours = String(now.getHours()).padStart(2, "0");  
-    const minutes = String(now.getMinutes()).padStart(2, "0");  
-    const seconds = String(now.getSeconds()).padStart(2, "0");
-    const dayOfWeek = daysOfWeek[now.getDay()]; // 요일을 얻어옴
+
+    // 한국 표준시(Asia/Seoul)로 시간대를 설정합니다.
+    const options = { timeZone: 'Asia/Seoul' };
+    const year = now.getFullYear();  // 년도를 얻어옵니다.
+    const month = String(now.getMonth() + 1).padStart(2, "0");  // 월을 얻어옵니다. (월은 0부터 시작하므로 1을 더해줍니다.)
+    const day = String(now.getDate()).padStart(2, "0");  // 일을 얻어옵니다.
+    const hours = String(now.getHours()).padStart(2, "0");  // 시간을 얻어옵니다.
+    const minutes = String(now.getMinutes()).padStart(2, "0");  // 분을 얻어옵니다.
+    const seconds = String(now.getSeconds()).padStart(2, "0");  // 초를 얻어옵니다.
+    const dayOfWeek = daysOfWeek[now.getDay()]; // 요일을 얻어옵니다.
+    
+        // 지정된 시간대로 날짜와 시간을 형식화합니다.
+        const formattedDate = now.toLocaleString('ko-KR', options);
   
     return {  
       date: `${year}-${month}-${day}`,
