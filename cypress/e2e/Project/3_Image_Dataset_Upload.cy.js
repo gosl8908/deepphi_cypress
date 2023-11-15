@@ -51,9 +51,9 @@ describe('Image Dataset Upload Test', () => {
 
         // 변환
         cy.get('#convert-btn').click(); // 변환
-        cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click(); // 검색된 모든 파일
+        cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click({ force: true }); // 검색된 모든 파일
         cy.wait(60000); 
-        cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 변화된 파일 탭
+        cy.get('.default-tab > ul > :nth-child(2) > button').click({ force: true }); // 변화된 파일 탭
         cy.contains('사용 용도 수정');
         cy.wait(5000);
 
