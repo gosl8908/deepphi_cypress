@@ -24,4 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests and Generate JUnit XML Report
-      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js,cypress/e2e/Project/2_User_change_Information.cy.js"
+      run: npx cypress run
