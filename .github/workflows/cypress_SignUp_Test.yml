@@ -23,5 +23,10 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
+<<<<<<< HEAD
     - name: Run Cypress Tests 
       run: npx cypress run
+=======
+    - name: Run Cypress Tests
+      run: npx cypress run
+>>>>>>> 2f410e92bdd37cf310a826ab9f9e416d3b129a5e
