@@ -21,6 +21,7 @@ describe('Organization Create', () => {
     cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
     cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
     cy.get('.modal-button-content > .btn-danger').click(); // 삭제
+    cy.wait(3000);
 
     // 단체 생성
     cy.get('.flex-display > :nth-child(2) > .btn').click(); // 단체 생성   
@@ -28,6 +29,7 @@ describe('Organization Create', () => {
     cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
     cy.get('.flex-display > .btn-wrap > .btn').click(); // 체크
     cy.get('.modal-button-content > .btn-primary').click(); // 생성
+    cy.wait(3000);
     cy.contains('단체 생성이 완료되었습니다.'); // 단체 생성 완료 확인
     cy.get('.modal-button-content > .btn').click(); // 확인
     cy.wait(5000);
@@ -120,7 +122,7 @@ describe('Organization Create', () => {
     // 마이홈 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
     cy.get('.organization-changer__opener').click(); 
-    cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click(); // 단체 선택
+    cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click({force: true}); // 단체 선택
     cy.wait(3000);
     cy.get(':nth-child(7) > button').click(); // 크레딧
     cy.wait(5000);

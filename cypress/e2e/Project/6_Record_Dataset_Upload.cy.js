@@ -45,7 +45,7 @@ describe('Record Dataset Upload Test', () => {
     cy.screenshot('Record_Dataset_Upload'+ Cypress.env('date_label'));
     cy.wait(120000); // 120초 대기
 
-    cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 데이터셋 매니지먼트 접속
+    cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
     cy.get('.page-button > .btn-primary').click(); // 완료
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크

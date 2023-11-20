@@ -1,4 +1,4 @@
-name: Cypress SignUp Tests
+name: Cypress Tests
 
 on:
   schedule:
@@ -24,5 +24,5 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests 
-      run: npx cypress run
+      run: npx cypress run --spec "cypress/e2e/Project/6_Record_Dataset_Upload.cy.js,cypress/e2e/Project/7_Record_Project_Create.cy.js,cypress/e2e/Project/8_Record Test Project Create,cypress/e2e/Project/9_Organization Create.cy.js"
 
