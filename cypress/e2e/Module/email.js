@@ -9,6 +9,7 @@ function email(emailtitle, emailbody) {
         const emailBody = emailbody;
     
         cy.task("sendEmail", {
+          
           recipient: "gosl8908@deepnoid.com" ,
           subject: emailSubject,
           body: emailBody,

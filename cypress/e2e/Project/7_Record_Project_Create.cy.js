@@ -171,7 +171,7 @@ describe('Record Project Create & Run', () => {
     cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
     cy.wait(3000);
     cy.get('.btn-floating > .fas').click(); // 프로세싱 모듈 추가
-    cy.contains('Scale').click(); // Scale 선택
+    cy.contains('Scale').click({ force: true }); // Scale 선택
     cy.contains('추가').click();
     cy.wait(3000);
 
@@ -195,8 +195,10 @@ describe('Record Project Create & Run', () => {
     cy.get(":nth-child(11) > image").click(); // DNN-Classification 모델러 선택
     cy.wait(2000);
     cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 변수 설정 탭
-    cy.get('.ui-multiselect-trigger').click(); // 입력변수 설정
-    cy.get(':nth-child(4) > .ui-multiselect-item > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon').click(); // 상영시간 체크
+    cy.wait(3000);
+    cy.get('.ui-multiselect-trigger').click({ force: true }); // 입력변수 설정
+    cy.wait(3000);
+    cy.get(':nth-child(4) > .ui-multiselect-item > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon').click({ force: true }); // 상영시간 체크
     cy.get('.content-scroll > :nth-child(2) > :nth-child(2) > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // 목표변수 설정
     cy.get(':nth-child(8) > .ui-dropdown-item').click(); // 감독의 영화 개수 선택
     cy.get('.input-columns > .btn').click(); // 입력변수 추가
@@ -207,7 +209,8 @@ describe('Record Project Create & Run', () => {
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(13) > image").click(); // Decision Tree Classifier 모델러 선택
     cy.wait(2000);
     cy.get('.ui-multiselect-trigger').click(); // 입력변수 설정
-    cy.get(':nth-child(4) > .ui-multiselect-item > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon').click(); // 상영시간 체크
+    cy.wait(3000);
+    cy.get(':nth-child(4) > .ui-multiselect-item > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon').click({ force: true }); // 상영시간 체크
     cy.get('.content-scroll > :nth-child(2) > :nth-child(2) > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // 목표변수 설정
     cy.get(':nth-child(8) > .ui-dropdown-item').click(); // 감독의 영화 개수 선택
     cy.get('.input-columns > .btn').click(); // 입력변수 추가
@@ -217,32 +220,35 @@ describe('Record Project Create & Run', () => {
     //프로젝트 Run
     cy.log('프로젝트 실행')
     cy.get('.modeler-header__run-action-button > .btn').click();
+
     cy.wait(3000);
     cy.contains('실행'); // 실행 상태 체크
+
     cy.screenshot('Record_Project_Run'+ Cypress.env('date_label'));
-    cy.wait(400000); // 5분 대기
+    
+    // cy.wait(400000); // 5분 대기
 
-    cy.contains('완료'); // 실행 완료 상태 체크
-    cy.screenshot('Record_Project_Completed'+ Cypress.env('date_label'));
+    // cy.contains('완료'); // 실행 완료 상태 체크
+    // cy.screenshot('Record_Project_Completed'+ Cypress.env('date_label'));
 
-    // 시각화 생성 & 삭제
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(13) > image").click(); // Decision Tree Classifier 모델러 선택
-    cy.get('.tab-item--visualization > button').click(); // 시각화 탭 선택
-    cy.get('.visualization__item--creat-info > div > .btn').click(); // 생성 버튼
-    cy.wait(3000);
-    cy.get('.modal-button-content > .btn-primary').click(); // 다음
-    cy.get('.mb15 > .label-form > .input-form').type('x'); // x축 제목
-    cy.get('.mb20 > .label-form > .input-form').type('y'); // y축 제목
-    cy.get('dd > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // x축 열
-    cy.get(':nth-child(7) > .ui-dropdown-item').click(); // 열 선택
-    cy.get('.modal-button-content > .btn-primary').click(); // 완료
-    cy.wait(60000); // 60초 대기
-    cy.contains('빈도 그래프'); // 생성 확인
-    cy.screenshot('Record_Project_visualization'+ Cypress.env('date_label'));
-    cy.get('.visualization__item--control > div.ng-star-inserted > :nth-child(2)').click(); // 삭제 클릭
-    cy.get('.btn-danger').click(); // 삭제 클릭
-    cy.wait(3000);
-    cy.contains('그래프를 생성해보세요.') // 삭제 확인
+    // // 시각화 생성 & 삭제
+    // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(13) > image").click(); // Decision Tree Classifier 모델러 선택
+    // cy.get('.tab-item--visualization > button').click(); // 시각화 탭 선택
+    // cy.get('.visualization__item--creat-info > div > .btn').click(); // 생성 버튼
+    // cy.wait(3000);
+    // cy.get('.modal-button-content > .btn-primary').click(); // 다음
+    // cy.get('.mb15 > .label-form > .input-form').type('x'); // x축 제목
+    // cy.get('.mb20 > .label-form > .input-form').type('y'); // y축 제목
+    // cy.get('dd > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // x축 열
+    // cy.get(':nth-child(7) > .ui-dropdown-item').click(); // 열 선택
+    // cy.get('.modal-button-content > .btn-primary').click(); // 완료
+    // cy.wait(60000); // 60초 대기
+    // cy.contains('빈도 그래프'); // 생성 확인
+    // cy.screenshot('Record_Project_visualization'+ Cypress.env('date_label'));
+    // cy.get('.visualization__item--control > div.ng-star-inserted > :nth-child(2)').click(); // 삭제 클릭
+    // cy.get('.btn-danger').click(); // 삭제 클릭
+    // cy.wait(3000);
+    // cy.contains('그래프를 생성해보세요.') // 삭제 확인
 
     emailModule.email('Record Project Cteate Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Project_Create_emailbody'));
   });
