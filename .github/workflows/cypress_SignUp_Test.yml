@@ -24,10 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests and Generate JUnit XML Report
-      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js,cypress/e2e/Project/2_User_change_Information.cy.js" --reporter junit --reporter-options "mochaFile=junit/SignUp-test-results.xml"
-        
-    - name: Upload JUnit XML Report
-      uses: actions/upload-artifact@v2
-      with:
-        name: SignUp-test-results
-        path: junit/SignUp-test-results.xml             
+      run: npx cypress run --spec "cypress/e2e/Project/1_SignUp.cy.js,cypress/e2e/Project/2_User_change_Information.cy.js"
