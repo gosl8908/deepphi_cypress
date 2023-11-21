@@ -1,4 +1,4 @@
-const { loginModule , emailModule } = require('../../e2e/Module/moduleManager.js');
+const { loginModule , emailModule } = require('../Module/moduleManager.js');
 
 describe('Record Project Create & Run', () => {
 
@@ -223,13 +223,10 @@ describe('Record Project Create & Run', () => {
 
     cy.wait(3000);
     cy.contains('실행'); // 실행 상태 체크
-
-    cy.screenshot('Record_Project_Run'+ Cypress.env('date_label'));
     
     // cy.wait(400000); // 5분 대기
 
     // cy.contains('완료'); // 실행 완료 상태 체크
-    // cy.screenshot('Record_Project_Completed'+ Cypress.env('date_label'));
 
     // // 시각화 생성 & 삭제
     // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(13) > image").click(); // Decision Tree Classifier 모델러 선택
@@ -244,7 +241,6 @@ describe('Record Project Create & Run', () => {
     // cy.get('.modal-button-content > .btn-primary').click(); // 완료
     // cy.wait(60000); // 60초 대기
     // cy.contains('빈도 그래프'); // 생성 확인
-    // cy.screenshot('Record_Project_visualization'+ Cypress.env('date_label'));
     // cy.get('.visualization__item--control > div.ng-star-inserted > :nth-child(2)').click(); // 삭제 클릭
     // cy.get('.btn-danger').click(); // 삭제 클릭
     // cy.wait(3000);

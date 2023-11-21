@@ -36,8 +36,6 @@ describe('Record Test Project Create', () => {
     
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
-    
-        cy.screenshot('Record_Test_Project_Completed'+ Cypress.env('date_label'));
       
     emailModule.email('Record Test Project Create Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Test_Project_Upload_emailbody'));
   });

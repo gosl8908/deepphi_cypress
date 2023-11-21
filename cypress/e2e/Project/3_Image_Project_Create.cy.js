@@ -102,10 +102,7 @@ describe('Image Project Create', () => {
     
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
-    
-        cy.screenshot('Image_Project_Completed'+ Cypress.env('date_label'));
       
-
     emailModule.email('Image Project Create Test ' + Cypress.env('emailtitle'), Cypress.env('image_Project_Upload_emailbody'));
   });
 });

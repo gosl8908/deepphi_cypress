@@ -76,15 +76,14 @@ function getCurrentDate(){
       Inference_name: `Inference${year}${month}${day}${hours}${minutes}${seconds}`,
       emailtitle: `${year}-${month}-${day} ${dayOfWeek} Cypress 자동화 테스트 결과`,
       emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
-      SignUp_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인`,
-      User_change_information_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 프로필 정보 변경 3. 비밀번호 변경 4. DISK 업그레이드`,
-      image_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 데이터셋 업로드 3. 변환 4. 사용 용도 수정 5. 데이터셋에 파일 포함`,
-      image_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 프로젝트 생성 3. 리소스 설정 4. 모듈 추가 5. 모듈 연결 6. 실행`,
-      image_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 이미지 평가 프로젝트 생성 3. 실행`,
-      Record_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 데이터셋 업로드 3. 설정 완료`,
-      Record_Project_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 프로젝트 생성 3. 리소스 설정 4. 모듈 추가 5. 모듈 연결 6. 실행 7. 시각화 생성 8. 시각화 삭제`,
-      Record_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 레코드 평가 프로젝트 생성 3. 실행`,
-      Organization_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 로그인 2. 단체 삭제 3. 단체 생성 4. 맴버 초대 5. 그룹 생성 6. 그룹 멤버 초대 7. 그룹 삭제 8. 크레딧 충전 9. 단체 DISK 구독`,
+      SignUp_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드`,
+      Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`,
+      image_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`,
+      image_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행`,
+      Record_Project_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행 6. 시각화 생성 7. 시각화 삭제`,
+      Record_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행`,
+      Organization_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`,
+      Organization_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료`,
     }
   
   }  
@@ -113,12 +112,11 @@ function getCurrentDate(){
     Cypress.env('emailtitle', currentDate.emailtitle);
     Cypress.env('emailbody', currentDate.emailbody);
     Cypress.env('SignUp_emailbody', currentDate.SignUp_emailbody);
-    Cypress.env('User_change_information_emailbody', currentDate.User_change_information_emailbody);
-    Cypress.env('image_Dataset_Upload_emailbody', currentDate.image_Dataset_Upload_emailbody);
+    Cypress.env('Dataset_Upload_emailbody', currentDate.Dataset_Upload_emailbody);
     Cypress.env('image_Project_Upload_emailbody', currentDate.image_Project_Upload_emailbody);
     Cypress.env('image_Test_Project_Upload_emailbody', currentDate.image_Test_Project_Upload_emailbody);
-    Cypress.env('Record_Dataset_Upload_emailbody', currentDate.Record_Dataset_Upload_emailbody);
     Cypress.env('Record_Project_Create_emailbody', currentDate.Record_Project_Create_emailbody);
     Cypress.env('Record_Test_Project_Upload_emailbody', currentDate.Record_Test_Project_Upload_emailbody);
     Cypress.env('Organization_Create_emailbody', currentDate.Organization_Create_emailbody);
+    Cypress.env('Organization_Dataset_Upload_emailbody', currentDate.Organization_Dataset_Upload_emailbody);
   });

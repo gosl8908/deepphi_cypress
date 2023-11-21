@@ -36,8 +36,6 @@ describe('Image Test Project Create', () => {
     
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
-    
-        cy.screenshot('Image_Test_Project_Completed'+ Cypress.env('date_label'));
       
     emailModule.email('Image Test Project Cteate Test ' + Cypress.env('emailtitle'), Cypress.env('image_Test_Project_Upload_emailbody'));
   });

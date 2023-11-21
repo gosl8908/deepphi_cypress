@@ -1,6 +1,6 @@
-const { loginModule , emailModule } = require('../../e2e/Module/moduleManager.js');
+const { loginModule , emailModule } = require('../Module/moduleManager.js');
 
-describe('Image Dataset Upload Test', () => {
+describe('Dataset Upload Test', () => {
     before(()=>{
       cy.setDateToEnv();
       cy.getAllCookies(); // 쿠키 삭제
@@ -8,7 +8,7 @@ describe('Image Dataset Upload Test', () => {
       cy.getAllSessionStorage(); // 세션 삭제
     });
     
-    it('Image Dataset Upload test', () => {
+    it('Dataset Upload test', () => {
       // 로그인
       loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
@@ -17,6 +17,8 @@ describe('Image Dataset Upload Test', () => {
         cy.wait(5000);
         cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
         cy.wait(3000);
+
+        // 데이터셋 정보 입력
         cy.get('#dataset_name').type(Cypress.env('ImageDatasetName')); // 데이터셋 이름 입력
         cy.get('.note-editable').type(Cypress.env('ImageDatasetName')); // 데이터셋 내용 입력
         cy.get('form.ng-dirty > .create-dataset > .step-content-box > .page-button > .btn').click(); // 다음
@@ -38,11 +40,10 @@ describe('Image Dataset Upload Test', () => {
         cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click();
         cy.wait(3000);
         cy.contains('성공'); // 업로드 확인
-        cy.screenshot('Image_Dataset_Upload' + Cypress.env('date+label'));
-
 
         // 데이터셋 매니지먼트 화면 진입
         cy.log('첫번째 데이터셋 선택')
+        cy.wait(10000);
         cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 1번째 데이터셋 선택 
         cy.wait(5000);
         cy.get('#DontShowItAgain').click({ force: true }); // 팝업 다시 보지 않기
@@ -69,7 +70,6 @@ describe('Image Dataset Upload Test', () => {
         cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click(); // 검색된 모든 파일
         cy.get('.modal-button-content > .btn-primary').click(); // 계속
         cy.wait(5000)
-        cy.screenshot('Image_Dataset_Upload');
 
         // // 데이터셋 이름 변경
         // cy.get('.dataset-management__lnb--content > :nth-child(1) > button.ng-tns-c0-0').click(); // 인사이트 탭
@@ -87,8 +87,50 @@ describe('Image Dataset Upload Test', () => {
         // cy.get('.btn-danger').click(); // 삭제 버튼
         // cy.wait(10000);
         // cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.'); // 데이터셋 삭제 확인
-        
-        emailModule.email('Image Dataset Upload Test ' + Cypress.env('emailtitle'), Cypress.env('image_Dataset_Upload_emailbody') );
+
+
+    // 레코드 데이터셋 업로드
+    cy.get('.ng-tns-c0-0 > .ng-tns-c0-0 > #site-map__flow-btn > .ng-tns-c0-0 > #sitemap-svg').click(); // 네비게이션
+    cy.get('.gnb__site-map__content > #dataset-menu > #dataset-menu-ul > li:nth-child(2) > button').click(); // 레코드 데이터셋
+    cy.wait(3000);
+    cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
+    cy.wait(3000);
+
+    // 데이터셋 정보 입력
+    cy.get('#dataset_name').type(Cypress.env('RecordDatasetName')); // 데이터셋 이름 입력
+    cy.get('.note-editable').type(Cypress.env('RecordDatasetName')); // 데이터셋 내용 입력
+    cy.get('.page-button > .btn').click(); // 다음
+    cy.fixture('자동화용 데이터셋.csv').then(fileContent => {
+      cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({ // 학습 데이터셋
+          fileContent,
+          filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
+          fileName: '자동화용 데이터셋.csv',
+          mimeType: 'text/csv'
   });
+    cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({ // 검증 데이터셋
+        fileContent,
+        filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
+        fileName: '자동화용 데이터셋.csv',
+        mimeType: 'text/csv'
+});
+      cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({ // 평가 데이터셋
+          fileContent,
+          filePath: 'C:\\my-cypress-project\\cypress\\fixtures\\자동화용 데이터셋.csv',
+          fileName: '자동화용 데이터셋.csv',
+          mimeType: 'text/csv'
+  });
+    });
+    cy.get('em').click(); // 자동탐지 체크
+    cy.get('.btn-primary').click(); // 다음
+    cy.contains('업로드중 중에는 진입이 불가능합니다.'); // 업로드 로딩 체크
+    cy.wait(120000); // 120초 대기
+
+    cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
+    cy.get('.page-button > .btn-primary').click(); // 완료
+    cy.wait(20000); // 20초 대기
+    cy.contains('샘플데이터'); // 업로드 정상 체크
+        
+    emailModule.email('Dataset Upload Test ' + Cypress.env('emailtitle'), Cypress.env('Dataset_Upload_emailbody') );
+     }); 
     });
 });

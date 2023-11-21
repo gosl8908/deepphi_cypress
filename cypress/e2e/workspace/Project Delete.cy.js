@@ -1,15 +1,15 @@
-// const { loginModule } = require('./Module/moduleManager.js');
+// const { loginModule } = require('../Module/moduleManager.js');
 
 // describe('Project Delete', () => {
-
-//   before(() => {
+//   before(()=>{
 //     cy.setDateToEnv();
-//     cy.viewport(1920, 1080); // FHD 해상도 설정
-//     cy.clearCookies(); // 모든 쿠키 지우기
-    
+//     cy.getAllCookies(); // 쿠키 삭제
+//     cy.getAllLocalStorage(); // 로컬 삭제
+//     cy.getAllSessionStorage(); // 세션 삭제
 //   });
 
 //   it('Project Delete', () => {
+//     // 로그인
 //     loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
 
     
