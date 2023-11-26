@@ -57,6 +57,7 @@ function getCurrentDate(){
       date: `${year}-${month}-${day}`,
       time: `${hours}:${minutes}:${seconds}`,
       date_label: `${year}${month}${day}${hours}${minutes}${seconds}`,
+      onprem: 'https://onprem.deepphi.ai/',
       stg: 'http://st-home.deepphi.ai/',
       stgadmin: 'https://st-admin.deepphi.ai/',
       dev: 'https://dev-home.deepphi.ai/',
@@ -67,6 +68,7 @@ function getCurrentDate(){
       signup_id: `Signup${year}${month}${day}${hours}${minutes}${seconds}`,
       id: 'gosl8908@deepnoid.com',
       auto_test_id: 'deeptest1@deepnoid.com',
+      onprem_id: 'asdasdasd3@ruu.kr',
       password: 'test123!',
       Nickname: `name${hours}${minutes}${seconds}`,
       Image_Dataset_name: `ImageDataset${year}${month}${day}${hours}${minutes}${seconds}`,
@@ -89,6 +91,8 @@ function getCurrentDate(){
   }  
   Cypress.Commands.add('setDateToEnv', () => {  
     const currentDate = getCurrentDate();
+    Cypress.env('onprem', currentDate.onprem);
+    Cypress.env('onprem_id', currentDate.onprem_id);
     Cypress.env('stg', currentDate.stg);
     Cypress.env('stgadmin', currentDate.stgadmin);
     Cypress.env('dev', currentDate.dev);
