@@ -25,7 +25,8 @@ describe('Dataset Upload Test', () => {
         cy.get(':nth-child(1) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 2D 이미지 데이터 선택
         cy.get(':nth-child(2) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 분류 선택
         cy.get(':nth-child(1) > .folder-structure-content > .folder-structure-content__header').click(); // 유형 1 선택
-        cy.get('form.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click(); // 다음
+        cy.get('form.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click({ force: true }); // 다음
+        cy.wait(3000);
 
         // 파일 첨부
         cy.fixture('자동화용 데이터셋(2D 분류).zip').then(fileContent => {
@@ -35,9 +36,9 @@ describe('Dataset Upload Test', () => {
                 fileName: '자동화용 데이터셋(2D 분류).zip',
                 mimeType: 'application/zip'
         });
-
+        cy.wait(3000);
         // 업로드
-        cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click();
+        cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click({ force: true });
         cy.wait(3000);
         cy.contains('성공'); // 업로드 확인
 
