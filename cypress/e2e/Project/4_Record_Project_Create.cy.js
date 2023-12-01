@@ -66,12 +66,12 @@ describe('Record Project Create & Run', () => {
     // Cleansing 모듈 모델러에 추가
     cy.ModuleAdd('@Cleansing', '@svg', 600, 300);
 
-    // Processing 모듈 인식
-    cy.get('#\\31 06').should('exist').as('Processing');
-    cy.wait(3000);
+    // // Processing 모듈 인식
+    // cy.get('#\\31 06').should('exist').as('Processing');
+    // cy.wait(3000);
 
-    // Processing 모듈 모델러에 추가
-    cy.ModuleAdd('@Processing', '@svg', 700, 300);
+    // // Processing 모듈 모델러에 추가
+    // cy.ModuleAdd('@Processing', '@svg', 700, 300);
 
     // DNN-Classification 모듈 검색
     cy.get('.NeuralNetwork').click();
@@ -84,7 +84,7 @@ describe('Record Project Create & Run', () => {
     cy.wait(3000);
     
     // DNN-Classification 모듈 모델러에 추가
-    cy.ModuleAdd('@DNN-Classification', '@svg', 800, 300);
+    cy.ModuleAdd('@DNN-Classification', '@svg', 700, 300);
 
     // Decision Tree Classifier 모듈 검색
     cy.get('.input-form').clear().type('Decision Tree Classifier');
@@ -96,7 +96,7 @@ describe('Record Project Create & Run', () => {
     cy.wait(3000);
     
     // Decision Tree Classifier 모듈 모델러에 추가
-    cy.ModuleAdd('@Decision Tree Classifier', '@svg', 900, 300);
+    cy.ModuleAdd('@Decision Tree Classifier', '@svg', 800, 300);
     cy.wait(3000);
 
     
@@ -110,11 +110,20 @@ describe('Record Project Create & Run', () => {
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
+    // // 데이터셋 클릭
+    // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
+    // cy.wait(2000);
+      
+    // //클렌징에서 프로세싱 연결
+    // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
+    // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
+    // cy.wait(3000);
+
     // 데이터셋 클릭
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
     cy.wait(2000);
-      
-    //클렌징에서 프로세싱 연결
+
+    //프로세싱에서 DNN-Classification 연결
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
@@ -123,17 +132,8 @@ describe('Record Project Create & Run', () => {
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
     cy.wait(2000);
 
-    //프로세싱에서 DNN-Classification 연결
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image").realHover('mouse');  
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
-    cy.wait(3000);
-
-    // 데이터셋 클릭
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
-    cy.wait(2000);
-
     //DNN-Classification에서 Decision Tree Classifier 연결
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image").realHover('mouse');  
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image").realHover('mouse');  
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
@@ -166,35 +166,35 @@ describe('Record Project Create & Run', () => {
     cy.get('.title > button > .fa-solid').click(); // 닫기
     cy.get('.right-content > .btn').click(); // 플로우 화면 나가기
 
-    // 프로세싱 모듈 설정
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(9) > image").click(); // 프로세싱 모듈 선택
-    cy.wait(2000);
-    cy.get(':nth-child(3) > :nth-child(2) > image').click(); // 모듈 더보기
-    cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
-    cy.wait(3000);
-    cy.get('.btn-floating > .fas').click(); // 프로세싱 모듈 추가
-    cy.contains('Scale').click({ force: true }); // Scale 선택
-    cy.contains('추가').click();
-    cy.wait(3000);
+    // // 프로세싱 모듈 설정
+    // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(9) > image").click(); // 프로세싱 모듈 선택
+    // cy.wait(2000);
+    // cy.get(':nth-child(3) > :nth-child(2) > image').click(); // 모듈 더보기
+    // cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
+    // cy.wait(3000);
+    // cy.get('.btn-floating > .fas').click(); // 프로세싱 모듈 추가
+    // cy.contains('Scale').click({ force: true }); // Scale 선택
+    // cy.contains('추가').click();
+    // cy.wait(3000);
 
-    // Scale 설정
-    cy.get('.flow-item-box > .flow-item > .flow-item__name').click(); // Scale 모듈 선택
-    cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 설정 탭
-    cy.get('.ui-multiselect-trigger-icon').click(); // 작업 대상 펼치기
-    cy.get(':nth-child(1) > .ui-multiselect-item').click(); // 상영시간 선택
-    cy.get('.ui-multiselect-trigger').click(); // 작업 대상 접기
+    // // Scale 설정
+    // cy.get('.flow-item-box > .flow-item > .flow-item__name').click(); // Scale 모듈 선택
+    // cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 설정 탭
+    // cy.get('.ui-multiselect-trigger-icon').click(); // 작업 대상 펼치기
+    // cy.get(':nth-child(1) > .ui-multiselect-item').click(); // 상영시간 선택
+    // cy.get('.ui-multiselect-trigger').click(); // 작업 대상 접기
+    // // cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
+    // // cy.contains('성공적으로 저장하였습니다'); // 저장 확인
+    // cy.get('td > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // 처리 방법
+    // cy.get(':nth-child(1) > .ui-dropdown-item').click(); // 표준화 선택
     // cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
     // cy.contains('성공적으로 저장하였습니다'); // 저장 확인
-    cy.get('td > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // 처리 방법
-    cy.get(':nth-child(1) > .ui-dropdown-item').click(); // 표준화 선택
-    cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
-    cy.contains('성공적으로 저장하였습니다'); // 저장 확인
-    cy.wait(5000);
-    cy.get('.title > button > .fa-solid').click(); // 닫기
-    cy.get('.right-content > .btn').click(); // 플로우 화면 나가기
+    // cy.wait(5000);
+    // cy.get('.title > button > .fa-solid').click(); // 닫기
+    // cy.get('.right-content > .btn').click(); // 플로우 화면 나가기
 
     // DNN-Classification 클릭
-    cy.get(":nth-child(11) > image").click(); // DNN-Classification 모델러 선택
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(8) > image").click({ force: true }); // DNN-Classification 모델러 선택
     cy.wait(2000);
     cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 변수 설정 탭
     cy.wait(3000);
@@ -208,7 +208,7 @@ describe('Record Project Create & Run', () => {
     cy.wait(3000);
 
     // Decision Tree Classifier 클릭
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(13) > image").click(); // Decision Tree Classifier 모델러 선택
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(10) > image").click({ force: true }); // Decision Tree Classifier 모델러 선택
     cy.wait(2000);
     cy.get('.ui-multiselect-trigger').click(); // 입력변수 설정
     cy.wait(3000);

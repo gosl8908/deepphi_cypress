@@ -115,8 +115,7 @@ describe('Organization Dataset Upload', () => {
     
         // 데이터셋 설정 완료
         cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
-        cy.wait(5000);
-        cy.get('.page-button > .btn-primary').click(); // 완료
+        cy.get('.main-content__wrap > .create-dataset > .clear-box > .page-button > .btn:nth-child(2)').click({force: true}); // 완료
         cy.wait(10000); // 20초 대기
         cy.contains('샘플데이터'); // 업로드 정상 체크
 

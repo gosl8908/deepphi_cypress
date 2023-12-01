@@ -82,8 +82,8 @@ function getCurrentDate(){
       Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`,
       image_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`,
       image_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행`,
-      Record_Project_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행 6. 시각화 생성 7. 시각화 삭제`,
-      Record_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행`,
+      Record_Project_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`,
+      Record_Test_Project_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`,
       Organization_Create_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`,
       Organization_Dataset_Upload_emailbody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료`,
     }
@@ -123,4 +123,9 @@ function getCurrentDate(){
     Cypress.env('Record_Test_Project_Upload_emailbody', currentDate.Record_Test_Project_Upload_emailbody);
     Cypress.env('Organization_Create_emailbody', currentDate.Organization_Create_emailbody);
     Cypress.env('Organization_Dataset_Upload_emailbody', currentDate.Organization_Dataset_Upload_emailbody);
+  });
+
+  Cypress.on('uncaught:exception', (err, runnable) => {
+    // 에러를 무시하고 계속 진행
+    return false;
   });

@@ -109,7 +109,7 @@ describe('Test', () => {
     cy.wait(150000);
 
     cy.get(':nth-child(2) > .dashboard-card > .dashboard-card__name > button').click({force: true}); // 데이터셋 매니지먼트 접속
-    cy.get('.page-button > .btn-primary').click(); // 완료
+    cy.get('.main-content__wrap > .create-dataset > .clear-box > .page-button > .btn:nth-child(2)').click({force: true}); // 완료
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크
 });
