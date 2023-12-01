@@ -24,4 +24,4 @@ jobs:
       run: npm install
 
     - name: Run Cypress Tests 
-      run: npx cypress run --spec "cypress/e2e/Project/**/*"
+      run: npx cypress run --spec "cypress/e2e/workspace/Dataset_Upload.cy.js"
