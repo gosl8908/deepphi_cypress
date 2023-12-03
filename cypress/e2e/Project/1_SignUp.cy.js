@@ -231,6 +231,7 @@ describe('SignUp', () => {
     cy.wait(120000); // 120초 대기
 
     cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
+    cy.wait(3000);
     cy.get('.main-content__wrap > .create-dataset > .clear-box > .page-button > .btn:nth-child(2)').click({force: true}); // 완료
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크

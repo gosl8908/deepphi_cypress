@@ -43,7 +43,7 @@ describe('Record Test Project Create', () => {
 
         cy.log('인퍼런스 생성')
         //인퍼런스 생성
-        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click(); // 메뉴바
+        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({force: true}); // 메뉴바
         cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click(); // 인퍼런스
         cy.wait(3000);
         cy.get('#inference_version').clear().type('1.0')
