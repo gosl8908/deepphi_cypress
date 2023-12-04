@@ -107,7 +107,7 @@ describe('Record Project Create & Run', () => {
     //데이터셋에서 클렌징 연결
 
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").realHover('mouse');
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
     // // 데이터셋 클릭
@@ -125,7 +125,7 @@ describe('Record Project Create & Run', () => {
 
     //프로세싱에서 DNN-Classification 연결
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
     // 데이터셋 클릭
@@ -134,7 +134,7 @@ describe('Record Project Create & Run', () => {
 
     //DNN-Classification에서 Decision Tree Classifier 연결
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image").realHover('mouse');  
-    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
+    cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
     //클렌징 모듈 설정

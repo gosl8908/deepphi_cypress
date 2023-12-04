@@ -83,16 +83,16 @@ describe('Image Project Create', () => {
     
         //데이터셋에서 Resize 연결
         cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").realHover('mouse');
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(200, 0).realMouseUp();
+        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(200, 0).realMouseUp({ force: true });
         cy.wait(3000);
     
         // 데이터셋 클릭
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
+        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click({ force: true });
         cy.wait(1000);
           
         //Resize에서 VGG16 연결
         cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(200, 0).realMouseUp();
+        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(200, 0).realMouseUp({ force: true });
         cy.wait(3000);
     
         cy.log('프로젝트 실행')
