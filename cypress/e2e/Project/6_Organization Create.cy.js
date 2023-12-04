@@ -85,7 +85,6 @@ describe('Organization Create', () => {
 
   // 단체 크레딧 충전
   it('Organization Credit Charge', () => {
-    cy.viewport(1980, 1080)
     // 로그인
     adminloginModule.adminlogin( Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password') );
 
