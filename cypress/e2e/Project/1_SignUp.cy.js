@@ -228,12 +228,12 @@ describe('SignUp', () => {
     cy.get('em').click(); // 자동탐지 체크
     cy.get('.btn-primary').click(); // 다음
     cy.contains('업로드중 중에는 진입이 불가능합니다.'); // 업로드 로딩 체크
-    cy.wait(120000); // 120초 대기
+    cy.wait(150000); // 120초 대기
 
     cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
     cy.wait(3000);
     cy.contains('삭제')
-    cy.get('.main-content__wrap > .create-dataset > .clear-box > .page-button > .btn:nth-child(2)').click({force: true}); // 완료
+    cy.get('.fa-solid.fa-check').eq(1).click({force: true});
     cy.wait(20000); // 20초 대기
     cy.contains('샘플데이터'); // 업로드 정상 체크
    });
