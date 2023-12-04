@@ -36,7 +36,7 @@ describe('Record Test Project Create', () => {
         cy.wait(5000);
     
         cy.contains('실행'); // 실행 상태 체크
-        cy.wait(300000); // 5분 대기
+        cy.wait(360000); // 6분 대기
 
         cy.contains('완료');
 

@@ -228,7 +228,7 @@ describe('SignUp', () => {
     cy.get('em').click(); // 자동탐지 체크
     cy.get('.btn-primary').click(); // 다음
     cy.contains('업로드중 중에는 진입이 불가능합니다.'); // 업로드 로딩 체크
-    cy.wait(150000); // 120초 대기
+    cy.wait(150000); 
 
     cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
     cy.wait(3000);
