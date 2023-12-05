@@ -62,7 +62,7 @@ function getCurrentDate(){
       stgadmin: 'https://st-admin.deepphi.ai/',
       dev: 'https://dev-home.deepphi.ai/',
       devadmin: 'https://dev-admin.deepphi.ai/',
-      Prod: 'http://deepphi.ai/',
+      Prod: 'https://www.deepphi.ai/home',
       prodadmin: 'https://admin.deepphi.ai/',
       prodtest: 'http://st.deepphi.ai/',
       signup_id: `Signup${year}${month}${day}${hours}${minutes}${seconds}`,
