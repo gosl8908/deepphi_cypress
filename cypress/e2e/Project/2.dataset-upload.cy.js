@@ -3,9 +3,9 @@ const { loginModule , imagedatasetModule , recorddatasetModule , emailModule } =
 describe('Dataset Upload Test', () => {
     before(()=>{
       cy.setDateToEnv();
-      // cy.getAllCookies(); // 쿠키 삭제
-      // cy.getAllLocalStorage(); // 로컬 삭제
-      // cy.getAllSessionStorage(); // 세션 삭제
+      cy.getAllCookies(); // 쿠키 삭제
+      cy.getAllLocalStorage(); // 로컬 삭제
+      cy.getAllSessionStorage(); // 세션 삭제
     });
     
     it('Dataset Upload test', () => {

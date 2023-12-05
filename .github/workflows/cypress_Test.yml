@@ -24,4 +24,4 @@ jobs:
       run: npm install cypress@latest
 
     - name: Run Cypress tests 
-      run: TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/**/*"
+      run: TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/1.signup.cy.js" && TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/2.dataset-upload.cy.js"

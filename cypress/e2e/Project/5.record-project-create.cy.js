@@ -4,9 +4,9 @@ describe('Record Project Create & Run', () => {
 
   before(() => {
     cy.setDateToEnv();
-    // cy.getAllCookies(); // 쿠키 삭제
-    // cy.getAllLocalStorage(); // 로컬 삭제
-    // cy.getAllSessionStorage(); // 세션 삭제    
+    cy.getAllCookies(); // 쿠키 삭제
+    cy.getAllLocalStorage(); // 로컬 삭제
+    cy.getAllSessionStorage(); // 세션 삭제    
   });
 
   it('Record Project Create & Run', () => {
