@@ -21,7 +21,7 @@ jobs:
         node-version: '20.9.0'
 
     - name: Install Dependencies
-      run: npm install
+      run: npm install cypress@latest
 
     - name: Run Cypress tests 
       run: TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/2.image-project-create.cy.js"
