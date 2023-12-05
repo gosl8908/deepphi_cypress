@@ -1,4 +1,4 @@
-function Record_api() {
+function record_api() {
 
     // 레코드 인퍼런스 API 호출
     cy.fixture("자동화용 데이터셋.csv").then((fileContent) => {
@@ -43,5 +43,5 @@ function Record_api() {
 }
 
 module.exports ={
-    Record_api: Record_api,
+    record_api: record_api,
 }

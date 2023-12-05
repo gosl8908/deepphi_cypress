@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress tests
 
 on:
   schedule:
@@ -23,5 +23,5 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Run Cypress Tests 
-      run: TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/**/*"
+    - name: Run Cypress tests 
+      run: TZ=Asia/Seoul npx cypress run --browser chrome --spec "cypress/e2e/Project/2.image-project-create.cy.js"

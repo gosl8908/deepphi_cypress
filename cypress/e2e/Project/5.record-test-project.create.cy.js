@@ -1,4 +1,4 @@
-const { loginModule , emailModule , Record_apiModule} = require('../Module/moduleManager.js');
+const { loginModule , emailModule , record_apiModule} = require('../Module/moduleManager.js');
 
 describe('Record Test Project Create', () => {
 
@@ -71,7 +71,7 @@ describe('Record Test Project Create', () => {
         cy.log('api 호출')
         // api 호출
         cy.wait(30000);
-        Record_apiModule.Record_api();
+        record_apiModule.record_api();
         cy.wait(30000);
         cy.contains('성공');
         cy.wait(3000);

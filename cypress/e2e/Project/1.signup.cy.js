@@ -1,4 +1,4 @@
-const { emailModule } = require('../../e2e/Module/moduleManager.js');
+const { emailModule } = require('../Module/moduleManager.js');
 
 describe('SignUp', () => {
 
@@ -31,7 +31,7 @@ describe('SignUp', () => {
       cy.contains('회원가입').click();
       cy.wait(5000);
 
-    // 회원가입 페이지
+    /* 회원가입 페이지 */
       cy.contains('모든 항목에 동의합니다').click() // 모든 항목 동의
       cy.get('.account-button--primary').click(); // 다음
       cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => { // 'SignupTest.txt' 파일 내용 불러오기
