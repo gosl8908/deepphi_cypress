@@ -17,6 +17,7 @@ describe('Record Project Create & Run', () => {
     cy.contains('프로젝트 생성').click(); // 프로젝트 생성 
     cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // 레코드 선택
     cy.get('.modal-button-content > .btn').click(); // 다음
+    cy.wait(1000);
 
     // 프로젝트 정보 입력
     cy.get('#project_name').type(Cypress.env('RecordProjectName')); // 프로젝트 제목
@@ -85,6 +86,7 @@ describe('Record Project Create & Run', () => {
     
     // DNN-Classification 모듈 모델러에 추가
     cy.ModuleAdd('@DNN-Classification', '@svg', 700, 300);
+    cy.wait(3000);
 
     // Decision Tree Classifier 모듈 검색
     cy.get('.input-form').clear().type('Decision Tree Classifier');
@@ -107,6 +109,7 @@ describe('Record Project Create & Run', () => {
     //데이터셋에서 클렌징 연결
 
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").realHover('mouse');
+    cy.wait(3000);
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
@@ -116,6 +119,7 @@ describe('Record Project Create & Run', () => {
       
     // //클렌징에서 프로세싱 연결
     // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
+    // cy.wait(3000);
     // cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
     // cy.wait(3000);
 
@@ -125,6 +129,7 @@ describe('Record Project Create & Run', () => {
 
     //프로세싱에서 DNN-Classification 연결
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
+    cy.wait(3000);
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
@@ -134,6 +139,7 @@ describe('Record Project Create & Run', () => {
 
     //DNN-Classification에서 Decision Tree Classifier 연결
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image").realHover('mouse');  
+    cy.wait(3000);
     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(100, 0).realMouseUp().realMouseUp();
     cy.wait(3000);
 
