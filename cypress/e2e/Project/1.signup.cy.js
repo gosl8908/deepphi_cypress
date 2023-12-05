@@ -6,12 +6,12 @@ describe('SignUp', () => {
     cy.setDateToEnv();
   });
 
-  // 일회용 이메일 만들기
+  /* 일회용 이메일 만들기 */
   it('Create email', () => {
     cy.viewport(1920, 1080);
     cy.visit('http://ruu.kr/') // 일회용 이메일 진입
 
-    // 환경 변수에서 날짜 레이블 가져오기
+    /* 환경 변수에서 날짜 레이블 가져오기 */
     const dateLabel = Cypress.env('date_label');    
     cy.get('#id')
       .type('test' + dateLabel); // 필요한 곳에서 텍스트 사용  
@@ -23,7 +23,7 @@ describe('SignUp', () => {
     cy.wait(3000);
   });
 
-    // 회원가입 진행
+    /* 회원가입 진행 */
     it('SignUp', () => {
       cy.viewport(1920, 1080);
       cy.visit(Cypress.env('prod'))
@@ -53,14 +53,14 @@ describe('SignUp', () => {
       cy.get('.account-button--primary').click(); // 등록
       cy.wait(3000);
 
-    // 회원가입 마무리
+    /* 회원가입 마무리 */
       cy.contains('회원 가입이 마무리됩니다.'); // 회원가입 완료 팝업 확인
       cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
       cy.wait(3000);
     });
   });
 
-  // 이메일 인증 확인
+  /* 이메일 인증 확인 */
     it('Check Verify email', () => {
       cy.viewport(1920, 1080);
       cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
@@ -79,7 +79,7 @@ describe('SignUp', () => {
     });
   });
 
-  // 회원가입 완료 확인
+  /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information & Dataset Upload', () => {
       cy.viewport(1920, 1080);
       cy.readFile('cypress/fixtures/SignupTest.txt').then((text) => {
@@ -92,7 +92,7 @@ describe('SignUp', () => {
     cy.wait(5000);
 
 
-    // 프로필 정보 변경 확인
+    /* 프로필 정보 변경 확인 */
     cy.get('dd.ng-tns-c1-1').click(); // 프로필 선택
     cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
     cy.get('.my-info__profile-card > .btn').click(); // 프로필 수정 선택
@@ -111,7 +111,7 @@ describe('SignUp', () => {
     cy.contains('회원정보가 성공적으로 변경되었습니다.'); // 회원정보 변경 확인
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
 
-    // 비밀번호 변경 확인
+    /* 비밀번호 변경 확인 */
     cy.get('.my-info__profile-card > .btn').click(); // 프로필 수정 선택
     cy.get('.input-form').type('test123!'); // 비밀번호 입력
     cy.get('.modal-button-content > .btn-primary').click(); // 확인
@@ -123,7 +123,7 @@ describe('SignUp', () => {
     cy.contains('비밀번호가 성공적으로 변경되었습니다.'); // 비밀번호 변경 확인
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
 
-    // DISK 업그레드 확인
+    /* DISK 업그레드 확인 */
     cy.get('.my-info__subscription > .my-info__card--item > .btn').click(); // Disk 업그레이드
     cy.get('.input-form').select('100GB'); // 100GB 선택
     cy.get(':nth-child(1) > div > .radio-item > em').click(); // 정기 결제 동의
@@ -133,14 +133,14 @@ describe('SignUp', () => {
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
     cy.contains('이용기간'); // 결제 확인
 
-    // 데이터셋 업로드
+    /* 데이터셋 업로드 */
     cy.get('#site-map__flow-btn').click(); // 네비게이션
     cy.get('[routerlink="user/image/dataset"] > button').click(); // 이미지 데이터셋
     cy.wait(5000);
      cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
      cy.wait(3000);
 
-     // 데이터셋 정보 입력
+     /* 데이터셋 정보 입력 */
      cy.get('#dataset_name').type(Cypress.env('ImageDatasetName')); // 데이터셋 이름 입력
      cy.get('.note-editable').type(Cypress.env('ImageDatasetName')); // 데이터셋 내용 입력
      cy.get('form.ng-dirty > .create-dataset > .step-content-box > .page-button > .btn').click(); // 다음
@@ -150,7 +150,7 @@ describe('SignUp', () => {
      cy.get('form.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click({ force: true }); // 다음
      cy.wait(3000);
 
-     // 파일 첨부
+     /* 파일 첨부 */
      cy.fixture('자동화용 데이터셋(2D 분류).zip').then(fileContent => {
          cy.get('input[accept=".zip"][type="file"]').attachFile({
              fileContent,
@@ -159,12 +159,13 @@ describe('SignUp', () => {
              mimeType: 'application/zip'
      });
      cy.wait(3000);
-     // 업로드
+
+     /* 업로드 */
      cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click({ force: true });
      cy.wait(3000);
      cy.contains('성공'); // 업로드 확인
 
-     // 데이터셋 매니지먼트 화면 진입
+     /* 데이터셋 매니지먼트 화면 진입 */
      cy.log('첫번째 데이터셋 선택')
      cy.wait(10000);
      cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 1번째 데이터셋 선택 
@@ -173,7 +174,7 @@ describe('SignUp', () => {
      cy.get('.text-center > .btn').click(); // 팝업 닫기
      cy.wait(30000);
 
-     // 변환
+     /* 변환 */
      cy.get('#convert-btn').click(); // 변환
      cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click({ force: true }); // 검색된 모든 파일
      cy.wait(60000); 
@@ -181,27 +182,27 @@ describe('SignUp', () => {
      cy.contains('사용 용도 수정');
      cy.wait(5000);
 
-     // 사용 용도 수정
+     /* 사용 용도 수정 */
      cy.get('#btn-edit-usage').click(); // 사용 용도 수정
      cy.get('.right-content > :nth-child(1) > .list-dropdown > :nth-child(1) > button').click(); // 검색된 모든 파일
      cy.get('.modal-button-content > .btn-primary').click(); // 저장
      cy.wait(5000);
      cy.contains(/학습.*검증/); // 사용 용도 확인
 
-     // 데이터셋에 파일 포함
+     /* 데이터셋에 파일 포함 */
      cy.get('#include-btn').click(); // 데이터셋에 파일 포함
      cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click(); // 검색된 모든 파일
      cy.get('.modal-button-content > .btn-primary').click(); // 계속
      cy.wait(5000)
 
-     // 레코드 데이터셋 업로드
+     /* 레코드 데이터셋 업로드 */
     cy.get('.ng-tns-c0-0 > .ng-tns-c0-0 > #site-map__flow-btn > .ng-tns-c0-0 > #sitemap-svg').click(); // 네비게이션
     cy.get('.gnb__site-map__content > #dataset-menu > #dataset-menu-ul > li:nth-child(2) > button').click(); // 레코드 데이터셋
     cy.wait(3000);
     cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
     cy.wait(3000);
 
-    // 데이터셋 정보 입력
+    /* 데이터셋 정보 입력 */
     cy.get('#dataset_name').type(Cypress.env('RecordDatasetName')); // 데이터셋 이름 입력
     cy.get('.note-editable').type(Cypress.env('RecordDatasetName')); // 데이터셋 내용 입력
     cy.get('.page-button > .btn').click(); // 다음
@@ -230,6 +231,7 @@ describe('SignUp', () => {
     cy.contains('업로드중 중에는 진입이 불가능합니다.'); // 업로드 로딩 체크
     cy.wait(150000); 
 
+    /*  데이터셋 설정 */
     cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({force: true}); // 데이터셋 매니지먼트 접속
     cy.wait(3000);
     cy.contains('삭제')

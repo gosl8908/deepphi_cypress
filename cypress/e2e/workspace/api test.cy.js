@@ -1,10 +1,10 @@
-const { apiModule, emailModule } = require('../../e2e/Module/moduleManager.js');
+const { record_apiModule, emailModule } = require('../../e2e/Module/moduleManager.js');
 
 describe('인퍼런스 서비스 api test', () => {
 
   // 레코드 인퍼런스 api 호출
   it('인퍼런스 서비스 api test', () => {
-    apiModule.api();
+    record_apiModule.api();
     // emailModule.email(Cypress.env('emailtitle'), Cypress.env('emailbody'));
   });
 });
