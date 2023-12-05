@@ -1,5 +1,8 @@
 function adminlogin(prodadmin, id, password) {
     
+    cy.log("어드민 로그인 성공");
+
+    /* 어드민 로그인 */
     cy.viewport(1920, 1080); // FHD 해상도 설정
     cy.visit(prodadmin, { timeout: 30000 }) 
     cy.get('#username').type(id); // 이메일 입력

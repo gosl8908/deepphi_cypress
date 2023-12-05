@@ -88,8 +88,6 @@ describe('Record Test Project Create', () => {
         cy.wait(3000);
         cy.contains('inferenceautomation 인퍼런스 서비스가 삭제되었습니다.');
 
-
-
-    emailModule.email('Record Test Project Create Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Test_Project_Upload_emailbody'));
+        emailModule.email('Record Test Project Create Test ' + Cypress.env('emailtitle'), Cypress.env('Record_Test_Project_Upload_emailbody'));
   });
 });

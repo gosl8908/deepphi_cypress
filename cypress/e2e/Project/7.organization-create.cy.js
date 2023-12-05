@@ -133,8 +133,7 @@ describe('Organization Create', () => {
     cy.wait(3000);
     cy.get('.modal-button-content > .btn').click(); // 확인
     cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
-    
+
     emailModule.email('Organization Create Test ' + Cypress.env('emailtitle'), Cypress.env('Organization_Create_emailbody'));
-    
 });
 });

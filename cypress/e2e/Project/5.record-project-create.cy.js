@@ -227,7 +227,7 @@ describe('Record Project Create & Run', () => {
 
     //프로젝트 Run
     cy.log('프로젝트 실행')
-    cy.get('.modeler-header__run-action-button > .btn').click();
+    cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
 
     cy.wait(3000);
     cy.contains('실행'); // 실행 상태 체크

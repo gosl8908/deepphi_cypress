@@ -90,7 +90,7 @@ describe('SignUp', () => {
     cy.get('#password').type('test123!'); // 비밀번호 입력
     cy.get('#kc-login').click() // 로그인 선택
     cy.wait(5000);
-
+    });
 
     /* 프로필 정보 변경 확인 */
     cy.get('dd.ng-tns-c1-1').click(); // 프로필 선택
@@ -132,9 +132,7 @@ describe('SignUp', () => {
     cy.contains('상품을 정기결제 하셨습니다.'); // 결제 완료 확인
     cy.get('.modal-button-content > .btn').click(); // 팝업 종료
     cy.contains('이용기간'); // 결제 확인
-
-  emailModule.email('SignUp Test ' + Cypress.env('emailtitle'), Cypress.env('SignUp_emailbody'));
-
-});
-});
+      
+    emailModule.email('SignUp Test ' + Cypress.env('emailtitle'), Cypress.env('SignUp_emailbody'));
+  });
 });
