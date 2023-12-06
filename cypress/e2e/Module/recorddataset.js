@@ -3,9 +3,8 @@ function recorddataset(RecordDatasetName , date_label) {
     cy.log("레코드 데이터셋 업로드 성공");
     
     /* 레코드 데이터셋 업로드 */
-    cy.get('.ng-tns-c0-0 > .ng-tns-c0-0 > #site-map__flow-btn > .ng-tns-c0-0 > #sitemap-svg').click(); // 네비게이션
-    cy.get('.gnb__site-map__content > #dataset-menu > #dataset-menu-ul > li:nth-child(2) > button').click(); // 레코드 데이터셋
-    cy.wait(3000);
+    cy.contains('레코드 데이터셋').click(); // 레코드 데이터셋
+    cy.wait(5000);
     cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
     cy.wait(3000);
  
@@ -50,6 +49,10 @@ function recorddataset(RecordDatasetName , date_label) {
      cy.get('.fa-solid.fa-check').eq(1).click({force: true});
      cy.wait(20000); // 20초 대기
      cy.contains('샘플데이터'); // 업로드 정상 체크
+
+     /* 데이터셋 화면 나가기 */
+     cy.get('.btn-home').click();
+     cy.wait(5000);
 }
 
 module.exports ={

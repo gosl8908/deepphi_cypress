@@ -3,8 +3,7 @@ function imagedataset(ImageDatasetName , date_label) {
 cy.log("이미지 데이터셋 업로드 성공");
 
 /* 데이터셋 업로드 */
-cy.get('#site-map__flow-btn').click(); // 네비게이션
-cy.get('[routerlink="user/image/dataset"] > button').click(); // 이미지 데이터셋
+cy.contains('이미지 데이터셋').click(); // 이미지 데이터셋
 cy.wait(5000);
 cy.contains('데이터셋 업로드').click(); // 데이터셋 업로드 화면 진입
 cy.wait(3000);
@@ -64,6 +63,10 @@ cy.get('#include-btn').click(); // 데이터셋에 파일 포함
 cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click(); // 검색된 모든 파일
 cy.get('.modal-button-content > .btn-primary').click(); // 계속
 cy.wait(5000)
+
+/* 데이터셋 화면 나가기 */
+cy.get('.btn-home').click();
+cy.wait(5000);
 }
 
 module.exports ={

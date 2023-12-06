@@ -1,4 +1,4 @@
-const { loginModule , emailModule } = require('../Module/moduleManager.js');
+const {loginModule, emailModule} = require('../Module/moduleManager.js');
 
 describe('Image Project Create', () => {
 
@@ -11,7 +11,7 @@ describe('Image Project Create', () => {
 
   it('Image Project Create', () => {
           // 로그인
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login(Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password'));
     
      // 프로젝트 생성
      cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
@@ -27,10 +27,12 @@ describe('Image Project Create', () => {
 
      // 리소스 설정
      cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
-     cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em').click(); // 데이터 프로세싱 cpu.4
+     cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em')
+     .click(); // 데이터 프로세싱 cpu.4
      // cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
      cy.get('.cpu-gpu--selector > :nth-child(2) > div > .radio-item > em').click(); // 뉴럴 네트워크 CPU
-     cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em').click(); // 뉴럴 네트워크 cpu.4
+     cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em')
+     .click(); // 뉴럴 네트워크 cpu.4
      // cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
      cy.get('.btn-primary').click(); // 저장
      cy.get('.modal-button-content > .btn-primary').click(); // 확인
@@ -86,7 +88,8 @@ describe('Image Project Create', () => {
      //데이터셋에서 Resize 연결
      cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").realHover('mouse');
      cy.wait(3000);
-     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(200, 0, { force: true }).realMouseUp({ force: true });
+     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image")
+     .realMouseDown({ force: true }).realMouseMove(200, 0, { force: true }).realMouseUp({ force: true });
      cy.wait(3000);
   
      // 데이터셋 클릭
@@ -96,7 +99,8 @@ describe('Image Project Create', () => {
      //Resize에서 VGG16 연결
      cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');  
      cy.wait(3000);
-     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown({ force: true }).realMouseMove(200, 0).realMouseUp({ force: true });
+     cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image")
+     .realMouseDown({ force: true }).realMouseMove(200, 0).realMouseUp({ force: true });
      cy.wait(3000);
   
      cy.log('프로젝트 실행')

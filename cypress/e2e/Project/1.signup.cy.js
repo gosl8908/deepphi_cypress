@@ -1,4 +1,4 @@
-const { emailModule } = require('../Module/moduleManager.js');
+const {emailModule} = require('../Module/moduleManager.js');
 
 describe('SignUp', () => {
 
@@ -12,13 +12,12 @@ describe('SignUp', () => {
     cy.visit('http://ruu.kr/') // 일회용 이메일 진입
 
     /* 환경 변수에서 날짜 레이블 가져오기 */
-    const dateLabel = Cypress.env('date_label');    
     cy.get('#id')
-      .type('test' + dateLabel); // 필요한 곳에서 텍스트 사용  
+      .type('test' + Cypress.env('date_label')); // 필요한 곳에서 텍스트 사용  
     cy.get('#mailList').click();  
     cy.wait(5000); // 5초 대기  
     // 조합한 텍스트를 파일에 저장
-    const textToWrite = 'test' + dateLabel;
+    const textToWrite = 'test' + Cypress.env('date_label');
     cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
     cy.wait(3000);
   });

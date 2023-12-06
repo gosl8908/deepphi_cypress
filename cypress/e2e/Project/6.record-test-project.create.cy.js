@@ -43,8 +43,10 @@ describe('Record Test Project Create', () => {
 
         cy.log('인퍼런스 생성')
         //인퍼런스 생성
-        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({force: true}); // 메뉴바
-        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click(); // 인퍼런스
+        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn')
+        .click({force: true}); // 메뉴바
+        cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button')
+        .click(); // 인퍼런스
         cy.wait(3000);
         cy.get('#inference_version').clear().type('1.0')
         cy.get('.ml10 > .btn').click(); // 버전 체크
@@ -81,7 +83,8 @@ describe('Record Test Project Create', () => {
 
         cy.log('인퍼런스 삭제')
         // 인퍼런스 삭제
-        cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 마이 인퍼런스
+        cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0 > .ng-tns-c0-0')
+        .click(); // 마이 인퍼런스
         cy.wait(5000);
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
