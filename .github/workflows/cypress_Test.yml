@@ -6,8 +6,8 @@ on:
     - cron: '10 23 * * 0'      # 매주 일요일 23:10 (11:10 PM)에 실행
     - cron: '30 23 * * 0' 
   push:
-      branches:
-        - main
+    branches:
+      - main
 
 jobs:
   build:
@@ -18,9 +18,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Setup Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
-        node-version: '20.9.0'
+        node-version: '14'  # 적절한 노드 버전을 선택하세요
 
     - name: Install Dependencies
       run: yarn install cypress@latest
@@ -36,9 +36,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'
+          node-version: '14'  # 적절한 노드 버전을 선택하세요
 
       - name: Install Dependencies
         run: yarn install cypress@latest
@@ -54,9 +54,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'
+          node-version: '14'  # 적절한 노드 버전을 선택하세요
 
       - name: Install Dependencies
         run: yarn install cypress@latest
