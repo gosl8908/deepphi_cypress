@@ -23,7 +23,7 @@ jobs:
         node-version: '14'  # 적절한 노드 버전을 선택하세요
 
     - name: Install Dependencies
-      run: yarn install cypress@latest
+      run: yarn add cypress@latest
 
     - name: Run Cypress tests 
       run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/1.signup.cy.js"
@@ -41,7 +41,7 @@ jobs:
           node-version: '14'  # 적절한 노드 버전을 선택하세요
 
       - name: Install Dependencies
-        run: yarn install cypress@latest
+        run: yarn add cypress@latest
 
       - name: Run Cypress tests 
         run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/2.dataset-upload.cy.js"
@@ -59,7 +59,7 @@ jobs:
           node-version: '14'  # 적절한 노드 버전을 선택하세요
 
       - name: Install Dependencies
-        run: yarn install cypress@latest
+        run: yarn add cypress@latest
 
       - name: Run Cypress tests 
         run: |
