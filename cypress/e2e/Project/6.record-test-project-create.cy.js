@@ -24,8 +24,13 @@ describe('Record Test Project Create', () => {
         cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
         cy.wait(3000);
         cy.get('.btn-floating > div').click({force: true}); // 생성
-        cy.get('.modal-button-content > .btn').click(); // 확인
+        cy.wait(3000);
+        cy.get('input-form input-lg display-block ng-pristine ng-valid ng-touched').clear.type(Cypress.env('date_label'));
+        cy.wait(1000);
+        cy.get('.modal-button-content > .btn').click(); // 다음
+        cy.wait(1000);
         cy.get('.btn-primary').click(); // 다음
+        cy.wait(1000);
         cy.get('.btn-primary').click(); // 확인
         cy.wait(5000);
 
@@ -50,6 +55,7 @@ describe('Record Test Project Create', () => {
         cy.wait(3000);
         cy.get('#inference_version').clear().type('1.0')
         cy.get('.ml10 > .btn').click(); // 버전 체크
+        cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('date_label')); // 설명
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.wait(5000);
@@ -77,6 +83,7 @@ describe('Record Test Project Create', () => {
         cy.wait(30000);
         cy.contains('성공');
         cy.wait(3000);
+        cy.screenshot('record_inference_api', 1920, 1080);
         cy.get('.btn-clear-danger').click(); // 중지
         cy.wait(10000);
 
