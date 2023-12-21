@@ -14,7 +14,7 @@ describe('SignUp', () => {
     cy.get('#id').type('test' + Cypress.env('date_label')); // 필요한 곳에서 텍스트 사용
     cy.get('#mailList').click();
     cy.wait(5000); // 5초 대기
-    // 조합한 텍스트를 파일에 저장
+    /* 조합한 텍스트를 파일에 저장 */
     const textToWrite = 'test' + Cypress.env('date_label');
     cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
     cy.wait(3000);
@@ -32,7 +32,7 @@ describe('SignUp', () => {
     cy.contains('모든 항목에 동의합니다').click(); // 모든 항목 동의
     cy.get('.account-button--primary').click(); // 다음
     cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-      // 'SignupTest.txt' 파일 내용 불러오기
+      /* 'SignupTest.txt' 파일 내용 불러오기 */
       cy.get('#user-id').type(text + '@ruu.kr'); // 파일 내용을 입력 필드에 입력
       cy.get(':nth-child(1) > dd > .form-size > .account-button').click(); // 아이디 중복 검사
       cy.contains('사용 가능한 이메일입니다.'); // 이메일 중복 팝업 확인

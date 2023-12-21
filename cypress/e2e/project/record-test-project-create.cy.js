@@ -9,17 +9,17 @@ describe('Record Test Project Create', () => {
   });
 
   it('Record Test Project Create', () => {
-    // 로그인
+
     loginModule.login(Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password'));
 
-    // 레코드 프로젝트 검색
+    /* 레코드 프로젝트 검색 */
     cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
     cy.get('.search-box > .btn-primary').click();
     cy.wait(3000);
     cy.get('.title').click();
     cy.wait(5000);
 
-    // 평가 프로젝트 생성
+    /* 평가 프로젝트 생성 */
     cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
     cy.wait(3000);
     cy.get('.btn-floating > div').click({ force: true }); // 생성
@@ -32,7 +32,7 @@ describe('Record Test Project Create', () => {
     cy.wait(5000);
 
     cy.log('프로젝트 실행');
-    //프로젝트 Run
+    /* 프로젝트 Run */
     cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
     cy.wait(5000);
 
@@ -42,7 +42,7 @@ describe('Record Test Project Create', () => {
     cy.contains('완료');
 
     cy.log('인퍼런스 생성');
-    //인퍼런스 생성
+    /* 인퍼런스 생성 */
     cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({ force: true }); // 메뉴바
     cy.get(
       '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button'
@@ -59,7 +59,7 @@ describe('Record Test Project Create', () => {
     cy.wait(5000);
 
     cy.log('인퍼런스 실행');
-    //인퍼런스 실행
+    /* 인퍼런스 실행 */
     cy.contains('마이 인퍼런스');
     cy.get(':nth-child(1) > :nth-child(11) > .btn').click(); // 실행
     cy.wait(10000);
@@ -70,7 +70,7 @@ describe('Record Test Project Create', () => {
     cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
     cy.log('api 호출');
-    // api 호출
+    /* api 호출 */
     cy.wait(30000);
     record_apiModule.record_api();
     cy.wait(30000);
@@ -81,7 +81,7 @@ describe('Record Test Project Create', () => {
     cy.wait(10000);
 
     cy.log('인퍼런스 삭제');
-    // 인퍼런스 삭제
+    /* 인퍼런스 삭제 */
     cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 마이 인퍼런스
     cy.wait(5000);
     cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제

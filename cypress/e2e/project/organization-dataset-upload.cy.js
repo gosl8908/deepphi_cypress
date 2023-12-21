@@ -11,7 +11,7 @@ describe('Organization Dataset Upload', () => {
   it('Organization Dataset Upload', () => {
     loginModule.login(Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password'));
 
-    // 단체 이동
+    /* 단체 이동 */
     cy.get('.btn__user_info').click(); // 프로필 선택
     cy.get('.organization-changer__opener').click();
     cy.contains('자동화용 단체').click(); // 단체 선택

@@ -16,13 +16,13 @@ describe('Organization Create', () => {
     cy.get('.btn__user_info').click(); // 프로필 선택
     cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
 
-    // 단체 삭제
+    /* 단체 삭제 */
     cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
     cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
     cy.get('.modal-button-content > .btn-danger').click(); // 삭제
     cy.wait(3000);
 
-    // 단체 생성
+    /* 단체 생성 */
     cy.get('.flex-display > :nth-child(2) > .btn').click(); // 단체 생성
     cy.get('#organization_select').select('기타'); // 분류 선택
     cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
@@ -33,7 +33,7 @@ describe('Organization Create', () => {
     cy.get('.modal-button-content > .btn').click(); // 확인
     cy.wait(5000);
 
-    // 멤버 초대
+    /* 멤버 초대 */
     cy.get(':nth-child(6) > button').click(); // 멤버
     cy.get('.dashboard__header--control > .btn').click(); // 초대
     cy.get('#group_new_manager_email').type('deeptest2@deepnoid.com'); // 이메일 입력
@@ -41,7 +41,7 @@ describe('Organization Create', () => {
     cy.get('.page-button > .btn-primary').click(); // 초대
     cy.get('.btn-close > .fa-solid').click(); // 완료 팝업 X
 
-    // 그룹 생성
+    /* 그룹 생성 */
     cy.get(':nth-child(2) > .left-navigation--sub-navi > :nth-child(1) > button > span').click(); // 그룹 관리
     cy.get('.dashboard__header--control > .btn').click(); // 그룹 생성
     cy.get('#group_name').type('그룹2'); // 그룹명 입력
@@ -51,7 +51,7 @@ describe('Organization Create', () => {
     cy.get('.modal-button-content > .btn-primary').click(); // 생성
     cy.wait(3000);
 
-    // 그룹 멤버 초대
+    /* 그룹 멤버 초대 */
     cy.get(':nth-child(6) > button').eq(0).click(); // 멤버
     cy.get('.dashboard__header--control > .btn').click(); // 초대
     cy.get('#group_new_manager_email').type('deeptest3@deepnoid.com'); // 이메일 입력
@@ -61,27 +61,27 @@ describe('Organization Create', () => {
     cy.get('.page-button > .btn-primary').click(); // 초대
     cy.get('.btn-close > .fa-solid').click(); // 완료 팝업 X
 
-    // 그룹 관리자 변경
+    /* 그룹 관리자 변경 */
     cy.get(':nth-child(2) > .left-navigation--sub-navi > :nth-child(1) > button > span').click(); // 그룹 관리
     cy.get(':nth-child(7) > .btn').click(); // 관리자 변경
     cy.get('#group_new_manager_email').type('deeptest3@deepnoid.com'); // 새로운 그룹 관리자 입력
     cy.get('.modal-button-content > .btn-primary').click(); // 확인
     cy.contains('deeptest3'); // 관리자 변경 확인
 
-    // 그룹 삭제
+    /* 그룹 삭제 */
     cy.get(':nth-child(8) > .btn').click(); // 삭제 선택
     cy.get('#group_delete_check').type('그룹2'); // 그룹명 입력
     cy.get('.modal-button-content > .btn-danger').click(); // 삭제
 
-    // 멤버 탈퇴
+    /* 멤버 탈퇴 */
     cy.get(':nth-child(6) > button').eq(0).click(); // 멤버
     cy.get(':nth-child(1) > :nth-child(8) > .btn').click(); // 강제 탈퇴
     cy.get('.modal-button-content > .btn-danger').click(); // 탈퇴
   });
 
-  // 단체 크레딧 충전
+  /* 단체 크레딧 충전 */
   it('Organization Credit Charge', () => {
-    // 어드민 로그인
+    /* 어드민 로그인 */
     adminloginModule.adminlogin(Cypress.env('prodadmin'), Cypress.env('id'), Cypress.env('password'));
 
     /* 크레딧 충전 */
@@ -109,11 +109,11 @@ describe('Organization Create', () => {
     cy.wait(3000);
   });
 
-  // 단체 DISK 구독
+  /* 단체 DISK 구독 */
   it('Organization DISK subscribe', () => {
     loginModule.login(Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password'));
 
-    // 크레딧 충전
+    /* 크레딧 충전 */
     cy.get('.btn__user_info').click(); // 프로필 선택
     cy.get('.organization-changer__opener').click();
     cy.get('.ng-star-inserted > .organization-changer__list-item > .organization-changer__list-item--info > dt').click({ force: true }); // 단체 선택
