@@ -1,7 +1,6 @@
 function login(prod, auto_test_id, password) {
   cy.log("로그인 성공");
 
-  /* 로그인 */
   cy.viewport(1920, 1080); // FHD 해상도 설정
   cy.visit(prod, { timeout: 120000 });
   cy.contains("로그인").click({ timeout: 60000 }); // 로그인 클릭

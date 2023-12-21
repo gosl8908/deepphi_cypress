@@ -2,7 +2,7 @@ name: Cypress tests
 
 on:
   schedule:
-    - cron: '0 23 * * 0-4'        # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
+    - cron: "0 23 * * 0-4" # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
 
   push:
     branches:
@@ -13,20 +13,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.9.0'  
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.9.0"
 
-    - name: Install Dependencies
-      run: yarn add cypress@latest
+      - name: Install Dependencies
+        run: yarn add cypress@latest
 
-    - name: Run Cypress tests 
-      run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/1.signup.cy.js"
-              
+      - name: Run Cypress tests
+        run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
+
   dataset_upload_test:
     runs-on: ubuntu-latest
     needs: signup_test
@@ -38,14 +38,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'  
+          node-version: "20.9.0"
 
       - name: Install Dependencies
         run: yarn add cypress@latest
 
-      - name: Run Cypress tests 
-        run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/0.test.cy.js"
-        
+      - name: Run Cypress tests
+        run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/test.cy.js"
+
   # image_project_create_test:
   #   runs-on: ubuntu-latest
   #   needs: dataset_upload_test
@@ -57,16 +57,16 @@ jobs:
   #     - name: Setup Node.js
   #       uses: actions/setup-node@v3
   #       with:
-  #         node-version: '20.9.0' 
+  #         node-version: '20.9.0'
 
   #     - name: Install Dependencies
   #       run: yarn add cypress@latest
 
-  #     - name: Run Cypress tests 
+  #     - name: Run Cypress tests
   #       run: |
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/3.image-project-create.cy.js" && 
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/4.image-test-project-create.cy.js" 
-      
+  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/3.image-project-create.cy.js" &&
+  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/4.image-test-project-create.cy.js"
+
   # record_project_create_test:
   #   runs-on: ubuntu-latest
   #   needs: image_project_create_test
@@ -78,16 +78,16 @@ jobs:
   #     - name: Setup Node.js
   #       uses: actions/setup-node@v3
   #       with:
-  #         node-version: '20.9.0' 
+  #         node-version: '20.9.0'
 
   #     - name: Install Dependencies
   #       run: yarn add cypress@latest
 
-  #     - name: Run Cypress tests 
+  #     - name: Run Cypress tests
   #       run: |
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/5.record-project-create.cy.js" && 
+  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/5.record-project-create.cy.js" &&
   #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/6.record-test-project-create.cy.js"
-        
+
   organization_test:
     runs-on: ubuntu-latest
     needs: dataset_upload_test
@@ -99,12 +99,12 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0' 
+          node-version: "20.9.0"
 
       - name: Install Dependencies
         run: yarn add cypress@latest
 
-      - name: Run Cypress tests 
+      - name: Run Cypress tests
         run: |
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/7.organization-create.cy.js" && 
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/8.organization-dataset-upload.cy.js"
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-create.cy.js" && 
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"

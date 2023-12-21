@@ -13,7 +13,7 @@ const nodemailer = require("nodemailer");
 
 module.exports = {
   pageLoadTimeout: 60000,
-  projectId: 'k9i7ip',
+  projectId: "k9i7ip",
   // ...
 
   e2e: {
@@ -29,19 +29,20 @@ module.exports = {
             port: 587,
             secure: false,
             auth: {
-              user: 'gosl8908@deepnoid.com',
-              pass: 'rnrmf0215!'
+              user: "gosl8908@deepnoid.com",
+              pass: "rnrmf0801!",
             },
           });
 
           const mailOptions = {
-            from: 'gosl8908@deepnoid.com',
-            to: 'gosl8908@deepnoid.com',
+            from: "gosl8908@deepnoid.com",
+            to: "gosl8908@deepnoid.com",
             subject: subject,
             text: body,
           };
 
-          return transporter.sendMail(mailOptions)
+          return transporter
+            .sendMail(mailOptions)
             .then((info) => {
               console.log("이메일 성공적으로 전송됨: " + info.response);
               return true;
