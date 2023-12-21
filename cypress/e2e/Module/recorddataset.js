@@ -13,7 +13,7 @@ function recorddataset(RecordDatasetName, date_label) {
   cy.get(".page-button > .btn").click(); // 다음
 
   /* 파일 업로드 */
-  cy.fixture("visualize_test_1000.csv").then((fileContent) => {
+  cy.fixture("Record\\visualize_test_1000.csv").then((fileContent) => {
     cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
       // 학습 데이터셋
       fileContent,
