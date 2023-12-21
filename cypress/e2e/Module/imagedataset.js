@@ -33,7 +33,7 @@ function imagedataset(ImageDatasetName, date_label) {
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         fileContent,
         filePath:
-          "C:\\my-cypress-project\\cypress\\fixtures\\Image\\Garbage Classification (2D Classification Case1).zip",
+          "C:\\my-cypress-project\\cypress\\fixtures\\Image\\2D_CL_Case1\\Garbage Classification (2D Classification Case1).zip",
         fileName: "Garbage Classification (2D Classification Case1).zip",
         mimeType: "application/zip",
       });
