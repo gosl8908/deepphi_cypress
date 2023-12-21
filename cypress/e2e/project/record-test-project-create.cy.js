@@ -23,8 +23,6 @@ describe('Record Test Project Create', () => {
     cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
     cy.wait(3000);
     cy.get('.btn-floating > div').click({ force: true }); // 생성
-    cy.wait(3000);
-    cy.get('input-form input-lg display-block ng-pristine ng-valid ng-touched').clear().type(Cypress.env('date_label'));
     cy.wait(1000);
     cy.get('.modal-button-content > .btn').click(); // 다음
     cy.wait(1000);
