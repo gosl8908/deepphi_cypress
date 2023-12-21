@@ -1,0 +1,2 @@
+cypress/fixtures/Image/3D_SE_Case1/Dataset.zip filter=lfs diff=lfs merge=lfs -text
+cypress/fixtures/Image/자동화테스트용.zip filter=lfs diff=lfs merge=lfs -text
