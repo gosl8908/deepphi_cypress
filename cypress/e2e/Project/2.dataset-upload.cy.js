@@ -20,11 +20,13 @@ describe("Dataset Upload Test", () => {
       Cypress.env("password")
     );
 
+    /*이미지 데이터셋 업로드 */
     imagedatasetModule.imagedataset(
       Cypress.env("ImageDatasetName"),
       Cypress.env("date_label")
     );
 
+    /*레코드 데이터셋 업로드 */
     recorddatasetModule.recorddataset(
       Cypress.env("RecordDatasetName"),
       Cypress.env("date_label")

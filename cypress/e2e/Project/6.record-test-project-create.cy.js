@@ -69,7 +69,7 @@ describe("Record Test Project Create", () => {
     cy.wait(1000);
     cy.get(".note-editable").type(Cypress.env("date_label")); // 설명
     cy.get(".modal-button-content > .btn").click(); // 확인
-    cy.wait(5000);
+    cy.wait(15000);
 
     cy.get(".modal-button-content > :nth-child(1)").click(); // 바로가기
     cy.wait(5000);
