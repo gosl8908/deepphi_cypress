@@ -13,29 +13,29 @@ function recorddataset(RecordDatasetName, date_label) {
   cy.get(".page-button > .btn").click(); // 다음
 
   /* 파일 업로드 */
-  cy.fixture("record\\visualize_test_1000.csv").then((fileContent) => {
+  cy.fixture("record/자동화용 데이터셋.csv").then((fileContent) => {
     cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
       // 학습 데이터셋
       fileContent,
       filePath:
-        "C:\\my-cypress-project\\cypress\\fixtures\\record\\visualize_test_1000.csv",
-      fileName: "visualize_test_1000.csv",
+        "C:/my-cypress-project/cypress/fixtures/record/자동화용 데이터셋.csv",
+      fileName: "자동화용 데이터셋.csv",
       mimeType: "text/csv",
     });
     cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
       // 검증 데이터셋
       fileContent,
       filePath:
-        "C:\\my-cypress-project\\cypress\\fixtures\\record\\visualize_test_1000.csv",
-      fileName: "visualize_test_1000.csv",
+      "C:/my-cypress-project/cypress/fixtures/record/자동화용 데이터셋.csv",
+      fileName: "자동화용 데이터셋.csv",
       mimeType: "text/csv",
     });
     cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
       // 평가 데이터셋
       fileContent,
       filePath:
-        "C:\\my-cypress-project\\cypress\\fixtures\\record\\visualize_test_1000.csv",
-      fileName: "visualize_test_1000.csv",
+      "C:/my-cypress-project/cypress/fixtures/record/자동화용 데이터셋.csv",
+      fileName: "자동화용 데이터셋.csv",
       mimeType: "text/csv",
     });
   });
