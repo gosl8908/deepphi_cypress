@@ -1,4 +1,4 @@
-const { loginModule, emailModule, image_apiModule } = require('../module/moduleManager.js');
+const { loginModule, emailModule, image_apiModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
   before(() => {

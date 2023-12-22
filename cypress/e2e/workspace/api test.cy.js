@@ -1,4 +1,4 @@
-const { image_apiModule, record_apiModule, emailModule } = require('../module/moduleManager.js');
+const { image_apiModule, record_apiModule, emailModule } = require('../module/manager.module.js');
 
 describe('인퍼런스 서비스 api test', () => {
 

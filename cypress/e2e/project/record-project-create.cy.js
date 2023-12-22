@@ -1,4 +1,4 @@
-const { loginModule, emailModule } = require('../module/moduleManager.js');
+const { loginModule, emailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
   before(() => {

@@ -1,4 +1,4 @@
-const { loginModule, imagedatasetModule, recorddatasetModule, emailModule } = require('../module/moduleManager.js');
+const { loginModule, imagedatasetModule, recorddatasetModule, emailModule } = require('../module/manager.module.js');
 
 describe('Dataset Upload Test', () => {
   before(() => {

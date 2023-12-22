@@ -1,4 +1,4 @@
-const { loginModule, emailModule, adminloginModule } = require('../module/moduleManager.js');
+const { loginModule, emailModule, adminloginModule } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
   before(() => {
