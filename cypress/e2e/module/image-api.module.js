@@ -1,4 +1,4 @@
-function image_api() {
+function imageApi() {
   cy.log("API 호출 성공");
 
   cy.fixture("image/2D_CL_Case1/glass1.jpg").then((fileContent) => {
@@ -27,5 +27,5 @@ function image_api() {
 }
 
 module.exports = {
-  image_api: image_api,
+  imageApi: imageApi,
 };

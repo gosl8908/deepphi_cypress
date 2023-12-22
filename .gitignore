@@ -1,6 +1,10 @@
 ######################
 # Cypress
 ######################
+cypress/downloads/
+cypress/videos/
+cypress/screenshots/
+cypress/reports/
+Image-Dataset.text
 cypress/fixtures/SignupTest.txt
-cypress/screenshots
 node_modules
