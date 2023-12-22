@@ -1,4 +1,4 @@
-const { loginModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('로그인', () => {
   before(()=>{
@@ -7,7 +7,9 @@ describe('로그인', () => {
 
   it('인퍼런스 서비스 api test', () => {
 
-    loginModule.login( Cypress.env('prod'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password') );
+
+    sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('SignupEmailBody'));
 
   });
 });

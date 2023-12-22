@@ -67,7 +67,7 @@ function getCurrentDate(){
         ProdTest: 'http://st.deepphi.ai/',
         SignupID: `Signup${year}${month}${day}${hours}${minutes}${seconds}`,
         ID: 'gosl8908@deepnoid.com',
-        AutoTestId: 'deeptest1@deepnoid.com',
+        AutoTestID: 'deeptest1@deepnoid.com',
         OnpremId: 'asdasdasd3@ruu.kr',
         Password: 'test123!',
         Nickname: `name${hours}${minutes}${seconds}`,
