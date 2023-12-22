@@ -3,3 +3,4 @@
 ######################
 cypress/fixtures/SignupTest.txt
 cypress/screenshots
+node_modules
