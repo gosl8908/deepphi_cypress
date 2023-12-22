@@ -1,4 +1,5 @@
 const { emailModule } = require('../module/manager.module.js');
+
 describe('SignUp', () => {
   before(() => {
     cy.setDateToEnv();
