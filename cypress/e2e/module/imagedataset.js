@@ -28,13 +28,11 @@ function imagedataset(ImageDatasetName, date_label) {
   cy.wait(3000);
 
   /* 파일 업로드 */
-  cy.fixture(
-    "image\\2D_CL_Case1\\Garbage Classification (2D Classification Case1).zip"
-  ).then((fileContent) => {
+  cy.fixture("image/2D_CL_Case1/Garbage Classification (2D Classification Case1).zip")
+  .then((fileContent) => {
     cy.get('input[accept=".zip"][type="file"]').attachFile({
       fileContent,
-      filePath:
-        "C:\\my-cypress-project\\cypress\\fixtures\\image\\2D_CL_Case1\\Garbage Classification (2D Classification Case1).zip",
+      filePath: "C:/my-cypress-project/cypress/fixtures/image/2D_CL_Case1/Garbage Classification (2D Classification Case1).zip",
       fileName: "Garbage Classification (2D Classification Case1).zip",
       mimeType: "application/zip",
     });
