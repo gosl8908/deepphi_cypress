@@ -257,9 +257,7 @@ describe('Record Project Create & Run', () => {
         //프로젝트 Run
         cy.log('프로젝트 실행');
         cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
-
-        cy.wait(3000);
-        cy.contains('실행'); // 실행 상태 체크
+        cy.contains('실행', { timeout: 60000 }).should('be.visible');
 
         // cy.wait(400000); // 5분 대기
 

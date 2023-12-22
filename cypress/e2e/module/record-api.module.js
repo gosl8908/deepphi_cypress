@@ -10,7 +10,7 @@ function recordApi() {
 
         cy.request({
             method: 'POST',
-            url: 'https://inference.deepphi.ai/recordinferenceautomation/1.0/api/inference', // url 입력
+            url: 'https://inference.deepphi.ai/record-inference-automation/1.0/api/inference', // url 입력
             failOnStatusCode: false,
             headers: {
                 'Content-Type': 'multipart/form-data', // Content-Type을 multipart/form-data로 설정

@@ -111,10 +111,7 @@ describe('Image Project Create', () => {
         cy.log('프로젝트 실행');
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
-        cy.wait(3000);
-
-        cy.contains('실행'); // 실행 상태 체크
-        cy.wait(3000);
+        cy.contains('실행', { timeout: 60000 }).should('be.visible');
 
         sendEmailModule.sendEmail(
             'Image Project Create Test ' + Cypress.env('EmailTitle'),

@@ -98,7 +98,7 @@ function getCurrentDate(){
     Cypress.env('Dev', currentDate.Dev);
     Cypress.env('DevAdmind', currentDate.DevAdmin);
     Cypress.env('Prod', currentDate.Prod);
-    Cypress.env('prodAdmin', currentDate.ProdAdmin);
+    Cypress.env('ProdAdmin', currentDate.ProdAdmin);
     Cypress.env('ProdTest', currentDate.ProdTest);
     Cypress.env('Date', currentDate.Date);
     Cypress.env('Time', currentDate.Time);
@@ -109,7 +109,7 @@ function getCurrentDate(){
     Cypress.env('Password', currentDate.Password);
     Cypress.env('Nickname', currentDate.Nickname);
     Cypress.env('RecordDatasetName', currentDate.RecordDatasetName);
-    Cypress.env('RecordProjectName', currentDate.Record_ProjectName);
+    Cypress.env('RecordProjectName', currentDate.RecordProjectName);
     Cypress.env('ImageDatasetName', currentDate.ImageDatasetName);
     Cypress.env('ImageProjectName', currentDate.ImageProjectName);
     Cypress.env('InferenceName', currentDate.InferenceName);

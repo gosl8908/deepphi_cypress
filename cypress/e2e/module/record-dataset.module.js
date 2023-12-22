@@ -41,8 +41,7 @@ function recordDataset(RecordDatasetName, DateLabel) {
   /* 업로드 */
   cy.get('em').click(); // 자동탐지 체크
   cy.get('.btn-primary').click(); // 다음
-  cy.contains('업로드중 중에는 진입이 불가능합니다.'); // 업로드 로딩 체크
-  cy.wait(150000);
+  cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160000 }).should('not.exist');
 
   /*  데이터셋 설정 */
   cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({
@@ -51,8 +50,7 @@ function recordDataset(RecordDatasetName, DateLabel) {
   cy.wait(3000);
   cy.contains('삭제');
   cy.get('.fa-solid.fa-check').eq(1).click({ force: true });
-  cy.wait(20000); // 20초 대기
-  cy.contains('샘플데이터'); // 업로드 정상 체크
+  cy.contains('샘플데이터', { timeout: 60000 }).should('be.visible');
 
   /* 데이터셋 화면 나가기 */
   cy.get('.btn-home').click();

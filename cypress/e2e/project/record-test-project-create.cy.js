@@ -34,12 +34,8 @@ describe('Record Test Project Create', () => {
         cy.log('프로젝트 실행');
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
-        cy.wait(5000);
-
-        cy.contains('실행'); // 실행 상태 체크
-        cy.wait(360000); // 6분 대기
-
-        cy.contains('완료');
+        cy.contains('실행', { timeout: 10000 }).should('be.visible');
+        cy.contains('완료', { timeout: 360000 }).should('be.visible');
 
         cy.log('인퍼런스 생성');
         //인퍼런스 생성
@@ -55,7 +51,7 @@ describe('Record Test Project Create', () => {
         cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('DateLabel')); // 설명
         cy.get('.modal-button-content > .btn').click(); // 확인
-        cy.wait(5000);
+        cy.contains('바로가기', { timeout: 60000 }).should('be.visible');
 
         cy.get('.modal-button-content > :nth-child(1)').click(); // 바로가기
         cy.wait(5000);
@@ -71,14 +67,11 @@ describe('Record Test Project Create', () => {
 
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
-        cy.log('api 호출');
         // api 호출
         cy.wait(30000);
         recordApiModule.recordApi();
-        cy.wait(30000);
-        cy.contains('성공');
-        cy.wait(3000);
-        cy.screenshot('record_inference_api', 1920, 1080);
+        cy.contains('성공', { timeout: 60000 }).should('be.visible');
+        cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);
         cy.get('.btn-clear-danger').click(); // 중지
         cy.wait(10000);
 
@@ -88,8 +81,7 @@ describe('Record Test Project Create', () => {
         cy.wait(5000);
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
-        cy.wait(3000);
-        cy.contains('inferenceautomation 인퍼런스 서비스가 삭제되었습니다.');
+        cy.contains('record-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
 
         sendEmailModule.sendEmail(
             'Record Test Project Create Test ' + Cypress.env('EmailTitle'),
