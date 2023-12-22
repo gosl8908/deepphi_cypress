@@ -1,4 +1,4 @@
-const { loginModule } = require('../../e2e/Module/moduleManager.js');
+const { loginModule } = require('../module/moduleManager.js');
 
 describe('로그인', () => {
   before(()=>{

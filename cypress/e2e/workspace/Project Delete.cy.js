@@ -1,4 +1,4 @@
-const { loginModule } = require('../Module/moduleManager.js');
+const { loginModule } = require('../module/moduleManager.js');
 
 describe('Project Delete', () => {
   before(()=>{
