@@ -82,7 +82,7 @@ describe('Organization Create', () => {
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
         // 어드민 로그인
-        adminLoginModule.adminlogin(Cypress.env('ProdAdmin'), Cypress.env('ID'), Cypress.env('Password'));
+        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('ID'), Cypress.env('Password'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리
@@ -131,7 +131,7 @@ describe('Organization Create', () => {
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Organization Create Test ' + Cypress.env('EmailTitle'),
             Cypress.env('OrganizationCreateEmailBody'),
         );

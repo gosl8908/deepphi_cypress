@@ -11,11 +11,11 @@ describe('Dataset Upload Test', () => {
   it('Dataset Upload test', () => {
     loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
 
-    imageDatasetModule.imagedataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
+    imageDatasetModule.imageDataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
 
-    recordDatasetModule.recorddataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
+    recordDatasetModule.recordDataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
 
-    sendEmailModule.email(
+    sendEmailModule.sendEmail(
         'Dataset Upload Test ' + Cypress.env('EmailTitle'),
         Cypress.env('DatasetUploadEmailBody'),
     );
@@ -128,7 +128,7 @@ describe('Dataset Upload Test', () => {
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Image Project Create Test ' + Cypress.env('EmailTitle'),
             Cypress.env('ImageProjectUploadEmailBody'),
         );
@@ -165,7 +165,7 @@ describe('Dataset Upload Test', () => {
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Image Test Project Cteate Test ' + Cypress.env('EmailTitle'),
             Cypress.env('ImageTestProjectUploadEmailBody'),
         );
@@ -375,7 +375,7 @@ describe('Dataset Upload Test', () => {
         cy.wait(3000);
         cy.contains('실행'); // 실행 상태 체크
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
             Cypress.env('RecordProjectCreateEmailBody'),
         );
@@ -465,7 +465,7 @@ describe('Dataset Upload Test', () => {
         cy.wait(3000);
         cy.contains('inferenceautomation 인퍼런스 서비스가 삭제되었습니다.');
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Record Test Project Create Test ' + Cypress.env('EmailTitle'),
             Cypress.env('RecordTestProjectUploadEmailBody'),
         );

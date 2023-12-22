@@ -91,7 +91,7 @@ describe('Record Test Project Create', () => {
         cy.wait(3000);
         cy.contains('inferenceautomation 인퍼런스 서비스가 삭제되었습니다.');
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Record Test Project Create Test ' + Cypress.env('EmailTitle'),
             Cypress.env('RecordTestProjectUploadEmailBody'),
         );

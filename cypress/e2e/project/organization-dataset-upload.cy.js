@@ -22,11 +22,11 @@ describe('Organization Dataset Upload', () => {
       cy.contains('자동화용 단체').click(); // 단체 선택
       cy.wait(5000);
 
-      imageDatasetModule.imagedataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
+      imageDatasetModule.imageDataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
 
-      recordDatasetModule.recorddataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
+      recordDatasetModule.recordDataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
 
-      sendEmailModule.email(
+      sendEmailModule.sendEmail(
           'Organization Dataset Upload ' + Cypress.env('EmailTitle'),
           Cypress.env('OrganizationDatasetUploadEmailBody'),
       );

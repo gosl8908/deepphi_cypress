@@ -116,7 +116,7 @@ describe('Image Project Create', () => {
         cy.contains('실행'); // 실행 상태 체크
         cy.wait(3000);
 
-        sendEmailModule.email(
+        sendEmailModule.sendEmail(
             'Image Project Create Test ' + Cypress.env('EmailTitle'),
             Cypress.env('ImageProjectUploadEmailBody'),
         );

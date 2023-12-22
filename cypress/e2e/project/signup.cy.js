@@ -132,6 +132,6 @@ describe('SignUp', () => {
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간'); // 결제 확인
 
-        sendEmailModule.email('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('SignupEmailBody'));
+        sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('SignupEmailBody'));
     });
 });

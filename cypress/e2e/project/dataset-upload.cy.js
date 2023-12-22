@@ -16,11 +16,11 @@ describe('Dataset Upload Test', () => {
   it('Dataset Upload test', () => {
       loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
 
-      imageDatasetModule.imagedataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
+      imageDatasetModule.imageDataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
 
-      recordDatasetModule.recorddataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
+      recordDatasetModule.recordDataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
 
-      sendEmailModule.email(
+      sendEmailModule.sendEmail(
           'Dataset Upload Test ' + Cypress.env('EmailTitle'),
           Cypress.env('DatasetUploadEmailBody'),
       );
