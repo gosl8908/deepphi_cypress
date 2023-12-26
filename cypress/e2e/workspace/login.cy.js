@@ -7,9 +7,9 @@ describe('로그인', () => {
 
   it('인퍼런스 서비스 api test', () => {
 
-    loginModule.login( Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password') );
+    loginModule.login( Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password') );
 
-    sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('SignupEmailBody'));
+    sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('EmailBody'));
 
   });
 });

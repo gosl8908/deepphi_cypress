@@ -12,9 +12,6 @@ jobs:
   signup_test:
     runs-on: windows-latest
 
-    env:
-      TZ: Asia/Seoul
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -28,12 +25,12 @@ jobs:
         run: yarn add cypress@latest
 
       - name: Run Cypress tests
-        run: yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
+        run: |
+          $env:TZ = "Asia/Seoul"
+          yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
 
   dataset_upload_test:
     runs-on: windows-latest
-    env:
-      TZ: Asia/Seoul
     needs: signup_test
 
     steps:
@@ -49,7 +46,9 @@ jobs:
         run: yarn add cypress@latest
 
       - name: Run Cypress tests
-        run: yarn cypress run --browser chrome --spec "cypress/e2e/project/test.cy.js"
+        run: |
+         $env:TZ = "Asia/Seoul"
+         yarn cypress run --browser chrome --spec "cypress/e2e/project/test.cy.js"
 
   # image_project_create_test:
   #   runs-on: windows-latest
@@ -95,8 +94,6 @@ jobs:
 
   organization_test:
     runs-on: windows-latest
-    env:
-      TZ: Asia/Seoul
     needs: dataset_upload_test
 
     steps:
@@ -113,5 +110,6 @@ jobs:
 
       - name: Run Cypress tests
         run: |
+          $env:TZ = "Asia/Seoul"
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-create.cy.js" && 
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"

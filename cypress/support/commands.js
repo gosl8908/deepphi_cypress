@@ -33,6 +33,7 @@ Cypress.Commands.add('ModuleAdd', (select, target, x_coordinate, y_coordinate) =
     .trigger("drop", { dataTransfer , which: 1, pageX: x_coordinate, pageY: y_coordinate, force: true })
 })
 
+
 // 시간 선언
 
 function getCurrentDate(){

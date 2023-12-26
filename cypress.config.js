@@ -12,15 +12,21 @@
 const nodemailer = require("nodemailer");
 
 module.exports = {
+  pageLoadTimeout: 120000,
+  viewportWidth: 1980,
+  viewportHeight: 1080,
   pageLoadTimeout: 60000,
-  projectId: "k9i7ip",
-  // ...
-
+  projectId: 'rrbsge',
+  reporter: 'cypress-mochawesome-reporter',
+  reporterOptions: {
+      charts: true,
+      reportPageTitle: 'custom-title',
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      saveAllAttempts: false,
+  },
   e2e: {
-    // ...
-
     setupNodeEvents(on, config) {
-      // ...
 
       on("task", {
         sendEmail({ recipient, subject, body }) {
@@ -54,6 +60,7 @@ module.exports = {
         },
       });
     },
+
     env: {
       Onprem: 'https://onprem.deepphi.ai/',
       Stg: 'http://st-home.deepphi.ai/',
@@ -77,6 +84,5 @@ module.exports = {
       case1: 1,
       case2: 2,
   },
-
   },
 };
