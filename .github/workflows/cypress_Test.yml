@@ -10,7 +10,7 @@ on:
 
 jobs:
   signup_test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Checkout repository
@@ -28,7 +28,7 @@ jobs:
         run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
 
   dataset_upload_test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: signup_test
 
     steps:
@@ -47,7 +47,7 @@ jobs:
         run: TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/test.cy.js"
 
   # image_project_create_test:
-  #   runs-on: ubuntu-latest
+  #   runs-on: windows-latest
   #   needs: dataset_upload_test
 
   #   steps:
@@ -68,7 +68,7 @@ jobs:
   #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/4.image-test-project-create.cy.js"
 
   # record_project_create_test:
-  #   runs-on: ubuntu-latest
+  #   runs-on: windows-latest
   #   needs: image_project_create_test
 
   #   steps:
@@ -89,7 +89,7 @@ jobs:
   #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/6.record-test-project-create.cy.js"
 
   organization_test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: dataset_upload_test
 
     steps:
