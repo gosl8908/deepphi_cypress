@@ -97,7 +97,7 @@ describe('SignUp', () => {
         cy.get('.my-info__profile-card > .btn').click(); // 프로필 수정 선택
         cy.get('.input-form').type('test123!'); // 비밀번호 입력
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
-        cy.get(':nth-child(3) > dd > .flex-display > .input-form').clear().type(Cypress.env('Nickname')); // 닉네임 변경
+        cy.get(':nth-child(3) > dd > .flex-display > .input-form').clear().type( 'name' + Cypress.env('Time')); // 닉네임 변경
         cy.wait(3000); // 3초 대기
         cy.get('.flex-display > .btn').click(); // 닉네임 체크
         cy.wait(3000); // 3초 대기
@@ -132,6 +132,10 @@ describe('SignUp', () => {
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간'); // 결제 확인
 
-        sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), Cypress.env('SignupEmailBody'));
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+            'DateLabelWeek',
+        )} \n 테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드`;
+
+        sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

@@ -53,76 +53,22 @@ function getCurrentDate(){
         // 지정된 시간대로 날짜와 시간을 형식화합니다.
         const formattedDate = now.toLocaleString('ko-KR', options);
   
-    return {  
-      Date: `${year}-${month}-${day}`,
-        Time: `${hours}:${minutes}:${seconds}`,
-        DateLabel: `${year}${month}${day}${hours}${minutes}${seconds}`,
-        Onprem: 'https://onprem.deepphi.ai/',
-        Stg: 'http://st-home.deepphi.ai/',
-        StgAdmin: 'https://st-admin.deepphi.ai/',
-        Dev: 'https://dev-home.deepphi.ai/',
-        DevAdmin: 'https://dev-admin.deepphi.ai/',
-        Prod: 'https://www.deepphi.ai/home',
-        ProdAdmin: 'https://admin.deepphi.ai/',
-        ProdTest: 'http://st.deepphi.ai/',
-        SignupID: `Signup${year}${month}${day}${hours}${minutes}${seconds}`,
-        ID: 'gosl8908@deepnoid.com',
-        AutoTestID: 'deeptest1@deepnoid.com',
-        OnpremId: 'asdasdasd3@ruu.kr',
-        Password: 'test123!',
-        Nickname: `name${hours}${minutes}${seconds}`,
-        ImageDatasetName: `ImageDataset${year}${month}${day}${hours}${minutes}${seconds}`,
-        ImageProjectName: `ImageProejct${year}${month}${day}${hours}${minutes}${seconds}`,
-        RecordDatasetName: `RecordDataset${year}${month}${day}${hours}${minutes}${seconds}`,
-        RecordProjectName: `RecordProejct${year}${month}${day}${hours}${minutes}${seconds}`,
-        InferenceName: `Inference${year}${month}${day}${hours}${minutes}${seconds}`,
-        EmailTitle: `${year}-${month}-${day} ${dayOfWeek} Cypress 자동화 테스트 결과`,
-        EmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
-        SignupEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드`,
-        DatasetUploadEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`,
-        ImageProjectUploadEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`,
-        ImageTestProjectUploadEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행`,
-        RecordProjectCreateEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`,
-        RecordTestProjectUploadEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`,
-        OrganizationCreateEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`,
-        OrganizationDatasetUploadEmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}\n 테스트 범위 : 1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료`,
-    }
+        return {
+          Date: `${year}-${month}-${day}`,
+          Time: `${hours}:${minutes}:${seconds}`,
+          DateLabel: `${year}${month}${day}${hours}${minutes}${seconds}`,
+          DateLabelWeek: `${year}-${month}-${day} ${dayOfWeek} ${hours}:${minutes}:${seconds}`,
+          EmailTitle: `${year}-${month}-${day} ${dayOfWeek} Cypress 자동화 테스트 결과`,
+      };
   
   }  
   Cypress.Commands.add('setDateToEnv', () => {
     const currentDate = getCurrentDate();
-    Cypress.env('Onprem', currentDate.Onprem);
-    Cypress.env('OnpremId', currentDate.OnpremId);
-    Cypress.env('Stg', currentDate.Stg);
-    Cypress.env('StgAdmin', currentDate.StgAdmin);
-    Cypress.env('Dev', currentDate.Dev);
-    Cypress.env('DevAdmind', currentDate.DevAdmin);
-    Cypress.env('Prod', currentDate.Prod);
-    Cypress.env('ProdAdmin', currentDate.ProdAdmin);
-    Cypress.env('ProdTest', currentDate.ProdTest);
     Cypress.env('Date', currentDate.Date);
     Cypress.env('Time', currentDate.Time);
     Cypress.env('DateLabel', currentDate.DateLabel);
-    Cypress.env('SignupID', currentDate.SignupID);
-    Cypress.env('ID', currentDate.ID);
-    Cypress.env('AutoTestID', currentDate.AutoTestID);
-    Cypress.env('Password', currentDate.Password);
-    Cypress.env('Nickname', currentDate.Nickname);
-    Cypress.env('RecordDatasetName', currentDate.RecordDatasetName);
-    Cypress.env('RecordProjectName', currentDate.RecordProjectName);
-    Cypress.env('ImageDatasetName', currentDate.ImageDatasetName);
-    Cypress.env('ImageProjectName', currentDate.ImageProjectName);
-    Cypress.env('InferenceName', currentDate.InferenceName);
+    Cypress.env('DateLabelWeek', currentDate.DateLabelWeek);
     Cypress.env('EmailTitle', currentDate.EmailTitle);
-    Cypress.env('EmailBody', currentDate.EmailBody);
-    Cypress.env('SignupEmailBody', currentDate.SignupEmailBody);
-    Cypress.env('DatasetUploadEmailBody', currentDate.DatasetUploadEmailBody);
-    Cypress.env('ImageProjectUploadEmailBody', currentDate.ImageProjectUploadEmailBody);
-    Cypress.env('ImageTestProjectUploadEmailBody', currentDate.ImageTestProjectUploadEmailBody);
-    Cypress.env('RecordProjectCreateEmailBody', currentDate.RecordProjectCreateEmailBody);
-    Cypress.env('RecordTestProjectUploadEmailBody', currentDate.RecordTestProjectUploadEmailBody);
-    Cypress.env('OrganizationCreateEmailBody', currentDate.OrganizationCreateEmailBody);
-    Cypress.env('OrganizationDatasetUploadEmailBody', currentDate.OrganizationDatasetUploadEmailBody);
 });
 
   Cypress.on('uncaught:exception', (err, runnable) => {

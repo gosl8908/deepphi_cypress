@@ -10,7 +10,7 @@ describe('Record Test Project Create', () => {
 
     it('Record Test Project Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
         // 레코드 프로젝트 검색
         cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
@@ -83,9 +83,10 @@ describe('Record Test Project Create', () => {
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('record-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
 
-        sendEmailModule.sendEmail(
-            'Record Test Project Create Test ' + Cypress.env('EmailTitle'),
-            Cypress.env('RecordTestProjectUploadEmailBody'),
-        );
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+            'DateLabelWeek',
+        )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
+
+        sendEmailModule.sendEmail('Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

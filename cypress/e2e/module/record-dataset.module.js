@@ -1,4 +1,4 @@
-function recordDataset(RecordDatasetName, DateLabel) {
+function recordDataset(DateLabel) {
   cy.log('레코드 데이터셋 업로드 성공');
 
   /* 레코드 데이터셋 업로드 */
@@ -8,7 +8,7 @@ function recordDataset(RecordDatasetName, DateLabel) {
   cy.wait(3000);
 
   /* 데이터셋 정보 입력 */
-  cy.get('#dataset_name').type(RecordDatasetName); // 데이터셋 이름 입력
+  cy.get('#dataset_name').type('RecordDataset' + DateLabel); // 데이터셋 이름 입력
   cy.get('.note-editable').type(DateLabel); // 데이터셋 내용 입력
   cy.get('.page-button > .btn').click(); // 다음
 

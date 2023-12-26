@@ -1,4 +1,4 @@
-function imageDataset(ImageDatasetName, DateLabel) {
+function imageDataset(DateLabel) {
   cy.log('이미지 데이터셋 업로드 성공');
 
   /* 데이터셋 업로드 */
@@ -8,7 +8,7 @@ function imageDataset(ImageDatasetName, DateLabel) {
   cy.wait(3000);
 
   /* 데이터셋 정보 입력 */
-  cy.get('#dataset_name').type(ImageDatasetName); // 데이터셋 이름 입력
+  cy.get('#dataset_name').type('ImageDataset' + DateLabel); // 데이터셋 이름 입력
   cy.get('.note-editable').type(DateLabel); // 데이터셋 내용 입력
   cy.get('form.ng-dirty > .create-dataset > .step-content-box > .page-button > .btn').click(); // 다음
   cy.get(':nth-child(1) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 2D 이미지 데이터 선택

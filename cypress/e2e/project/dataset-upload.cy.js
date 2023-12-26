@@ -14,15 +14,16 @@ describe('Dataset Upload Test', () => {
   });
 
   it('Dataset Upload test', () => {
-      loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
-      imageDatasetModule.imageDataset(Cypress.env('ImageDatasetName'), Cypress.env('DateLabel'));
+      imageDatasetModule.imageDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
 
-      recordDatasetModule.recordDataset(Cypress.env('RecordDatasetName'), Cypress.env('DateLabel'));
+      recordDatasetModule.recordDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
 
-      sendEmailModule.sendEmail(
-          'Dataset Upload Test ' + Cypress.env('EmailTitle'),
-          Cypress.env('DatasetUploadEmailBody'),
-      );
-  });
+      const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+        'DateLabelWeek',
+    )}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`;
+
+    sendEmailModule.sendEmail('Dataset Upload Test ' + Cypress.env('EmailTitle'), EmailBody);
+});
 });

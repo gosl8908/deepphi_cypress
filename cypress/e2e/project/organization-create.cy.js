@@ -10,7 +10,7 @@ describe('Organization Create', () => {
 
     it('Organization Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -82,7 +82,7 @@ describe('Organization Create', () => {
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
         // 어드민 로그인
-        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('ID'), Cypress.env('Password'));
+        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('Password'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리
@@ -111,7 +111,7 @@ describe('Organization Create', () => {
 
     // 단체 DISK 구독
     it('Organization DISK subscribe', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
         // 크레딧 충전
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -131,9 +131,10 @@ describe('Organization Create', () => {
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
 
-        sendEmailModule.sendEmail(
-            'Organization Create Test ' + Cypress.env('EmailTitle'),
-            Cypress.env('OrganizationCreateEmailBody'),
-        );
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+            'DateLabelWeek',
+        )}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`;
+
+        sendEmailModule.sendEmail('Organization Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

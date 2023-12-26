@@ -10,7 +10,7 @@ describe('Image Project Create', () => {
 
     it('Image Project Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
         // 프로젝트 생성
         cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
@@ -19,8 +19,8 @@ describe('Image Project Create', () => {
         cy.wait(1000);
 
         // 프로젝트 정보 입력
-        cy.get('#project_name').type(Cypress.env('ImageProjectName')); // 프로젝트 타이틀 입력
-        cy.get('.note-editable').type(Cypress.env('ImageProjectName')); // 프로젝트 Detail 입력
+        cy.get('#project_name').type('ImageProject' + Cypress.env('DateLabel')); // 프로젝트 타이틀 입력
+        cy.get('.note-editable').type(Cypress.env('DateLabel')); // 프로젝트 Detail 입력
         cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
         cy.wait(5000);
 
@@ -113,9 +113,10 @@ describe('Image Project Create', () => {
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('실행', { timeout: 60000 }).should('be.visible');
 
-        sendEmailModule.sendEmail(
-            'Image Project Create Test ' + Cypress.env('EmailTitle'),
-            Cypress.env('ImageProjectUploadEmailBody'),
-        );
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+            'DateLabelWeek',
+        )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
+
+        sendEmailModule.sendEmail('Image Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

@@ -10,7 +10,7 @@ describe('Record Project Create & Run', () => {
 
     it('Record Project Create & Run', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
 
         // 프로젝트 생성
         cy.contains('프로젝트 생성').click(); // 프로젝트 생성
@@ -19,8 +19,8 @@ describe('Record Project Create & Run', () => {
         cy.wait(1000);
 
         // 프로젝트 정보 입력
-        cy.get('#project_name').type(Cypress.env('RecordProjectName')); // 프로젝트 제목
-        cy.get('.note-editable').type(Cypress.env('RecordProjectName')); // 프로젝트 내용
+        cy.get('#project_name').type('RecordProject' + Cypress.env('DateLabel')); // 프로젝트 타이틀 입력
+        cy.get('.note-editable').type(Cypress.env('DateLabel')); // 프로젝트 Detail 입력
         cy.get('.modal-button-content > .btn-primary').click(); // 완료
         cy.wait(10000); // 10초 대기
 
@@ -282,9 +282,10 @@ describe('Record Project Create & Run', () => {
         // cy.wait(3000);
         // cy.contains('그래프를 생성해보세요.') // 삭제 확인
 
-        sendEmailModule.sendEmail(
-            'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
-            Cypress.env('RecordProjectCreateEmailBody'),
-        );
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+            'DateLabelWeek',
+        )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
+
+        sendEmailModule.sendEmail('Record Project Cteate Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });
