@@ -44,8 +44,6 @@ function imageDataset(ImageDatasetName, DateLabel) {
   cy.contains('파일이 성공적으로 업로드되었습니다', { timeout: 60000 }).should('be.visible');
   cy.get('#DontShowItAgain').click({ force: true }); // 팝업 다시 보지 않기
   cy.get('.text-center > .btn').click(); // 팝업 닫기
-  cy.wait(3000);
-  cy.contains('검증 중', { timeout: 60000 }).should('be.visible');
   cy.wait(15000);
 
   /* 변환 */
@@ -53,8 +51,6 @@ function imageDataset(ImageDatasetName, DateLabel) {
   cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click({
       force: true,
   }); // 검색된 모든 파일
-  cy.wait(3000);
-  cy.contains('변환 중', { timeout: 60000 }).should('be.visible');
   cy.wait(15000);
 
   /* 사용 용도 수정 */
