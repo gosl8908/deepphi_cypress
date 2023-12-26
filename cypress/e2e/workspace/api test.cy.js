@@ -9,6 +9,6 @@ describe('인퍼런스 서비스 api test', () => {
 
     // recordApiModule.recordApi();
 
-    sendEmailModule.email('api test ' + Cypress.env('emailtitle'), Cypress.env('date_label'));
+    sendEmailModule.email(Cypress.env('Id'), 'api test ' + Cypress.env('emailtitle'), Cypress.env('date_label'));
   });
 });

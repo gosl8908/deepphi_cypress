@@ -10,7 +10,7 @@ describe('Test', () => {
 
   it('test', () => {
     // 로그인
-    loginModule.login( Cypress.env('onprem'), Cypress.env('onprem_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('Onprem'), Cypress.env('OnpremId'), Cypress.env('Password') );
 
     cy.get('.gnb__nav > :nth-child(2) > button').click(); // 프로젝트
     cy.get('#createBtn').click(); // 생성

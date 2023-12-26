@@ -286,6 +286,6 @@ describe('Record Project Create & Run', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
 
-        sendEmailModule.sendEmail('Record Project Cteate Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Project Cteate Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

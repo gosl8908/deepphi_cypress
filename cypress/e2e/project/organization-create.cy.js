@@ -135,6 +135,6 @@ describe('Organization Create', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`;
 
-        sendEmailModule.sendEmail('Organization Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

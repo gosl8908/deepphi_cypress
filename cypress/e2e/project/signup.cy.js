@@ -136,6 +136,6 @@ describe('SignUp', () => {
             'DateLabelWeek',
         )} \n 테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드`;
 
-        sendEmailModule.sendEmail('SignUp Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'SignUp Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

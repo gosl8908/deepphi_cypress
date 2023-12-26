@@ -29,6 +29,6 @@ describe('Organization Dataset Upload', () => {
         'DateLabelWeek',
     )}\n 테스트 범위 : 1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료`;
 
-    sendEmailModule.sendEmail('Organization Dataset Upload Test ' + Cypress.env('EmailTitle'), EmailBody);
+    sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Dataset Upload Test ' + Cypress.env('EmailTitle'), EmailBody);
 });
 });

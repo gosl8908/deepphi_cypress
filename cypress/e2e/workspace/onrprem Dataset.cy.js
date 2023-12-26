@@ -10,7 +10,7 @@ describe('Test', () => {
 
   it('test', () => {
     // 로그인
-    loginModule.login( Cypress.env('onprem'), Cypress.env('onprem_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('Onprem'), Cypress.env('OnpremId'), Cypress.env('Password') );
 
     cy.get('.gnb__nav > :nth-child(1) > button').click(); // 데이터셋
     cy.get('.dashboard__header--control > .list-dropdown-wrap > .btn').click(); // 업로드
@@ -19,8 +19,8 @@ describe('Test', () => {
     cy.get('.dashboard__header--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click(); //이미지
 
     // 데이터셋 정보 입력
-    cy.get('#dataset_name').type(Cypress.env('ImageDatasetName')); // 데이터셋 이름 입력
-    cy.get('.note-editable').type(Cypress.env('ImageDatasetName')); // 데이터셋 내용 입력
+    cy.get('#dataset_name').type(Cypress.env('DateLabel')); // 데이터셋 이름 입력
+    cy.get('.note-editable').type(Cypress.env('DateLabel')); // 데이터셋 내용 입력
     cy.get('form.ng-dirty > .create-dataset > .step-content-box > .page-button > .btn').click(); // 다음
     cy.get(':nth-child(1) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 2D 이미지 데이터 선택
     cy.get(':nth-child(2) > dd > ul > :nth-child(1) > .radio-graphic > div > label > em').click(); // 분류 선택

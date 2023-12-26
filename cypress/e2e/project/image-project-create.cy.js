@@ -117,6 +117,6 @@ describe('Image Project Create', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
 
-        sendEmailModule.sendEmail('Image Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

@@ -87,6 +87,6 @@ describe('Image Test Project Create', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행`;
 
-        sendEmailModule.sendEmail('Image Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });

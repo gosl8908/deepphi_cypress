@@ -19,7 +19,7 @@ describe('Dataset Upload Test', () => {
         'DateLabelWeek',
     )}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`;
 
-    sendEmailModule.sendEmail('Dataset Upload Test ' + Cypress.env('EmailTitle'), DatasetUploadEmailBody);
+    sendEmailModule.sendEmail(Cypress.env('Id'), 'Dataset Upload Test ' + Cypress.env('EmailTitle'), DatasetUploadEmailBody);
 
     cy.get(':nth-child(2) > .left-navigation--sub-navi > :nth-child(1) > button.ng-tns-c0-0 > .ng-tns-c0-0').click();
 
@@ -130,7 +130,7 @@ describe('Dataset Upload Test', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
 
-        sendEmailModule.sendEmail('Image Project Create Test ' + Cypress.env('EmailTitle'), ImageProjectCreateEmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Project Create Test ' + Cypress.env('EmailTitle'), ImageProjectCreateEmailBody);
 
     cy.get('#site-map__flow-btn').click();
 
@@ -165,7 +165,7 @@ describe('Dataset Upload Test', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행`;
 
-        sendEmailModule.sendEmail('Image Test Project Create Test ' + Cypress.env('EmailTitle'), ImageTestProjectCreateEmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Test Project Create Test ' + Cypress.env('EmailTitle'), ImageTestProjectCreateEmailBody);
 
     cy.get('#site-map__flow-btn').click();
 
@@ -374,7 +374,7 @@ describe('Dataset Upload Test', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
 
-        sendEmailModule.sendEmail('Record Project Cteate Test ' + Cypress.env('EmailTitle'), RecordProjectCreateEmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Project Cteate Test ' + Cypress.env('EmailTitle'), RecordProjectCreateEmailBody);
 
     cy.get('#site-map__flow-btn').click();
 
@@ -457,6 +457,6 @@ describe('Dataset Upload Test', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
 
-        sendEmailModule.sendEmail('Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
   });
 });

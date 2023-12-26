@@ -87,6 +87,6 @@ describe('Record Test Project Create', () => {
             'DateLabelWeek',
         )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
 
-        sendEmailModule.sendEmail('Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+        sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
     });
 });
