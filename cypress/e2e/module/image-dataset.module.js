@@ -41,21 +41,23 @@ function imageDataset(DateLabel) {
   /* 데이터셋 매니지먼트 화면 진입 */
   cy.log('첫번째 데이터셋 선택');
   cy.contains('데이터셋 바로가기', { timeout: 60000 }).should('be.visible').click();
+  cy.wait(10000);
   cy.contains('파일이 성공적으로 업로드되었습니다', { timeout: 60000 }).should('be.visible');
   cy.get('#DontShowItAgain').click({ force: true }); // 팝업 다시 보지 않기
   cy.get('.text-center > .btn').click(); // 팝업 닫기
-  cy.wait(15000);
+  cy.wait(30000);
 
   /* 변환 */
+  cy.contains('성공')
   cy.get('#convert-btn').click(); // 변환
   cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click({
       force: true,
   }); // 검색된 모든 파일
-  cy.wait(15000);
+  cy.wait(30000);
 
   /* 사용 용도 수정 */
   cy.get('.default-tab > ul > :nth-child(2) > button').click({ force: true }); // 변화된 파일 탭
-  cy.wait(5000);
+  cy.wait(10000);
   cy.get('#btn-edit-usage').click(); // 사용 용도 수정
   cy.get('.right-content > :nth-child(1) > .list-dropdown > :nth-child(1) > button').click(); // 검색된 모든 파일
   cy.get('.modal-button-content > .btn-primary').click(); // 저장
