@@ -10,12 +10,14 @@
 
 // cypress.config.js
 const nodemailer = require("nodemailer");
+const { defineConfig } = require('cypress');
+// 리포트 추가
+const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
-module.exports = {
+module.exports = defineConfig({
   pageLoadTimeout: 120000,
   viewportWidth: 1980,
   viewportHeight: 1080,
-  pageLoadTimeout: 60000,
   projectId: 'rrbsge',
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
@@ -62,6 +64,7 @@ module.exports = {
     },
 
     env: {
+      // url
       Onprem: 'https://onprem.deepphi.ai/',
       Stg: 'http://st-home.deepphi.ai/',
       StgAdmin: 'https://st-admin.deepphi.ai/',
@@ -70,11 +73,11 @@ module.exports = {
       Prod: 'https://www.deepphi.ai/home',
       ProdAdmin: 'https://admin.deepphi.ai/',
       ProdTest: 'http://st.deepphi.ai/',
+      // 계정
       Id: 'gosl8908@deepnoid.com',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
       Password: 'test123!',
-      email: 'ckdeo1211@deepnoid.com',
       // 형식
       classification: 1,
       segmentation: 2,
@@ -85,4 +88,4 @@ module.exports = {
       case2: 2,
   },
   },
-};
+});
