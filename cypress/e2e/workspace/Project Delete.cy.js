@@ -7,7 +7,7 @@ describe('Project Delete', () => {
 
   it('Project Delete', () => {
     // 로그인
-    loginModule.login( Cypress.env('stg'), Cypress.env('auto_test_id'), Cypress.env('password') );
+    loginModule.login( Cypress.env('Prod'), Cypress.env('AutoTestID'), Cypress.env('Password') );
 
     // DISK 결제 팝업
     // cy.get('.left-content > .radio-graphic > div > label > em').click();
@@ -18,10 +18,10 @@ describe('Project Delete', () => {
     // cy.get('#inference-menu-ul > li > button').click();
 
     // 이미지 데이터셋 메뉴
-    // cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(1) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
+    cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(1) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
     
     // 레코드 데이터셋 메뉴
-    cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(2) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
+    // cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(2) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
 
     for (let i = 0; i < 100; i++) { // 반복 100번
 

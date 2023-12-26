@@ -40,19 +40,22 @@ function imageDataset(ImageDatasetName, DateLabel) {
 
   /* 데이터셋 매니지먼트 화면 진입 */
   cy.log('첫번째 데이터셋 선택');
-  cy.wait(10000);
-  cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click(); // 1번째 데이터셋 선택
-  cy.wait(5000);
+  cy.contains('데이터셋 바로가기', { timeout: 60000 }).should('be.visible').click();
+  cy.contains('파일이 성공적으로 업로드되었습니다', { timeout: 60000 }).should('be.visible');
   cy.get('#DontShowItAgain').click({ force: true }); // 팝업 다시 보지 않기
   cy.get('.text-center > .btn').click(); // 팝업 닫기
-  cy.contains('성공', { timeout: 60000 }).should('be.visible');
+  cy.wait(3000);
+  cy.contains('검증 중', { timeout: 60000 }).should('be.visible');
+  cy.wait(10000);
 
   /* 변환 */
   cy.get('#convert-btn').click(); // 변환
   cy.get(':nth-child(2) > .list-dropdown > .ng-star-inserted > button').click({
       force: true,
   }); // 검색된 모든 파일
-  cy.wait(60000);
+  cy.wait(3000);
+  cy.contains('변환 중', { timeout: 60000 }).should('be.visible');
+  cy.wait(15000);
 
   /* 사용 용도 수정 */
   cy.get('.default-tab > ul > :nth-child(2) > button').click({ force: true }); // 변화된 파일 탭

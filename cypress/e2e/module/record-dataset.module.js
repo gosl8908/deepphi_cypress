@@ -41,6 +41,7 @@ function recordDataset(RecordDatasetName, DateLabel) {
   /* 업로드 */
   cy.get('em').click(); // 자동탐지 체크
   cy.get('.btn-primary').click(); // 다음
+  cy.wait(5000);
   cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160000 }).should('not.exist');
 
   /*  데이터셋 설정 */
