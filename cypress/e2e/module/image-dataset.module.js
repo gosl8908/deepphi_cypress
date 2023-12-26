@@ -46,7 +46,7 @@ function imageDataset(ImageDatasetName, DateLabel) {
   cy.get('.text-center > .btn').click(); // 팝업 닫기
   cy.wait(3000);
   cy.contains('검증 중', { timeout: 60000 }).should('be.visible');
-  cy.wait(10000);
+  cy.wait(15000);
 
   /* 변환 */
   cy.get('#convert-btn').click(); // 변환
