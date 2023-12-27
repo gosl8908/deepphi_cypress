@@ -82,11 +82,14 @@ describe('SignUp', () => {
     it('SignUp Completed Check & User Change Information', () => {
         cy.viewport(1920, 1080);
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            cy.visit(Cypress.env('Prod'));
+            cy.visit(Cypress.env('Prod'), { timeout: 120000 }).then(() => {
+                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
+                cy.reload();
+            });
             cy.wait(3000);
             cy.contains('로그인').click();
             cy.get('#username').type(text + '@ruu.kr'); // 이메일 입력
-            cy.get('#password').type('test123!'); // 비밀번호 입력
+            cy.get('#password').type(Cypress.env('KangTestPasswd')); // 비밀번호 입력
             cy.get('#kc-login').click(); // 로그인 선택
             cy.wait(5000);
         });

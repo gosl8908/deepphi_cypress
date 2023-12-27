@@ -10,7 +10,7 @@ describe('Organization Create', () => {
 
     it('Organization Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -82,7 +82,7 @@ describe('Organization Create', () => {
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
         // 어드민 로그인
-        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('Password'));
+        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPasswd'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리
@@ -111,7 +111,7 @@ describe('Organization Create', () => {
 
     // 단체 DISK 구독
     it('Organization DISK subscribe', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
         // 크레딧 충전
         cy.get('.btn__user_info').click(); // 프로필 선택

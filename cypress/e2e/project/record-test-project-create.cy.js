@@ -10,7 +10,7 @@ describe('Record Test Project Create', () => {
 
     it('Record Test Project Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
         // 레코드 프로젝트 검색
         cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');

@@ -14,7 +14,7 @@ describe('Dataset Upload Test', () => {
   });
 
   it('Dataset Upload test', () => {
-      loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
       imageDatasetModule.imageDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
 

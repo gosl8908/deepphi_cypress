@@ -75,9 +75,10 @@ module.exports = defineConfig({
       ProdTest: 'http://st.deepphi.ai/',
       // 계정
       Id: 'gosl8908@deepnoid.com',
+      KangTestId: 'deepphi.auto2@ruu.kr',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
-      Password: 'test123!',
+      KangTestPasswd: 'test123!',
       // 형식
       classification: 1,
       segmentation: 2,

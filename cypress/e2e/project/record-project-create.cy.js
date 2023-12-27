@@ -10,7 +10,7 @@ describe('Record Project Create & Run', () => {
 
     it('Record Project Create & Run', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
         // 프로젝트 생성
         cy.contains('프로젝트 생성').click(); // 프로젝트 생성

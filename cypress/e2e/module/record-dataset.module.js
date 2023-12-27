@@ -49,8 +49,8 @@ function recordDataset(DateLabel) {
       force: true,
   }); // 데이터셋 매니지먼트 접속
   cy.wait(3000);
-  cy.contains('삭제');
-  cy.get('.fa-solid.fa-check').eq(1).click({ force: true });
+  cy.contains('삭제', { timeout: 10000 });
+  cy.get('.fa-solid.fa-check', { timeout: 10000 }).eq(1).click({ force: true });
   cy.contains('샘플데이터', { timeout: 60000 }).should('be.visible');
 
   /* 데이터셋 화면 나가기 */
