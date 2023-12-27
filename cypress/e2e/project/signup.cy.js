@@ -87,21 +87,15 @@ describe('SignUp', () => {
                 cy.reload();
             });
             cy.wait(3000);
-            cy.contains('로그인').click().then(() => {
-                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
-                cy.reload();
-            });
+            cy.contains('로그인').click()
             cy.get('#username').type(text + '@ruu.kr'); // 이메일 입력
             cy.get('#password').type(Cypress.env('KangTestPasswd')); // 비밀번호 입력
-            cy.get('#kc-login').click().then(() => {
-                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
-                cy.reload();
-            }); // 로그인 선택
+            cy.get('#kc-login').click()// 로그인 선택
             cy.wait(5000);
         });
 
         /* 프로필 정보 변경 확인 */
-        cy.get('dd.ng-tns-c1-1').click(); // 프로필 선택
+        cy.get('.btn__user_info').click(); // 프로필 선택
         cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
         cy.get('.my-info__profile-card > .btn').click(); // 프로필 수정 선택
         cy.get('.input-form').type('test123!'); // 비밀번호 입력
