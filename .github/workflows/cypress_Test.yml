@@ -31,7 +31,6 @@ jobs:
 
   dataset_upload_test:
     runs-on: windows-latest
-    needs: signup_test
 
     steps:
       - name: Checkout repository
