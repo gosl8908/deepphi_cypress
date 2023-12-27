@@ -87,10 +87,16 @@ describe('SignUp', () => {
                 cy.reload();
             });
             cy.wait(3000);
-            cy.contains('로그인').click();
+            cy.contains('로그인').click().then(() => {
+                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
+                cy.reload();
+            });
             cy.get('#username').type(text + '@ruu.kr'); // 이메일 입력
             cy.get('#password').type(Cypress.env('KangTestPasswd')); // 비밀번호 입력
-            cy.get('#kc-login').click(); // 로그인 선택
+            cy.get('#kc-login').click().then(() => {
+                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
+                cy.reload();
+            }); // 로그인 선택
             cy.wait(5000);
         });
 

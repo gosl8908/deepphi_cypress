@@ -15,9 +15,9 @@ describe('Dataset Upload Test', () => {
 
     recordDatasetModule.recordDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
 
-    const DatasetUploadEmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-        'DateLabelWeek',
-    )}\n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`;
+    const DatasetUploadEmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다
+    \n 테스트 실행 시간 : ${Cypress.env('DateLabelWeek',)}
+    \n 테스트 범위 : 1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료`;
 
     sendEmailModule.sendEmail(Cypress.env('Id'), 'Dataset Upload Test ' + Cypress.env('EmailTitle'), DatasetUploadEmailBody);
 
