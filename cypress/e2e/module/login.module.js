@@ -1,4 +1,4 @@
-function login(Prod, KangTestId, KangTestPw) {
+function login(Prod, KangTestId, KangTestPasswd) {
   cy.log('로그인 성공');
 
   /* 로그인 */
