@@ -14,11 +14,18 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands';
-import "cypress-real-events";
-import "@4tw/cypress-drag-drop";
+// import './commands';
+// import "cypress-real-events";
+// import "@4tw/cypress-drag-drop";
 // import 'cypress-mochawesome-reporter/register';
-import 'cypress-clipboard';
-import 'cypress-file-upload';
+// import 'cypress-clipboard';
+// import 'cypress-file-upload';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+require('./commands');
+require('cypress-real-events');
+require('@4tw/cypress-drag-drop');
+require('cypress-mochawesome-reporter/register');
+require('cypress-file-upload');
+require('cypress-clipboard');

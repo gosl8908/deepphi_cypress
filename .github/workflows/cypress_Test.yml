@@ -29,6 +29,12 @@ jobs:
           $env:TZ = "Asia/Seoul"
           yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
 
+      - name: Upload cpress signup test screenshots
+        uses: actions/upload-artifact@v2
+        with:
+          name: cypress-signup_test_screenshots
+          path: cypress/screenshots/signup_test
+
   dataset_upload_test:
     runs-on: windows-latest
     needs: signup_test  # signup_test 작업이 완료될 때까지 대기
@@ -48,7 +54,7 @@ jobs:
       - name: Run Cypress tests
         run: |
          $env:TZ = "Asia/Seoul"
-         yarn cypress run --browser chrome --spec "cypress/e2e/project/test.cy.js"
+         yarn cypress run --browser chrome --spec "cypress/e2e/project/dataset-upload.cy.js"
 
   # image_project_create_test:
   #   runs-on: windows-latest
