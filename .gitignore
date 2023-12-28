@@ -7,4 +7,5 @@ cypress/screenshots/
 cypress/reports/
 Image-Dataset.text
 cypress/fixtures/SignupTest.txt
+cypress/fixtures/api.txt
 node_modules

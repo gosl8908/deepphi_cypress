@@ -76,3 +76,5 @@ function getCurrentDate(){
     // 에러를 무시하고 계속 진행
     return false;
   });
+
+  

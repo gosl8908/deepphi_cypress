@@ -64,6 +64,17 @@ describe('Image Test Project Create', () => {
         // cy.get(':nth-child(1) > :nth-child(13) > .btn').click(); // 상세 조회
         // cy.wait(5000);
 
+        // // api url 복사
+        // cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then(($el) => {
+    
+        //     // 텍스트 추출
+        //     const text = $el.text();
+        
+        //     Cypress.env('endpointText', text);
+        //     cy.log('확인된 endpointText 값:', Cypress.env('endpointText'));
+            
+        //       });
+
         // cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
         // cy.log('api 호출');

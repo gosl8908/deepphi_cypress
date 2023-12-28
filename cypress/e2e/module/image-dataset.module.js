@@ -56,8 +56,10 @@ function imageDataset(DateLabel) {
   cy.wait(30000);
 
   /* 사용 용도 수정 */
+  cy.contains('변환된 파일');
   cy.get('.default-tab > ul > :nth-child(2) > button').click({ force: true }); // 변화된 파일 탭
   cy.wait(10000);
+  cy.contains('사용 용도 수정');
   cy.get('#btn-edit-usage').click(); // 사용 용도 수정
   cy.get('.right-content > :nth-child(1) > .list-dropdown > :nth-child(1) > button').click(); // 검색된 모든 파일
   cy.get('.modal-button-content > .btn-primary').click(); // 저장
