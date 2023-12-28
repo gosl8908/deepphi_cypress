@@ -56,51 +56,51 @@ jobs:
           export TZ="Asia/Seoul"
           yarn cypress run --browser chrome --spec "cypress/e2e/project/dataset-upload.cy.js"
 
-  # image_project_create_test:
-  #   runs-on: windows-latest
-  #   needs: dataset_upload_test
+  image_project_create_test:
+    runs-on: windows-latest
+    needs: dataset_upload_test
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '20.9.0'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.9.0'
 
-  #     - name: Install Dependencies
-  #       run: yarn add cypress@latest
+      - name: Install Dependencies
+        run: yarn add cypress@latest
 
-  #     - name: Run Cypress tests
-  #       run: |
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/3.image-project-create.cy.js" &&
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/4.image-test-project-create.cy.js"
+      - name: Run Cypress tests
+        run: |
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js" &&
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/image-test-project-create.cy.js"
 
-  # record_project_create_test:
-  #   runs-on: windows-latest
-  #   needs: image_project_create_test
+  record_project_create_test:
+    runs-on: windows-latest
+    needs: image_project_create_test
 
-  #   steps:
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '20.9.0'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.9.0'
 
-  #     - name: Install Dependencies
-  #       run: yarn add cypress@latest
+      - name: Install Dependencies
+        run: yarn add cypress@latest
 
-  #     - name: Run Cypress tests
-  #       run: |
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/5.record-project-create.cy.js" &&
-  #         TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/6.record-test-project-create.cy.js"
+      - name: Run Cypress tests
+        run: |
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-project-create.cy.js" &&
+          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-test-project-create.cy.js"
 
   organization_test:
     runs-on: windows-latest
-    needs: dataset_upload_test
+    needs: record_project_create_test
 
     steps:
       - name: Checkout repository
