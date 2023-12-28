@@ -81,12 +81,13 @@ describe('SignUp', () => {
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.viewport(1920, 1080);
+        cy.visit(Cypress.env('Prod')).then(() => {
+            // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
+            cy.reload();
+            cy.log('Visited the production page.');
+        });
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            cy.visit(Cypress.env('Prod')).then(() => {
-                // 페이지 로드가 완료되지 않았을 경우 페이지를 새로고침합니다.
-                cy.reload();
-                cy.log('Visited the production page.');
-            });
+
             cy.wait(3000);
             cy.contains('로그인').click().then(() => {
                 cy.log('Clicked on "로그인".');
