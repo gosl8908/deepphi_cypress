@@ -3,13 +3,13 @@ const { sendEmailModule } = require('../module/manager.module.js');
 describe('SignUp', () => {
     before(() => {
         cy.setDateToEnv();
+        
     });
 
     /* 일회용 이메일 만들기 */
     it('Create email', () => {
         cy.viewport(1920, 1080);
         cy.visit('http://ruu.kr/'); // 일회용 이메일 진입
-
         /* 환경 변수에서 날짜 레이블 가져오기 */
         cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();

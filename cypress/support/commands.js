@@ -36,7 +36,7 @@ Cypress.Commands.add('ModuleAdd', (select, target, x_coordinate, y_coordinate) =
 Cypress.Commands.add('test:after:run', (test, runnable) => {
   // 테스트가 실패한 경우
   if (test.state === 'failed') {
-    const screenshotFolder = '.github/workflows/screenshot';
+    const screenshotFolder = '.github/workflows';
 
     // 스크린샷 폴더 확인
     if (!Cypress.fs.existsSync(screenshotFolder)) {
@@ -53,7 +53,6 @@ Cypress.Commands.add('test:after:run', (test, runnable) => {
 });
 
 // 시간 선언
-
 function getCurrentDate(){
 
     const now = new Date(); // 날짜와 시간을 원하는 형식으로 변환
