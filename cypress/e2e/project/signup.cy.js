@@ -32,7 +32,6 @@ describe('SignUp', () => {
         cy.contains('모든 항목에 동의합니다').click(); // 모든 항목 동의
         cy.get('.account-button--primary').click(); // 다음
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            // 'SignupTest.txt' 파일 내용 불러오기
             cy.get('#user-id').type(text + '@ruu.kr'); // 파일 내용을 입력 필드에 입력
             cy.get(':nth-child(1) > dd > .form-size > .account-button').click(); // 아이디 중복 검사
             cy.contains('사용 가능한 이메일입니다.'); // 이메일 중복 팝업 확인
@@ -49,10 +48,9 @@ describe('SignUp', () => {
             cy.get('#institution-name').type('deepnoid'); // 기관명 입력
             cy.get('#position').select('의사'); // 직업 선택
             cy.get('.account-button--primary').click(); // 등록
-            cy.wait(3000);
 
             /* 회원가입 마무리 */
-            cy.contains('회원 가입이 마무리됩니다.'); // 회원가입 완료 팝업 확인
+            cy.contains('회원 가입이 마무리됩니다.', { timeout: 10000 }).should('be.visible').click();
             cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
             cy.wait(3000);
         });
@@ -64,9 +62,8 @@ describe('SignUp', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.visit('http://ruu.kr/'); // 일회용 이메일 진입
             cy.wait(5000);
-
             cy.get('#id').type(text); // 이메일 입력
-            cy.wait(30000); // 이메일 30초 대기
+            cy.contains('(Notice) Verify your email for DEEP:PHI', { timeout: 10000 }).should('be.visible').click();
             cy.get('#mailList').click(); // 메일 확인
             cy.contains('deepphi@deepnoid.com').click(); // 메일 진입
             cy.contains('Click to Verify Email'); // 이메일 확인
@@ -84,10 +81,7 @@ describe('SignUp', () => {
             cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.visit(Cypress.env('Prod'))
             .then(() => cy.log('Visited the production page.'));
-            cy.wait(3000);
-            cy.contains('로그인').click().then(() => {
-            cy.log('Clicked on "로그인".');
-              });// 로그인 클릭
+            cy.contains('로그인', { timeout: 10000 }).should('be.visible').click();
             cy.get('#username').type(text + '@ruu.kr'); // 이메일 입력
             cy.get('#password').type(Cypress.env('KangTestPasswd')); // 비밀번호 입력
             cy.get('#kc-login').click().then(() => {

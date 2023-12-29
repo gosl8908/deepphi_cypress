@@ -15,7 +15,7 @@ const { defineConfig } = require('cypress');
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
 module.exports = defineConfig({
-  pageLoadTimeout: 5*60*1000,
+  pageLoadTimeout: 60*1000,
   hooks: {
     afterVisit: (options) => {
       // 페이지 로딩이 실패하면(options.error exists), 또는 타임아웃이 발생하면(options.timeout exists) 새로고침
