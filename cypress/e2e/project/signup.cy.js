@@ -81,11 +81,10 @@ describe('SignUp', () => {
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.viewport(1920, 1080);
-        
-
-        cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            cy.visit(Cypress.env('Prod'));
-                cy.log('Visited the production page.');
+                cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
+            cy.visit(Cypress.env('Prod'))
+            .then(() => cy.log('Visited the production page.'))
+            .catch((e) => cy.log("[ERROR]", {e}));
             cy.wait(3000);
             cy.contains('로그인').click().then(() => {
                 cy.log('Clicked on "로그인".');

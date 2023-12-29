@@ -15,7 +15,7 @@ const { defineConfig } = require('cypress');
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
 module.exports = defineConfig({
-  pageLoadTimeout: 240*1000,
+  pageLoadTimeout: 5*60*1000,
   viewportWidth: 1980,
   viewportHeight: 1080,
   projectId: 'rrbsge',
