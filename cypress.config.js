@@ -16,8 +16,17 @@ const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/li
 
 module.exports = defineConfig({
   pageLoadTimeout: 5*60*1000,
+  hooks: {
+    afterVisit: (options) => {
+      // 페이지 로딩이 실패하면(options.error exists), 또는 타임아웃이 발생하면(options.timeout exists) 새로고침
+      if (options.error || options.timeout) {
+        cy.reload();
+      }
+    },
+  },
   viewportWidth: 1980,
   viewportHeight: 1080,
+  screenshotFolder: "cypress/screenshots",
   projectId: 'rrbsge',
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
