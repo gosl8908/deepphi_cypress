@@ -82,18 +82,8 @@ describe('SignUp', () => {
     it('SignUp Completed Check & User Change Information', () => {
         cy.viewport(1920, 1080);
             cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-                cy.on('uncaught:exception', (err, runnable) => {
-                    // 페이지 타임아웃 에러인지 확인
-                    if (err.message.includes('Timed out')) {
-                      // 에러가 발생했을 때 원하는 동작 수행
-                      cy.log('Page load timed out.');
-                    }
-                    // Cypress가 에러를 무시하고 계속 진행하도록 반환
-                    return false;
-                  });
-                  
-                  cy.visit(Cypress.env('Prod'))
-                      .then(() => cy.log('Visited the production page.'));
+            cy.visit(Cypress.env('Prod'))
+            .then(() => cy.log('Visited the production page.'));
             cy.wait(3000);
             cy.contains('로그인').click().then(() => {
             cy.log('Clicked on "로그인".');

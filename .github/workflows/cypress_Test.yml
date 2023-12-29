@@ -74,8 +74,9 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js" &&
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/project/image-test-project-create.cy.js"
+          export TZ="Asia/Seoul"
+          yarn cypress run --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js" &&
+          yarn cypress run --browser chrome --spec "cypress/e2e/project/image-test-project-create.cy.js"
 
   record_project_create_test:
     runs-on: windows-latest
@@ -95,8 +96,9 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-project-create.cy.js" &&
-          TZ=Asia/Seoul yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-test-project-create.cy.js"
+          export TZ="Asia/Seoul" 
+          yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-project-create.cy.js" &&
+          yarn cypress run --browser chrome --spec "cypress/e2e/Project/record-test-project-create.cy.js"
 
   organization_test:
     runs-on: windows-latest
@@ -116,6 +118,6 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          $env:TZ = "Asia/Seoul"
+          export TZ="Asia/Seoul" 
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-create.cy.js" && 
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"
