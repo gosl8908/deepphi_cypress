@@ -1,5 +1,5 @@
 function recordDataset(DateLabel) {
-  cy.log('레코드 데이터셋 업로드 성공');
+  cy.log('레코드 데이터셋 업로드');
 
   /* 레코드 데이터셋 업로드 */
   cy.contains('레코드 데이터셋').click(); // 레코드 데이터셋

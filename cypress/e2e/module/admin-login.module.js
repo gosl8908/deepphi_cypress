@@ -1,5 +1,5 @@
 function adminLogin(ProdAdmin, Id, Password) {
-  cy.log('어드민 로그인 성공');
+  cy.log('어드민 로그인');
 
   /* 어드민 로그인 */
   cy.visit(ProdAdmin, { timeout: 120000 }).then(() => {

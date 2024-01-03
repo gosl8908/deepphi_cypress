@@ -42,10 +42,12 @@ describe('로그인', () => {
   //       cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);
   //       cy.get('.btn-clear-danger').click(); // 중지
   //       cy.wait(10000);
-  });
-});
+
   //   const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
   //     'DateLabelWeek',
   // )}\n 테스트 범위 : 1. 로그인`;
 
   //   sendEmailModule.sendEmail(Cypress.env('Id'), 'Login Test ' + Cypress.env('EmailTitle'), EmailBody);
+
+});
+});

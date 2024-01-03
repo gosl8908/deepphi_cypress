@@ -230,7 +230,7 @@ describe('Record Project Create & Run', () => {
         }); // 상영시간 체크
         cy.get(
             '.content-scroll > :nth-child(2) > :nth-child(2) > .input-form > .ui-dropdown > .ui-dropdown-trigger',
-        ).click(); // 목표변수 설정
+        ).click({ force: true }); // 목표변수 설정
         cy.get(':nth-child(8) > .ui-dropdown-item').click(); // 감독의 영화 개수 선택
         cy.get('.input-columns > .btn').click(); // 입력변수 추가
         cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
@@ -241,14 +241,14 @@ describe('Record Project Create & Run', () => {
             force: true,
         }); // Decision Tree Classifier 모델러 선택
         cy.wait(2000);
-        cy.get('.ui-multiselect-trigger').click(); // 입력변수 설정
+        cy.get('.ui-multiselect-trigger').click({ force: true }); // 입력변수 설정
         cy.wait(3000);
         cy.get(':nth-child(4) > .ui-multiselect-item > .ui-chkbox > .ui-chkbox-box > .ui-chkbox-icon').click({
             force: true,
         }); // 상영시간 체크
         cy.get(
             '.content-scroll > :nth-child(2) > :nth-child(2) > .input-form > .ui-dropdown > .ui-dropdown-trigger',
-        ).click(); // 목표변수 설정
+        ).click({ force: true }); // 목표변수 설정
         cy.get(':nth-child(8) > .ui-dropdown-item').click(); // 감독의 영화 개수 선택
         cy.get('.input-columns > .btn').click(); // 입력변수 추가
         cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장

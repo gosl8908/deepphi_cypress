@@ -1,5 +1,5 @@
 function imageDataset(DateLabel) {
-  cy.log('이미지 데이터셋 업로드 성공');
+  cy.log('이미지 데이터셋 업로드');
 
   /* 데이터셋 업로드 */
   cy.contains('이미지 데이터셋').click(); // 이미지 데이터셋

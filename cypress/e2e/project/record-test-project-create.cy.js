@@ -46,7 +46,7 @@ describe('Record Test Project Create', () => {
             '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
         ).click(); // 인퍼런스
         cy.wait(3000);
-        cy.get('#inference_version').clear().type('1.0');
+        // cy.get('#inference_version').clear().type('1.0');
         cy.get('.ml10 > .btn').click(); // 버전 체크
         cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('DateLabel')); // 설명
@@ -70,10 +70,20 @@ describe('Record Test Project Create', () => {
         cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then(($el) => {
     
             // 텍스트 추출
-            const text = $el.text();
+            const endpoint = $el.text();
       
-            Cypress.env('endpointText', text);
+            Cypress.env('endpointText', endpoint);
             cy.log('확인된 endpointText 값:', Cypress.env('endpointText'));
+            
+              });
+
+        cy.get('.documentation-address').then(($el) => {
+    
+            // 텍스트 추출
+            const api = $el.text();
+      
+            Cypress.env('apiText', api);
+            cy.log('확인된 endpointText 값:', Cypress.env('apiText'));
             
               });
 
@@ -81,7 +91,7 @@ describe('Record Test Project Create', () => {
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
         // api 호출
-        cy.wait(30000);
+        cy.wait(15000);
         recordApiModule.recordApi();
         cy.contains('성공', { timeout: 60000 }).should('be.visible');
         cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);

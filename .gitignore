@@ -2,6 +2,7 @@
 # Cypress
 ######################
 cypress/downloads/
+cypress/screenshots/
 cypress/videos/
 cypress/reports/
 Image-Dataset.text

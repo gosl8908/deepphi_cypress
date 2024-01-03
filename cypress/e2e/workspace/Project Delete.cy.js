@@ -7,9 +7,9 @@ describe('Project Delete', () => {
 
   it('Project Delete', () => {
     // 로그인
-    loginModule.login( Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('Password') );
+    loginModule.login( Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd') );
 
-    cy.get('.search-box > .input-form').type('2023');
+    cy.get('.search-box > .input-form').type('2024');
     cy.get('.search-box > .btn-primary').click();
 
     // DISK 결제 팝업
