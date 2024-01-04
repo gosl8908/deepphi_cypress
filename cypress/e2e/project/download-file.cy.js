@@ -20,15 +20,17 @@ describe('Download File Test', () => {
       cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
       cy.get('.search-box > .btn-primary').click();
       cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click();      
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').click();
+      cy.get('.flow__module--name')
+      .contains('자동화 데이터셋')
+      .click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 데이터셋 데이터
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image').click();
+      cy.contains('Data Cleansing').click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 프로세싱 데이터
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image').click();
+      cy.contains('DNN-Classification').click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // AI 데이터
@@ -43,15 +45,19 @@ describe('Download File Test', () => {
       cy.get('.clear-both > .btn').click();
       cy.get('.btn-primary').click();
       cy.wait(3000);      
-      cy.get(':nth-child(3) > image').click();
+      cy.get('.flow__module--name')
+      .contains('자동화 데이터셋')
+      .click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 데이터셋 데이터      
-      cy.get(':nth-child(5) > image').click();
+      cy.contains('Data Cleansing').click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 프로세싱 데이터
-      cy.get(':nth-child(7) > image').click();
+      cy.get('.flow__module--name')
+      .contains('DNN-Classification')
+      .click();
       cy.get('[placement="bottom"]').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // AI 데이터
@@ -71,12 +77,12 @@ describe('Download File Test', () => {
       cy.get('.list-dropdown > .ng-star-inserted > button').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 학습 소스 코드
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').click();
+      cy.contains('자동화 데이터셋_2D_CL').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .btn').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 데이터셋 이미지
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image').click();
+      cy.contains('Resize').click();
       cy.get('.bottom__head--control > :nth-child(1)').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 프로세싱 파일
@@ -84,7 +90,7 @@ describe('Download File Test', () => {
       cy.get('.bottom__head--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 프로세싱 이미지
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image').click();
+      cy.contains('DensNet121').click();
       cy.get('.bottom__head--control > :nth-child(1)').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // AI 파일
@@ -103,20 +109,20 @@ describe('Download File Test', () => {
       cy.get('.clear-both > .btn').click();
       cy.get('.btn-primary').click();
       cy.wait(3000);
-      cy.get('.test-project__item--control > .list-dropdown-wrap > .btn').click();
-      cy.get('.test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click();
+      cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn > .fas').click();
+      cy.contains('인퍼런스').click();
       cy.get('.modal-button-content > .btn').click();
       cy.get('.btn-primary').click();
       cy.get('#appName').type('TestCode');
       cy.get('.btn-primary').click();
-      cy.wait(10000);
+      cy.contains('바로가기', { timeout: 30000 }).should('be.visible');
       cy.get('.btn-primary').click(); // 인퍼런스 소스 코드
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image').click();
+      cy.contains('자동화 데이터셋_2D_CL').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .btn').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 데이터셋 이미지
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').click();
+      cy.contains('Resize').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .btn').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
       cy.get('.btn-primary').click();
@@ -124,7 +130,9 @@ describe('Download File Test', () => {
       cy.get('.bottom__head--control > :nth-child(1)').click();
       cy.get('.btn-primary').click();
       cy.contains('파일 압축이 완료되었습니다.'); // 프로세싱 파일
-      cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image').click();      
+      cy.get('.flow__module--name')
+      .contains('DensNet121')
+      .click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .btn').click();
       cy.get('.bottom__head--control > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
       cy.get('.btn-primary').click();
@@ -178,7 +186,7 @@ describe('Download File Test', () => {
       cy.get('label > em').click();
       cy.get('.file-item__control-panel > :nth-child(2) > .btn').click();
       cy.get('.modal-button-content > .btn-danger').click();
-      cy.contains('성공적으로 삭제되었습니다.');
+      cy.contains('성공적으로 삭제되었습니다.', { timeout: 30000 }).should('be.visible');
       };
 
       const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(

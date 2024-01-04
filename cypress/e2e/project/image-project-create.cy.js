@@ -96,7 +96,8 @@ describe('Image Project Create', () => {
         cy.wait(3000);
 
         // 데이터셋 클릭
-        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
+        cy.get('flow__module--name')
+        contains('Cat and Dog Classification').click();
         cy.wait(1000);
 
         //Resize에서 VGG16 연결
