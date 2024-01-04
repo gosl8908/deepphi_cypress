@@ -26,8 +26,6 @@ describe('Project Delete', () => {
     // 레코드 데이터셋 메뉴
     // cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(2) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
 
-    for (let i = 0; i < 100; i++) { // 반복 100번
-
     // 인퍼런스 삭제
     // cy.get(':nth-child(1) > :nth-child(14) > .btn').click();
     // cy.get('.btn-danger').click();
@@ -37,12 +35,14 @@ describe('Project Delete', () => {
     // cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click();
     // cy.get('.btn-danger').click();
     // cy.wait(3000);
-
+  });
+  after(() => {
+    for (let i = 0; i < 100; i++) {
     // 프로젝트 삭제
-    cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn > .fas').click(); // 프로젝트 메뉴 선택
+    cy.get('.list-dropdown-wrap > .btn').click(); // 프로젝트 메뉴 선택
     cy.contains('삭제').click(); 
     cy.get('.btn-danger').click();
     cy.wait(3000);
-    }
-  });
+    };
+});
 });

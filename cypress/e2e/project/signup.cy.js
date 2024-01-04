@@ -8,7 +8,6 @@ describe('SignUp', () => {
 
     /* 일회용 이메일 만들기 */
     it('Create email', () => {
-        cy.viewport(1920, 1080);
         cy.visit('https://ruu.kr/'); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
         cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
@@ -22,7 +21,6 @@ describe('SignUp', () => {
 
     /* 회원가입 진행 */
     it('SignUp', () => {
-        cy.viewport(1920, 1080);
         cy.visit(Cypress.env('Prod'));
         cy.wait(5000);
         cy.contains('회원가입').click();
@@ -58,7 +56,6 @@ describe('SignUp', () => {
 
     /* 이메일 인증 확인 */
     it('Check Verify email', () => {
-        cy.viewport(1920, 1080);
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.visit('https://ruu.kr/'); // 일회용 이메일 진입
             cy.wait(5000);
@@ -77,7 +74,6 @@ describe('SignUp', () => {
 
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
-        cy.viewport(1920, 1080);
             cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.visit(Cypress.env('Prod'))
             .then(() => cy.log('Visited the production page.'));

@@ -24,7 +24,7 @@ module.exports = defineConfig({
       }
     },
   },
-  viewportWidth: 1980,
+  viewportWidth: 1920,
   viewportHeight: 1080,
   screenshotFolder: "cypress/screenshots",
   projectId: 'rrbsge',

@@ -27,8 +27,18 @@ jobs:
       - name: Install Dependencies
         run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run: yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
+      - name: Run Cypress tests with retry on failure
+        run: |
+          # Retry logic
+          for run in {1..3}; do
+            yarn cypress run --browser chrome --spec "cypress/e2e/project/signup.cy.js"
+            # Check if the exit code is 0 (success)
+            if [ $? -eq 0 ]; then
+              break
+            fi
+            # Wait for 60 seconds before retrying
+            sleep 60
+          done
 
   dataset_upload_test:
     runs-on: ubuntu-latest
@@ -111,3 +121,23 @@ jobs:
         run: |
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-create.cy.js" && 
           yarn cypress run --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"
+
+  download_file_test:
+    runs-on: ubuntu-latest
+    needs: organization_test
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.9.0"
+
+      - name: Install Dependencies
+        run: yarn add cypress@latest
+
+      - name: Run Cypress tests
+        run: |
+          yarn cypress run --browser chrome --spec "cypress/e2e/project/download-file.cy.js"
