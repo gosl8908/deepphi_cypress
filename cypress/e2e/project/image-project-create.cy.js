@@ -97,7 +97,7 @@ describe('Image Project Create', () => {
 
         // 데이터셋 클릭
         cy.get('flow__module--name')
-        contains('Cat and Dog Classification').click();
+        .contains('Cat and Dog Classification').click();
         cy.wait(1000);
 
         //Resize에서 VGG16 연결

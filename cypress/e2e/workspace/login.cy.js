@@ -1,6 +1,8 @@
 const { loginModule, recordApiModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('로그인', () => {
+  let testFailureReason = ''; // 실패 원인을 저장할 변수
+
   before(()=>{
     cy.setDateToEnv();
   });
@@ -8,6 +10,38 @@ describe('로그인', () => {
   it('test', () => {
 
     loginModule.login( Cypress.env('Prod'), Cypress.env('Id'), Cypress.env('KangTestPasswd') );
+
+    cy.get('.t')
+        // // 테스트 실패 시 이메일 전송
+        // Cypress.on('fail', (err, runnable) => {
+        //   const emailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
+        //     'DateLabelWeek',
+        //   )}\n 테스트 범위 : 1. 로그인\n\n테스트 실패 원인: ${err.message}`;
+        //   sendEmailModule.sendEmail(Cypress.env('Id'), 'Test ' + Cypress.env('EmailTitle'), emailBody);
+        //   throw err; // 테스트 실패를 다시 던져서 프레임워크에게 보고합니다.
+        // });
+  // 테스트 실패 시 호출되는 핸들러
+  Cypress.on('fail', (err, runnable) => {
+    testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+  });
+});
+after(() => {
+  if (testFailureReason) {
+    // 테스트 실패 시 이메일 전송
+    const emailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
+      'DateLabelWeek',
+    )}\n 테스트 범위 : 1. 로그인\n\n테스트 실패 원인: ${testFailureReason}`;
+    sendEmailModule.sendEmail(Cypress.env('Id'), 'Test ' + Cypress.env('EmailTitle'), emailBody);
+  } else {
+    // 테스트가 성공했을 때 이메일 전송
+    const emailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+      'DateLabelWeek',
+    )}\n 테스트 범위 : 1. 로그인`;
+    sendEmailModule.sendEmail(Cypress.env('Id'), 'Test ' + Cypress.env('EmailTitle'), emailBody);
+  }
+});
+});
+
 
   //   cy.contains('마이 인퍼런스').click();
 
@@ -48,6 +82,3 @@ describe('로그인', () => {
   // )}\n 테스트 범위 : 1. 로그인`;
 
   //   sendEmailModule.sendEmail(Cypress.env('Id'), 'Login Test ' + Cypress.env('EmailTitle'), EmailBody);
-
-});
-});
