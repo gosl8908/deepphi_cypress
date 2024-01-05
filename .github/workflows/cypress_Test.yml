@@ -19,6 +19,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Create Screenshots Directory
+        run: mkdir -p cypress/screenshots
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
