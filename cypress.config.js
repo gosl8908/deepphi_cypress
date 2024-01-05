@@ -45,10 +45,11 @@ module.exports = defineConfig({
         const attachments = [];
 
         if (screenshotFileName) {
+          const path = `cypress/screenshots/${screenshotFileName}`;
           attachments.push({
             filename: screenshotFileName,
             encoding: 'base64',
-            path: 'cypress/screenshots/' + screenshotFileName,
+            path: path,
           });
         }
           const transporter = nodemailer.createTransport({
