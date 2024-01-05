@@ -33,24 +33,24 @@ Cypress.Commands.add('ModuleAdd', (select, target, x_coordinate, y_coordinate) =
     .trigger("drop", { dataTransfer , which: 1, pageX: x_coordinate, pageY: y_coordinate, force: true })
 })
 
-Cypress.Commands.add('test:after:run', (test, runnable) => {
-  // 테스트가 실패한 경우
-  if (test.state === 'failed') {
-    const screenshotFolder = '.github/workflows';
+// Cypress.Commands.add('test:after:run', (test, runnable) => {
+//   // 테스트가 실패한 경우
+//   if (test.state === 'failed') {
+//     const screenshotFolder = '.github/workflows';
 
-    // 스크린샷 폴더 확인
-    if (!Cypress.fs.existsSync(screenshotFolder)) {
-      Cypress.fs.mkdirSync(screenshotFolder);
-    }
+//     // 스크린샷 폴더 확인
+//     if (!Cypress.fs.existsSync(screenshotFolder)) {
+//       Cypress.fs.mkdirSync(screenshotFolder);
+//     }
 
-    const screenshotFileName = `${runnable.parent.title} -- ${test.title} (failed).png`;
-    const screenshotPath = `${screenshotFolder}/${screenshotFileName}`;
+//     const screenshotFileName = `${runnable.parent.title} -- ${test.title} (failed).png`;
+//     const screenshotPath = `${screenshotFolder}/${screenshotFileName}`;
 
-    // 스크린샷 저장
-    cy.screenshot(screenshotFileName);
-    cy.task('renameScreenshot', { originalPath: 'cypress/screenshots/' + screenshotFileName, newPath: screenshotPath });
-  }
-});
+//     // 스크린샷 저장
+//     cy.screenshot(screenshotFileName);
+//     cy.task('renameScreenshot', { originalPath: 'cypress/screenshots/' + screenshotFileName, newPath: screenshotPath });
+//   }
+// });
 
 // 시간 선언
 function getCurrentDate(){

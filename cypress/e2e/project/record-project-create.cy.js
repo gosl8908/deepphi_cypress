@@ -1,6 +1,7 @@
 const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
+    let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
         cy.setDateToEnv();
         cy.getAllCookies(); // 쿠키 삭제
@@ -272,15 +273,33 @@ describe('Record Project Create & Run', () => {
         // cy.get('.btn-danger').click(); // 삭제 클릭
         // cy.wait(3000);
         // cy.contains('그래프를 생성해보세요.') // 삭제 확인
-
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+        Cypress.on('fail', (err, runnable) => {
+            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+          });
+    });
+    after(() => {
+        if (testFailureReason) {
+            // 테스트 실패 시 스크린샷 찍기
+            cy.screenshot(`record-project-create-failed-test-${Cypress.env('DateLabelWeek')}`)
+            // 테스트 실패 시 이메일 전송
+            const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
+              'DateLabelWeek',
+            )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행\n\n테스트 실패 원인: ${testFailureReason}`;
+            sendEmailModule.sendEmail(
+                Cypress.env('Id'),
+                'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
+                EmailBody,
+            );
+        } else {
+          // 테스트가 성공했을 때 이메일 전송
+          const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
             'DateLabelWeek',
-        )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
-
-        sendEmailModule.sendEmail(
+          )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
+          sendEmailModule.sendEmail(
             Cypress.env('Id'),
             'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
             EmailBody,
         );
-    });
+        }
+      });
 });

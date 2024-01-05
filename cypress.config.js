@@ -10,6 +10,7 @@
 
 // cypress.config.js
 const nodemailer = require("nodemailer");
+const fs = require('fs');
 const { defineConfig } = require('cypress');
 // 리포트 추가
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
@@ -26,7 +27,7 @@ module.exports = defineConfig({
   },
   viewportWidth: 1920,
   viewportHeight: 1080,
-  screenshotFolder: "cypress/screenshots",
+  screenshotOnRunFailure: true,
   projectId: 'rrbsge',
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
