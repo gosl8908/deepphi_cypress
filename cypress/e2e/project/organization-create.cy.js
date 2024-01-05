@@ -136,14 +136,15 @@ describe('Organization Create', () => {
           });
     });
     after(() => {
+        let screenshotFileName = `organization-create-failed-test ${Cypress.env('DateLabel')}`;
         if (testFailureReason) {
             // 테스트 실패 시 스크린샷 찍기
-            cy.screenshot(`organization-create-failed-test-${Cypress.env('DateLabelWeek')}`)
+            cy.screenshot(screenshotFileName)
             // 테스트 실패 시 이메일 전송
             const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
               'DateLabelWeek',
             )}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독\n\n테스트 실패 원인: ${testFailureReason}`;
-            sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Create Test ' + Cypress.env('EmailTitle'), EmailBody);
+            sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Create Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
         } else {
           // 테스트가 성공했을 때 이메일 전송
           const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(

@@ -30,14 +30,15 @@ describe('Organization Dataset Upload', () => {
       });
 });
 after(() => {
+  let screenshotFileName = `organization-dataset-upload-failed-test ${Cypress.env('DateLabel')}`;
   if (testFailureReason) {
       // 테스트 실패 시 스크린샷 찍기
-      cy.screenshot(`organization-dataset-upload-failed-test-${Cypress.env('DateLabelWeek')}`)
+      cy.screenshot(screenshotFileName)
       // 테스트 실패 시 이메일 전송
       const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
         'DateLabelWeek',
       )}\n 테스트 범위 : 1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료\n\n테스트 실패 원인: ${testFailureReason}`;
-      sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Dataset Upload Test ' + Cypress.env('EmailTitle'), EmailBody);
+      sendEmailModule.sendEmail(Cypress.env('Id'), 'Organization Dataset Upload Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
   } else {
     // 테스트가 성공했을 때 이메일 전송
     const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(

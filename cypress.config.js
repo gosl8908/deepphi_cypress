@@ -41,7 +41,16 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
 
       on("task", {
-        sendEmail({ recipient, subject, body }) {
+        sendEmail({ recipient, subject, body, screenshotFileName}) {
+        const attachments = [];
+
+        if (screenshotFileName) {
+          attachments.push({
+            filename: screenshotFileName,
+            encoding: 'base64',
+            path: 'cypress/screenshots/' + screenshotFileName,
+          });
+        }
           const transporter = nodemailer.createTransport({
             host: "smtp.office365.com",
             port: 587,
@@ -50,15 +59,14 @@ module.exports = defineConfig({
               user: "gosl8908@deepnoid.com",
               pass: "rnrmf0801!",
             },
-          });
-
+          });      
           const mailOptions = {
             from: "gosl8908@deepnoid.com",
             to: "gosl8908@deepnoid.com",
             subject: subject,
             text: body,
+            attachments: attachments,
           };
-
           return transporter
             .sendMail(mailOptions)
             .then((info) => {

@@ -192,14 +192,15 @@ describe('Download File Test', () => {
             cy.contains('성공적으로 삭제되었습니다.', { timeout: 10000 });
             cy.wait(3000);
         };
+        let screenshotFileName = `download-file-failed-test ${Cypress.env('DateLabel')}`;
             if (testFailureReason) {
                 // 테스트 실패 시 스크린샷 찍기
-                cy.screenshot(`download-file-failed-test-${Cypress.env('DateLabelWeek')}`)
+                cy.screenshot(screenshotFileName)
                 // 테스트 실패 시 이메일 전송
                 const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
                   'DateLabelWeek',
                 )}\n 테스트 범위 : 1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드\n\n테스트 실패 원인: ${testFailureReason}`;
-                sendEmailModule.sendEmail(Cypress.env('Id'), 'Download File Test ' + Cypress.env('EmailTitle'), EmailBody);
+                sendEmailModule.sendEmail(Cypress.env('Id'), 'Download File Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
             } else {
               // 테스트가 성공했을 때 이메일 전송
               const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
