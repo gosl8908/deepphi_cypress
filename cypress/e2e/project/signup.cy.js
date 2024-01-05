@@ -11,7 +11,7 @@ describe('SignUp', () => {
     it('Create email', () => {
         cy.visit('https://ruu.kr/'); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
-        cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
+        cy.get('#ids').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();
         cy.wait(5000); // 5초 대기
         // 조합한 텍스트를 파일에 저장
@@ -127,7 +127,7 @@ describe('SignUp', () => {
         cy.contains('상품을 정기결제 하셨습니다.', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
-        
+
         Cypress.on('fail', (err, runnable) => {
             testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
           });
