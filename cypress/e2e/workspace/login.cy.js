@@ -18,7 +18,7 @@ describe('로그인', () => {
     });
   });
   after(() => {
-    let screenshotFileName = `login.cy.js/login test ${Cypress.env('DateLabel')}.png`;
+    let screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
     if (testFailureReason) {
         // 테스트 실패 시 스크린샷 찍기
         cy.screenshot(screenshotFileName)
