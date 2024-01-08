@@ -27,14 +27,11 @@ jobs:
       - name: Install Dependencies
         run: yarn add cypress@latest
 
-      - name: Create Screenshots Directory
-        run: mkdir -p cypress/screenshots
-
       - name: Run Cypress tests with retry on failure
         run: |
           # Retry logic
           for run in {1..3}; do
-            yarn cypress run --browser chrome --spec "cypress/e2e/workspace/login.cy.js" --env screenshotsFolder=cypress/screenshots
+            yarn cypress run --browser chrome --spec "cypress/e2e/workspace/login.cy.js"
             # Check if the exit code is 0 (success)
             if [ $? -eq 0 ]; then
               break
@@ -42,6 +39,17 @@ jobs:
             # Wait for 60 seconds before retrying
             sleep 60
           done
+        
+      - name: Save Screenshots to Main Branch
+        if: failure()
+        run: |
+            mkdir -p screenshots
+            cp -r cypress/screenshots/* screenshots/
+            git config user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+            git config user.name "${{ secrets.GITHUB_ACTOR }}"
+            git add screenshots/*
+            git commit -m "Add screenshots from failed Cypress tests" || true
+            git push origin main
 
 # name: Cypress tests
 
