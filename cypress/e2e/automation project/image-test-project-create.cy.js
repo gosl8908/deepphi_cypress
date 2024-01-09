@@ -1,7 +1,6 @@
 const { loginModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -10,7 +9,7 @@ describe('Image Test Project Create', () => {
 
     it('Image Test Project Create', () => {
 
-      // 이미지 프로젝트 검색
+        // 이미지 프로젝트 검색
         cy.get('.search-box > .input-form').type('이미지 평가 프로젝트 자동화 확인용');
         cy.get('.search-box > .btn-primary').click();
         cy.wait(3000);
@@ -38,9 +37,9 @@ describe('Image Test Project Create', () => {
         //인퍼런스 생성
         cy.get(
             '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({ force: true }); // 메뉴바
-        cy.get(
-            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
-        ).click({ force: true }); // 인퍼런스
+            cy.get(
+                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
+            ).click({ force: true }); // 인퍼런스
         cy.wait(3000);
         cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content > .create-select-item__title').click();
         cy.get('.modal-button-content > .btn').click();
@@ -100,26 +99,16 @@ describe('Image Test Project Create', () => {
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
-        Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
+
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+          'DateLabelWeek',
+      )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
+      
+      sendEmailModule.sendEmail(
+        undefined,
+          Cypress.env('Id'),
+          'Image Test Project Create ' + Cypress.env('EmailTitle'),
+          EmailBody,
+          undefined,)
     });
-    after(() => {
-        let screenshotFileName = `image-test-project-create-failed-test ${Cypress.env('DateLabel')}`;
-        if (testFailureReason) {
-            // 테스트 실패 시 스크린샷 찍기
-            cy.screenshot(screenshotFileName)
-            // 테스트 실패 시 이메일 전송
-            const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
-              'DateLabelWeek',
-            )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제\n\n테스트 실패 원인: ${testFailureReason}`;
-            sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
-        } else {
-          // 테스트가 성공했을 때 이메일 전송
-          const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-          )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
-          sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
-        }
-      });
 });

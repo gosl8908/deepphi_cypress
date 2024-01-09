@@ -1,7 +1,6 @@
 const { loginModule, sendEmailModule, ApiModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -98,13 +97,21 @@ describe('Record Test Project Create', () => {
         cy.get('.ng-star-inserted')
         .eq(0)
         .contains('중지', { timeout: 30*1000 }).should('be.visible');
-        Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
+
+        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
+          'DateLabelWeek',
+      )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
+      
+      sendEmailModule.sendEmail(
+        undefined,
+          Cypress.env('Id'),
+          'Record Test Project Create ' + Cypress.env('EmailTitle'),
+          EmailBody,
+          undefined,)
     });
 
     after(() => {
-      cy.visit(`${Cypress.env('Prod')}user/my/inference`);
+        cy.visit(`${Cypress.env('Prod')}user/my/inference`);
         cy.wait(5000);
 
         /* 인퍼런스 삭제 */
@@ -127,22 +134,5 @@ describe('Record Test Project Create', () => {
         });
         cy.get('.btn-danger').invoke('click'); // 삭제
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
-
-        let screenshotFileName = `record-test-project-create-failed-test ${Cypress.env('DateLabel')}`;
-            if (testFailureReason) {
-                // 테스트 실패 시 스크린샷 찍기
-                cy.screenshot(screenshotFileName)
-                // 테스트 실패 시 이메일 전송
-                const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
-                  'DateLabelWeek',
-                )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제\n\n테스트 실패 원인: ${testFailureReason}`;
-                sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
-            } else {
-              // 테스트가 성공했을 때 이메일 전송
-              const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-                'DateLabelWeek',
-              )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
-              sendEmailModule.sendEmail(Cypress.env('Id'), 'Record Test Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
-            }
   });
 });
