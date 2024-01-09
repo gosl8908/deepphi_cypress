@@ -1,4 +1,4 @@
-const { sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
     before(() => {
@@ -59,6 +59,7 @@ describe('SignUp', () => {
             cy.visit(Cypress.env('DisposableEmail')); // 일회용 이메일 진입
             cy.wait(5000);
             cy.get('#id').type(text); // 이메일 입력
+        });
             cy.contains('(Notice) Verify your email for DEEP:PHI', { timeout: 10000 }).should('be.visible').click();
             cy.get('#mailList').click(); // 메일 확인
             cy.contains('deepphi@deepnoid.com').click(); // 메일 진입
@@ -68,24 +69,12 @@ describe('SignUp', () => {
                 .invoke('removeAttr', 'target') // target 속성을 제거합니다.
                 .click(); // 이메일 인증 확인
             cy.wait(3000);
-        });
     });
 
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            cy.visit(Cypress.env('Prod')).then(() => cy.log('Visited the production page.'));
-            cy.contains('로그인', { timeout: 10000 })
-                .should('be.visible')
-                .click()
-                .then(() => cy.log('Visited the production page.'));
-            cy.get('#username').type(text + '@ruu.kr'); // 이메일 입력
-            cy.get('#password').type(Cypress.env('KangTestPasswd')); // 비밀번호 입력
-            cy.get('#kc-login')
-                .click()
-                .then(() => {
-                    cy.log('Clicked on "#kc-login".');
-                }); // 로그인 선택
+            loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPasswd'));
             cy.wait(5000);
         });
         /* 프로필 정보 변경 확인 */
