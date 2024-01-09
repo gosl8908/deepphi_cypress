@@ -1,12 +1,10 @@
-const { loginModule, sendEmailModule, adminLoginModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
-        cy.setDateToEnv();
-        cy.getAllCookies(); // 쿠키 삭제
-        cy.getAllLocalStorage(); // 로컬 삭제
-        cy.getAllSessionStorage(); // 세션 삭제
+      cy.setDateToEnv();
+      cy.getAll();
     });
 
     it('Organization Create', () => {
@@ -82,8 +80,8 @@ describe('Organization Create', () => {
 
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
-        // 어드민 로그인
-        adminLoginModule.adminLogin(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPasswd'));
+
+        loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPasswd'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리

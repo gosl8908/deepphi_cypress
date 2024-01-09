@@ -1,12 +1,10 @@
-const { loginModule, sendEmailModule, recordApiModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule, ApiModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
-        cy.setDateToEnv();
-        cy.getAllCookies(); // 쿠키 삭제
-        cy.getAllLocalStorage(); // 로컬 삭제
-        cy.getAllSessionStorage(); // 세션 삭제
+      cy.setDateToEnv();
+      cy.getAll();
     });
 
     it('Record Test Project Create', () => {
@@ -91,7 +89,7 @@ describe('Record Test Project Create', () => {
 
         // api 호출
         cy.wait(15*1000);
-        recordApiModule.recordApi()
+        ApiModule.Api()
         cy.contains('성공', { timeout: 60*1000 }).should('be.visible');
         cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);
         cy.get('.btn-clear-danger').click(); // 중지

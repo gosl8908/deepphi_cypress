@@ -3,15 +3,12 @@ const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 describe('Image Project Create', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
-        cy.setDateToEnv();
-        cy.getAllCookies(); // 쿠키 삭제
-        cy.getAllLocalStorage(); // 로컬 삭제
-        cy.getAllSessionStorage(); // 세션 삭제
+      cy.setDateToEnv();
+      cy.getAll();
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
     });
 
     it('Image Project Create', () => {
-        // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
 
         // 프로젝트 생성
         cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
@@ -121,21 +118,24 @@ describe('Image Project Create', () => {
           });
     });
     after(() => {
-        let screenshotFileName = `image-project-create-failed-test ${Cypress.env('DateLabel')}`;
-        if (testFailureReason) {
-            // 테스트 실패 시 스크린샷 찍기
-            cy.screenshot(screenshotFileName)
-            // 테스트 실패 시 이메일 전송
-            const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
-              'DateLabelWeek',
-            )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행\n\n테스트 실패 원인: ${testFailureReason}`;
-            sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Project Create Test ' + Cypress.env('EmailTitle'), EmailBody, screenshotFileName);
-        } else {
-          // 테스트가 성공했을 때 이메일 전송
-          const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-          )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
-          sendEmailModule.sendEmail(Cypress.env('Id'), 'Image Project Create Test ' + Cypress.env('EmailTitle'), EmailBody);
-        }
+      const screenshotFileName = `image-project-create-failed ${Cypress.env('DateLabel')}`;
+      const isTestFailed = Boolean(testFailureReason);
+
+      const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
+  테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
+  테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행${
+      isTestFailed
+          ? `\n
+  테스트 실패 원인: ${testFailureReason}`
+          : ''
+  }`;
+
+      sendEmailModule.sendEmail(
+          isTestFailed,
+          Cypress.env('Id'),
+          `Image Project Create Test ${Cypress.env('EmailTitle')}`,
+          EmailBody,
+          isTestFailed && screenshotFileName,
+      );
       });
 });

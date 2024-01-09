@@ -4,6 +4,7 @@ describe('SignUp', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
         cy.setDateToEnv();
+        cy.getAll();
         
     });
 

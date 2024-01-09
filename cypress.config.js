@@ -40,7 +40,7 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
-
+      require('cypress-mochawesome-reporter/plugin')(on);
       on("task", {
         sendEmail({ recipient, subject, body, screenshotFileName}) {
         const attachments = [];
@@ -90,7 +90,7 @@ module.exports = defineConfig({
       StgAdmin: 'https://st-admin.deepphi.ai/',
       Dev: 'https://dev-home.deepphi.ai/',
       DevAdmin: 'https://dev-admin.deepphi.ai/',
-      Prod: 'https://www.deepphi.ai/home',
+      Prod: 'https://www.deepphi.ai/',
       ProdAdmin: 'https://admin.deepphi.ai/',
       ProdTest: 'http://st.deepphi.ai/',
       // 계정

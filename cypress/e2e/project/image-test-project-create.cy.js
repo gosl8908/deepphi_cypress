@@ -3,10 +3,8 @@ const { loginModule, recordApiModule, sendEmailModule } = require('../module/man
 describe('Image Test Project Create', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
     before(() => {
-        cy.setDateToEnv();
-        cy.getAllCookies(); // 쿠키 삭제
-        cy.getAllLocalStorage(); // 로컬 삭제
-        cy.getAllSessionStorage(); // 세션 삭제
+      cy.setDateToEnv();
+      cy.getAll();
     });
 
     it('Image Test Project Create', () => {

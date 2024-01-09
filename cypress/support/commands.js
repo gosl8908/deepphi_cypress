@@ -33,25 +33,6 @@ Cypress.Commands.add('ModuleAdd', (select, target, x_coordinate, y_coordinate) =
     .trigger("drop", { dataTransfer , which: 1, pageX: x_coordinate, pageY: y_coordinate, force: true })
 })
 
-// Cypress.Commands.add('test:after:run', (test, runnable) => {
-//   // 테스트가 실패한 경우
-//   if (test.state === 'failed') {
-//     const screenshotFolder = '.github/workflows';
-
-//     // 스크린샷 폴더 확인
-//     if (!Cypress.fs.existsSync(screenshotFolder)) {
-//       Cypress.fs.mkdirSync(screenshotFolder);
-//     }
-
-//     const screenshotFileName = `${runnable.parent.title} -- ${test.title} (failed).png`;
-//     const screenshotPath = `${screenshotFolder}/${screenshotFileName}`;
-
-//     // 스크린샷 저장
-//     cy.screenshot(screenshotFileName);
-//     cy.task('renameScreenshot', { originalPath: 'cypress/screenshots/' + screenshotFileName, newPath: screenshotPath });
-//   }
-// });
-
 // 시간 선언
 function getCurrentDate(){
 
@@ -89,9 +70,13 @@ function getCurrentDate(){
     Cypress.env('EmailTitle', currentDate.EmailTitle);
 });
 
+Cypress.Commands.add('getAll', () => {
+  cy.getAllCookies(); // 쿠키 삭제
+  cy.getAllLocalStorage(); // 로컬 삭제
+  cy.getAllSessionStorage(); // 세션 삭제
+})
+
   Cypress.on('uncaught:exception', (err, runnable) => {
     // 에러를 무시하고 계속 진행
     return false;
-  });
-
-  
+  });    

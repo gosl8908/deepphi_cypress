@@ -2,20 +2,17 @@ const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Download File Test', () => {
     let testFailureReason = ''; // 실패 원인을 저장할 변수
-    before(() => {
-        cy.setDateToEnv();
-        cy.getAllCookies(); // 쿠키 삭제
-        cy.getAllLocalStorage(); // 로컬 삭제
-        cy.getAllSessionStorage(); // 세션 삭제
+    beforeEach(() => {
+      cy.setDateToEnv();
+      cy.getAll();
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
     });
 
-    it('Download File Test', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+    it('Record Download File Test', () => {
+
 
         /* 레코드 */
-        cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
-        cy.get('.search-box > .btn-primary').click();
-        cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click();
+        cy.visit('https://modeler.deepphi.ai/modeler/39468');
         cy.get('.flow__module--name').contains('자동화 데이터셋').click();
         cy.get('[placement="bottom"]').click();
         cy.get('.btn-primary').click();
