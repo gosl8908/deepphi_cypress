@@ -1,14 +1,24 @@
 const { loginModule } = require('../module/manager.module.js');
 
 describe('Project Delete', () => {
-  before(()=>{
+  beforeEach(()=>{
     cy.setDateToEnv();
+    loginModule.login( Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd') );
   });
 
   it('Project Delete', () => {
-    // 로그인
-    loginModule.login( Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd') );
 
+    // /* 프로젝트 */
+    // cy.get('.search-box > .input-form').type('2024');
+    // cy.get('.search-box > .btn-primary').click();
+
+    // /* 이미지 데이터셋 */
+    // cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(1) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
+    // cy.get('.search-box > .input-form').type('2024');
+    // cy.get('.search-box > .btn-primary').click();
+
+    /* 레코드 데이터셋 */
+    cy.get(':nth-child(1) > .left-navigation--sub-navi > :nth-child(2) > button.ng-tns-c1-1 > .ng-tns-c1-1').click();
     cy.get('.search-box > .input-form').type('2024');
     cy.get('.search-box > .btn-primary').click();
 
@@ -29,20 +39,22 @@ describe('Project Delete', () => {
     // 인퍼런스 삭제
     // cy.get(':nth-child(1) > :nth-child(14) > .btn').click();
     // cy.get('.btn-danger').click();
-
-    // 데이터셋 삭제
-    // cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn > .fas').click();
-    // cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click();
-    // cy.get('.btn-danger').click();
-    // cy.wait(3000);
-  });
-  after(() => {
+    
     for (let i = 0; i < 100; i++) {
-    // 프로젝트 삭제
-    cy.get('.list-dropdown-wrap > .btn').click(); // 프로젝트 메뉴 선택
-    cy.contains('삭제').click(); 
+    // 데이터셋
+    cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
+    cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button').click();
     cy.get('.btn-danger').click();
     cy.wait(3000);
-    };
+  };
+  });
+  after(() => {
+    // for (let i = 0; i < 100; i++) {
+    // // 프로젝트 삭제
+    // cy.get('.list-dropdown-wrap > .btn').invoke('click'); // 프로젝트 메뉴 선택
+    // cy.contains('삭제').invoke('click');
+    // cy.get('.btn-danger').invoke('click');
+    // cy.wait(3000);
+    // };
 });
 });

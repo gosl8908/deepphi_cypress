@@ -1,7 +1,7 @@
 const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
+    let recordProjectCreate = ''; // 실패 원인을 저장할 변수
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -9,7 +9,6 @@ describe('Record Project Create & Run', () => {
     });
 
     it('Record Project Create & Run', () => {
-
         // 프로젝트 생성
         cy.contains('프로젝트 생성').click(); // 프로젝트 생성
         cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // 레코드 선택
@@ -31,7 +30,9 @@ describe('Record Project Create & Run', () => {
             '.resource-setting__item-container.mb10 > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
         ).click(); // 머신러닝 cpu.4
         cy.get('.cpu-gpu--selector > :nth-child(2) > div > .radio-item > em').click(); // 뉴럴 네트워크 CPU
-        cy.get(':nth-child(7) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em').click(); // 뉴럴 네트워크 cpu.4
+        cy.get(
+            ':nth-child(7) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
+        ).click(); // 뉴럴 네트워크 cpu.4
         cy.get('.btn-primary').click(); // 저장
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.contains('성공적으로 저장되었습니다.'); // 저장 확인
@@ -83,7 +84,7 @@ describe('Record Project Create & Run', () => {
         cy.wait(3000);
 
         // DNN-Classification 모듈 모델러에 추가
-        cy.ModuleAdd('@DNN-Classification', '@svg', 700, 300);
+        cy.ModuleAdd('@DNN-Classification', '@svg', 800, 300);
         cy.wait(3000);
 
         // Decision Tree Classifier 모듈 검색
@@ -96,32 +97,20 @@ describe('Record Project Create & Run', () => {
         cy.wait(3000);
 
         // Decision Tree Classifier 모듈 모델러에 추가
-        cy.ModuleAdd('@Decision Tree Classifier', '@svg', 800, 300);
+        cy.ModuleAdd('@Decision Tree Classifier', '@svg', 900, 300);
         cy.wait(3000);
 
         //데이터셋에서 클렌징 연결
-
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').realHover('mouse');
         cy.wait(3000);
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image')
-            // cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1)
             .realMouseDown({ force: true })
             .realMouseMove(100, 0)
             .realMouseUp()
             .realMouseUp();
         cy.wait(3000);
 
-        // 데이터셋 클릭
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image").click();
-        cy.wait(2000);
-
         //클렌징에서 프로세싱 연결
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image").realHover('mouse');
-        cy.wait(3000);
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image").realMouseDown().realMouseMove(100, 0).realMouseUp().realMouseUp();
-        cy.wait(3000);
-
-        //프로세싱에서 DNN-Classification 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').realHover('mouse');
         cy.wait(3000);
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
@@ -131,8 +120,18 @@ describe('Record Project Create & Run', () => {
             .realMouseUp();
         cy.wait(3000);
 
-        //DNN-Classification에서 Decision Tree Classifier 연결
+        //프로세싱에서 DNN-Classification 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image').realHover('mouse');
+        cy.wait(3000);
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
+            .realMouseDown({ force: true })
+            .realMouseMove(100, 0)
+            .realMouseUp()
+            .realMouseUp();
+        cy.wait(3000);
+
+        //DNN-Classification에서 Decision Tree Classifier 연결
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image').realHover('mouse');
         cy.wait(3000);
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
             .realMouseDown({ force: true })
@@ -173,11 +172,10 @@ describe('Record Project Create & Run', () => {
         cy.get('.right-content > .btn').click(); // 플로우 화면 나가기
 
         // 프로세싱 모듈 설정
-        cy.get("#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(9) > image")
-        .click(); // 프로세싱 모듈 선택
+        cy.get('.flow__module--name').contains('Data Processing').click();
         cy.wait(2000);
-        cy.get(':nth-child(3) > :nth-child(2) > image').click(); // 모듈 더보기
-        cy.get(':nth-child(3) > [align="left"]').click(); // 프로세스 플로우 진입
+        cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1).click(); // 모듈 더보기
+        cy.get('.mxPopupMenu').contains('프로세스 플로우').click();
         cy.wait(3000);
         cy.get('.btn-floating > .fas').click(); // 프로세싱 모듈 추가
         cy.contains('Scale').click({ force: true }); // Scale 선택
@@ -189,9 +187,7 @@ describe('Record Project Create & Run', () => {
         cy.get('.nav-project-right > ul > :nth-child(2) > button').click(); // 설정 탭
         cy.get('.ui-multiselect-trigger-icon').click(); // 작업 대상 펼치기
         cy.get(':nth-child(1) > .ui-multiselect-item').click(); // 상영시간 선택
-        cy.get('.ui-multiselect-trigger').click(); // 작업 대상 접기
-        // cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
-        // cy.contains('성공적으로 저장하였습니다'); // 저장 확인
+        cy.get('.ui-multiselect-label').click(); // 작업 대상 접기
         cy.get('td > .input-form > .ui-dropdown > .ui-dropdown-trigger').click(); // 처리 방법
         cy.get(':nth-child(1) > .ui-dropdown-item').click(); // 표준화 선택
         cy.get('.flex-button-box > :nth-child(2) > .btn').click(); // 저장
@@ -240,34 +236,20 @@ describe('Record Project Create & Run', () => {
         cy.contains('중지', { timeout: 60000 }).should('be.visible');
 
         Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
+            recordProjectCreate = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
     after(() => {
-        let screenshotFileName = `record-project-create-failed-test ${Cypress.env('DateLabel')}`;
-        if (testFailureReason) {
-            // 테스트 실패 시 스크린샷 찍기
-            cy.screenshot(screenshotFileName)
-            // 테스트 실패 시 이메일 전송
-            const EmailBody = `Cypress 자동화 테스트 스위트가 실패하였습니다\n 테스트 실행 시간 : ${Cypress.env(
-              'DateLabelWeek',
-            )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행\n\n테스트 실패 원인: ${testFailureReason}`;
-            sendEmailModule.sendEmail(
-                Cypress.env('Id'),
-                'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
-                EmailBody, 
-                screenshotFileName
-            );
-        } else {
-          // 테스트가 성공했을 때 이메일 전송
-          const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-          )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
-          sendEmailModule.sendEmail(
-            Cypress.env('Id'),
-            'Record Project Cteate Test ' + Cypress.env('EmailTitle'),
-            EmailBody,
-        );
-        }
-      });
+            const screenshotFileName = `record-project-create-failed-test ${Cypress.env('DateLabel')}`;
+            const isTestFailed  = Boolean(recordProjectCreate);
+            const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
+            테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
+            테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행
+            ${isTestFailed ? `\n
+            테스트 실패 원인:
+            ${recordProjectCreate ? '첫 번째 테스트: ' + recordProjectCreate + '\n' : ''}`
+            : ''
+          }`;
+            sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, EmailBody, isTestFailed  && screenshotFileName);
+    });
 });

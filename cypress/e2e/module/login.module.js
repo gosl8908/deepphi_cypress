@@ -2,7 +2,7 @@ function login(site, id, password) {
   cy.visit(site);
 
   if (site === (Cypress.env('Prod'))) {
-      cy.contains('로그인').click();
+    cy.get('.ng-star-inserted [gaevent="home_login"]').click()
   } else if (site === (Cypress.env('ProdAdmin'))) {
   }
   cy.get('#username').type(id); // 이메일 입력

@@ -57,22 +57,6 @@ function settingDataset(labelType, content) {
   cy.get('.btn-danger').click();
   cy.wait(10000);
   cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.');
-
-  // cy.task('sendEmail', {
-  //     recipient: 'gosl8908@deepnoid.com, crheo@deepnoid.com',
-  //     subject: EmailName,
-  //     body: testResult // 이메일 내용
-  // }).then((sent) => {
-  //     if (sent) {
-  //         console.log('이메일이 성공적으로 전송되었습니다.');
-  //     } else {
-  //         console.log('이메일 전송에 실패했습니다.');
-  //     }
-
-  //     // 테스트 결과 출력
-  //     console.log('테스트 결과:', Cypress.mocha.getRunner().suite.fullTitle());
-  //     console.log('테스트 결과 내용:', testResult);
-  // });
 }
 
 module.exports = {
