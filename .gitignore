@@ -5,8 +5,6 @@ cypress/downloads/
 cypress/screenshots/
 cypress/videos/
 cypress/reports/
-Image-Dataset.text
 cypress/fixtures/SignupTest.txt
-cypress/fixtures/api.txt
 node_modules
 cypress/e2e/workspace/

@@ -1,16 +1,11 @@
 function createImageDataset(dimension, labelType, structure, filename, title, detail = title) {
   // Create Dataset 클릭
-  cy.get(
-    '.lnb--right-content__container > .ng-star-inserted > .dashboard__default-header > .dashboard__header--control > .btn-primary',
-  ).click();
+  cy.contains('데이터셋 업로드').click({force:true}); // 데이터셋 업로드 화면 진입
   cy.wait(5000);
   // Dataset title 입력
   cy.get('#dataset_name').type(title);
   // Dataset Detail 입력
   cy.get('.note-editable').type(detail);
-
-  // cy.writeFile("Image-Dataset.text", ImageDatasetname);
-  cy.writeFile('Image-Dataset.text', title);
 
   // 1단계 Next 버튼 선택
   cy.get('.ng-dirty > .create-dataset > .step-content-box > .page-button > .btn').click();
@@ -33,7 +28,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'Image\\' + filename + '\\Dataset.zip',
+        filePath: 'image\\' + filename + '\\Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -41,7 +36,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'Image\\' + filename + '\\Dataset.zip',
+        filePath: 'image\\' + filename + '\\Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -49,7 +44,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Label 파일 첨부
       cy.get('.mb20 > .file-input > .input-wrap > input[accept=".csv"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'Image\\' + filename + '\\Label.csv',
+        filePath: 'image\\' + filename + '\\Label.csv',
         fileName: 'Label.csv',
         mimeType: 'application/csv',
       });
@@ -91,37 +86,31 @@ function createImageProject(title, detail = title) {
 
 function createRecordDataset(filename, title, detail = title) {
   // Create Dataset 클릭
-  cy.get(
-    '.lnb--right-content__container > .ng-star-inserted > .dashboard__default-header > .dashboard__header--control > .btn-primary',
-  ).click();
-  cy.wait(500);
+  cy.contains('데이터셋 업로드').click({force:true}); // 데이터셋 업로드 화면 진입
+  cy.wait(5000);
   // Dataset title 입력
   cy.get('#dataset_name').type(title);
   // Dataset Detail 입력
   cy.get('.note-editable').type(detail);
-
-  // cy.writeFile("Record-Dataset.text", RecordDatasetname);
-  cy.writeFile('Record-Dataset.text', title);
-
   // 1단계 Next 버튼 선택
   cy.get('.page-button > .btn').click();
 
         // Dataset 파일 첨부
         cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
           // fileContent,
-          filePath: 'Record\\' + filename,
+          filePath: 'record\\' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
           // fileContent,
-          filePath: 'Record\\' + filename,
+          filePath: 'record\\' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
           // fileContent,
-          filePath: 'Record\\' + filename,
+          filePath: 'record\\' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
