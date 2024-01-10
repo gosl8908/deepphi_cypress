@@ -28,7 +28,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'image/' + filename + 'Dataset.zip',
+        filePath: 'image/' + filename + '/Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -36,7 +36,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'image/' + filename + 'Dataset.zip',
+        filePath: 'image/' + filename + '/Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -53,7 +53,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
     // Dataset 파일 첨부
     cy.get('input[accept=".zip"][type="file"]').attachFile({
       // fileContent,
-      filePath: 'image/' + filename + 'Dataset.zip',
+      filePath: 'image/' + filename + '/Dataset.zip',
       fileName: 'Dataset.zip',
       mimeType: 'application/zip',
     });
