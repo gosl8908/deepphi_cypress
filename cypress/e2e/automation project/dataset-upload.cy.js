@@ -1,4 +1,4 @@
-const { loginModule, DatasetUploadModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Dataset Upload Test', () => {
     beforeEach(() => {
@@ -8,11 +8,15 @@ describe('Dataset Upload Test', () => {
     });
 
     it('Image Dataset Upload test', () => {
-        DatasetUploadModule.imageDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
+        cy.contains('이미지 데이터셋').click();
+            createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
+                datasetModule.settingImageDataset(1, '2D');
     });
 
     it('Record Dataset Upload test', () => {
-        DatasetUploadModule.recordDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
+        cy.contains('레코드 데이터셋').click();
+            createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
+                datasetModule.settingRecordDataset();
 
         const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
             'DateLabelWeek',

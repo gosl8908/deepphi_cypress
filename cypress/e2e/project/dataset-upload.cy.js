@@ -1,4 +1,4 @@
-const { loginModule, DatasetUploadModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Dataset Upload Test', () => {
     let imageDatasetUploadTestFail = ''; // 실패 원인을 저장할 변수
@@ -10,18 +10,22 @@ describe('Dataset Upload Test', () => {
     });
 
     it('Image Dataset Upload test', () => {
-        DatasetUploadModule.imageDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
+        cy.contains('이미지 데이터셋').click();
+        createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
+        datasetModule.settingImageDataset(1, '2D');
 
         Cypress.on('fail', (err, runnable) => {
-          imageDatasetUploadTestFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            imageDatasetUploadTestFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
     it('Record Dataset Upload test', () => {
-        DatasetUploadModule.recordDataset(Cypress.env('DateLabel'), Cypress.env('DateLabel'));
+        cy.contains('레코드 데이터셋').click();
+        createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
+        datasetModule.settingRecordDataset();
 
         Cypress.on('fail', (err, runnable) => {
-          recordDatasetUploadTestFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            recordDatasetUploadTestFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
     after(() => {

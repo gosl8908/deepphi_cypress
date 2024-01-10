@@ -1,7 +1,7 @@
-const { loginModule, recordApiModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, recordApiModule, sendEmailModule } = require('../module/manager.module.js');
 describe('로그인', () => {
-  let isTestFailed  = ''; // 실패 원인을 저장할 변수
-  let Login2testFailureReason = ''; // 실패 원인을 저장할 변수
+  // let isTestFailed  = ''; // 실패 원인을 저장할 변수
+  // let Login2testFailureReason = ''; // 실패 원인을 저장할 변수
   
   beforeEach(()=>{
     cy.setDateToEnv();
@@ -10,41 +10,34 @@ describe('로그인', () => {
   });
 
   it('test', () => {
-
-    cy.get('.f')
-
-    Cypress.on('fail', (err, runnable) => {
-      console.error('Test failed:', err.message);
-      LogintestFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-    });
+    cy.contains('이미지 데이터셋').click();
+    // createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
+    // createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
+    // createModule.createRecordProject('RecordDataset' + Cypress.env('DateLabel'));
+    // datasetModule.settingImageDataset(1, '2D');
+    // datasetModule.settingRecordDataset();
+    // Cypress.on('fail', (err, runnable) => {
+    //   console.error('Test failed:', err.message);
+    //   LogintestFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+    // });
   });
+  // after(() => {
 
-  it('test', () => {
-
-    cy.get('.f')
-
-    Cypress.on('fail', (err, runnable) => {
-      console.error('Test failed:', err.message);
-      Login2testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-    });
-  });
-  after(() => {
-
-    const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
-    const isTestFailed  = Boolean(LogintestFailureReason);
+  //   const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
+  //   const isTestFailed  = Boolean(LogintestFailureReason);
     
-    const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
-    테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-    테스트 범위 : 1. 로그인
-    ${isTestFailed ? `\n
-    테스트 실패 원인: 
-    ${LogintestFailureReason ? '첫 번째 테스트: ' + LogintestFailureReason + '\n' : ''}
-    ${Login2testFailureReason ? '두 번째 테스트: ' + Login2testFailureReason : ''}` 
-    : ''
-  }`;
+  //   const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
+  //   테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
+  //   테스트 범위 : 1. 로그인
+  //   ${isTestFailed ? `\n
+  //   테스트 실패 원인: 
+  //   ${LogintestFailureReason ? '첫 번째 테스트: ' + LogintestFailureReason + '\n' : ''}
+  //   ${Login2testFailureReason ? '두 번째 테스트: ' + Login2testFailureReason : ''}` 
+  //   : ''
+  // }`;
     
-    sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Login test ${Cypress.env('EmailTitle')}`, EmailBody, isTestFailed  && screenshotFileName);
-  });
+  //   sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Login test ${Cypress.env('EmailTitle')}`, EmailBody, isTestFailed  && screenshotFileName);
+  // });
   });
 
 

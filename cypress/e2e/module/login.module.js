@@ -2,7 +2,7 @@ function login(site, id, password) {
   cy.visit(site);
 
   if (site === (Cypress.env('Prod'))) {
-    cy.get('.ng-star-inserted [gaevent="home_login"]').click({ force: true })
+    cy.get('.support__gnb-container > .support__gnb--user > ul > .ng-star-inserted:nth-child(4) > a', {timeout : 30*1000}).click({ force: true })
   } else if (site === (Cypress.env('ProdAdmin'))) {
   }
   cy.get('#username').type(id); // 이메일 입력
