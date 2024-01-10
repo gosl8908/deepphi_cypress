@@ -232,7 +232,7 @@ describe('Record Project Create & Run', () => {
         });
     });
     after(() => {
-            const screenshotFileName = `record-project-create-failed-test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Record Project Cteate Test/Record Project Cteate Test ${Cypress.env('DateLabel')}`;
             const isTestFailed  = Boolean(recordProjectCreate);
             const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
             테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}

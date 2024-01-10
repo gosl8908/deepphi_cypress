@@ -109,7 +109,7 @@ describe('Image Project Create', () => {
           });
     });
     after(() => {
-      const screenshotFileName = `image-project-create-failed ${Cypress.env('DateLabel')}`;
+      const screenshotFileName = `Image Project Create Test/Image Project Create Test ${Cypress.env('DateLabel')}`;
       const isTestFailed = Boolean(testFailureReason);
 
       const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.

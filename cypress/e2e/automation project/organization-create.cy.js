@@ -1,7 +1,6 @@
 const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
     beforeEach(() => {
       cy.setDateToEnv();
       cy.getAll();

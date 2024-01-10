@@ -39,7 +39,7 @@ afterEach(()=> {
   }
 })
     after(() => {
-        const screenshotFileName = `download-file-failed ${Cypress.env('DateLabel')}`;
+        const screenshotFileName = `Download File Test/Download File Test ${Cypress.env('DateLabel')}`;
         const isTestFailed = Boolean(RecordDownloadFileTestFail, ImageDownloadFileTestFail);
         const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
         테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}

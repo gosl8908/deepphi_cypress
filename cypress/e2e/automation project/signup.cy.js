@@ -1,7 +1,7 @@
 const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
-    before(() => {
+    beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
     });

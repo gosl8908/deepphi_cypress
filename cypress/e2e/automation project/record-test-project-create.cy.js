@@ -1,7 +1,7 @@
 const { loginModule, sendEmailModule, ApiModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
-    before(() => {
+  beforeEach(() => {
       cy.setDateToEnv();
       cy.getAll();
     });

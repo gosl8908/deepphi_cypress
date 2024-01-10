@@ -1,7 +1,7 @@
 const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
-    before(() => {
+    beforeEach(() => {
       cy.setDateToEnv();
       cy.getAll();
       loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));

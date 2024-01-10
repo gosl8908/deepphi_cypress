@@ -128,7 +128,7 @@ describe('Record Test Project Create', () => {
         cy.get('.btn-danger').invoke('click'); // 삭제
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
 
-          const screenshotFileName = `Record-test-project-create-failed ${Cypress.env('DateLabel')}`;
+          const screenshotFileName = `Record Test Project Create Test/Record Test Project Create Test ${Cypress.env('DateLabel')}`;
           const isTestFailed = Boolean(testFailureReason);
     
           const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.

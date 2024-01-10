@@ -3,6 +3,7 @@ const { loginModule, createModule, datasetModule, sendEmailModule } = require('.
 describe('Dataset Upload Test', () => {
     let imageDatasetUploadTestFail = ''; // 실패 원인을 저장할 변수
     let recordDatasetUploadTestFail = ''; // 실패 원인을 저장할 변수
+      let screenshotFileName = `login test`;
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -29,7 +30,7 @@ describe('Dataset Upload Test', () => {
         });
     });
     after(() => {
-        const screenshotFileName = `dataset-upload-failed ${Cypress.env('DateLabel')}`;
+        const screenshotFileName = `Dataset Upload Test/Dataset Upload Test ${Cypress.env('DateLabel')}`;
         const isTestFailed = Boolean(imageDatasetUploadTestFail, recordDatasetUploadTestFail);
 
         const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.

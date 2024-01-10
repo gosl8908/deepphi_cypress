@@ -6,7 +6,7 @@ const {
 } = require('../module/manager.module.js');
 
 describe('Organization Dataset Upload', () => {
-  before(() => {
+  beforeEach(() => {
     cy.setDateToEnv();
     cy.getAll();
     loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
