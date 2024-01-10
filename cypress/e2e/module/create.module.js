@@ -28,7 +28,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'image\\' + filename + '\\Dataset.zip',
+        filePath: 'image/' + filename + 'Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -36,7 +36,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Dataset 파일 첨부
       cy.get('input[accept=".zip"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'image\\' + filename + '\\Dataset.zip',
+        filePath: 'image/' + filename + 'Dataset.zip',
         fileName: 'Dataset.zip',
         mimeType: 'application/zip',
       });
@@ -44,7 +44,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
       // Label 파일 첨부
       cy.get('.mb20 > .file-input > .input-wrap > input[accept=".csv"][type="file"]').attachFile({
         // fileContent,
-        filePath: 'image\\' + filename + '\\Label.csv',
+        filePath: 'image/' + filename + '/Label.csv',
         fileName: 'Label.csv',
         mimeType: 'application/csv',
       });
@@ -53,7 +53,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
     // Dataset 파일 첨부
     cy.get('input[accept=".zip"][type="file"]').attachFile({
       // fileContent,
-      filePath: 'Image\\' + filename + '\\Dataset.zip',
+      filePath: 'image/' + filename + 'Dataset.zip',
       fileName: 'Dataset.zip',
       mimeType: 'application/zip',
     });
@@ -61,7 +61,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
     // Label 파일 첨부
     cy.get('.mb20 > .file-input > .input-wrap > input[accept=".zip"][type="file"]').attachFile({
       // fileContent,
-      filePath: 'Image\\' + filename + '\\Label.zip',
+      filePath: 'image/' + filename + '/Label.csv',
       fileName: 'Label.zip',
       mimeType: 'application/zip',
     });
@@ -98,19 +98,19 @@ function createRecordDataset(filename, title, detail = title) {
         // Dataset 파일 첨부
         cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
           // fileContent,
-          filePath: 'record\\' + filename,
+          filePath: 'record/' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
           // fileContent,
-          filePath: 'record\\' + filename,
+          filePath: 'record/' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
           // fileContent,
-          filePath: 'record\\' + filename,
+          filePath: 'record/' + filename,
           fileName: filename,
           mimeType: 'text/csv',
         });
@@ -120,7 +120,7 @@ function createRecordDataset(filename, title, detail = title) {
 
   // Dataset 업로드 확인
   cy.wait(5000);
-  cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160000 }).should('not.exist');
+  cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160*1000 }).should('not.exist');
 }
 
 function createRecordProject(title, detail = title) {

@@ -1,4 +1,4 @@
-const { loginModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
     let recordProjectCreate = ''; // 실패 원인을 저장할 변수
@@ -9,16 +9,8 @@ describe('Record Project Create & Run', () => {
     });
 
     it('Record Project Create & Run', () => {
-        // 프로젝트 생성
-        cy.contains('프로젝트 생성').click(); // 프로젝트 생성
-        cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // 레코드 선택
-        cy.get('.modal-button-content > .btn').click(); // 다음
-        cy.wait(1000);
 
-        // 프로젝트 정보 입력
-        cy.get('#project_name').type('RecordProject' + Cypress.env('DateLabel')); // 프로젝트 타이틀 입력
-        cy.get('.note-editable').type(Cypress.env('DateLabel')); // 프로젝트 Detail 입력
-        cy.get('.modal-button-content > .btn-primary').click(); // 완료
+        createModule.createRecordProject('RecordDataset' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정

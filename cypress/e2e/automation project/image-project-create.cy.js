@@ -1,4 +1,4 @@
-const { loginModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
     before(() => {
@@ -9,17 +9,8 @@ describe('Image Project Create', () => {
 
     it('Image Project Create', () => {
 
-        // 프로젝트 생성
-        cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
-        cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
-        cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
-        cy.wait(1000);
-
-        // 프로젝트 정보 입력
-        cy.get('#project_name').type('ImageProject' + Cypress.env('DateLabel')); // 프로젝트 타이틀 입력
-        cy.get('.note-editable').type(Cypress.env('DateLabel')); // 프로젝트 Detail 입력
-        cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
-        cy.wait(5000);
+        createModule.createImageProject('RecordDataset' + Cypress.env('DateLabel'));
+        cy.wait(10000); // 10초 대기
 
         // 리소스 설정
         cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭

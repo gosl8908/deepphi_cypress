@@ -17,21 +17,21 @@ function recordDataset(DateLabel) {
       cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
           // 학습 데이터셋
           fileContent,
-          filePath: 'fixtures/record/자동화용 데이터셋.csv',
+          filePath: 'record/자동화용 데이터셋.csv',
           fileName: '자동화용 데이터셋.csv',
           mimeType: 'text/csv',
       });
       cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
           // 검증 데이터셋
           fileContent,
-          filePath: 'fixtures/record/자동화용 데이터셋.csv',
+          filePath: 'record/자동화용 데이터셋.csv',
           fileName: '자동화용 데이터셋.csv',
           mimeType: 'text/csv',
       });
       cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
           // 평가 데이터셋
           fileContent,
-          filePath: 'fixtures/record/자동화용 데이터셋.csv',
+          filePath: 'record/자동화용 데이터셋.csv',
           fileName: '자동화용 데이터셋.csv',
           mimeType: 'text/csv',
       });
@@ -82,9 +82,8 @@ function imageDataset(DateLabel) {
     /* 파일 업로드 */
     cy.fixture('image/2D_CL_Case1/Garbage Classification (2D Classification Case1).zip').then(fileContent => {
         cy.get('input[accept=".zip"][type="file"]').attachFile({
-            fileContent,
             filePath:
-                'fixtures/image/2D_CL_Case1/Garbage Classification (2D Classification Case1).zip',
+                'image/2D_CL_Case1/Garbage Classification (2D Classification Case1).zip',
             fileName: 'Garbage Classification (2D Classification Case1).zip',
             mimeType: 'application/zip',
         });
