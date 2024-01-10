@@ -3,7 +3,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
   cy.get(
     '.lnb--right-content__container > .ng-star-inserted > .dashboard__default-header > .dashboard__header--control > .btn-primary',
   ).click();
-  cy.wait(500);
+  cy.wait(5000);
   // Dataset title 입력
   cy.get('#dataset_name').type(title);
   // Dataset Detail 입력
