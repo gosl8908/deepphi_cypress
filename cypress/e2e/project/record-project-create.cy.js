@@ -5,12 +5,12 @@ describe('Record Project Create & Run', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Record Project Create & Run', () => {
 
-        createModule.createRecordProject('RecordDataset' + Cypress.env('DateLabel'));
+        createModule.createRecordProject('RecordProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정
@@ -233,9 +233,8 @@ describe('Record Project Create & Run', () => {
     });
     after('Send Email', () => {
             const screenshotFileName = `Record Project Cteate Test/Record Project Cteate Test ${Cypress.env('DateLabel')}`;
-            const isTestFailed  = Boolean(testFail);
             const testRange = '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행'
 
-            sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, testRange, isTestFailed  && screenshotFileName, testFail);
+            sendEmailModule.sendEmail(testFail , Cypress.env('Id'), `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, testRange, testFail  && screenshotFileName);
     });
 });

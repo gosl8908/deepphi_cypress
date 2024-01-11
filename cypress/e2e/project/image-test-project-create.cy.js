@@ -5,7 +5,7 @@ describe('Image Test Project Create', () => {
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {
@@ -106,16 +106,14 @@ describe('Image Test Project Create', () => {
     });
     after('Send Email', () => {
       const screenshotFileName = `Image Test Project Create Test/Image Test Project Create Test ${Cypress.env('DateLabel')}`;
-      const isTestFailed = Boolean(testFail);
       const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
 
       sendEmailModule.sendEmail(
-          isTestFailed,
+        testFail,
           Cypress.env('Id'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
-          isTestFailed && screenshotFileName,
-          testFail,
+          testFail && screenshotFileName,
       );
       });
 });

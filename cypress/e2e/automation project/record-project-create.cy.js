@@ -4,12 +4,12 @@ describe('Record Project Create & Run', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Record Project Create & Run', () => {
 
-        createModule.createRecordProject('RecordDataset' + Cypress.env('DateLabel'));
+        createModule.createRecordProject('RecordProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정

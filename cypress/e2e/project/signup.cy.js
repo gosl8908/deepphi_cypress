@@ -39,8 +39,8 @@ describe('SignUp', () => {
             cy.get(':nth-child(1) > dd > .form-size > .account-button').click(); // 아이디 중복 검사
             cy.contains('사용 가능한 이메일입니다.'); // 이메일 중복 팝업 확인
             cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
-            cy.get('#user-pw').type('test123!'); // 비밀번호
-            cy.get('#user-pw--confirm').type('test123!'); // 비밀번호 확인
+            cy.get('#user-pw').type(Cypress.env('KangTestPwd')); // 비밀번호
+            cy.get('#user-pw--confirm').type(Cypress.env('KangTestPwd')); // 비밀번호 확인
             cy.get('#user-name').type(text); // 이름
             cy.get('#user-nickname').type(text); // 닉네임
             cy.get(':nth-child(5) > dd > .form-size > .account-button').click(); // 닉네임 중복 검사
@@ -86,7 +86,7 @@ describe('SignUp', () => {
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPasswd'));
+            loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPwd'));
             cy.wait(5000);
         });
         /* 프로필 정보 변경 확인 */
@@ -111,7 +111,7 @@ describe('SignUp', () => {
 
         /* 비밀번호 변경 확인 */
         cy.get('.my-info__profile-card > .btn').click(); // 프로필 수정 선택
-        cy.get('.input-form').type('test123!'); // 비밀번호 입력
+        cy.get('.input-form').type(Cypress.env('KangTestPwd')); // 비밀번호 입력
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.wait(3000); // 3초 대기
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 비밀번호 변경 탭
@@ -137,16 +137,14 @@ describe('SignUp', () => {
     });
     after('Send Email', () => {
         const screenshotFileName = `signup test ${Cypress.env('DateLabel')}`;
-        const isTestFailed = Boolean(testFail);
         const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
         sendEmailModule.sendEmail(
-            isTestFailed,
+            testFail,
             Cypress.env('Id'),
             `SignUp test ${Cypress.env('EmailTitle')}`,
             testRange,
-            isTestFailed && screenshotFileName,
-            testFail,
+            testFail && screenshotFileName,
         );
     });
 });

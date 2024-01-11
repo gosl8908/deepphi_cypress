@@ -79,6 +79,7 @@ function createImageProject(title, detail = title) {
   cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
   cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
   cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
+  cy.wait(3*1000);
   cy.get('#project_name').type(title); // 프로젝트 타이틀 입력
   cy.get('.note-editable').type(detail); // 프로젝트 Detail 입력
   cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
@@ -127,6 +128,7 @@ function createRecordProject(title, detail = title) {
   cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
   cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // Record 선택
   cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
+  cy.wait(3*1000);
   cy.get('#project_name').type(title); // 프로젝트 타이틀 입력
   cy.get('.note-editable').type(detail); // 프로젝트 Detail 입력
   cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭

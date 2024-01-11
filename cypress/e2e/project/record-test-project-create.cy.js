@@ -9,7 +9,7 @@ describe('Record Test Project Create', () => {
 
     it('Record Test Project Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
         // 레코드 프로젝트 검색
         cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
@@ -129,16 +129,14 @@ describe('Record Test Project Create', () => {
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
 
           const screenshotFileName = `Record Test Project Create Test/Record Test Project Create Test ${Cypress.env('DateLabel')}`;
-          const isTestFailed = Boolean(testFail);
           const testRange = '1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
     
           sendEmailModule.sendEmail(
-              isTestFailed,
+            testFail,
               Cypress.env('Id'),
               `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
               testRange,
-              isTestFailed && screenshotFileName,
-              testFail,
+              testFail && screenshotFileName,
           );
   });
 });

@@ -1,5 +1,6 @@
-function sendEmail(isTestFailed, Id, EmailTitle, testRange, screenshotFileName, testFail) {
-
+function sendEmail(testFail, Id, EmailTitle, testRange, screenshotFileName) {
+  const isTestFailed  = Boolean(testFail);
+  isTestFailed && cy.screenshot(screenshotFileName);
   const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
   테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
   테스트 범위 : ${testRange}
@@ -7,7 +8,7 @@ function sendEmail(isTestFailed, Id, EmailTitle, testRange, screenshotFileName, 
   테스트 실패 원인 : ${testFail}` : ''}`;
 
   cy.log('테스트가 성공적으로 완료되었습니다.');
-  isTestFailed && cy.screenshot(screenshotFileName);
+
   const v = {
     recipient: Id,
     subject: EmailTitle,

@@ -6,7 +6,7 @@ describe('Dataset Upload Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Dataset Upload test', () => {
@@ -30,15 +30,14 @@ describe('Dataset Upload Test', () => {
     });
     after('Send Email', () => {
         const screenshotFileName = `Dataset Upload Test/Dataset Upload Test ${Cypress.env('DateLabel')}`;
-        const isTestFailed = Boolean(testFail);
         const testRange = '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료'
 
         sendEmailModule.sendEmail(
-            isTestFailed,
+            testFail,
             Cypress.env('Id'),
             `Dataset Upload Test ${Cypress.env('EmailTitle')}`,
             testRange,
-            isTestFailed && screenshotFileName, testFail,
+            testFail && screenshotFileName,
         );
     });
 });

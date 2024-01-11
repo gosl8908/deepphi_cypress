@@ -5,12 +5,11 @@ describe('로그인', () => {
   beforeEach(()=>{
     cy.setDateToEnv();
     cy.getAll();
-    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
   });
 
   it('test', () => {
-    cy.contains('이미지 데이터셋ㄹ')
-
+    cy.contains('이미지 데이터셋f');
     Cypress.on('fail', (err, runnable) => {
       testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
     });
@@ -19,9 +18,6 @@ describe('로그인', () => {
   // it('test', () => {
   //   cy.contains('이미지 데이터셋f').click();
 
-  //   Cypress.on('fail', (err, runnable) => {
-  //     testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
-  //   });
   // });
 
   // afterEach(() => {
@@ -30,11 +26,13 @@ describe('로그인', () => {
   // })
 after('Send Email', () => {
   const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
-  const isTestFailed  = Boolean(testFail);
   const testRange = '1. 로그인'
 
-
-  sendEmailModule.sendEmail(isTestFailed, Cypress.env('Id'), `Login test ${Cypress.env('EmailTitle')}`, testRange, isTestFailed && screenshotFileName, testFail,
+  sendEmailModule.sendEmail(testFail,
+    Cypress.env('Id'),
+    `Login test ${Cypress.env('EmailTitle')}`,
+    testRange,
+    testFail && screenshotFileName,
   );
 });
 });

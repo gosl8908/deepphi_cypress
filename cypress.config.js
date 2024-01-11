@@ -91,7 +91,7 @@ module.exports = defineConfig({
       KangTestId: 'deepphi.auto2@ruu.kr',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
-      KangTestPasswd: 'test123!',
+      KangTestPwd: 'test123!',
       // 형식
       classification: 1,
       segmentation: 2,

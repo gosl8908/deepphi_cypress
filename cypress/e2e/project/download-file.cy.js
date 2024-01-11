@@ -5,7 +5,7 @@ describe('Download File Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 it('Image Download File Test',()=> {
 
@@ -46,16 +46,14 @@ afterEach(()=> {
 })
     after('Send Email', () => {
         const screenshotFileName = `Download File Test/Download File Test ${Cypress.env('DateLabel')}`;
-        const isTestFailed = Boolean(testFail);
         const testRange = '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드'
 
         sendEmailModule.sendEmail(
-            isTestFailed,
+          testFail,
             Cypress.env('Id'),
             `Download File Test ${Cypress.env('EmailTitle')}`,
             testRange,
-            isTestFailed && screenshotFileName,
-            testFail,
+            testFail && screenshotFileName,
         );
     });
 });

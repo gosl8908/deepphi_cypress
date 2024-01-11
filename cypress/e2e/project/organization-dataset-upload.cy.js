@@ -12,7 +12,7 @@ describe('Organization Dataset Upload', () => {
   });
 
   it('Organization Image Dataset Upload', () => {
-    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
       // 단체 이동
       cy.get('.btn__user_info').click(); // 프로필 선택
@@ -27,7 +27,7 @@ describe('Organization Dataset Upload', () => {
       });
 });
 it('Organization Record Dataset Upload', () => {
-  loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+  loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
     // 단체 이동
     cy.get('.btn__user_info').click(); // 프로필 선택
@@ -43,16 +43,14 @@ it('Organization Record Dataset Upload', () => {
 });
 after('Send Email', () => {
   const screenshotFileName = `Organization Dataset Upload Test/Organization Dataset Upload Test ${Cypress.env('DateLabel')}`;
-  const isTestFailed = Boolean(testFail);
   const testRange = '1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료'
 
   sendEmailModule.sendEmail(
-      isTestFailed,
+    testFail,
       Cypress.env('Id'),
       `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
       testRange,
-      isTestFailed && screenshotFileName,
-      testFail,
+      testFail && screenshotFileName,
   );
   });
 });
