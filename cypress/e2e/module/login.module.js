@@ -5,7 +5,6 @@ function login(site, id, password) {
       cy.get('.support__gnb-container > .support__gnb--user > ul > .ng-star-inserted:nth-child(4) > a', {timeout: 30000,}).click({ force: true });
   } else if (site === Cypress.env('ProdAdmin')) {
   }
-  cy.reload();
   cy.get('#username').type(id); // 이메일 입력
   cy.get('#password').type(password); // 비밀번호 입력
   cy.get('#kc-login').click();

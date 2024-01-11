@@ -74,7 +74,7 @@ describe('SignUp', () => {
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPasswd'));
+            loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPwd'));
             cy.wait(5000);
         });
         /* 프로필 정보 변경 확인 */
