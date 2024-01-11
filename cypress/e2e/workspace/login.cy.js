@@ -1,48 +1,43 @@
 const { loginModule, createModule, datasetModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
 describe('로그인', () => {
-  let testFailureReason  = ''; // 실패 원인을 저장할 변수
+  let testFail  = ''; // 실패 원인을 저장할 변수
+
   beforeEach(()=>{
     cy.setDateToEnv();
     cy.getAll();
-
     loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
   });
 
   it('test', () => {
-    cy.contains('이미지 데이터셋f').click();
+    cy.contains('이미지 데이터셋ㄹ')
 
     Cypress.on('fail', (err, runnable) => {
-      testFailureReason = `${err.message}` || '알 수 없는 이유로 실패함\n';
+      testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
     });
 
   });
-  it('test', () => {
-    cy.contains('이미지 데이터셋f').click();
+  // it('test', () => {
+  //   cy.contains('이미지 데이터셋f').click();
 
-    Cypress.on('fail', (err, runnable) => {
-      testFailureReason = `${err.message}` || '알 수 없는 이유로 실패함\n';
-    });
-  });
+  //   Cypress.on('fail', (err, runnable) => {
+  //     testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
+  //   });
+  // });
+
   // afterEach(() => {
-  //   const screenshotFileName = `Login/login test ${Cypress.env('DateLabel')}`;
-  //   const isTestFailed  = Boolean(testFailureReason);
+
   //   isTestFailed && cy.screenshot(screenshotFileName);
   // })
-after(() => {
+after('Send Email', () => {
   const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
-  const isTestFailed  = Boolean(testFailureReason);
-  
-  const EmailBody = `Cypress 자동화 테스트 스위트가 ${testFailureReason ? '실패' : '성공'}하였습니다.
-  테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-  테스트 범위 : 1. 로그인
-  ${testFailureReason ? `\n
-  테스트 실패 원인: ${testFailureReason}`
-  : ''
-}`;
-  sendEmailModule.sendEmail(isTestFailed, Cypress.env('Id'), `Login test ${Cypress.env('EmailTitle')}`, EmailBody, screenshotFileName);
-})
+  const isTestFailed  = Boolean(testFail);
+  const testRange = '1. 로그인'
 
-  });
+
+  sendEmailModule.sendEmail(isTestFailed, Cypress.env('Id'), `Login test ${Cypress.env('EmailTitle')}`, testRange, isTestFailed && screenshotFileName, testFail,
+  );
+});
+});
 
     // createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
     // createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));

@@ -119,14 +119,12 @@ describe('SignUp', () => {
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-        )}\n 테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드`;
-        
+        const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
+
         sendEmailModule.sendEmail(undefined,
             Cypress.env('Id'),
             'SignUp ' + Cypress.env('EmailTitle'),
-            EmailBody,
+            testRange,
             undefined,)
     });
 });

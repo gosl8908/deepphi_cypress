@@ -1,7 +1,7 @@
 const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
-    let recordProjectCreate = ''; // 실패 원인을 저장할 변수
+    let testFail = ''; // 실패 원인을 저장할 변수
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -228,20 +228,14 @@ describe('Record Project Create & Run', () => {
         cy.contains('중지', { timeout: 60000 }).should('be.visible');
 
         Cypress.on('fail', (err, runnable) => {
-            recordProjectCreate = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
-    after(() => {
+    after('Send Email', () => {
             const screenshotFileName = `Record Project Cteate Test/Record Project Cteate Test ${Cypress.env('DateLabel')}`;
-            const isTestFailed  = Boolean(recordProjectCreate);
-            const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
-            테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-            테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행
-            ${isTestFailed ? `\n
-            테스트 실패 원인:
-            ${recordProjectCreate ? '첫 번째 테스트: ' + recordProjectCreate + '\n' : ''}`
-            : ''
-          }`;
-            sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, EmailBody, isTestFailed  && screenshotFileName);
+            const isTestFailed  = Boolean(testFail);
+            const testRange = '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행'
+
+            sendEmailModule.sendEmail(isTestFailed , Cypress.env('Id'), `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, testRange, isTestFailed  && screenshotFileName, testFail);
     });
 });

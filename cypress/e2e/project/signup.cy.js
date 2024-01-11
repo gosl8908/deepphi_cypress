@@ -1,10 +1,7 @@
 const { sendEmailModule } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
-    let CreateEmail = ''; // 실패 원인을 저장할 변수
-    let SignUp = ''; // 실패 원인을 저장할 변수
-    let CheckVerifyEmail = ''; // 실패 원인을 저장할 변수
-    let SignUpCompletedCheckUserChangeInfo = ''; // 실패 원인을 저장할 변수
+    let testFail = ''; // 실패 원인을 저장할 변수
 
     before(() => {
         cy.setDateToEnv();
@@ -23,7 +20,7 @@ describe('SignUp', () => {
         cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
         cy.wait(3000);
         Cypress.on('fail', (err, runnable) => {
-            CreateEmail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
@@ -61,7 +58,7 @@ describe('SignUp', () => {
             cy.wait(3000);
         });
         Cypress.on('fail', (err, runnable) => {
-            SignUp = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
@@ -82,7 +79,7 @@ describe('SignUp', () => {
             cy.wait(3000);
         });
         Cypress.on('fail', (err, runnable) => {
-            CheckVerifyEmail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
@@ -135,37 +132,21 @@ describe('SignUp', () => {
         cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
 
         Cypress.on('fail', (err, runnable) => {
-            SignUpCompletedCheckUserChangeInfo = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
-    after(() => {
+    after('Send Email', () => {
         const screenshotFileName = `signup test ${Cypress.env('DateLabel')}`;
-        const isTestFailed = Boolean(LogintestFailureReason);
-
-        const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
-    테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-    테스트 범위 : 1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드
-    ${
-        isTestFailed
-            ? `\n
-    테스트 실패 원인: 
-    ${CreateEmail ? 'Create Email: ' + CreateEmail + '\n' : ''}
-    ${SignUp ? 'SignUp: ' + SignUp : ''}
-    ${CheckVerifyEmail ? 'Check Verify Email: ' + CheckVerifyEmail : ''}
-    ${
-        SignUpCompletedCheckUserChangeInfo
-            ? 'SignUp Completed CheckUser Change Info: ' + SignUpCompletedCheckUserChangeInfo
-            : ''
-    }`
-            : ''
-    }`;
+        const isTestFailed = Boolean(testFail);
+        const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
         sendEmailModule.sendEmail(
             isTestFailed,
             Cypress.env('Id'),
             `SignUp test ${Cypress.env('EmailTitle')}`,
-            EmailBody,
+            testRange,
             isTestFailed && screenshotFileName,
+            testFail,
         );
     });
 });

@@ -129,15 +129,13 @@ describe('Organization Create', () => {
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-          'DateLabelWeek',
-      )}\n 테스트 범위 : 1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독`;
+        const testRange = '1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독';
       
       sendEmailModule.sendEmail(
         undefined,
           Cypress.env('Id'),
           'Organization Create ' + Cypress.env('EmailTitle'),
-          EmailBody,
+          testRange,
           undefined,)
     });
 });

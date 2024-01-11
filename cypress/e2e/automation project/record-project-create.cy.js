@@ -226,15 +226,13 @@ describe('Record Project Create & Run', () => {
         cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
         cy.contains('중지', { timeout: 60000 }).should('be.visible');
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-        )}\n 테스트 범위 : 1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행`;
+        const testRange = '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
         
         sendEmailModule.sendEmail(
             undefined,
             Cypress.env('Id'),
             'Record Project Create ' + Cypress.env('EmailTitle'),
-            EmailBody,
+            testRange,
             undefined,)
     });
 });

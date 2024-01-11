@@ -98,15 +98,13 @@ describe('Record Test Project Create', () => {
         .eq(0)
         .contains('중지', { timeout: 30*1000 }).should('be.visible');
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-          'DateLabelWeek',
-      )}\n 테스트 범위 : 1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
+        const testRange = '1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제';
       
       sendEmailModule.sendEmail(
         undefined,
           Cypress.env('Id'),
           'Record Test Project Create ' + Cypress.env('EmailTitle'),
-          EmailBody,
+          testRange,
           undefined,)
     });
 

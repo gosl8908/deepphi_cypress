@@ -1,7 +1,7 @@
 const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
+    let testFail = ''; // 실패 원인을 저장할 변수
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -105,28 +105,21 @@ describe('Image Project Create', () => {
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('중지', { timeout: 30000 }).should('be.visible');
         Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
           });
     });
-    after(() => {
+    after('Send Email', () => {
       const screenshotFileName = `Image Project Create Test/Image Project Create Test ${Cypress.env('DateLabel')}`;
-      const isTestFailed = Boolean(testFailureReason);
-
-      const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
-  테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-  테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행${
-      isTestFailed
-          ? `\n
-  테스트 실패 원인: ${testFailureReason}`
-          : ''
-  }`;
+      const isTestFailed = Boolean(testFail);
+      const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행'
 
       sendEmailModule.sendEmail(
           isTestFailed,
           Cypress.env('Id'),
           `Image Project Create Test ${Cypress.env('EmailTitle')}`,
-          EmailBody,
+          testRange,
           isTestFailed && screenshotFileName,
+          testFail,
       );
       });
 });

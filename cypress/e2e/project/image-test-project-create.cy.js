@@ -1,7 +1,7 @@
 const { loginModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
-    let testFailureReason = ''; // 실패 원인을 저장할 변수
+    let testFail = ''; // 실패 원인을 저장할 변수
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -101,28 +101,21 @@ describe('Image Test Project Create', () => {
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
         Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
           });
     });
-    after(() => {
+    after('Send Email', () => {
       const screenshotFileName = `Image Test Project Create Test/Image Test Project Create Test ${Cypress.env('DateLabel')}`;
-      const isTestFailed = Boolean(testFailureReason);
-
-      const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
-  테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
-  테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제${
-      isTestFailed
-          ? `\n
-  테스트 실패 원인: ${testFailureReason}`
-          : ''
-  }`;
+      const isTestFailed = Boolean(testFail);
+      const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
 
       sendEmailModule.sendEmail(
           isTestFailed,
           Cypress.env('Id'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
-          EmailBody,
+          testRange,
           isTestFailed && screenshotFileName,
+          testFail,
       );
       });
 });

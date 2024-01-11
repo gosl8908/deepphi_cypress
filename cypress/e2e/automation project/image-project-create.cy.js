@@ -102,15 +102,13 @@ describe('Image Project Create', () => {
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('중지', { timeout: 30000 }).should('be.visible');
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-            'DateLabelWeek',
-        )}\n 테스트 범위 : 1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행`;
-        
+        const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
+
         sendEmailModule.sendEmail(
             undefined,
             Cypress.env('Id'),
             'Image Project Create ' + Cypress.env('EmailTitle'),
-            EmailBody,
+            testRange,
             undefined,)
     });
 });

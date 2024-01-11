@@ -153,7 +153,7 @@ function imageDownloadFlie() {
   cy.get('.search-box > .btn-primary').click();
   cy.contains('Train_code'); // 인퍼런스 소스 코드
   cy.get('.cpx-180').select('인퍼런스 소스 코드');
-  cy.contains(/IntelTestCode.*TensorTestCode/); // 학습 소스 코드
+  cy.contains(/Intel.*Tensor/); // 학습 소스 코드
   cy.get('.cpx-180').select('엑셀 데이터');
   cy.get('.search-box > .input-form').type('Resize');
   cy.get('.search-box > .btn-primary').click();

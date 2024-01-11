@@ -100,15 +100,13 @@ describe('Image Test Project Create', () => {
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
 
-        const EmailBody = `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다\n 테스트 실행 시간 : ${Cypress.env(
-          'DateLabelWeek',
-      )}\n 테스트 범위 : 1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제`;
+        const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제';
       
       sendEmailModule.sendEmail(
         undefined,
           Cypress.env('Id'),
           'Image Test Project Create ' + Cypress.env('EmailTitle'),
-          EmailBody,
+          testRange,
           undefined,)
     });
 });
