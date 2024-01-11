@@ -21,7 +21,7 @@ module.exports = defineConfig({
   viewportHeight: 1080,
   screenshotFolder: "cypress/screenshots",
   screenshotOnRunFailure: true,
-  projectId: 'rrbsge',
+  projectId: 'scq3m9',
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
       charts: true,

@@ -81,7 +81,7 @@ jobs:
         run: yarn add cypress@latest
 
       - name: Run Cypress tests
-        run: yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/signup.cy.js"
+        run: yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/signup.cy.js"
         continue-on-error: true
 
   dataset_upload_test:
@@ -101,7 +101,7 @@ jobs:
         run: yarn add cypress@latest
 
       - name: Run Cypress tests
-        run: yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/dataset-upload.cy.js"
+        run: yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/dataset-upload.cy.js"
         continue-on-error: true
 
   image_project_create_test:
@@ -122,8 +122,8 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/image-project-create.cy.js" &&
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/image-test-project-create.cy.js"
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/image-project-create.cy.js" &&
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/image-test-project-create.cy.js"
         continue-on-error: true
 
   record_project_create_test:
@@ -144,8 +144,8 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/record-project-create.cy.js" &&
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/record-test-project-create.cy.js"
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/record-project-create.cy.js" &&
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/record-test-project-create.cy.js"
         continue-on-error: true
 
   organization_test:
@@ -166,8 +166,8 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/organization-create.cy.js" && 
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/organization-dataset-upload.cy.js"
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/organization-create.cy.js" && 
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/organization-dataset-upload.cy.js"
         continue-on-error: true
 
   download_file_test:
@@ -188,4 +188,4 @@ jobs:
 
       - name: Run Cypress tests
         run: |
-          yarn cypress run --record --key 2099e8cc-d155-4ae6-8e00-2c5bb129503b --browser chrome --spec "cypress/e2e/automation project/download-file.cy.js"
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/download-file.cy.js"
