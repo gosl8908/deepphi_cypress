@@ -4,7 +4,7 @@ const modelModule = require('./model.module.js');
 const datasetModule = require('./dataset.module.js');
 const sendEmailModule = require('./email.module.js');
 const ApiModule = require('./api.module.js');
-const DatasetUploadModule = require('./dataset.upload.module.js');
+const ConstantModule = require('./constant.module.js');
 const visualizationCreateModule = require('./visualization-create.module.js');
 // 다른 모듈들도 필요한 경우 추가
 
@@ -14,8 +14,8 @@ module.exports = {
     modelModule,
     datasetModule,
     sendEmailModule,
+    ConstantModule,
     ApiModule,
-    DatasetUploadModule,
     visualizationCreateModule,
     // 다른 모듈들도 필요한 경우 추가
 };
