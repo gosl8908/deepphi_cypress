@@ -5,13 +5,13 @@ describe('로그인', () => {
   beforeEach(()=>{
     cy.setDateToEnv();
     cy.getAll();
-    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+    loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
   });
 
   it('test', () => {
-    cy.visit('https://modeler.deepphi.ai/modeler/39468');
+    cy.visit('https://modeler.deepphi.ai/modeler/39759');
     cy.wait(3*1000);
-    visualizationCreateModule.boxplotCreate('DNN-Classification');
+    visualizationCreateModule.countPlotCreate('DNN-Classification');
     Cypress.on('fail', (err, runnable) => {
       testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
     });

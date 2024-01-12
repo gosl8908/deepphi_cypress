@@ -87,7 +87,7 @@ function createImageProject(title, detail = title) {
   cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
 }
 
-function createRecordDataset(filename, title, detail = title) {
+function createRecordDataset(trainfilename, testfilename, validationfilename, title, detail = title) {
   // Create Dataset 클릭
   cy.contains('데이터셋 업로드').click({force:true}); // 데이터셋 업로드 화면 진입
   cy.wait(5000);
@@ -101,20 +101,20 @@ function createRecordDataset(filename, title, detail = title) {
         // Dataset 파일 첨부
         cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
           // fileContent,
-          filePath: 'record/' + filename,
-          fileName: filename,
+          filePath: 'record/' + trainfilename,
+          fileName: trainfilename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
           // fileContent,
-          filePath: 'record/' + filename,
-          fileName: filename,
+          filePath: 'record/' + testfilename,
+          fileName: testfilename,
           mimeType: 'text/csv',
         });
         cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
           // fileContent,
-          filePath: 'record/' + filename,
-          fileName: filename,
+          filePath: 'record/' + validationfilename,
+          fileName: validationfilename,
           mimeType: 'text/csv',
         });
 
