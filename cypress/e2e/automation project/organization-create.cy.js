@@ -8,20 +8,24 @@ describe('Organization Create', () => {
     });
 
     it('Organization Create', () => {
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
         cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
 
+        cy.get('tbody > :nth-child(1) > :nth-child(8)').then((v) => {
+          const t = v.text().includes('단체삭제');
+          if(t) {
         // 단체 삭제
         cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
         cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
         cy.get('.modal-button-content > .btn-danger').click(); // 삭제
         cy.wait(3000);
-
+      }
+      });
         // 단체 생성
-        cy.get('.flex-display > :nth-child(2) > .btn').click(); // 단체 생성
+        cy.contains('단체 생성').click()
         cy.get('#organization_select').select('기타'); // 분류 선택
         cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
         cy.get('.flex-display > .btn-wrap > .btn').click(); // 체크

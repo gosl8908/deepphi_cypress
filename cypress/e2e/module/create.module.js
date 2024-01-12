@@ -72,6 +72,8 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
 
   // Dataset 업로드 확인
   cy.contains('성공');
+  cy.contains('압축 해제 중', {timeout : 30*1000}).should('be.visible')
+  cy.contains('검증 진행 중', {timeout : 30*1000}).should('be.visible')
   cy.contains('설정을 완료하세요', {timeout : 30*1000}).should('be.visible')
 }
 
@@ -115,6 +117,8 @@ function createRecordDataset(filename, title, detail = title) {
           fileName: filename,
           mimeType: 'text/csv',
         });
+
+  cy.get('em').click(); // 자동탐지 체크
 
   // 2단계 Next 버튼 선택
   cy.get('.btn-primary').click();

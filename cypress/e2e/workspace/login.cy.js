@@ -1,4 +1,4 @@
-const { loginModule, createModule, datasetModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, ApiModule, sendEmailModule, visualizationCreateModule } = require('../module/manager.module.js');
 describe('로그인', () => {
   let testFail  = ''; // 실패 원인을 저장할 변수
 
@@ -9,33 +9,31 @@ describe('로그인', () => {
   });
 
   it('test', () => {
-    cy.contains('이미지 데이터셋f');
+    cy.visit('https://modeler.deepphi.ai/modeler/39468');
+    cy.wait(3*1000);
+    visualizationCreateModule.boxplotCreate('DNN-Classification');
     Cypress.on('fail', (err, runnable) => {
       testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
     });
-
   });
-  // it('test', () => {
-  //   cy.contains('이미지 데이터셋f').click();
+  });
+//   afterEach(() => {
 
-  // });
+//     isTestFailed && cy.screenshot(screenshotFileName);
+//   })
+// after('Send Email', () => {
 
-  // afterEach(() => {
+//   const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
+//   const testRange = '1. 로그인'
 
-  //   isTestFailed && cy.screenshot(screenshotFileName);
-  // })
-after('Send Email', () => {
-  const screenshotFileName = `login/login test ${Cypress.env('DateLabel')}`;
-  const testRange = '1. 로그인'
+//   sendEmailModule.sendEmail(testFail,
+//     Cypress.env('Id'),
+//     `Login test ${Cypress.env('EmailTitle')}`,
+//     testRange,
+//     testFail && screenshotFileName,
+//   );
+// });
 
-  sendEmailModule.sendEmail(testFail,
-    Cypress.env('Id'),
-    `Login test ${Cypress.env('EmailTitle')}`,
-    testRange,
-    testFail && screenshotFileName,
-  );
-});
-});
 
     // createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
     // createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));

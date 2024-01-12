@@ -89,6 +89,7 @@ module.exports = defineConfig({
       // 계정
       Id: 'gosl8908@deepnoid.com',
       KangTestId: 'deepphi.auto2@ruu.kr',
+      KangTestId2: 'deepphi.auto3@ruu.kr',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
       KangTestPwd: 'test123!',
