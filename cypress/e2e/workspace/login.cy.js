@@ -11,7 +11,10 @@ describe('로그인', () => {
   it('test', () => {
     cy.visit('https://modeler.deepphi.ai/modeler/39759');
     cy.wait(3*1000);
-    visualizationCreateModule.visualizationCreate('DNN-Classification', '상자 수염 그림(Box Plot)')
+
+
+
+    visualizationCreateModule.visualizationCreate('DNN-Classification', '산점도(Scatter Plot)')
 
 // });
 //   cy.get('.modal-button-content > .btn-primary').click();
