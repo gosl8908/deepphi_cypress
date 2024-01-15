@@ -104,9 +104,11 @@ describe('Image Project Create', () => {
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('중지', { timeout: 30000 }).should('be.visible');
+    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
           });
+      });
     });
     after('Send Email', () => {
       const screenshotFileName = `Image Project Create Test/Image Project Create Test ${Cypress.env('DateLabel')}`;

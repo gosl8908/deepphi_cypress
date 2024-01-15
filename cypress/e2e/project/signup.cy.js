@@ -19,9 +19,6 @@ describe('SignUp', () => {
         const textToWrite = 'test' + Cypress.env('DateLabel');
         cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
         cy.wait(3000);
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     /* 회원가입 진행 */
@@ -57,9 +54,6 @@ describe('SignUp', () => {
             cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
             cy.wait(3000);
         });
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     /* 이메일 인증 확인 */
@@ -77,9 +71,6 @@ describe('SignUp', () => {
                 .invoke('removeAttr', 'target') // target 속성을 제거합니다.
                 .click(); // 이메일 인증 확인
             cy.wait(3000);
-        });
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
@@ -130,7 +121,8 @@ describe('SignUp', () => {
         cy.contains('상품을 정기결제 하셨습니다.', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
-
+    });
+    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });

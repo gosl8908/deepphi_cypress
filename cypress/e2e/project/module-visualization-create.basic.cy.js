@@ -17,10 +17,6 @@ describe('Record Project visualization Create Test', () => {
         cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1).click(); // 모듈 더보기
         cy.get('.mxPopupMenu').contains('프로세스 플로우').click();
         visualizationCreateModule.visualizationCreate('Calculation', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
     it('Processing > Scale Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
@@ -30,54 +26,30 @@ describe('Record Project visualization Create Test', () => {
         cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1).click(); // 모듈 더보기
         cy.get('.mxPopupMenu').contains('프로세스 플로우').click();
         visualizationCreateModule.visualizationCreate('Scale', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Cleansing Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
         cy.wait(3*1000);
-
         visualizationCreateModule.visualizationCreate('Data Cleansing', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Processing Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
         cy.wait(3*1000);
-
         visualizationCreateModule.visualizationCreate('Data Processing', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
         it('DL Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
         cy.wait(3*1000);
-
         visualizationCreateModule.visualizationCreate('DNN-Classification', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('ML Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
         cy.wait(3*1000);
-
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     
@@ -89,10 +61,6 @@ describe('Record Project visualization Create Test', () => {
         cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1).click(); // 모듈 더보기
         cy.get('.mxPopupMenu').contains('프로세스 플로우').click();
         visualizationCreateModule.visualizationCreate('Calculation', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
     it('Test Project Processing > Scale Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780?testId=39783&loadedProjectPage=1');
@@ -102,40 +70,24 @@ describe('Record Project visualization Create Test', () => {
         cy.get('[style="cursor: pointer; visibility: visible;"]').eq(1).click(); // 모듈 더보기
         cy.get('.mxPopupMenu').contains('프로세스 플로우').click();
         visualizationCreateModule.visualizationCreate('Scale', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Test Project Cleansing Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780?testId=39783&loadedProjectPage=1');
         cy.wait(3*1000);
         visualizationCreateModule.visualizationCreate('Data Cleansing', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Test Project Processing Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780?testId=39783&loadedProjectPage=1');
         cy.wait(3*1000);
         visualizationCreateModule.visualizationCreate('Data Processing', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
         it('Test Project DL Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780?testId=39783&loadedProjectPage=1');
         cy.wait(3*1000);
         visualizationCreateModule.visualizationCreate('DNN-Classification', '빈도 그래프(Count Plot)')
-
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Test Project ML Module visualization Create Test', () => {
@@ -143,9 +95,11 @@ describe('Record Project visualization Create Test', () => {
         cy.wait(3*1000);
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '빈도 그래프(Count Plot)')
 
+    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
+    });
     });
 
     after('Send Email', () => {

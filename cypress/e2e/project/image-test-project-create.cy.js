@@ -100,9 +100,11 @@ describe('Image Test Project Create', () => {
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
+    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
-          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
+    });
     });
     after('Send Email', () => {
       const screenshotFileName = `Image Test Project Create Test/Image Test Project Create Test ${Cypress.env('DateLabel')}`;

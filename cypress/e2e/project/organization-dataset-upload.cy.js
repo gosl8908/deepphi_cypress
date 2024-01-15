@@ -21,10 +21,6 @@ describe('Organization Dataset Upload', () => {
       cy.wait(5000);
       createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
       datasetModule.settingImageDataset(1, '2D');
-
-      Cypress.on('fail', (err, runnable) => {
-        testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-      });
 });
 it('Organization Record Dataset Upload', () => {
   loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
@@ -37,8 +33,10 @@ it('Organization Record Dataset Upload', () => {
 
     createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
     datasetModule.settingRecordDataset();
-    Cypress.on('fail', (err, runnable) => {
-      testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+    afterEach('Status Fail', () => {
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 });
 after('Send Email', () => {

@@ -98,11 +98,12 @@ describe('Record Test Project Create', () => {
         cy.get('.ng-star-inserted')
         .eq(0)
         .contains('중지', { timeout: 30*1000 }).should('be.visible');
-        Cypress.on('fail', (err, runnable) => {
-            testFailureReason = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
     });
-
+    afterEach('Status Fail', () => {
+      Cypress.on('fail', (err, runnable) => {
+          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+      });
+  });
     after('Send Email', () => {
       cy.visit(`${Cypress.env('Prod')}user/my/inference`);
         cy.wait(5000);
