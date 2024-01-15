@@ -11,12 +11,32 @@ describe('로그인', () => {
   it('test', () => {
     cy.visit('https://modeler.deepphi.ai/modeler/39759');
     cy.wait(3*1000);
-    visualizationCreateModule.countPlotCreate('DNN-Classification');
-    Cypress.on('fail', (err, runnable) => {
-      testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
-    });
-  });
-  });
+    visualizationCreateModule.visualizationCreate('DNN-Classification', '상자 수염 그림(Box Plot)')
+
+// });
+//   cy.get('.modal-button-content > .btn-primary').click();
+//   cy.wait(3*1000);
+//   cy.get('jhi-record-visualization-graph', {timeout : 60*1000}).should('be.visible');
+//   // cy.screenshot('빈도그래프');
+
+//   cy.get('.modeler-bottom__content').then(btn => {
+//     const loading = btn.text().includes('계속하시겠습니까?');
+//     if (loading) {
+//         cy.get('.visualization-item__screen--control > .btn').click();
+//     }
+
+
+  // /* 삭제 */
+  // cy.wait(3*1000);
+  // cy.get('.visualization__item--control > div.ng-star-inserted > :nth-child(2)').eq(0).click();
+  // cy.get('.btn-danger').click();
+  // cy.wait(3*1000)
+});
+});
+    // Cypress.on('fail', (err, runnable) => {
+    //   testFail = `${err.message}` || '알 수 없는 이유로 실패함\n';
+    // });
+
 //   afterEach(() => {
 
 //     isTestFailed && cy.screenshot(screenshotFileName);
