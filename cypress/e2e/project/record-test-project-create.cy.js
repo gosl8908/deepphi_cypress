@@ -1,7 +1,8 @@
-const { loginModule, sendEmailModule, ApiModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule, OldApiModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -89,7 +90,7 @@ describe('Record Test Project Create', () => {
 
         // api 호출
         cy.wait(15*1000);
-        ApiModule.Api()
+        OldApiModule.Api();
         cy.contains('성공', { timeout: 60*1000 }).should('be.visible');
         cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);
         cy.get('.btn-clear-danger').click(); // 중지
@@ -98,11 +99,15 @@ describe('Record Test Project Create', () => {
         cy.get('.ng-star-inserted')
         .eq(0)
         .contains('중지', { timeout: 30*1000 }).should('be.visible');
-    });
-    afterEach('Status Fail', () => {
-      Cypress.on('fail', (err, runnable) => {
+        Cypress.on('fail', (err, runnable) => {
           testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
       });
+    });
+    afterEach('Status Fail', () => {
+      const isTestFailed = Boolean(testFail);
+      const screenshotFileName = `Record Test Project Create/Record Test Project Create Test ${Cypress.env('DateLabel')}`;
+      isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+      isTestFailed && screenshots.push(screenshotFileName);
   });
     after('Send Email', () => {
       cy.visit(`${Cypress.env('Prod')}user/my/inference`);
@@ -128,8 +133,6 @@ describe('Record Test Project Create', () => {
         });
         cy.get('.btn-danger').invoke('click'); // 삭제
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
-
-          const screenshotFileName = `Record Test Project Create Test/Record Test Project Create Test ${Cypress.env('DateLabel')}`;
           const testRange = '1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
     
           sendEmailModule.sendEmail(
@@ -137,7 +140,7 @@ describe('Record Test Project Create', () => {
               Cypress.env('Id'),
               `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
               testRange,
-              testFail && screenshotFileName,
+              screenshots,
           );
   });
 });

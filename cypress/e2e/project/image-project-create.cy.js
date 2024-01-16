@@ -2,6 +2,7 @@ const { loginModule, createModule, sendEmailModule } = require('../module/manage
 
 describe('Image Project Create', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -104,14 +105,17 @@ describe('Image Project Create', () => {
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('중지', { timeout: 30000 }).should('be.visible');
-    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-          });
-      });
+        });
     });
+    afterEach('Status Fail', () => {
+        const isTestFailed = Boolean(testFail);
+        const screenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
+        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+        isTestFailed && screenshots.push(screenshotFileName);
+      });
     after('Send Email', () => {
-      const screenshotFileName = `Image Project Create Test/Image Project Create Test ${Cypress.env('DateLabel')}`;
       const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행'
 
       sendEmailModule.sendEmail(
@@ -119,7 +123,7 @@ describe('Image Project Create', () => {
           Cypress.env('Id'),
           `Image Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
-          testFail && screenshotFileName,
+          screenshots,
       );
       });
 });

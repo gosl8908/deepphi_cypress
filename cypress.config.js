@@ -34,15 +34,17 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
       on("task", {
-        sendEmail({ recipient, subject, body, screenshotFileName}) {
+        sendEmail({ recipient, subject, body, screenshotFileNames }) {
         const attachments = [];
 
-        if (screenshotFileName) {
-          const path = `./cypress/screenshots/${screenshotFileName}`;
-          attachments.push({
-            filename: screenshotFileName,
-            encoding: 'base64',
-            path: path,
+        if (screenshotFileNames && screenshotFileNames.length > 0) {
+          screenshotFileNames.forEach(screenshotFileName => {
+            const path = `./cypress/screenshots/${screenshotFileName}`;
+            attachments.push({
+              filename: screenshotFileName,
+              encoding: 'base64',
+              path: path,
+            });
           });
         }
           const transporter = nodemailer.createTransport({
@@ -90,6 +92,8 @@ module.exports = defineConfig({
       Id: 'gosl8908@deepnoid.com',
       KangTestId: 'deepphi.auto2@ruu.kr',
       KangTestId2: 'deepphi.auto3@ruu.kr',
+      KangTestId3: 'deepphi.auto4@ruu.kr',
+      KangTestId4: 'deepphi.auto5@ruu.kr',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
       KangTestPwd: 'test123!',

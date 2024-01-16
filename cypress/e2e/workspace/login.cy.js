@@ -1,36 +1,42 @@
 const { loginModule, createModule, datasetModule, ApiModule, sendEmailModule, visualizationCreateModule } = require('../module/manager.module.js');
 describe('로그인', () => {
   let testFail  = ''; // 실패 원인을 저장할 변수
+  let screenshots = []; // 스크린샷을 저장할 배열
 
   beforeEach(()=>{
     cy.setDateToEnv();
     cy.getAll();
     loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
+
   });
 
   it('test', () => {
-    cy.get('.f');
+    cy.contains('이미지 데이터셋f');
+    Cypress.on('fail', (err, runnable) => {
+      testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
   });
-    it('test', () => {
-    cy.get('.f');
+  });
+  it('test2', () => {
+    cy.contains('이미지 데이터셋f');
+    Cypress.on('fail', (err, runnable) => {
+      testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+  });
   });
   afterEach('Status Fail', () => {
-    Cypress.on('fail', (err, runnable) => {
-        testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-    });
+    const isTestFailed  = Boolean(testFail);
+    const screenshotFileName = `Login/Login Test ${Cypress.env('DateLabel')}`;
+    isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+    isTestFailed && screenshots.push(screenshotFileName)
 });
 after('Send Email', () => {
-  const screenshotFileName = `Login Test ${Cypress.env('DateLabel')}`;
   const testRange = '1. 로그인 '
-
-  // [파일명1, 파일명2, ...]
 
   sendEmailModule.sendEmail(
       testFail,
       Cypress.env('Id'),
       `Login Test ${Cypress.env('EmailTitle')}`,
       testRange,
-      testFail && screenshotFileName,
+      screenshots,
   );
 });
 });

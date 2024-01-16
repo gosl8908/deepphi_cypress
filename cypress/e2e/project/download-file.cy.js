@@ -2,10 +2,11 @@ const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Download File Test', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Project Download File Test', () => {
@@ -40,6 +41,9 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Image Test Project Download File Test', () => {
@@ -95,6 +99,9 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Image Download File Check', () => {
@@ -117,6 +124,9 @@ describe('Download File Test', () => {
         cy.get('.search-box > .input-form').clear().type('DensNet121');
         cy.get('.search-box > .btn-primary').click();
         cy.contains(/DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121/); // AI 이미지, AI 파일, AI 결과 / 평가 AI 이미지, AI 파일, AI 결과
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Record ProjectDownload File Test', () => {
@@ -138,6 +148,9 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(1)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Record Project Download File Test', () => {
@@ -165,6 +178,9 @@ describe('Download File Test', () => {
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
         cy.get('#site-map__flow-btn').click();
         cy.get('#project-menu-ul > :nth-child(1) > button').click();
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Record Download File Check', () => {
@@ -180,11 +196,15 @@ describe('Download File Test', () => {
         cy.get('.search-box > .input-form').clear().type('Data Cleansing');
         cy.get('.search-box > .btn-primary').click();
         cy.contains(/Data Cleansing.*Data Cleansing/); // 프로세싱 데이터 / 평가 프로세싱 데이터
-    });
-    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
+    });
+    afterEach('Status Fail', () => {
+        const isTestFailed = Boolean(testFail);
+        const screenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
+        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+        isTestFailed && screenshots.push(screenshotFileName);
     });
     after('Send Email', () => {
         cy.visit(`${Cypress.env('Prod')}my-page/files`);
@@ -199,7 +219,6 @@ describe('Download File Test', () => {
             cy.contains('성공적으로 삭제되었습니다.', { timeout: 20000 });
             cy.wait(3000);
         }
-        const screenshotFileName = `Download File Test/Download File Test ${Cypress.env('DateLabel')}`;
         const testRange =
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
 
@@ -208,7 +227,7 @@ describe('Download File Test', () => {
             Cypress.env('Id'),
             `Download File Test ${Cypress.env('EmailTitle')}`,
             testRange,
-            testFail && screenshotFileName,
+            screenshots,
         );
     });
 });

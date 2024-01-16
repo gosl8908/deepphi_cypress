@@ -2,6 +2,7 @@ const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -76,6 +77,9 @@ describe('Organization Create', () => {
         cy.get(':nth-child(6) > button').eq(0).click(); // 멤버
         cy.get(':nth-child(1) > :nth-child(8) > .btn').click(); // 강제 탈퇴
         cy.get('.modal-button-content > .btn-danger').click(); // 탈퇴
+        Cypress.on('fail', (err, runnable) => {
+          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+      });
     });
 
     // 단체 크레딧 충전
@@ -106,6 +110,9 @@ describe('Organization Create', () => {
         cy.contains('정상 충전되었습니다.'); // 충전 확인
         cy.get('admin-credit-alert-modal.ng-star-inserted > .modal--wrap > .modal--btn-area > .btn').click(); // 확인
         cy.wait(3000);
+        Cypress.on('fail', (err, runnable) => {
+          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+      });
     });
 
     // 단체 DISK 구독
@@ -129,14 +136,17 @@ describe('Organization Create', () => {
         cy.wait(3000);
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
-    });
-    afterEach('Status Fail', () => {
-      Cypress.on('fail', (err, runnable) => {
+        Cypress.on('fail', (err, runnable) => {
           testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
       });
+    });
+    afterEach('Status Fail', () => {
+      const isTestFailed = Boolean(testFail);
+      const screenshotFileName = `Organization Create/Organization Create Test ${Cypress.env('DateLabel')}`;
+      isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+      isTestFailed && screenshots.push(screenshotFileName);
   });
     after('Send Email', () => {
-      const screenshotFileName = `Organization Create Test/Organization Create Test ${Cypress.env('DateLabel')}`;
       const testRange = '1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독'
 
       sendEmailModule.sendEmail(
@@ -144,7 +154,7 @@ describe('Organization Create', () => {
           Cypress.env('Id'),
           `Organization Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
-          testFail && screenshotFileName,
+          screenshots,
       );
       });
 });

@@ -1,8 +1,8 @@
-const { sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
-
+    let screenshots = []; // 스크린샷을 저장할 배열
     before(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -12,13 +12,16 @@ describe('SignUp', () => {
     it('Create email', () => {
         cy.visit(Cypress.env('DisposableEmail')); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
-        cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
+        cy.get('#id').type('deepphi.auto5'); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();
         cy.wait(5000); // 5초 대기
         // 조합한 텍스트를 파일에 저장
-        const textToWrite = 'test' + Cypress.env('DateLabel');
+        const textToWrite = 'deepphi.auto5';
         cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
         cy.wait(3000);
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     /* 회원가입 진행 */
@@ -54,6 +57,9 @@ describe('SignUp', () => {
             cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
             cy.wait(3000);
         });
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     /* 이메일 인증 확인 */
@@ -71,6 +77,9 @@ describe('SignUp', () => {
                 .invoke('removeAttr', 'target') // target 속성을 제거합니다.
                 .click(); // 이메일 인증 확인
             cy.wait(3000);
+        });
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
 
@@ -121,14 +130,17 @@ describe('SignUp', () => {
         cy.contains('상품을 정기결제 하셨습니다.', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
-    });
-    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
     });
+    afterEach('Status Fail', () => {
+        const isTestFailed = Boolean(testFail);
+        const screenshotFileName = `SignUp/SignUp test ${Cypress.env('DateLabel')}`;
+        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+        isTestFailed && screenshots.push(screenshotFileName);
+    });
     after('Send Email', () => {
-        const screenshotFileName = `signup test ${Cypress.env('DateLabel')}`;
         const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
         sendEmailModule.sendEmail(
@@ -136,7 +148,7 @@ describe('SignUp', () => {
             Cypress.env('Id'),
             `SignUp test ${Cypress.env('EmailTitle')}`,
             testRange,
-            testFail && screenshotFileName,
+            screenshots,
         );
     });
 });

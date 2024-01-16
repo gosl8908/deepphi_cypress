@@ -2,7 +2,7 @@ const { loginModule, visualizationCreateModule, sendEmailModule } = require('../
 
 describe('Record Project visualization Create Test', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
-
+    let screenshots = []; // 스크린샷을 저장할 배열
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -22,6 +22,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Calculation', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Calculation', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Calculation', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
     it('Processing > Scale Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780');
@@ -36,6 +39,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Scale', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Scale', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Scale', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Cleansing Module visualization Create Test', () => {
@@ -48,6 +54,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Data Cleansing', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Data Cleansing', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Data Cleansing', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Processing Module visualization Create Test', () => {
@@ -60,6 +69,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Data Processing', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Data Processing', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Data Processing', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
         it('DL Module visualization Create Test', () => {
@@ -72,6 +84,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('DNN-Classification', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('DNN-Classification', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('DNN-Classification', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('ML Module visualization Create Test', () => {
@@ -84,6 +99,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     
@@ -100,6 +118,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Calculation', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Calculation', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Calculation', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
     it('Test Project Processing > Scale Module visualization Create Test', () => {
         cy.visit('https://modeler.deepphi.ai/modeler/39780?testId=39783&loadedProjectPage=1');
@@ -114,6 +135,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Scale', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Scale', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Scale', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Test Project Cleansing Module visualization Create Test', () => {
@@ -125,6 +149,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Data Cleansing', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Data Cleansing', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Data Cleansing', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Test Project Processing Module visualization Create Test', () => {
@@ -136,6 +163,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Data Processing', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Data Processing', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Data Processing', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
         it('Test Project DL Module visualization Create Test', () => {
@@ -147,6 +177,9 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('DNN-Classification', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('DNN-Classification', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('DNN-Classification', '상자 수염 그림(Box Plot)')
+        Cypress.on('fail', (err, runnable) => {
+            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+        });
     });
 
     it('Test Project ML Module visualization Create Test', () => {
@@ -158,11 +191,15 @@ describe('Record Project visualization Create Test', () => {
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '밀도분포(Density Plot)')
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '히트맵(Heat Map)')
         visualizationCreateModule.visualizationCreate('Decision Tree Classifier', '상자 수염 그림(Box Plot)')
-    });
-    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
             testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
         });
+    });
+    afterEach('Status Fail', () => {
+        const isTestFailed = Boolean(testFail);
+        const screenshotFileName = `Record Project Module Visualization Create/Record Project Module Visualization Create Test ${Cypress.env('DateLabel')}`;
+        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+        isTestFailed && screenshots.push(screenshotFileName);
     });
     after('Send Email', () => {
         const screenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env('DateLabel')}`;
@@ -173,7 +210,7 @@ describe('Record Project visualization Create Test', () => {
             Cypress.env('Id'),
             `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
-            testFail && screenshotFileName,
+            screenshots,
         );
     });
 });

@@ -1,7 +1,8 @@
-const { loginModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, OldApiModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
     let testFail = ''; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -86,7 +87,7 @@ describe('Image Test Project Create', () => {
         cy.log('api 호출');
         // api 호출
         cy.wait(15000);
-        ApiModule.Api();
+        OldApiModule.Api();
         cy.contains('실패', { timeout: 60000 }).should('be.visible');
         cy.wait(5000);
         cy.screenshot('image_inference_api', 1920, 1080);
@@ -100,14 +101,17 @@ describe('Image Test Project Create', () => {
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
-    afterEach('Status Fail', () => {
         Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
+          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
+      });
     });
+        afterEach('Status Fail', () => {
+          const isTestFailed = Boolean(testFail);
+          const screenshotFileName = `Image Test Project Create/Image Test Project Create Test ${Cypress.env('DateLabel')}`;
+          isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
+          isTestFailed && screenshots.push(screenshotFileName);
     });
     after('Send Email', () => {
-      const screenshotFileName = `Image Test Project Create Test/Image Test Project Create Test ${Cypress.env('DateLabel')}`;
       const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
 
       sendEmailModule.sendEmail(
@@ -115,7 +119,7 @@ describe('Image Test Project Create', () => {
           Cypress.env('Id'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
-          testFail && screenshotFileName,
+          screenshots,
       );
       });
 });
