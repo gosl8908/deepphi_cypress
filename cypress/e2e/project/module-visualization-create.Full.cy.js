@@ -202,7 +202,6 @@ describe('Record Project visualization Create Test', () => {
         isTestFailed && screenshots.push(screenshotFileName);
     });
     after('Send Email', () => {
-        const screenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env('DateLabel')}`;
         const testRange = '1. 클랜징 모듈 시각화 2. 프로세싱 모듈 시각화 3. DL 모듈 시각화 4. ML 모듈 시각화 '
 
         sendEmailModule.sendEmail(

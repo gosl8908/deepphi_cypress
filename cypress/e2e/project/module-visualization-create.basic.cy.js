@@ -6,7 +6,7 @@ describe('Record Project visualization Create Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
     });
 
     it('Cleansing > Calculation Module visualization Create Test', () => {

@@ -6,7 +6,7 @@ describe('Image Test Project Create', () => {
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {
