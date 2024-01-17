@@ -1,8 +1,14 @@
 const { loginModule, OldApiModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
-    let testFail = ''; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+  let testFails = []; // 실패 원인을 저장할 변수
+  let screenshots = []; // 스크린샷을 저장할 배열
+  let FailTF = false;
+  Cypress.on('fail', (err, runnable) => {
+      const errMessage = err.message || '알 수 없는 이유로 실패함';
+      !testFails.includes(errMessage) && testFails.push(errMessage);
+      FailTF = true;
+  });
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
@@ -101,21 +107,22 @@ describe('Image Test Project Create', () => {
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
         cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
-        Cypress.on('fail', (err, runnable) => {
-          testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-      });
     });
         afterEach('Status Fail', () => {
-          const isTestFailed = Boolean(testFail);
-          const screenshotFileName = `Image Test Project Create/Image Test Project Create Test ${Cypress.env('DateLabel')}`;
-          isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
-          isTestFailed && screenshots.push(screenshotFileName);
+          if (FailTF) {
+            const screenshotFileName = `Image Test Project Create/Image Test Project Create Test ${Cypress.env(
+                'DateLabel',
+            )}`;
+            cy.screenshot(screenshotFileName);
+            screenshots.push(screenshotFileName);
+            FailTF = false;
+        }
     });
     after('Send Email', () => {
       const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
 
       sendEmailModule.sendEmail(
-        testFail,
+        testFails,
           Cypress.env('AdminId'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,

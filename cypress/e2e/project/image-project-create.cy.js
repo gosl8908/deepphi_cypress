@@ -1,16 +1,21 @@
 const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
-    let testFail = ''; // 실패 원인을 저장할 변수
+    let testFails = []; // 실패 원인을 저장할 변수
     let screenshots = []; // 스크린샷을 저장할 배열
+    let FailTF = false;
+    Cypress.on('fail', (err, runnable) => {
+        const errMessage = err.message || '알 수 없는 이유로 실패함';
+        !testFails.includes(errMessage) && testFails.push(errMessage);
+        FailTF = true;
+    });
     before(() => {
-      cy.setDateToEnv();
-      cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        cy.setDateToEnv();
+        cy.getAll();
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Project Create', () => {
-
         createModule.createImageProject('ImageProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
@@ -65,8 +70,7 @@ describe('Image Project Create', () => {
         cy.get(':nth-child(2) > :nth-child(2) > .input-form').clear().type('128');
         cy.get(':nth-child(3) > :nth-child(2) > .input-form').clear().type('128');
         cy.get('.flex-button-box > .ng-star-inserted > .btn').click();
-        cy.contains('성공적으로 저장되었습니다.', {timeout: 10*1000}).should('be.visible')
-
+        cy.contains('성공적으로 저장되었습니다.', { timeout: 10 * 1000 }).should('be.visible');
 
         /* VGG16 모듈 검색 */
         cy.get('.NeuralNetwork').click();
@@ -105,25 +109,24 @@ describe('Image Project Create', () => {
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
         cy.contains('중지', { timeout: 30000 }).should('be.visible');
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
     afterEach('Status Fail', () => {
-        const isTestFailed = Boolean(testFail);
-        const screenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
-        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
-        isTestFailed && screenshots.push(screenshotFileName);
-      });
+        if (FailTF) {
+            const screenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(screenshotFileName);
+            screenshots.push(screenshotFileName);
+            FailTF = false;
+        }
+    });
     after('Send Email', () => {
-      const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행'
+        const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
 
-      sendEmailModule.sendEmail(
-        testFail,
-          Cypress.env('AdminId'),
-          `Image Project Create Test ${Cypress.env('EmailTitle')}`,
-          testRange,
-          screenshots,
-      );
-      });
+        sendEmailModule.sendEmail(
+            testFails,
+            Cypress.env('AdminId'),
+            `Image Project Create Test ${Cypress.env('EmailTitle')}`,
+            testRange,
+            screenshots,
+        );
+    });
 });

@@ -36,7 +36,7 @@ it('Organization Record Dataset Upload', () => {
 
 sendEmailModule.sendEmail(
   undefined,
-    Cypress.env('Id'),
+    Cypress.env('AdminId'),
     'Organization Dataset Upload ' + Cypress.env('EmailTitle'),
     testRange,
     undefined,)

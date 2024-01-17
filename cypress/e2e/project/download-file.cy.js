@@ -1,17 +1,23 @@
 const { loginModule, sendEmailModule } = require('../module/manager.module.js');
 
 describe('Download File Test', () => {
-    let testFail = ''; // 실패 원인을 저장할 변수
+    let testFails = []; // 실패 원인을 저장할 변수
     let screenshots = []; // 스크린샷을 저장할 배열
+    let FailTF = false;
+    Cypress.on('fail', (err, runnable) => {
+        const errMessage = err.message || '알 수 없는 이유로 실패함';
+        !testFails.includes(errMessage) && testFails.push(errMessage);
+        FailTF = true;
+    });
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Project Download File Test', () => {
         /* 이미지 */
-        cy.visit('https://modeler.deepphi.ai/modeler/39465');
+        cy.visit('https://modeler.deepphi.ai/modeler/39811');
         cy.get('.list-dropdown-wrap > .btn').click();
         cy.get('.list-dropdown > .ng-star-inserted > button').click();
         cy.get('.btn-primary').click();
@@ -41,14 +47,11 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Image Test Project Download File Test', () => {
         /* 이미지 평가 */
-        cy.visit('https://modeler.deepphi.ai/modeler/39465');
+        cy.visit('https://modeler.deepphi.ai/modeler/39811');
         cy.get('.nav-project-left > ul > :nth-child(2) > button').click();
         cy.get('.clear-both > .btn').click();
         cy.get('.btn-primary').click();
@@ -99,39 +102,11 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
-    });
-
-    it('Image Download File Check', () => {
-        /* 이미지 다운로드 확인 */
-        cy.visit(`${Cypress.env('Prod')}my-page/files`);
-        cy.get('.cpx-180').select('이미지 데이터');
-        cy.get('.search-box > .input-form').type('자동화 데이터셋_2D_CL');
-        cy.get('.search-box > .btn-primary').click();
-        cy.contains(/자동화 데이터셋_2D_CL.*자동화 데이터셋_2D_CL/); // 데이터셋 이미지 / 데이터셋 이미지 평가
-        cy.get('.cpx-180').select('학습 소스 코드');
-        cy.get('.search-box > .input-form').clear();
-        cy.get('.search-box > .btn-primary').click();
-        cy.contains('Train_code'); // 인퍼런스 소스 코드
-        cy.get('.cpx-180').select('인퍼런스 소스 코드');
-        cy.contains(/Intel.*Tensor/); // 학습 소스 코드
-        cy.get('.cpx-180').select('엑셀 데이터');
-        cy.get('.search-box > .input-form').type('Resize');
-        cy.get('.search-box > .btn-primary').click();
-        cy.contains(/Resize_Files.*Resize_Files/); // 이미지 프로세싱 파일 / 이미지 평가 프로세싱 파일
-        cy.get('.search-box > .input-form').clear().type('DensNet121');
-        cy.get('.search-box > .btn-primary').click();
-        cy.contains(/DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121/); // AI 이미지, AI 파일, AI 결과 / 평가 AI 이미지, AI 파일, AI 결과
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Record ProjectDownload File Test', () => {
         /* 레코드 */
-        cy.visit('https://modeler.deepphi.ai/modeler/39468');
+        cy.visit('https://modeler.deepphi.ai/modeler/39813');
         cy.get('.flow__module--name').contains('자동화 데이터셋').click();
         cy.get('[placement="bottom"]').click();
         cy.get('.btn-primary').click();
@@ -148,14 +123,11 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(1)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
-    it('Record Project Download File Test', () => {
+    it('Record Test Project Download File Test', () => {
         /* 레코드 평가 */
-        cy.visit('https://modeler.deepphi.ai/modeler/39468');
+        cy.visit('https://modeler.deepphi.ai/modeler/39813');
         cy.get('.nav-project-left > ul > :nth-child(2) > button').click();
         cy.get('.clear-both > .btn').click();
         cy.get('.btn-primary').click();
@@ -178,9 +150,30 @@ describe('Download File Test', () => {
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
         cy.get('#site-map__flow-btn').click();
         cy.get('#project-menu-ul > :nth-child(1) > button').click();
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
+    });
+
+    it('Image Download File Check', () => {
+        /* 이미지 다운로드 확인 */
+        cy.visit(`${Cypress.env('Prod')}my-page/files`);
+        cy.get('.cpx-180').select('이미지 데이터');
+        cy.get('.search-box > .input-form').type('자동화 데이터셋_2D_CL');
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains(/자동화 데이터셋_2D_CL.*자동화 데이터셋_2D_CL/, { timeout: 10 * 1000 }).should('be.visible'); // 데이터셋 이미지 / 데이터셋 이미지 평가
+        cy.get('.cpx-180').select('학습 소스 코드');
+        cy.get('.search-box > .input-form').clear();
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains('Train_code'); // 인퍼런스 소스 코드
+        cy.get('.cpx-180').select('인퍼런스 소스 코드');
+        cy.contains(/Intel open vino.*Tensor flow/, { timeout: 60 * 1000 }).should('be.visible'); // 학습 소스 코드
+        cy.get('.cpx-180').select('엑셀 데이터');
+        cy.get('.search-box > .input-form').type('Resize');
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains(/Resize_Files.*Resize_Files/, { timeout: 10 * 1000 }).should('be.visible'); // 이미지 프로세싱 파일 / 이미지 평가 프로세싱 파일
+        cy.get('.search-box > .input-form').clear().type('DensNet121');
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains(/DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121/, {
+            timeout: 10 * 1000,
+        }).should('be.visible'); // AI 이미지, AI 파일, AI 결과 / 평가 AI 이미지, AI 파일, AI 결과
     });
 
     it('Record Download File Check', () => {
@@ -189,22 +182,24 @@ describe('Download File Test', () => {
         cy.get('.cpx-180').select('엑셀 데이터');
         cy.get('.search-box > .input-form').type('DNN-Classification');
         cy.get('.search-box > .btn-primary').click();
-        cy.contains(/DNN-Classification.*DNN-Classification.*DNN-Classification.*DNN-Classification/); // AI 데이터, AI 결과 / 평가 AI 데이터, AI 결과
+        cy.contains(/DNN-Classification.*DNN-Classification.*DNN-Classification.*DNN-Classification/, {
+            timeout: 10 * 1000,
+        }).should('be.visible'); // AI 데이터, AI 결과 / 평가 AI 데이터, AI 결과
         cy.get('.search-box > .input-form').clear().type('자동화 데이터셋');
         cy.get('.search-box > .btn-primary').click();
-        cy.contains(/자동화 데이터셋.*자동화 데이터셋/); // 데이터셋 데이터 / 평가 데이터셋 데이터
+        cy.contains(/자동화 데이터셋.*자동화 데이터셋/, { timeout: 10 * 1000 }).should('be.visible'); // 데이터셋 데이터 / 평가 데이터셋 데이터
         cy.get('.search-box > .input-form').clear().type('Data Cleansing');
         cy.get('.search-box > .btn-primary').click();
-        cy.contains(/Data Cleansing.*Data Cleansing/); // 프로세싱 데이터 / 평가 프로세싱 데이터
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
+        cy.contains(/Data Cleansing.*Data Cleansing/, { timeout: 10 * 1000 }).should('be.visible'); // 프로세싱 데이터 / 평가 프로세싱 데이터
     });
+
     afterEach('Status Fail', () => {
-        const isTestFailed = Boolean(testFail);
-        const screenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
-        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
-        isTestFailed && screenshots.push(screenshotFileName);
+        if (FailTF) {
+            const screenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(screenshotFileName);
+            screenshots.push(screenshotFileName);
+            FailTF = false;
+        }
     });
     after('Send Email', () => {
         cy.visit(`${Cypress.env('Prod')}my-page/files`);
@@ -223,7 +218,7 @@ describe('Download File Test', () => {
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
 
         sendEmailModule.sendEmail(
-            testFail,
+            testFails,
             Cypress.env('AdminId'),
             `Download File Test ${Cypress.env('EmailTitle')}`,
             testRange,

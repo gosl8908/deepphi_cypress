@@ -137,7 +137,7 @@ describe('Organization Create', () => {
       
       sendEmailModule.sendEmail(
         undefined,
-          Cypress.env('Id'),
+          Cypress.env('AdminId'),
           'Organization Create ' + Cypress.env('EmailTitle'),
           testRange,
           undefined,)

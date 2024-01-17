@@ -230,7 +230,7 @@ describe('Record Project Create & Run', () => {
         
         sendEmailModule.sendEmail(
             undefined,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             'Record Project Create ' + Cypress.env('EmailTitle'),
             testRange,
             undefined,)

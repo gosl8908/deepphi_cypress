@@ -203,7 +203,7 @@ describe('Download File Test', () => {
   
 sendEmailModule.sendEmail(
   undefined,
-    Cypress.env('Id'),
+    Cypress.env('AdminId'),
     'Download File ' + Cypress.env('EmailTitle'),
     testRange,
     undefined,)

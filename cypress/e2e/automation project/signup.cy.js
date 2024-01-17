@@ -122,7 +122,7 @@ describe('SignUp', () => {
         const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
         sendEmailModule.sendEmail(undefined,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             'SignUp ' + Cypress.env('EmailTitle'),
             testRange,
             undefined,)

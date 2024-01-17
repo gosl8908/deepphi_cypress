@@ -106,7 +106,7 @@ describe('Image Project Create', () => {
 
         sendEmailModule.sendEmail(
             undefined,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             'Image Project Create ' + Cypress.env('EmailTitle'),
             testRange,
             undefined,)

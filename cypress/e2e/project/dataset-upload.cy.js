@@ -7,8 +7,14 @@ const {
 } = require('../module/manager.module.js');
 
 describe('Dataset Upload Test', () => {
-    let testFail = ''; // 실패 원인을 저장할 변수
+    let testFails = []; // 실패 원인을 저장할 변수
     let screenshots = []; // 스크린샷을 저장할 배열
+    let FailTF = false;
+    Cypress.on('fail', (err, runnable) => {
+        const errMessage = err.message || '알 수 없는 이유로 실패함';
+        !testFails.includes(errMessage) && testFails.push(errMessage);
+        FailTF = true;
+    });
 
     beforeEach(() => {
         cy.setDateToEnv();
@@ -45,21 +51,23 @@ describe('Dataset Upload Test', () => {
         });
     });
     afterEach('Status Fail', () => {
-        const isTestFailed = Boolean(testFail);
-        const screenshotFileName = `Dataset Upload/Dataset Upload Test ${Cypress.env('DateLabel')}`;
-        isTestFailed && cy.screenshot(screenshotFileName); // 첫 번째 스크린샷
-        isTestFailed && screenshots.push(screenshotFileName);
+        if (FailTF) {
+            const screenshotFileName = `Login/Login Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(screenshotFileName);
+            screenshots.push(screenshotFileName);
+            FailTF = false;
+        }
     });
     after('Send Email', () => {
         const testRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
 
-        sendEmailModule.sendEmail(
-            testFail,
-            Cypress.env('AdminId'),
-            `Dataset Upload Test ${Cypress.env('EmailTitle')}`,
-            testRange,
-            screenshots,
-        );
+            sendEmailModule.sendEmail(
+                testFails,
+                Cypress.env('AdminId'),
+                `Login Test ${Cypress.env('EmailTitle')}`,
+                testRange,
+                screenshots,
+            );
     });
 });
