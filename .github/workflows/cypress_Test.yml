@@ -51,38 +51,34 @@
 #             git commit -m "Add screenshots from failed Cypress tests" || true
 #             git push origin main
 
-# name: Cypress tests
+name: Cypress tests
 
-# on:
-#   schedule:
-#     - cron: "0 23 * * 0-4" # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
+on:
+  schedule:
+    - cron: "0 23 * * 0-4" # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
 
-#   push:
-#     branches:
-#       - main
+  push:
+    branches:
+      - main
 
-# env:
-#   TZ: "Asia/Seoul"
+env:
+  TZ: "Asia/Seoul"
 
-# jobs:
-#   signup_test:
-#     runs-on: ubuntu-latest
+jobs:
+  signup_test:
+    runs-on: cypress/browsers
 
-#     steps:
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: "20.9.0"
-
-#       - name: Install Dependencies
-#         run: yarn add cypress@latest
-
-#       - name: Run Cypress tests
-#         run: yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/signup.cy.js"
-#         continue-on-error: true
+      - name: Setup Node.js and Install Cypress
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20.9.0"
+      - run: |
+          yarn add cypress@latest
+          yarn cypress run --record --key 36380704-ad32-4c0c-b833-d56c0c01dc63 --browser chrome --spec "cypress/e2e/automation project/signup.cy.js"
+        continue-on-error: true
 
 #   dataset_upload_test:
 #     runs-on: ubuntu-latest

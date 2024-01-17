@@ -58,7 +58,7 @@ module.exports = defineConfig({
           });      
           const mailOptions = {
             from: "gosl8908@deepnoid.com",
-            to: "gosl8908@deepnoid.com",
+            to: "gosl8908@deepnoid.com, js_lee@deepnoid.com", 
             subject: subject,
             text: body,
             attachments: attachments,

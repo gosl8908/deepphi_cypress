@@ -12,7 +12,7 @@ describe('Image Test Project Create', () => {
     before(() => {
       cy.setDateToEnv();
       cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
+      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId3'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {
@@ -49,9 +49,14 @@ describe('Image Test Project Create', () => {
             '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
         ).click({ force: true }); // 인퍼런스
         cy.wait(3000);
-        cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content > .create-select-item__title').click();
-        cy.get('.modal-button-content > .btn').click();
-        cy.get('.ml10 > .btn').click(); // 버전 체크
+        cy.get('#inference_service_name2').invoke('text').then((text) => {
+          if (!text.trim()) {
+            const Inference = `inference${Cypress.env('DateLabel')}`;
+            cy.get('#inference_service_name2').type(Inference);
+            cy.get('.ng-star-inserted > dd > .flex-display > .ml10 > .btn').click();
+          }
+        });
+        cy.get(':nth-child(3) > dd > .flex-display > .ml10 > .btn').click(); // 버전 체크
         cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('DateLabel')); // 설명
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
@@ -94,19 +99,6 @@ describe('Image Test Project Create', () => {
         // api 호출
         cy.wait(15000);
         OldApiModule.Api();
-        cy.contains('실패', { timeout: 60000 }).should('be.visible');
-        cy.wait(5000);
-        cy.screenshot('image_inference_api', 1920, 1080);
-        cy.get('.btn-clear-danger').click(); // 중지
-        cy.wait(10000);
-
-        cy.log('인퍼런스 삭제');
-        // 인퍼런스 삭제
-        cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 마이 인퍼런스
-        cy.wait(5000);
-        cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
-        cy.get('.btn-danger').click(); // 삭제
-        cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
     });
         afterEach('Status Fail', () => {
           if (FailTF) {

@@ -16,7 +16,7 @@ describe('Record Test Project Create', () => {
 
     it('Record Test Project Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId4'), Cypress.env('KangTestPwd'));
 
         // 레코드 프로젝트 검색
         cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
@@ -52,8 +52,14 @@ describe('Record Test Project Create', () => {
             '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
         ).click(); // 인퍼런스
         cy.wait(3000);
-        // cy.get('#inference_version').clear().type('1.0');
-        cy.get('.ml10 > .btn').click(); // 버전 체크
+        cy.get('#inference_service_name2').invoke('text').then((text) => {
+          if (!text.trim()) {
+            const Inference = `inference${Cypress.env('DateLabel')}`;
+            cy.get('#inference_service_name2').type(Inference);
+            cy.get('.ng-star-inserted > dd > .flex-display > .ml10 > .btn').click();
+          }
+        });
+        cy.get(':nth-child(3) > dd > .flex-display > .ml10 > .btn').click(); // 버전 체크
         cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('DateLabel')); // 설명
         cy.get('.modal-button-content > .btn').click(); // 확인
@@ -97,14 +103,6 @@ describe('Record Test Project Create', () => {
         // api 호출
         cy.wait(15*1000);
         OldApiModule.Api();
-        cy.contains('성공', { timeout: 60*1000 }).should('be.visible');
-        cy.screenshot('record_inference_api'+ Cypress.env('DateLabel'), 1920, 1080);
-        cy.get('.btn-clear-danger').click(); // 중지
-        cy.wait(15*1000);
-        cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0').click();
-        cy.get('.ng-star-inserted')
-        .eq(0)
-        .contains('중지', { timeout: 30*1000 }).should('be.visible');
     });
     afterEach('Status Fail', () => {
       if (FailTF) {

@@ -32,6 +32,29 @@ cy.fixture(selectedFilePath).then(fileContent => {
         }
     });
 });
+// 레코드
+cy.contains('성공', { timeout: 60*1000 }).should('be.visible');
+cy.get('.btn-clear-danger').click(); // 중지
+cy.wait(15*1000);
+cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0').click();
+cy.get('.ng-star-inserted')
+.eq(0)
+.contains('중지', { timeout: 30*1000 }).should('be.visible');
+
+//이미지
+cy.contains('실패', { timeout: 60000 }).should('be.visible');
+cy.wait(5000);
+cy.screenshot('image_inference_api', 1920, 1080);
+cy.get('.btn-clear-danger').click(); // 중지
+cy.wait(10000);
+
+cy.log('인퍼런스 삭제');
+// 인퍼런스 삭제
+cy.get('.left-navigation--sub-navi > .current > button.ng-tns-c0-0 > .ng-tns-c0-0').click(); // 마이 인퍼런스
+cy.wait(5000);
+cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
+cy.get('.btn-danger').click(); // 삭제
+cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
 };
 
 module.exports = {
