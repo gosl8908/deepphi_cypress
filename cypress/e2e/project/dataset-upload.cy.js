@@ -2,7 +2,7 @@ const {
     loginModule,
     createModule,
     datasetModule,
-    sendEmailModule,
+    EmailModule,
     constantModule: c,
 } = require('../module/manager.module.js');
 
@@ -62,7 +62,7 @@ describe('Dataset Upload Test', () => {
         const testRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
 
-            sendEmailModule.sendEmail(
+            EmailModule.Email(
                 testFails,
                 Cypress.env('AdminId'),
                 `Login Test ${Cypress.env('EmailTitle')}`,

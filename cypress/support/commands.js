@@ -80,9 +80,3 @@ Cypress.Commands.add('getAll', () => {
     // 에러를 무시하고 계속 진행
     return false;
   });    
-
-  Cypress.on('fail', (err, runnable) => {
-    const errMessage = err.message || '알 수 없는 이유로 실패함';
-    !testFails.includes(errMessage) && testFails.push(errMessage);
-    FailTF = true;
-  });

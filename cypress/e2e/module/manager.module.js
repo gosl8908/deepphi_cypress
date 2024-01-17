@@ -2,7 +2,7 @@ const loginModule = require('./login.module.js');
 const createModule = require('./create.module.js');
 const modelModule = require('./model.module.js');
 const datasetModule = require('./dataset.module.js');
-const sendEmailModule = require('./email.module.js');
+const EmailModule = require('./email.module.js');
 const ApiModule = require('./api.module.js');
 const OldApiModule = require('./old.api.module.js');
 const ConstantModule = require('./constant.module.js');
@@ -14,7 +14,7 @@ module.exports = {
     createModule,
     modelModule,
     datasetModule,
-    sendEmailModule,
+    EmailModule,
     ConstantModule,
     OldApiModule,
     ApiModule,

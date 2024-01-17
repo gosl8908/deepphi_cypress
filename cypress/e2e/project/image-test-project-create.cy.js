@@ -1,4 +1,4 @@
-const { loginModule, OldApiModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, OldApiModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
   let testFails = []; // 실패 원인을 저장할 변수
@@ -121,7 +121,7 @@ describe('Image Test Project Create', () => {
     after('Send Email', () => {
       const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
 
-      sendEmailModule.sendEmail(
+      EmailModule.Email(
         testFails,
           Cypress.env('AdminId'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,

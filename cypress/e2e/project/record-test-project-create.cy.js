@@ -1,4 +1,4 @@
-const { loginModule, sendEmailModule, OldApiModule } = require('../module/manager.module.js');
+const { loginModule, EmailModule, OldApiModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
   let testFails = []; // 실패 원인을 저장할 변수
@@ -142,7 +142,7 @@ describe('Record Test Project Create', () => {
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
           const testRange = '1. 레코드 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
     
-          sendEmailModule.sendEmail(
+          EmailModule.Email(
             testFails,
               Cypress.env('AdminId'),
               `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,

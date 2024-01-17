@@ -1,4 +1,4 @@
-const { loginModule, createModule, datasetModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Organization Dataset Upload', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -51,7 +51,7 @@ describe('Organization Dataset Upload', () => {
         const testRange =
             '1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료';
 
-        sendEmailModule.sendEmail(
+            EmailModule.Email(
             testFails,
             Cypress.env('AdminId'),
             `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,

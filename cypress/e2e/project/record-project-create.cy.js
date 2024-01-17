@@ -1,4 +1,4 @@
-const { loginModule, createModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -245,7 +245,7 @@ describe('Record Project Create & Run', () => {
         const testRange =
             '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
 
-        sendEmailModule.sendEmail(
+            EmailModule.Email(
             testFails,
             Cypress.env('AdminId'),
             `Record Project Cteate Test ${Cypress.env('EmailTitle')}`,

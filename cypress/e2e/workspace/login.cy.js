@@ -1,4 +1,4 @@
-const { loginModule, createModule, datasetModule, ApiModule, sendEmailModule, visualizationCreateModule } = require('../module/manager.module.js');
+const { loginModule, createModule, datasetModule, ApiModule, EmailModule, visualizationCreateModule } = require('../module/manager.module.js');
 describe('로그인', () => {
   let testFails  = []; // 실패 원인을 저장할 변수
   let screenshots = []; // 스크린샷을 저장할 배열
@@ -33,7 +33,7 @@ describe('로그인', () => {
     const testRange = '1. 로그인 ';
 
 
-    sendEmailModule.sendEmail(
+    EmailModule.Email(
       testFails,
       Cypress.env('AdminId'),
       `Login Test ${Cypress.env('EmailTitle')}`,

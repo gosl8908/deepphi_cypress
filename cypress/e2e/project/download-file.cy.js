@@ -1,4 +1,4 @@
-const { loginModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Download File Test', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -217,7 +217,7 @@ describe('Download File Test', () => {
         const testRange =
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
 
-        sendEmailModule.sendEmail(
+            EmailModule.Email(
             testFails,
             Cypress.env('AdminId'),
             `Download File Test ${Cypress.env('EmailTitle')}`,
