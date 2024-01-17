@@ -52,7 +52,7 @@ after('Send Email', () => {
 
   sendEmailModule.sendEmail(
     testFail,
-      Cypress.env('Id'),
+      Cypress.env('AdminId'),
       `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
       testRange,
       screenshots,

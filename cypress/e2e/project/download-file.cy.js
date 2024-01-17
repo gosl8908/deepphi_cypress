@@ -224,7 +224,7 @@ describe('Download File Test', () => {
 
         sendEmailModule.sendEmail(
             testFail,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             `Download File Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

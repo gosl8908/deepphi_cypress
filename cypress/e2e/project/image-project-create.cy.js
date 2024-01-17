@@ -120,7 +120,7 @@ describe('Image Project Create', () => {
 
       sendEmailModule.sendEmail(
         testFail,
-          Cypress.env('Id'),
+          Cypress.env('AdminId'),
           `Image Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
           screenshots,

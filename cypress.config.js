@@ -89,7 +89,7 @@ module.exports = defineConfig({
       ProdTest: 'http://st.deepphi.ai/',
       DisposableEmail: 'https://ruu.kr/',
       // 계정
-      Id: 'gosl8908@deepnoid.com',
+      AdminId: 'gosl8908@deepnoid.com',
       KangTestId2: 'deepphi.auto2@ruu.kr',
       KangTestId3: 'deepphi.auto3@ruu.kr',
       KangTestId4: 'deepphi.auto4@ruu.kr',

@@ -206,7 +206,7 @@ describe('Record Project visualization Create Test', () => {
 
         sendEmailModule.sendEmail(
             testFail,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

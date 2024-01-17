@@ -56,7 +56,7 @@ describe('Dataset Upload Test', () => {
 
         sendEmailModule.sendEmail(
             testFail,
-            Cypress.env('Id'),
+            Cypress.env('AdminId'),
             `Dataset Upload Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

@@ -151,7 +151,7 @@ describe('Organization Create', () => {
 
       sendEmailModule.sendEmail(
         testFail,
-          Cypress.env('Id'),
+          Cypress.env('AdminId'),
           `Organization Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
           screenshots,

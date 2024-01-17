@@ -12,11 +12,11 @@ describe('SignUp', () => {
     it('Create email', () => {
         cy.visit(Cypress.env('DisposableEmail')); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
-        cy.get('#id').type('deepphi.auto5'); // 필요한 곳에서 텍스트 사용
+        cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();
         cy.wait(5000); // 5초 대기
         // 조합한 텍스트를 파일에 저장
-        const textToWrite = 'deepphi.auto5';
+        const textToWrite = 'test' + Cypress.env('DateLabel');
         cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
         cy.wait(3000);
         Cypress.on('fail', (err, runnable) => {
