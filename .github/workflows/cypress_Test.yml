@@ -66,7 +66,10 @@ env:
 
 jobs:
   signup_test:
-    runs-on: cypress/browsers
+    runs-on: ubuntu-latest
+
+    container:
+      image: cypress/browsers
 
     steps:
       - uses: actions/checkout@v2
