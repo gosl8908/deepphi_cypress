@@ -7,11 +7,12 @@ describe('Support Test', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('FaQ Test', () => {

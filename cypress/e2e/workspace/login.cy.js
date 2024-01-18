@@ -1,6 +1,7 @@
 const { loginModule, createModule, datasetModule, ApiModule, EmailModule, visualizationCreateModule } = require('../module/manager.module.js');
 describe('로그인', () => {
   let testFails  = []; // 실패 원인을 저장할 변수
+  let testTitles = [];
   let screenshots = []; // 스크린샷을 저장할 배열
   let FailTF = false
   Cypress.on('fail', (err, runnable) => {
@@ -14,11 +15,13 @@ describe('로그인', () => {
     loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
   });
 
-  it('test', () => {
+  it('test', function () {
+    testTitles.push(this.test.title);
     cy.contains('이미지 데이터셋aa', {timeout: 1*1000});
   });
-  it('test2', () => {
-    cy.contains('이미지 데이터셋', {timeout: 1*1000});
+  it('test2', function () {
+    testTitles.push(this.test.title);
+    cy.contains('이미지 데이터셋bb', {timeout: 1*1000});
   });
   afterEach('Status Fail', () => {
     if (FailTF) {
@@ -35,6 +38,7 @@ describe('로그인', () => {
 
     EmailModule.Email(
       testFails,
+      testTitles,
       Cypress.env('AdminId'),
       `Login Test ${Cypress.env('EmailTitle')}`,
       testRange,

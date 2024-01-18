@@ -8,11 +8,12 @@ describe('Record Project visualization Create Test', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Cleansing > Calculation Module visualization Create Test', () => {

@@ -8,25 +8,30 @@ describe('Organization Create', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
-    before(() => {
+    beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
     });
 
     it('Organization Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
         cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
 
-        // 단체 삭제
-        cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
-        cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
-        cy.get('.modal-button-content > .btn-danger').click(); // 삭제
-        cy.wait(3000);
+        cy.get('.card-content').then(btn => {
+            const body = btn.text().includes('단체삭제');
+            if (body) {
+                cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
+                cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
+                cy.get('.modal-button-content > .btn-danger').click(); // 삭제
+                cy.wait(3000);
+            }
+        });
 
         // 단체 생성
         cy.get('.flex-display > :nth-child(2) > .btn').click(); // 단체 생성
@@ -87,7 +92,7 @@ describe('Organization Create', () => {
 
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
-        loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('AdminId'), Cypress.env('KangTestPwd'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리
@@ -116,7 +121,7 @@ describe('Organization Create', () => {
 
     // 단체 DISK 구독
     it('Organization DISK subscribe', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
 
         // 크레딧 충전
         cy.get('.btn__user_info').click(); // 프로필 선택

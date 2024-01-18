@@ -8,14 +8,15 @@ describe('Organization Dataset Upload', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
-    before(() => {
+    beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Organization Image Dataset Upload', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
         // 단체 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -26,7 +27,6 @@ describe('Organization Dataset Upload', () => {
         datasetModule.settingImageDataset(1, '2D');
     });
     it('Organization Record Dataset Upload', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
         // 단체 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -34,7 +34,7 @@ describe('Organization Dataset Upload', () => {
         cy.contains('자동화용 단체').click(); // 단체 선택
         cy.wait(5000);
 
-        createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
+        createModule.createRecordDataset('자동화용 데이터셋.csv', '자동화용 데이터셋.csv', '자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
         datasetModule.settingRecordDataset();
     });
     afterEach('Status Fail', () => {

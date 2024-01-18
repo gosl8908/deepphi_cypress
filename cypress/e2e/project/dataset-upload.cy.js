@@ -14,12 +14,13 @@ describe('Dataset Upload Test', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
 
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Dataset Upload test', () => {
@@ -32,9 +33,6 @@ describe('Dataset Upload Test', () => {
             'ImageDataset' + Cypress.env('DateLabel'),
         );
         datasetModule.settingImageDataset(1, '2D');
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
 
     it('Record Dataset Upload test', () => {
@@ -46,9 +44,6 @@ describe('Dataset Upload Test', () => {
             'RecordDataset' + Cypress.env('DateLabel'),
         );
         datasetModule.settingRecordDataset();
-        Cypress.on('fail', (err, runnable) => {
-            testFail = err.message || '알 수 없는 이유로 실패함'; // 실패 원인을 저장
-        });
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
@@ -64,6 +59,7 @@ describe('Dataset Upload Test', () => {
 
             EmailModule.Email(
                 testFails,
+                undefined,
                 Cypress.env('AdminId'),
                 `Login Test ${Cypress.env('EmailTitle')}`,
                 testRange,

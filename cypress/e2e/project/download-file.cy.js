@@ -8,11 +8,12 @@ describe('Download File Test', () => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
         !testFails.includes(errMessage) && testFails.push(errMessage);
         FailTF = true;
+        throw err;
     });
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId5'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Project Download File Test', () => {
@@ -47,6 +48,7 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        cy.wait(5*1000)
     });
 
     it('Image Test Project Download File Test', () => {
@@ -102,6 +104,7 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        cy.wait(5*1000)
     });
 
     it('Record ProjectDownload File Test', () => {
@@ -123,6 +126,7 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(1)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
+        cy.wait(5*1000)
     });
 
     it('Record Test Project Download File Test', () => {
@@ -148,13 +152,12 @@ describe('Download File Test', () => {
         cy.get('.bottom__head--control > :nth-child(1)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10000 }).should('be.visible'); // AI 결과
-        cy.get('#site-map__flow-btn').click();
-        cy.get('#project-menu-ul > :nth-child(1) > button').click();
+        cy.wait(5*1000)
     });
 
     it('Image Download File Check', () => {
         /* 이미지 다운로드 확인 */
-        cy.visit(`${Cypress.env('Prod')}my-page/files`);
+        cy.visit(`${Cypress.env('Prod')}my-page/files`, { timeout: 60 * 1000 });
         cy.get('.cpx-180').select('이미지 데이터');
         cy.get('.search-box > .input-form').type('자동화 데이터셋_2D_CL');
         cy.get('.search-box > .btn-primary').click();
@@ -164,7 +167,8 @@ describe('Download File Test', () => {
         cy.get('.search-box > .btn-primary').click();
         cy.contains('Train_code'); // 인퍼런스 소스 코드
         cy.get('.cpx-180').select('인퍼런스 소스 코드');
-        cy.contains(/Intel open vino.*Tensor flow/, { timeout: 60 * 1000 }).should('be.visible'); // 학습 소스 코드
+        cy.contains('IntelTestCode', { timeout: 60 * 1000 }).should('be.visible'); // 학습 소스 코드
+        cy.contains('TensorTestCode', { timeout: 60 * 1000 }).should('be.visible'); // 학습 소스 코드
         cy.get('.cpx-180').select('엑셀 데이터');
         cy.get('.search-box > .input-form').type('Resize');
         cy.get('.search-box > .btn-primary').click();
@@ -174,16 +178,17 @@ describe('Download File Test', () => {
         cy.contains(/DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121.*DensNet121/, {
             timeout: 10 * 1000,
         }).should('be.visible'); // AI 이미지, AI 파일, AI 결과 / 평가 AI 이미지, AI 파일, AI 결과
+        cy.wait(3*1000)
     });
 
     it('Record Download File Check', () => {
         /* 레코드 다운로드 확인 */
-        cy.visit(`${Cypress.env('Prod')}my-page/files`);
+        cy.visit(`${Cypress.env('Prod')}my-page/files`, { timeout: 60 * 1000 });
         cy.get('.cpx-180').select('엑셀 데이터');
         cy.get('.search-box > .input-form').type('DNN-Classification');
         cy.get('.search-box > .btn-primary').click();
         cy.contains(/DNN-Classification.*DNN-Classification.*DNN-Classification.*DNN-Classification/, {
-            timeout: 10 * 1000,
+            timeout: 30 * 1000,
         }).should('be.visible'); // AI 데이터, AI 결과 / 평가 AI 데이터, AI 결과
         cy.get('.search-box > .input-form').clear().type('자동화 데이터셋');
         cy.get('.search-box > .btn-primary').click();
@@ -191,6 +196,7 @@ describe('Download File Test', () => {
         cy.get('.search-box > .input-form').clear().type('Data Cleansing');
         cy.get('.search-box > .btn-primary').click();
         cy.contains(/Data Cleansing.*Data Cleansing/, { timeout: 10 * 1000 }).should('be.visible'); // 프로세싱 데이터 / 평가 프로세싱 데이터
+        cy.wait(3*1000)
     });
 
     afterEach('Status Fail', () => {

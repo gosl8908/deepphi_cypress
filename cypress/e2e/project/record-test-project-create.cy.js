@@ -8,15 +8,15 @@ describe('Record Test Project Create', () => {
       const errMessage = err.message || '알 수 없는 이유로 실패함';
       !testFails.includes(errMessage) && testFails.push(errMessage);
       FailTF = true;
+      throw err;
   });
-    before(() => {
+    beforeEach(() => {
       cy.setDateToEnv();
       cy.getAll();
+      loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Record Test Project Create', () => {
-        // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId4'), Cypress.env('KangTestPwd'));
 
         // 레코드 프로젝트 검색
         cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
