@@ -59,7 +59,6 @@ describe('Dataset Upload Test', () => {
 
             EmailModule.Email(
                 testFails,
-                undefined,
                 Cypress.env('AdminId'),
                 `Login Test ${Cypress.env('EmailTitle')}`,
                 testRange,

@@ -25,7 +25,6 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
   },
-  include: ["src", "**/*.ts"],
   plugins: ["@typescript-eslint", "cypress"],
   rules: {
     // 큰 따옴표 사용 확인

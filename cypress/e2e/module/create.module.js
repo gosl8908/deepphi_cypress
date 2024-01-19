@@ -71,7 +71,7 @@ function createImageDataset(dimension, labelType, structure, filename, title, de
   cy.get('[style=""] > .step-content-box > .page-button > .btn-primary').click();
 
   // Dataset 업로드 확인
-  cy.contains('성공');
+  cy.contains('성공', {timeout : 30*1000}).should('be.visible')
   cy.contains('압축 해제 중', {timeout : 30*1000}).should('be.visible')
   cy.contains('검증 진행 중', {timeout : 30*1000}).should('be.visible')
   cy.contains('설정을 완료하세요', {timeout : 30*1000}).should('be.visible')
