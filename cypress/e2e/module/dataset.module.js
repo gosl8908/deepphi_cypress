@@ -77,7 +77,7 @@ function settingRecordDataset() {
   cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
   cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button').click();
   cy.get('.project-info__control > .btn').click();
-  cy.get('#dataset_name').clear().type(`Change${Cypress.env('DataLabel')}`);
+  cy.get('#dataset_name').clear().type(`Change${Cypress.env('DateLabel')}`);
   cy.get('.modal-button-content > .btn-primary').click();
 
   cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();

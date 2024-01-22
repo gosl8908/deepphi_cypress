@@ -167,7 +167,7 @@ describe('Record Project visualization Create Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Record Project Module Visualization Create(Full)/Record Project Module Visualization Create Test ${Cypress.env(
+            const screenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env(
                 'DateLabel',
             )}`;
             cy.screenshot(screenshotFileName);
@@ -180,7 +180,6 @@ describe('Record Project visualization Create Test', () => {
 
         EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
             `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

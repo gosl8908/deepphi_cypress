@@ -1,4 +1,4 @@
-const { loginModule, OldApiModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
   let testFails = []; // 실패 원인을 저장할 변수
@@ -18,21 +18,7 @@ describe('Image Test Project Create', () => {
 
     it('Image Test Project Create', () => {
 
-      // 이미지 프로젝트 검색
-        cy.get('.search-box > .input-form').type('이미지 평가 프로젝트 자동화 확인용');
-        cy.get('.search-box > .btn-primary').click();
-        cy.wait(3000);
-        cy.get('.title').click();
-        cy.wait(5000);
-
-        // 평가 프로젝트 생성
-        cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
-        cy.wait(3000);
-        cy.get('.btn-floating > div').click({ force: true }); // 생성
-        cy.get('.modal-button-content > .btn').click(); // 확인
-        cy.get('.btn-primary').click(); // 확인
-        cy.get('.btn-primary').click(); // 확인
-        cy.wait(5000);
+      createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용')
 
         cy.log('프로젝트 실행');
         //프로젝트 Run
@@ -103,7 +89,7 @@ describe('Image Test Project Create', () => {
     });
         afterEach('Status Fail', () => {
           if (FailTF) {
-            const screenshotFileName = `Image Test Project Create/Image Test Project Create Test ${Cypress.env(
+            const screenshotFileName = `Image Test Project Create Test ${Cypress.env(
                 'DateLabel',
             )}`;
             cy.screenshot(screenshotFileName);
@@ -116,7 +102,6 @@ describe('Image Test Project Create', () => {
 
       EmailModule.Email(
         testFails,
-          Cypress.env('AdminId'),
           `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
           testRange,
           screenshots,

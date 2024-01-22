@@ -137,8 +137,31 @@ function createRecordProject(title, detail = title) {
   cy.get('.note-editable').type(detail); // 프로젝트 Detail 입력
   cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
 }
+
+function createTestProject(name) {
+
+  /* 프로젝트 검색 */
+  cy.get('.search-box > .input-form').type(name);
+  cy.get('.search-box > .btn-primary').click();
+  cy.wait(3000);
+  cy.get('.title').click();
+  cy.wait(5000);
+
+  // 평가 프로젝트 생성
+  cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
+  cy.wait(3000);
+  cy.get('.btn-floating > div').click({ force: true }); // 생성
+  cy.wait(3000);
+  cy.get('.modal-button-content > .btn').click(); // 다음
+  cy.wait(1000);
+  cy.get('.btn-primary').click(); // 다음
+  cy.wait(1000);
+  cy.get('.btn-primary').click(); // 확인
+  cy.wait(5000);
+}
 module.exports = {
   createImageProject: createImageProject,
+  createTestProject: createTestProject,
   createImageDataset: createImageDataset,
   createRecordProject: createRecordProject,
   createRecordDataset: createRecordDataset,

@@ -34,7 +34,7 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
       on("task", {
-        sendEmail({ recipient, subject, body, screenshotFileNames }) {
+        sendEmail({ subject, body, screenshotFileNames }) {
         const attachments = [];
 
         if (screenshotFileNames && screenshotFileNames.length > 0) {
@@ -94,6 +94,7 @@ module.exports = defineConfig({
       KangTestId3: 'deepphi.auto3@ruu.kr',
       KangTestId4: 'deepphi.auto4@ruu.kr',
       KangTestId5: 'deepphi.auto5@ruu.kr',
+      KangTestId6: 'deepphi.auto6@ruu.kr',
       AutoTestId: 'deeptest1@deepnoid.com',
       OnpremId: 'asdasdasd3@ruu.kr',
       KangTestPwd: 'test123!',

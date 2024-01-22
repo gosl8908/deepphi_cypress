@@ -47,7 +47,7 @@ describe('Dataset Upload Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Login/Login Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -59,8 +59,7 @@ describe('Dataset Upload Test', () => {
 
             EmailModule.Email(
                 testFails,
-                Cypress.env('AdminId'),
-                `Login Test ${Cypress.env('EmailTitle')}`,
+                `Dataset Upload Test ${Cypress.env('EmailTitle')}`,
                 testRange,
                 screenshots,
             );

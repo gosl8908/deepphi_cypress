@@ -47,7 +47,7 @@ describe('Support Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Support/Support test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Support test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -58,7 +58,6 @@ describe('Support Test', () => {
 
         EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
             `Support test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

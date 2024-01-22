@@ -113,7 +113,7 @@ describe('Image Project Create', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Image Project Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -124,7 +124,6 @@ describe('Image Project Create', () => {
 
         EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
             `Image Project Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

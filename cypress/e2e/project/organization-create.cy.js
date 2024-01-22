@@ -143,7 +143,7 @@ describe('Organization Create', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Organization Create/Organization Create Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Organization Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -155,7 +155,7 @@ describe('Organization Create', () => {
 
             EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
+
             `Organization Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

@@ -7,6 +7,7 @@ const ApiModule = require('./api.module.js');
 const OldApiModule = require('./old.api.module.js');
 const ConstantModule = require('./constant.module.js');
 const visualizationCreateModule = require('./visualization-create.module.js');
+const InferenceServiceModule = require('./inference-service.js');
 // 다른 모듈들도 필요한 경우 추가
 
 module.exports = {
@@ -19,6 +20,7 @@ module.exports = {
     OldApiModule,
     ApiModule,
     visualizationCreateModule,
+    InferenceServiceModule,
     // 다른 모듈들도 필요한 경우 추가
 };
 

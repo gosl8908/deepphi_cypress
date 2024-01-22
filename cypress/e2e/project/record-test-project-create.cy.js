@@ -1,4 +1,4 @@
-const { loginModule, EmailModule, OldApiModule } = require('../module/manager.module.js');
+const { loginModule, createModule, EmailModule } = require('../module/manager.module.js');
 
 describe('Record Test Project Create', () => {
   let testFails = []; // 실패 원인을 저장할 변수
@@ -18,24 +18,7 @@ describe('Record Test Project Create', () => {
 
     it('Record Test Project Create', () => {
 
-        // 레코드 프로젝트 검색
-        cy.get('.search-box > .input-form').type('레코드 평가 프로젝트 자동화 확인용');
-        cy.get('.search-box > .btn-primary').click();
-        cy.wait(3000);
-        cy.get('.title').click();
-        cy.wait(5000);
-
-        // 평가 프로젝트 생성
-        cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
-        cy.wait(3000);
-        cy.get('.btn-floating > div').click({ force: true }); // 생성
-        cy.wait(3000);
-        cy.get('.modal-button-content > .btn').click(); // 다음
-        cy.wait(1000);
-        cy.get('.btn-primary').click(); // 다음
-        cy.wait(1000);
-        cy.get('.btn-primary').click(); // 확인
-        cy.wait(5000);
+      createModule.createTestProject('레코드 평가 프로젝트 자동화 확인용')
 
         cy.log('프로젝트 실행');
         //프로젝트 Run
@@ -106,7 +89,7 @@ describe('Record Test Project Create', () => {
     });
     afterEach('Status Fail', () => {
       if (FailTF) {
-        const screenshotFileName = `Record Test Project Create/Record Test Project Create Test ${Cypress.env(
+        const screenshotFileName = `Record Test Project Create Test ${Cypress.env(
             'DateLabel',
         )}`;
         cy.screenshot(screenshotFileName);
@@ -142,7 +125,6 @@ describe('Record Test Project Create', () => {
     
           EmailModule.Email(
             testFails,
-              Cypress.env('AdminId'),
               `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
               testRange,
               screenshots,

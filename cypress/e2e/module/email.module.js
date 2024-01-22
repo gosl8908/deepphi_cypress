@@ -1,4 +1,4 @@
-function Email(testFails, id, emailTitle, testRange, screenshots) {
+function Email(testFails, emailTitle, testRange, screenshots) {
   const isTestFailed = testFails.length > 0;
   const EmailBody = `Cypress 자동화 테스트 스위트가 ${isTestFailed ? '실패' : '성공'}하였습니다.
   테스트 실행 시간 : ${Cypress.env('DateLabelWeek')}
@@ -10,7 +10,6 @@ function Email(testFails, id, emailTitle, testRange, screenshots) {
   cy.log('테스트가 성공적으로 완료되었습니다.');
 
   const emailInfo = {
-    recipient: id,
     subject: emailTitle,
     body: EmailBody,
     screenshotFileNames: screenshots.map(name => name + '.png'), // 스크린샷 파일 이름들을 추가

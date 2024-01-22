@@ -39,7 +39,7 @@ describe('Organization Dataset Upload', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Organization Dataset Upload/Organization Dataset Upload Test ${Cypress.env(
+            const screenshotFileName = `Organization Dataset Upload Test ${Cypress.env(
                 'DateLabel',
             )}`;
             cy.screenshot(screenshotFileName);
@@ -53,7 +53,6 @@ describe('Organization Dataset Upload', () => {
 
             EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
             `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,

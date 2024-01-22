@@ -17,13 +17,13 @@ describe('SignUp', () => {
 
     /* 일회용 이메일 만들기 */
     it('Create email', () => {
+        const textToWrite = 'test' + Cypress.env('DateLabel');
         cy.visit(Cypress.env('DisposableEmail')); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
-        cy.get('#id').type('test' + Cypress.env('DateLabel')); // 필요한 곳에서 텍스트 사용
+        cy.get('#id').type(textToWrite); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();
         cy.wait(5000); // 5초 대기
         // 조합한 텍스트를 파일에 저장
-        const textToWrite = 'test' + Cypress.env('DateLabel');
         cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
         cy.wait(3000);
     });
@@ -131,7 +131,7 @@ describe('SignUp', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `SignUp/SignUp test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `SignUp test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -142,7 +142,6 @@ describe('SignUp', () => {
 
         EmailModule.Email(
             testFails,
-            Cypress.env('AdminId'),
             `SignUp test ${Cypress.env('EmailTitle')}`,
             testRange,
             screenshots,
