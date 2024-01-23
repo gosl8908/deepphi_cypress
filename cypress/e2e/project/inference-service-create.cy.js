@@ -4,7 +4,7 @@ const {
     apiModule,
     emailModule,
     inferenceserviceModule,
-    ConstantModule: c,
+    constantModule: c,
 } = require('../module/manager.module.js');
 
 describe('Inference Service Create', () => {
@@ -83,7 +83,7 @@ describe('Inference Service Create', () => {
             .then($e2 => {
                 cy.get('.default-tab > ul > :nth-child(2) > button').click();
                 cy.wait(30 * 1000);
-                apiModule.api($e2, c.IMAGE);
+                apiModule.api($e2, c.RECORD);
                 cy.get('.flex-auto').contains('성공', {
                     timeout: 30 * 1000,
                 });

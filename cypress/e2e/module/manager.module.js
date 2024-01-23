@@ -5,7 +5,7 @@ const datasetModule = require('./dataset.module.js');
 const emailModule = require('./email.module.js');
 const apiModule = require('./api.module.js');
 const OldApiModule = require('./old.api.module.js');
-const ConstantModule = require('./constant.module.js');
+const constantModule = require('./constant.module.js');
 const visualizationCreateModule = require('./visualization-create.module.js');
 const inferenceserviceModule = require('./inference-service.js');
 // 다른 모듈들도 필요한 경우 추가
@@ -16,7 +16,7 @@ module.exports = {
     modelModule,
     datasetModule,
     emailModule,
-    ConstantModule,
+    constantModule,
     OldApiModule,
     apiModule,
     visualizationCreateModule,

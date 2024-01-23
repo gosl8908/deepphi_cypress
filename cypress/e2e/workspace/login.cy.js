@@ -1,11 +1,10 @@
-// const apiModule = require('../module/api.module.js');
 const {
     loginModule,
     createModule,
     apiModule,
     emailModule,
     inferenceserviceModule,
-    ConstantModule: c,
+    constantModule: c,
 } = require('../module/manager.module.js');
 describe('로그인', () => {
     let testFails = []; // 실패 원인을 저장할 변수
