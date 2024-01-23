@@ -12,7 +12,7 @@ describe('Support Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('supporttest'), Cypress.env('KangTestPwd'));
     });
 
     it('FaQ Test', () => {
