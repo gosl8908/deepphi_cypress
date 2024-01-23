@@ -1,4 +1,4 @@
-const { loginModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -140,11 +140,6 @@ describe('SignUp', () => {
     after('Send Email', () => {
         const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
-        EmailModule.Email(
-            testFails,
-            `SignUp test ${Cypress.env('EmailTitle')}`,
-            testRange,
-            screenshots,
-        );
+        emailModule.Email(testFails, `SignUp test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
     });
 });

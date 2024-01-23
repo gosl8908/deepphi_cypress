@@ -1,4 +1,4 @@
-const { loginModule, createModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, emailModule } = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -122,11 +122,6 @@ describe('Image Project Create', () => {
     after('Send Email', () => {
         const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
 
-        EmailModule.Email(
-            testFails,
-            `Image Project Create Test ${Cypress.env('EmailTitle')}`,
-            testRange,
-            screenshots,
-        );
+        emailModule.Email(testFails, `Image Project Create Test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
     });
 });

@@ -2,7 +2,7 @@ const {
     loginModule,
     createModule,
     datasetModule,
-    EmailModule,
+    emailModule,
     constantModule: c,
 } = require('../module/manager.module.js');
 
@@ -25,13 +25,7 @@ describe('Dataset Upload Test', () => {
 
     it('Image Dataset Upload test', () => {
         cy.contains('이미지 데이터셋').click();
-        createModule.createImageDataset(
-            '2D',
-            1,
-            1,
-            '2D_CL_Case1',
-            'ImageDataset' + Cypress.env('DateLabel'),
-        );
+        createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
         datasetModule.settingImageDataset(1, '2D');
     });
 
@@ -57,11 +51,6 @@ describe('Dataset Upload Test', () => {
         const testRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
 
-            EmailModule.Email(
-                testFails,
-                `Dataset Upload Test ${Cypress.env('EmailTitle')}`,
-                testRange,
-                screenshots,
-            );
+        emailModule.Email(testFails, `Dataset Upload Test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
     });
 });

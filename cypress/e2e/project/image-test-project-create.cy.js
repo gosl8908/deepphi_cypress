@@ -1,24 +1,23 @@
-const { loginModule, createModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, emailModule } = require('../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
-  let testFails = []; // 실패 원인을 저장할 변수
-  let screenshots = []; // 스크린샷을 저장할 배열
-  let FailTF = false;
-  Cypress.on('fail', (err, runnable) => {
-      const errMessage = err.message || '알 수 없는 이유로 실패함';
-      !testFails.includes(errMessage) && testFails.push(errMessage);
-      FailTF = true;
-      throw err;
-  });
+    let testFails = []; // 실패 원인을 저장할 변수
+    let screenshots = []; // 스크린샷을 저장할 배열
+    let FailTF = false;
+    Cypress.on('fail', (err, runnable) => {
+        const errMessage = err.message || '알 수 없는 이유로 실패함';
+        !testFails.includes(errMessage) && testFails.push(errMessage);
+        FailTF = true;
+        throw err;
+    });
     before(() => {
-      cy.setDateToEnv();
-      cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        cy.setDateToEnv();
+        cy.getAll();
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {
-
-      createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용')
+        createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용');
 
         cy.log('프로젝트 실행');
         //프로젝트 Run
@@ -31,18 +30,21 @@ describe('Image Test Project Create', () => {
         cy.log('인퍼런스 생성');
         //인퍼런스 생성
         cy.get(
-            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({ force: true }); // 메뉴바
+            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn',
+        ).click({ force: true }); // 메뉴바
         cy.get(
             '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
         ).click({ force: true }); // 인퍼런스
         cy.wait(3000);
-        cy.get('#inference_service_name2').invoke('text').then((text) => {
-          if (!text.trim()) {
-            const Inference = `inference${Cypress.env('DateLabel')}`;
-            cy.get('#inference_service_name2').type(Inference);
-            cy.get('.ng-star-inserted > dd > .flex-display > .ml10 > .btn').click();
-          }
-        });
+        cy.get('#inference_service_name2')
+            .invoke('text')
+            .then(text => {
+                if (!text.trim()) {
+                    const Inference = `inference${Cypress.env('DateLabel')}`;
+                    cy.get('#inference_service_name2').type(Inference);
+                    cy.get('.ng-star-inserted > dd > .flex-display > .ml10 > .btn').click();
+                }
+            });
         cy.get(':nth-child(3) > dd > .flex-display > .ml10 > .btn').click(); // 버전 체크
         cy.wait(1000);
         cy.get('.note-editable').type(Cypress.env('DateLabel')); // 설명
@@ -62,23 +64,21 @@ describe('Image Test Project Create', () => {
         cy.wait(5000);
 
         // api url 복사
-        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then(($el) => {
-    
+        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($el => {
             // 텍스트 추출
             const text = $el.text();
-        
+
             Cypress.env('endpointText', text);
             cy.log('확인된 endpointText 값:', Cypress.env('endpointText'));
-              });
+        });
 
-        cy.get('.documentation-address').then(($el) => {
-    
+        cy.get('.documentation-address').then($el => {
             // 텍스트 추출
             const api = $el.text();
-      
+
             Cypress.env('apiText', api);
             cy.log('확인된 endpointText 값:', Cypress.env('apiText'));
-              });
+        });
 
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
@@ -87,24 +87,23 @@ describe('Image Test Project Create', () => {
         cy.wait(15000);
         OldApiModule.Api();
     });
-        afterEach('Status Fail', () => {
-          if (FailTF) {
-            const screenshotFileName = `Image Test Project Create Test ${Cypress.env(
-                'DateLabel',
-            )}`;
+    afterEach('Status Fail', () => {
+        if (FailTF) {
+            const screenshotFileName = `Image Test Project Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
         }
     });
     after('Send Email', () => {
-      const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제'
+        const testRange =
+            '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제';
 
-      EmailModule.Email(
-        testFails,
-          `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
-          testRange,
-          screenshots,
-      );
-      });
+        emailModule.Email(
+            testFails,
+            `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
+            testRange,
+            screenshots,
+        );
+    });
 });

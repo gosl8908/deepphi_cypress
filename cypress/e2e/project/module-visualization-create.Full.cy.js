@@ -1,4 +1,4 @@
-const { loginModule, visualizationCreateModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, visualizationCreateModule, emailModule } = require('../module/manager.module.js');
 
 describe('Record Project visualization Create Test', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -167,9 +167,7 @@ describe('Record Project visualization Create Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env(
-                'DateLabel',
-            )}`;
+            const screenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
             screenshots.push(screenshotFileName);
             FailTF = false;
@@ -178,7 +176,7 @@ describe('Record Project visualization Create Test', () => {
     after('Send Email', () => {
         const testRange = '1. 클랜징 모듈 시각화 2. 프로세싱 모듈 시각화 3. DL 모듈 시각화 4. ML 모듈 시각화 ';
 
-        EmailModule.Email(
+        emailModule.Email(
             testFails,
             `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
             testRange,

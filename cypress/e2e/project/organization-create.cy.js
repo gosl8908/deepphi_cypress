@@ -1,4 +1,4 @@
-const { loginModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -153,7 +153,7 @@ describe('Organization Create', () => {
         const testRange =
             '1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독';
 
-            EmailModule.Email(
+        emailModule.Email(
             testFails,
 
             `Organization Create Test ${Cypress.env('EmailTitle')}`,

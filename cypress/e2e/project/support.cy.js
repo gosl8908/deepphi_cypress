@@ -1,4 +1,4 @@
-const { loginModule, EmailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule } = require('../module/manager.module.js');
 describe('Support Test', () => {
     let testFails = []; // 실패 원인을 저장할 변수
     let screenshots = []; // 스크린샷을 저장할 배열
@@ -56,11 +56,6 @@ describe('Support Test', () => {
     after('Send Email', () => {
         const testRange = '1. 자주 묻는 질문 2. 공지사항 3. 고객지원 4. 질의응답';
 
-        EmailModule.Email(
-            testFails,
-            `Support test ${Cypress.env('EmailTitle')}`,
-            testRange,
-            screenshots,
-        );
+        emailModule.Email(testFails, `Support test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
     });
 });
