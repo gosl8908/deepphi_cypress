@@ -25,8 +25,14 @@ describe('Dataset Upload Test', () => {
 
     it('Image Dataset Upload test', () => {
         cy.contains('이미지 데이터셋').click();
-        createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
-        datasetModule.settingImageDataset(1, '2D');
+        createModule.createImageDataset(
+            '2D',
+            c.CLASSIFICATION,
+            c.CASE1,
+            '2D_CL_Case1',
+            'ImageDataset' + Cypress.env('DateLabel'),
+        );
+        datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
     });
 
     it('Record Dataset Upload test', () => {

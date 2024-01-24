@@ -1,7 +1,4 @@
-const apiModule = require('./api.module');
-const { IMAGE, RECORD } = require('./constant.module');
-
-function InferenceCreate() {
+function inferenceCreate() {
     cy.log('인퍼런스 생성');
     /* 인퍼런스 생성 */
     cy.get('.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({
@@ -41,7 +38,7 @@ function InferenceCreate() {
     cy.wait(5000);
 }
 
-function InferenceRun() {
+function inferenceRun() {
     cy.visit(`${Cypress.env('Prod')}/user/my/inference`);
 
     // 마이 인퍼런스 진입
@@ -65,6 +62,6 @@ function InferenceRun() {
 }
 
 module.exports = {
-    InferenceCreate: InferenceCreate,
-    InferenceRun: InferenceRun,
+    inferenceCreate: inferenceCreate,
+    inferenceRun: inferenceRun,
 };

@@ -39,7 +39,7 @@
 #             # Wait for 60 seconds before retrying
 #             sleep 60
 #           done
-        
+
 #       - name: Save Screenshots to Main Branch
 #         if: failure()
 #         run: |
@@ -54,182 +54,200 @@
 name: Cypress tests
 
 on:
-  schedule:
-    - cron: "0 23 * * 0-4" # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
+    schedule:
+        - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
 
-  push:
-    branches:
-      - main
+    push:
+        branches:
+            - main
 
 env:
-  TZ: "Asia/Seoul"
+    TZ: 'Asia/Seoul'
 
 jobs:
-  signup_test:
-    runs-on: ubuntu-latest
+    signup_test:
+        runs-on: ubuntu-latest
 
-    container:
-      image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/signup.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/signup.cy.js"
+              continue-on-error: true
 
-  dataset_upload_test:
-    runs-on: ubuntu-latest
-    needs: signup_test  # signup_test 작업이 완료될 때까지 대기
+    dataset_upload_test:
+        runs-on: ubuntu-latest
+        needs: signup_test # signup_test 작업이 완료될 때까지 대기
 
-    container:
-        image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/dataset-upload.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/dataset-upload.cy.js"
+              continue-on-error: true
 
-  image_project_create_test:
-    runs-on: ubuntu-latest
-    needs: dataset_upload_test
+    image_project_create_test:
+        runs-on: ubuntu-latest
+        needs: dataset_upload_test
 
-    container:
-        image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js"
+              continue-on-error: true
 
-  image_test_project_create_test:
-    runs-on: ubuntu-latest
-    needs: image_project_create_test
+    image_test_project_create_test:
+        runs-on: ubuntu-latest
+        needs: image_project_create_test
 
-    container:
-        image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-test-project-create.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-test-project-create.cy.js"
+              continue-on-error: true
 
-  record_project_create_test:
-    runs-on: ubuntu-latest
-    needs: image_test_project_create_test
+    record_project_create_test:
+        runs-on: ubuntu-latest
+        needs: image_test_project_create_test
 
-    container:
-        image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/record-project-create.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/record-project-create.cy.js"
+              continue-on-error: true
 
-  record_test_project_create_test:
-    runs-on: ubuntu-latest
-    needs: record_project_create_test
+    record_test_project_create_test:
+        runs-on: ubuntu-latest
+        needs: record_project_create_test
 
-    container:
-        image: cypress/browsers
+        container:
+            image: cypress/browsers
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/record-test-project-create.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/record-test-project-create.cy.js"
+              continue-on-error: true
 
-  organization_test:
-    runs-on: ubuntu-latest
-    needs: record_test_project_create_test
+    organization_test:
+        runs-on: ubuntu-latest
+        needs: record_test_project_create_test
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/organization-create.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/organization-create.cy.js"
+              continue-on-error: true
 
-  organization_dataset_upload_test:
-    runs-on: ubuntu-latest
-    needs: organization_test
+    organization_dataset_upload_test:
+        runs-on: ubuntu-latest
+        needs: organization_test
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"
-        continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/organization-dataset-upload.cy.js"
+              continue-on-error: true
 
-  download_file_test:
-    runs-on: ubuntu-latest
-    needs: organization_dataset_upload_test
+    download_file_test:
+        runs-on: ubuntu-latest
+        needs: organization_dataset_upload_test
 
-    steps:
-      - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-      - name: Setup Node.js and Install Cypress
-        uses: actions/setup-node@v3
-        with:
-          node-version: "20.9.0"
-      - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-      - name: Run Cypress tests
-        run:  yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/download-file.cy.js"
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/download-file.cy.js"
+              continue-on-error: true
+
+    inference-service-create_test:
+        runs-on: ubuntu-latest
+        needs: download_file_test
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
+
+            - name: Run Cypress tests
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/inference-service-create.cy.js"
+              continue-on-error: true

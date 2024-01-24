@@ -3,7 +3,7 @@ const {
     createModule,
     apiModule,
     emailModule,
-    inferenceserviceModule,
+    inferenceServiceModule,
     constantModule: c,
 } = require('../module/manager.module.js');
 describe('로그인', () => {
@@ -36,9 +36,9 @@ describe('로그인', () => {
             .should('be.visible');
         cy.wait(3 * 1000);
 
-        inferenceserviceModule.InferenceCreate();
+        inferenceServiceModule.InferenceCreate();
 
-        inferenceserviceModule.InferenceRun();
+        inferenceServiceModule.InferenceRun();
 
         /* 복사 버튼 대신 */
         cy.get('[style="width: calc(100% - 76px);word-break: break-all"]')
