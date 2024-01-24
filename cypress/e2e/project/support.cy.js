@@ -1,18 +1,18 @@
-const { loginModule, emailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule, functionModule: f } = require('../module/manager.module.js');
 describe('Support Test', () => {
-    let testFails = []; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+    let TestFails = []; // 실패 원인을 저장할 변수
+    let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !testFails.includes(errMessage) && testFails.push(errMessage);
+        !TestFails.includes(errMessage) && TestFails.push(errMessage);
         FailTF = true;
         throw err;
     });
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('supporttest'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('FaQ Test', () => {
@@ -29,8 +29,7 @@ describe('Support Test', () => {
 
     it('Guide Test', () => {
         cy.visit(`${Cypress.env('Prod')}support/guide`);
-        cy.get(':nth-child(4) > .board__subject > .board__subject-content').click();
-        cy.get('.user-guide__container > :nth-child(2)').should('be.visible');
+        cy.contains('데이터셋 업로드', { timeout: 5 * 1000 }).should('be.visible');
     });
 
     it('QA Test', () => {
@@ -47,15 +46,20 @@ describe('Support Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Support test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Support/Support test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });
     after('Send Email', () => {
         const testRange = '1. 자주 묻는 질문 2. 공지사항 3. 고객지원 4. 질의응답';
 
-        emailModule.Email(testFails, `Support test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
+        emailModule.Email(TestFails, `Support test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
     });
 });

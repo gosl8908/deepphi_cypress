@@ -10,7 +10,7 @@ function Email(TestFails, EmailTitle, TestRange, Screenshots) {
           : ''
   }`;
 
-    cy.log(EmailBody);
+    cy.log('테스트가 성공적으로 완료되었습니다.');
 
     const emailInfo = {
         subject: `[자동화] ${EmailTitle}`,

@@ -5,15 +5,16 @@ const {
     emailModule,
     inferenceServiceModule,
     constantModule: c,
+    functionModule: f,
 } = require('../module/manager.module.js');
 
 describe('Inference Service Create', () => {
-    let testFails = []; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+    let TestFails = []; // 실패 원인을 저장할 변수
+    let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !testFails.includes(errMessage) && testFails.push(errMessage);
+        !TestFails.includes(errMessage) && TestFails.push(errMessage);
         FailTF = true;
         throw err;
     });
@@ -21,7 +22,7 @@ describe('Inference Service Create', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Inference Service Create Test', () => {
@@ -84,7 +85,7 @@ describe('Inference Service Create', () => {
             cy.log('확인된 endpointText 값:', endpoint);
 
             cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 에측 이력
-            cy.wait(5 * 1000);
+            cy.wait(30 * 1000);
             apiModule.api(endpoint, c.RECORD);
             cy.get('.flex-auto').contains('성공', {
                 timeout: 30 * 1000,
@@ -116,9 +117,16 @@ describe('Inference Service Create', () => {
         cy.get('.btn-danger').invoke('click'); // 삭제
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30 * 1000 });
         if (FailTF) {
-            const screenshotFileName = `Inference Service Create Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Inference Service Create/Inference Service Create Test ${Cypress.env(
+                'DateLabel',
+            )}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });
@@ -128,10 +136,10 @@ describe('Inference Service Create', () => {
             '1. 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 실행 5. API 호출 6. 결과 조회 7. 중지 8. 삭제 ';
 
         emailModule.Email(
-            testFails,
+            TestFails,
             `Inference Service Create Test ${Cypress.env('EmailTitle')}`,
             testRange,
-            screenshots,
+            Screenshots,
         );
     });
 });

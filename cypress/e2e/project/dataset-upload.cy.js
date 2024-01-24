@@ -4,19 +4,19 @@ const {
     datasetModule,
     emailModule,
     constantModule: c,
+    functionModule: f,
 } = require('../module/manager.module.js');
 
 describe('Dataset Upload Test', () => {
-    let testFails = []; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+    let TestFails = []; // 실패 원인을 저장할 변수
+    let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !testFails.includes(errMessage) && testFails.push(errMessage);
+        !TestFails.includes(errMessage) && TestFails.push(errMessage);
         FailTF = true;
         throw err;
     });
-
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
@@ -25,6 +25,7 @@ describe('Dataset Upload Test', () => {
 
     it('Image Dataset Upload test', () => {
         cy.contains('이미지 데이터셋').click();
+        cy.wait(3 * 1000);
         createModule.createImageDataset(
             '2D',
             c.CLASSIFICATION,
@@ -45,11 +46,16 @@ describe('Dataset Upload Test', () => {
         );
         datasetModule.settingRecordDataset();
     });
-    afterEach('Status Fail', () => {
+    afterEach('Status Check', () => {
         if (FailTF) {
             const screenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });
@@ -57,6 +63,6 @@ describe('Dataset Upload Test', () => {
         const testRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
 
-        emailModule.Email(testFails, `Dataset Upload Test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
+        emailModule.Email(TestFails, `Dataset Upload Test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
     });
 });

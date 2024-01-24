@@ -1,31 +1,30 @@
-const { loginModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, sendEmailModule } = require('../../module/manager.module.js');
 
 describe('Organization Create', () => {
     beforeEach(() => {
-      cy.setDateToEnv();
-      cy.getAll();
-
+        cy.setDateToEnv();
+        cy.getAll();
     });
 
     it('Organization Create', () => {
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
         cy.get('.user-card__footer > .btn-primary').click(); // 마이홈 선택
 
-        cy.get('tbody > :nth-child(1) > :nth-child(8)').then((v) => {
-          const t = v.text().includes('단체삭제');
-          if(t) {
-        // 단체 삭제
-        cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
-        cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
-        cy.get('.modal-button-content > .btn-danger').click(); // 삭제
-        cy.wait(3000);
-      }
-      });
+        cy.get('tbody > :nth-child(1) > :nth-child(8)').then(v => {
+            const t = v.text().includes('단체삭제');
+            if (t) {
+                // 단체 삭제
+                cy.get(':nth-child(8) > .btn').click(); // 단체 삭제
+                cy.get('#organization_confirm').type('자동화용 단체'); // 단체명 입력
+                cy.get('.modal-button-content > .btn-danger').click(); // 삭제
+                cy.wait(3000);
+            }
+        });
         // 단체 생성
-        cy.contains('단체 생성').click()
+        cy.contains('단체 생성').click();
         cy.get('#organization_select').select('기타'); // 분류 선택
         cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
         cy.get('.flex-display > .btn-wrap > .btn').click(); // 체크
@@ -83,7 +82,6 @@ describe('Organization Create', () => {
 
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
-
         loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPwd'));
 
         /* 크레딧 충전 */
@@ -133,13 +131,15 @@ describe('Organization Create', () => {
         cy.get('.modal-button-content > .btn').click(); // 확인
         cy.contains('DISK 30GB 정기권'); // 업그레이드 확인
 
-        const testRange = '1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독';
-      
-      sendEmailModule.sendEmail(
-        undefined,
-          Cypress.env('AdminId'),
-          'Organization Create ' + Cypress.env('EmailTitle'),
-          testRange,
-          undefined,)
+        const testRange =
+            '1. 단체 삭제 2. 단체 생성 3. 맴버 초대 4. 그룹 생성 5. 그룹 멤버 초대 6. 그룹 삭제 7. 크레딧 충전 8. 단체 DISK 구독';
+
+        sendEmailModule.sendEmail(
+            undefined,
+            Cypress.env('AdminId'),
+            'Organization Create ' + Cypress.env('EmailTitle'),
+            testRange,
+            undefined,
+        );
     });
 });

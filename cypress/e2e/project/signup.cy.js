@@ -1,12 +1,12 @@
-const { loginModule, emailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule, functionModule: f } = require('../module/manager.module.js');
 
 describe('SignUp', () => {
-    let testFails = []; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+    let TestFails = []; // 실패 원인을 저장할 변수
+    let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !testFails.includes(errMessage) && testFails.push(errMessage);
+        !TestFails.includes(errMessage) && TestFails.push(errMessage);
         FailTF = true;
         throw err;
     });
@@ -84,6 +84,7 @@ describe('SignUp', () => {
     /* 회원가입 완료 확인 */
     it('SignUp Completed Check & User Change Information', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
+            cy.log(text);
             loginModule.login(Cypress.env('Prod'), text + '@ruu.kr', Cypress.env('KangTestPwd'));
             cy.wait(5000);
         });
@@ -119,27 +120,57 @@ describe('SignUp', () => {
         cy.contains('비밀번호가 성공적으로 변경되었습니다.', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
 
+        /* 디스크 구독 */
+        cy.contains('마이 크레딧').click(); // 마이 크레딧 선택
+        cy.wait(3000);
+
         /* DISK 업그레드 확인 */
-        cy.get('.my-info__subscription > .my-info__card--item > .btn').click(); // Disk 업그레이드
-        cy.get('.input-form').select('100GB'); // 100GB 선택
+        cy.get('.control-box__button > .btn-primary').click(); // Disk 업그레이드
+        cy.wait(3000);
+        cy.get('.right-content > .input-form').select('100GB'); // 100GB 선택
         cy.get(':nth-child(1) > div > .radio-item > em').click(); // 정기 결제 동의
         cy.get('.mt3 > div > .radio-item > em').click(); // 이용 제한 동의
         cy.get('.modal-button-content > .btn-primary').click(); // 구독 개시
-        cy.contains('상품을 정기결제 하셨습니다.', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
+        cy.contains('상품을 정기결제 하셨습니다.'); // 결제 완료 확인
         cy.get('.modal-button-content > .btn').click(); // 팝업 종료
-        cy.contains('이용기간', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
+        cy.contains('이용기간'); // 결제 확인
+
+        /* DISK 다운 그레이드 확인 */
+        cy.contains('다운그레이드').click({ force: true });
+        cy.wait(3000);
+        cy.get('.right-content > .input-form').select('70GB'); // 100GB 선택
+        cy.get(':nth-child(1) > div > .radio-item > em').click(); // 정기 결제 동의
+        cy.get('.mt3 > div > .radio-item > em').click(); // 이용 제한 동의
+        cy.get('.modal-button-content > .btn-primary').click(); // 다운 그레이드 신청
+        cy.contains('상품으로 다운그레이드 신청이 완료되었으며'); // 결제 완료 확인
+        cy.get('.modal-button-content > .btn').click(); // 팝업 종료
+        cy.get('.ng-star-inserted > dd').invoke('text').should('include', '다운그레이드');
+
+        /* DISK 다운 그레이드 취소 확인 */
+        cy.contains('다운그레이드 취소').click({ force: true });
+        cy.wait(3000);
+        cy.get('.modal-button-content > .btn-primary').click(); // 다운그레이드 확인 팝업
+        cy.wait(1000);
+        cy.get('.modal-button-content > .btn').click();
+        cy.get('.control-box__button > .btn-primary').should('exist'); // 다운그레이드 취소 확인
+
+        /* DISK 구독 취소 확인 */
+        cy.contains('구독 취소').click({ force: true });
+        cy.wait(3000);
+        cy.get('.btn-danger').click(); // 해지 신청하기
+        cy.contains('DISK 10GB 무료 서비스'); // 구독 취소 확인
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `SignUp test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `SignUp/SignUp test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            Screenshots.push(screenshotFileName);
             FailTF = false;
         }
     });
     after('Send Email', () => {
         const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
 
-        emailModule.Email(testFails, `SignUp test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
+        emailModule.Email(TestFails, `SignUp test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
     });
 });

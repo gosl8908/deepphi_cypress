@@ -1,14 +1,13 @@
-const { loginModule, ApiModule, sendEmailModule } = require('../module/manager.module.js');
+const { loginModule, ApiModule, sendEmailModule } = require('../../module/manager.module.js');
 
 describe('Image Test Project Create', () => {
-  beforeEach(() => {
-      cy.setDateToEnv();
-      cy.getAll();
-      loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
+    beforeEach(() => {
+        cy.setDateToEnv();
+        cy.getAll();
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {
-
         // 이미지 프로젝트 검색
         cy.get('.search-box > .input-form').type('이미지 평가 프로젝트 자동화 확인용');
         cy.get('.search-box > .btn-primary').click();
@@ -36,12 +35,15 @@ describe('Image Test Project Create', () => {
         cy.log('인퍼런스 생성');
         //인퍼런스 생성
         cy.get(
-            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn').click({ force: true }); // 메뉴바
-            cy.get(
-                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
-            ).click({ force: true }); // 인퍼런스
+            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn',
+        ).click({ force: true }); // 메뉴바
+        cy.get(
+            '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
+        ).click({ force: true }); // 인퍼런스
         cy.wait(3000);
-        cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content > .create-select-item__title').click();
+        cy.get(
+            ':nth-child(2) > .create-select-item__container > .create-select-item__content > .create-select-item__title',
+        ).click();
         cy.get('.modal-button-content > .btn').click();
         cy.get('.ml10 > .btn').click(); // 버전 체크
         cy.wait(1000);
@@ -62,23 +64,21 @@ describe('Image Test Project Create', () => {
         cy.wait(5000);
 
         // api url 복사
-        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then(($el) => {
-    
+        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($el => {
             // 텍스트 추출
             const text = $el.text();
-        
+
             Cypress.env('endpointText', text);
             cy.log('확인된 endpointText 값:', Cypress.env('endpointText'));
-              });
+        });
 
-        cy.get('.documentation-address').then(($el) => {
-    
+        cy.get('.documentation-address').then($el => {
             // 텍스트 추출
             const api = $el.text();
-      
+
             Cypress.env('apiText', api);
             cy.log('확인된 endpointText 값:', Cypress.env('apiText'));
-              });
+        });
 
         cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 예측 이력
 
@@ -98,15 +98,19 @@ describe('Image Test Project Create', () => {
         cy.wait(5000);
         cy.get(':nth-child(1) > :nth-child(14) > .btn').click(); // 삭제
         cy.get('.btn-danger').click(); // 삭제
-        cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should('be.visible');
+        cy.contains('image-inference-automation 인퍼런스 서비스가 삭제되었습니다.', { timeout: 60000 }).should(
+            'be.visible',
+        );
 
-        const testRange = '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제';
-      
-      sendEmailModule.sendEmail(
-        undefined,
-          Cypress.env('AdminId'),
-          'Image Test Project Create ' + Cypress.env('EmailTitle'),
-          testRange,
-          undefined,)
+        const testRange =
+            '1. 이미지 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 인퍼런스 서비스 실행 5. API 호출 6. 중지 7. 인퍼런스 서비스 삭제';
+
+        sendEmailModule.sendEmail(
+            undefined,
+            Cypress.env('AdminId'),
+            'Image Test Project Create ' + Cypress.env('EmailTitle'),
+            testRange,
+            undefined,
+        );
     });
 });

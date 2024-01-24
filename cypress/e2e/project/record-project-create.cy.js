@@ -1,12 +1,12 @@
-const { loginModule, createModule, emailModule } = require('../module/manager.module.js');
+const { loginModule, createModule, emailModule, functionModule: f } = require('../module/manager.module.js');
 
 describe('Record Project Create & Run', () => {
-    let testFails = []; // 실패 원인을 저장할 변수
-    let screenshots = []; // 스크린샷을 저장할 배열
+    let TestFails = []; // 실패 원인을 저장할 변수
+    let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
         const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !testFails.includes(errMessage) && testFails.push(errMessage);
+        !TestFails.includes(errMessage) && TestFails.push(errMessage);
         FailTF = true;
         throw err;
     });
@@ -236,9 +236,14 @@ describe('Record Project Create & Run', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Record Project Create Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Record Project Create/Record Project Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });
@@ -246,6 +251,6 @@ describe('Record Project Create & Run', () => {
         const testRange =
             '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
 
-        emailModule.Email(testFails, `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, testRange, screenshots);
+        emailModule.Email(TestFails, `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
     });
 });
