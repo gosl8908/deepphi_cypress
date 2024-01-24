@@ -1,4 +1,4 @@
-const { loginModule, emailModule } = require('../module/manager.module.js');
+const { loginModule, emailModule, functionModule: f } = require('../module/manager.module.js');
 
 describe('Organization Create', () => {
     let testFails = []; // 실패 원인을 저장할 변수
@@ -143,9 +143,14 @@ describe('Organization Create', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Organization Create Test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `Organization Create/Organization Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });

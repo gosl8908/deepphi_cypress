@@ -162,9 +162,14 @@ describe('SignUp', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `SignUp/SignUp test ${Cypress.env('DateLabel')}`;
+            const screenshotFileName = `SignUp/SignUp Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(screenshotFileName);
-            Screenshots.push(screenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const currentFile = f.getFileName(__filename);
+                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+            } else {
+                Screenshots.push(`${screenshotFileName}`);
+            }
             FailTF = false;
         }
     });
