@@ -5,8 +5,8 @@ describe('SignUp', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -17,14 +17,14 @@ describe('SignUp', () => {
 
     /* 일회용 이메일 만들기 */
     it('Create email', () => {
-        const textToWrite = 'test' + Cypress.env('DateLabel');
+        const SignUpId = 'test' + Cypress.env('DateLabel');
         cy.visit(Cypress.env('DisposableEmail')); // 일회용 이메일 진입
         /* 환경 변수에서 날짜 레이블 가져오기 */
-        cy.get('#id').type(textToWrite); // 필요한 곳에서 텍스트 사용
+        cy.get('#id').type(SignUpId); // 필요한 곳에서 텍스트 사용
         cy.get('#mailList').click();
         cy.wait(5000); // 5초 대기
         // 조합한 텍스트를 파일에 저장
-        cy.writeFile('cypress/fixtures/SignupTest.txt', textToWrite);
+        cy.writeFile('cypress/fixtures/SignupTest.txt', SignUpId);
         cy.wait(3000);
     });
 
@@ -174,7 +174,7 @@ describe('SignUp', () => {
         }
     });
     after('Send Email', () => {
-        const testRange = '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드';
+        '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드 6. DISK 다운그레이드 7. DISK 구독 취소';
 
         emailModule.Email(TestFails, `SignUp test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
     });

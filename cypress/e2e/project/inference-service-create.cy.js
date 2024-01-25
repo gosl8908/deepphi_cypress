@@ -13,8 +13,8 @@ describe('Inference Service Create', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -44,15 +44,15 @@ describe('Inference Service Create', () => {
         inferenceServiceModule.inferenceRun();
 
         // api url 복사
-        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($el => {
+        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($url => {
             // 텍스트 추출
-            const endpoint = $el.text();
+            const Endpoint = $url.text();
 
-            cy.log('확인된 endpointText 값:', endpoint);
+            cy.log('확인된 endpointText 값:', Endpoint);
 
             cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 에측 이력
             cy.wait(5 * 1000);
-            apiModule.api(endpoint, c.IMAGE);
+            apiModule.api(Endpoint, c.IMAGE);
             cy.get('.flex-auto').contains('성공', {
                 timeout: 15 * 1000,
             });
@@ -78,15 +78,15 @@ describe('Inference Service Create', () => {
         inferenceServiceModule.inferenceRun();
 
         // api url 복사
-        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($el => {
+        cy.get('[style="width: calc(100% - 76px);word-break: break-all"]').then($url => {
             // 텍스트 추출
-            const endpoint = $el.text();
+            const Endpoint = $url.text();
 
-            cy.log('확인된 endpointText 값:', endpoint);
+            cy.log('확인된 endpointText 값:', Endpoint);
 
             cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 에측 이력
             cy.wait(30 * 1000);
-            apiModule.api(endpoint, c.RECORD);
+            apiModule.api(Endpoint, c.RECORD);
             cy.get('.flex-auto').contains('성공', {
                 timeout: 30 * 1000,
             });
@@ -117,28 +117,28 @@ describe('Inference Service Create', () => {
         cy.get('.btn-danger').invoke('click'); // 삭제
         cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30 * 1000 });
         if (FailTF) {
-            const screenshotFileName = `Inference Service Create/Inference Service Create Test ${Cypress.env(
+            const ScreenshotFileName = `Inference Service Create/Inference Service Create Test ${Cypress.env(
                 'DateLabel',
             )}`;
-            cy.screenshot(screenshotFileName);
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
 
     after('Send Email', () => {
-        const testRange =
+        const TestRange =
             '1. 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 실행 5. API 호출 6. 결과 조회 7. 중지 8. 삭제 ';
 
         emailModule.Email(
             TestFails,
             `Inference Service Create Test ${Cypress.env('EmailTitle')}`,
-            testRange,
+            TestRange,
             Screenshots,
         );
     });

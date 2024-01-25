@@ -5,8 +5,8 @@ describe('Record Test Project Create', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -43,26 +43,26 @@ describe('Record Test Project Create', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Record Test Project Create/Record Test Project Create Test ${Cypress.env(
+            const ScreenshotFileName = `Record Test Project Create/Record Test Project Create Test ${Cypress.env(
                 'DateLabel',
             )}`;
-            cy.screenshot(screenshotFileName);
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
     after('Send Email', () => {
-        const testRange = '1. 레코드 평가 프로젝트 생성 2. 실행';
+        const TestRange = '1. 레코드 평가 프로젝트 생성 2. 실행';
 
         emailModule.Email(
             TestFails,
             `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
-            testRange,
+            TestRange,
             Screenshots,
         );
     });

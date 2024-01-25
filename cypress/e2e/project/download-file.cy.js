@@ -5,8 +5,8 @@ describe('Download File Test', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -228,13 +228,13 @@ describe('Download File Test', () => {
 
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(screenshotFileName);
+            const ScreenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
@@ -252,9 +252,9 @@ describe('Download File Test', () => {
             cy.contains('성공적으로 삭제되었습니다.', { timeout: 20000 });
             cy.wait(3000);
         }
-        const testRange =
+        const TestRange =
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
 
-        emailModule.Email(TestFails, `Download File Test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
+        emailModule.Email(TestFails, `Download File Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
     });
 });

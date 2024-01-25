@@ -4,8 +4,8 @@ describe('Support Test', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -46,20 +46,20 @@ describe('Support Test', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Support/Support test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(screenshotFileName);
+            const ScreenshotFileName = `Support/Support test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
     after('Send Email', () => {
-        const testRange = '1. 자주 묻는 질문 2. 공지사항 3. 고객지원 4. 질의응답';
+        const TestRange = '1. 자주 묻는 질문 2. 공지사항 3. 고객지원 4. 질의응답';
 
-        emailModule.Email(TestFails, `Support test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
+        emailModule.Email(TestFails, `Support test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
     });
 });

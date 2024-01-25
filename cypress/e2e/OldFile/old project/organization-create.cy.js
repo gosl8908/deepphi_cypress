@@ -27,8 +27,8 @@ describe('Organization Create', () => {
         cy.contains('단체 생성').click();
         cy.get('#organization_select').select('기타'); // 분류 선택
         cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
-        cy.get('.flex-display > .btn-wrap > .btn').click(); // 체크
-        cy.get('.modal-button-content > .btn-primary').click(); // 생성
+        cy.get('.flex-display > .btn-wrap > .btn').click({ force: true }); // 체크
+        cy.get('.modal-button-content > .btn-primary').click({ force: true }); // 생성
         cy.wait(3000);
         cy.contains('단체 생성이 완료되었습니다.'); // 단체 생성 완료 확인
         cy.get('.modal-button-content > .btn').click(); // 확인

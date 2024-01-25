@@ -5,8 +5,8 @@ describe('Image Project Create', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -113,20 +113,20 @@ describe('Image Project Create', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(screenshotFileName);
+            const ScreenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
     after('Send Email', () => {
-        const testRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
+        const TestRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
 
-        emailModule.Email(TestFails, `Image Project Create Test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
+        emailModule.Email(TestFails, `Image Project Create Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
     });
 });

@@ -12,8 +12,8 @@ describe('Dataset Upload Test', () => {
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
     Cypress.on('fail', (err, runnable) => {
-        const errMessage = err.message || '알 수 없는 이유로 실패함';
-        !TestFails.includes(errMessage) && TestFails.push(errMessage);
+        const ErrMessage = err.message || '알 수 없는 이유로 실패함';
+        !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
         FailTF = true;
         throw err;
     });
@@ -48,21 +48,21 @@ describe('Dataset Upload Test', () => {
     });
     afterEach('Status Check', () => {
         if (FailTF) {
-            const screenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(screenshotFileName);
+            const ScreenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
     after('Send Email', () => {
-        const testRange =
+        const TestRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
 
-        emailModule.Email(TestFails, `Dataset Upload Test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
+        emailModule.Email(TestFails, `Dataset Upload Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
     });
 });
