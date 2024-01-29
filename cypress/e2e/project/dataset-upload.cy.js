@@ -26,24 +26,26 @@ describe('Dataset Upload Test', () => {
     it('Image Dataset Upload test', () => {
         cy.contains('이미지 데이터셋').click();
         cy.wait(3 * 1000);
-        createModule.createImageDataset(
-            '2D',
-            c.CLASSIFICATION,
-            c.CASE1,
-            '2D_CL_Case1',
-            'ImageDataset' + Cypress.env('DateLabel'),
-        );
+        createModule.createImageDataset({
+            Dimension: '2D',
+            LabelType: c.CLASSIFICATION,
+            Structure: c.CASE1,
+            FolderName: '2D_CL_Case1',
+            Dataset: 'dataset.zip',
+            // Label: 'Label.csv',
+            Title: `ImageDataset${Cypress.env('DateLabel')}`,
+        });
         datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
     });
 
     it('Record Dataset Upload test', () => {
         cy.contains('레코드 데이터셋').click();
-        createModule.createRecordDataset(
-            '자동화용 데이터셋.csv',
-            '자동화용 데이터셋.csv',
-            '자동화용 데이터셋.csv',
-            'RecordDataset' + Cypress.env('DateLabel'),
-        );
+        createModule.createRecordDataset({
+            TrainFileName: '자동화용 데이터셋.csv',
+            TestFileName: '자동화용 데이터셋.csv',
+            ValidationFileName: '자동화용 데이터셋.csv',
+            Title: `RecordDataset${Cypress.env('DateLabel')}`,
+        });
         datasetModule.settingRecordDataset();
     });
     afterEach('Status Check', () => {

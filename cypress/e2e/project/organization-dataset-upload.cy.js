@@ -29,13 +29,15 @@ describe('Organization Dataset Upload', () => {
         cy.get('.organization-changer__opener').click();
         cy.contains('자동화용 단체').click(); // 단체 선택
         cy.wait(5000);
-        createModule.createImageDataset(
-            '2D',
-            c.CLASSIFICATION,
-            c.CASE1,
-            '2D_CL_Case1',
-            'ImageDataset' + Cypress.env('DateLabel'),
-        );
+        createModule.createImageDataset({
+            Dimension: '2D',
+            LabelType: c.CLASSIFICATION,
+            Structure: c.CASE1,
+            FolderName: '2D_CL_Case1',
+            Dataset: 'dataset.zip',
+            // Label: 'Label.csv',
+            Title: `ImageDataset${Cypress.env('DateLabel')}`,
+        });
         datasetModule.settingImageDataset(1, '2D');
     });
     it('Organization Record Dataset Upload', () => {
@@ -45,12 +47,12 @@ describe('Organization Dataset Upload', () => {
         cy.contains('자동화용 단체').click(); // 단체 선택
         cy.wait(5000);
 
-        createModule.createRecordDataset(
-            '자동화용 데이터셋.csv',
-            '자동화용 데이터셋.csv',
-            '자동화용 데이터셋.csv',
-            'RecordDataset' + Cypress.env('DateLabel'),
-        );
+        createModule.createRecordDataset({
+            TrainFileName: '자동화용 데이터셋.csv',
+            TestFileName: '자동화용 데이터셋.csv',
+            ValidationFileName: '자동화용 데이터셋.csv',
+            Title: `RecordDataset${Cypress.env('DateLabel')}`,
+        });
         datasetModule.settingRecordDataset();
     });
     afterEach('Status Fail', () => {
@@ -58,8 +60,8 @@ describe('Organization Dataset Upload', () => {
             const ScreenshotFileName = `Organization Dataset Upload/Organization Dataset Upload Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${ScreenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
@@ -73,7 +75,7 @@ describe('Organization Dataset Upload', () => {
             TestFails,
             `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
             TestRange,
-            Screenshots,
+            screenshots,
         );
     });
 });

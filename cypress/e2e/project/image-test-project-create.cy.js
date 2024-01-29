@@ -38,7 +38,25 @@ describe('Image Test Project Create', () => {
         cy.get('.as-vertical > .flow > .modeler__status-panner > .modeler-header__run-action-button > .btn').click({
             force: true,
         });
-        cy.contains('실행', { timeout: 60000 }).should('be.visible');
+        cy.get('.modeler-header__run-action-button > .btn')
+            .contains('중지', { timeout: 30 * 1000 })
+            .should('be.visible');
+        const Status = cy
+            .get('.modeler__status')
+            .contains('완료', { timeout: 420 * 1000 })
+            .should('be.visible');
+
+        if (Status) {
+            cy.get(
+                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn',
+            ).click();
+            cy.get(
+                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown',
+            )
+                .contains('삭제')
+                .click();
+            cy.get('.btn-danger').click();
+        }
     });
     afterEach('Status Fail', () => {
         if (FailTF) {

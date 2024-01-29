@@ -25,12 +25,6 @@ describe('Image Project Create', () => {
         cy.get(
             ':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
         ).click({ force: true }); // 데이터 프로세싱 cpu.4
-        // cy.get(':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
-        cy.get('.cpu-gpu--selector > :nth-child(2) > div > .radio-item > em').click(); // 뉴럴 네트워크 CPU
-        cy.get(
-            ':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
-        ).click({ force: true }); // 뉴럴 네트워크 cpu.4
-        // cy.get(':nth-child(6) > dd > .select-row__content > :nth-child(2) > .select-row__item > .form-item > .label-form > .input-form').type('2');
         cy.get('.btn-primary').click(); // 저장
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.contains('성공적으로 저장되었습니다.'); // 저장 확인
@@ -109,7 +103,33 @@ describe('Image Project Create', () => {
         cy.log('프로젝트 실행');
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
-        cy.contains('중지', { timeout: 30000 }).should('be.visible');
+        cy.get('.modeler-header__run-action-button > .btn')
+            .contains('중지', { timeout: 30 * 1000 })
+            .should('be.visible');
+        const Status = cy
+            .get('.modeler__status')
+            .contains('완료', { timeout: 420 * 1000 })
+            .should('be.visible');
+
+        if (Status) {
+            cy.get('dt > p').then($url => {
+                // 텍스트 추출
+                const Title = $url.text();
+                cy.get('.btn-home').click();
+                cy.wait(5 * 1000);
+                cy.get('.search-box > .input-form').type(Title);
+                cy.get('.search-box > .btn-primary').click();
+                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn > .fas').click();
+                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown')
+                    .contains('삭제')
+                    .click();
+                cy.get('.btn-danger').click();
+                cy.wait(3 * 1000);
+                cy.get('.project-list--none')
+                    .contains('안녕하세요! DEEP:PHI 플랫폼 운영팀입니다.', { timeout: 10 * 1000 })
+                    .should('be.visible');
+            });
+        }
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
