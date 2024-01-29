@@ -272,7 +272,11 @@ describe('Record Project Create & Run', () => {
     after('Send Email', () => {
         const TestRange =
             '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
-
-        emailModule.Email(TestFails, `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Record Project Cteate Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

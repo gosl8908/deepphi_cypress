@@ -78,12 +78,11 @@ describe('Record Test Project Create', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 레코드 평가 프로젝트 생성 2. 실행';
-
-        emailModule.Email(
-            TestFails,
-            `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            Screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

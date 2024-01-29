@@ -146,7 +146,11 @@ describe('Image Project Create', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
-
-        emailModule.Email(TestFails, `Image Project Create Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Image Project Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

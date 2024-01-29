@@ -59,7 +59,11 @@ describe('Support Test', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 자주 묻는 질문 2. 공지사항 3. 고객지원 4. 질의응답';
-
-        emailModule.Email(TestFails, `Support test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Support test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

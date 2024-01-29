@@ -75,12 +75,11 @@ describe('Image Test Project Create', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 이미지 평가 프로젝트 생성 2. 실행';
-
-        emailModule.Email(
-            TestFails,
-            `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            Screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

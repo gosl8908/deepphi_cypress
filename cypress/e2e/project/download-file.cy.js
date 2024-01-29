@@ -255,6 +255,11 @@ describe('Download File Test', () => {
         const TestRange =
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
 
-        emailModule.Email(TestFails, `Download File Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Download File Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

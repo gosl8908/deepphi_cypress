@@ -134,12 +134,11 @@ describe('Inference Service Create', () => {
     after('Send Email', () => {
         const TestRange =
             '1. 평가 프로젝트 생성 2. 실행 3. 인퍼런스 서비스 생성 4. 실행 5. API 호출 6. 결과 조회 7. 중지 8. 삭제 ';
-
-        emailModule.Email(
-            TestFails,
-            `Inference Service Create Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            Screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Inference Service Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

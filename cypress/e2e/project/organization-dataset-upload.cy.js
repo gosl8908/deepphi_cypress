@@ -71,11 +71,11 @@ describe('Organization Dataset Upload', () => {
     after('Send Email', () => {
         const TestRange =
             '1. 단체 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 단체 레코드 데이터셋 업로드 6. 설정 완료';
-        emailModule.Email(
-            TestFails,
-            `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Organization Dataset Upload Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });
