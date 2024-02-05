@@ -1,5 +1,6 @@
 const {
     loginModule,
+    datasetModule,
     createModule,
     apiModule,
     emailModule,
@@ -22,111 +23,114 @@ describe('로그인', () => {
     });
 
     it('test', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
-        //     createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용');
-
-        //     cy.log('프로젝트 실행');
-        //     /* 프로젝트 Run */
-        //     cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
-        //     cy.get('.modeler__status')
-        //         .contains('실행', { timeout: 10 * 1000 })
-        //         .should('be.visible');
-        //     cy.get('.modeler__status')
-        //         .contains('완료', { timeout: 360 * 1000 })
-        //         .should('be.visible');
-        //     cy.wait(3 * 1000);
-
-        //     inferenceServiceModule.InferenceCreate();
-
-        //     inferenceServiceModule.InferenceRun();
-
-        //     /* 복사 버튼 대신 */
-        //     cy.get('[style="width: calc(100% - 76px);word-break: break-all"]')
-        //         .then($el => {
-        //             return $el.text();
-        //         })
-        //         .then($e2 => {
-        //             cy.get('.default-tab > ul > :nth-child(2) > button').click();
-        //             cy.wait(5 * 1000);
-        //             apiModule.api($e2, c.IMAGE);
-        //             cy.get('.flex-auto').contains('성공', {
-        //                 timeout: 15 * 1000,
-        //             });
-        //         });
-        // });
-        // afterEach('Status Fail', () => {
-        //     cy.visit('https://www.deepphi.ai/user/my/inference');
-        //     cy.wait(10000);
-
-        //     //서비스 실행 중지 & 서비스 삭제
-        //     if (cy.get('.card-content').contains('실행')) {
-        //         cy.get(':nth-child(1) > :nth-child(11) > .btn').realClick();
-        //         cy.wait(15000);
-        //         cy.log('인퍼런스 서비스 - 중지');
-        //         cy.get(':nth-child(1) > :nth-child(14) > .btn > .fa-solid').realClick();
-        //         cy.wait(3000);
-        //         cy.get('.btn-danger > .fa-solid').realClick();
-        //         cy.contains('인퍼런스 서비스가 삭제되었습니다', { timeout: 15000 }).should('be.visible');
-        //         cy.log('인퍼런스 서비스 - 삭제완료');
-        //     } else {
-        //         cy.log('에러 - 삭제할 프로젝트 없음');
-        //     }
-        //     if (FailTF) {
-        //         const screenshotFileName = `Login Test ${Cypress.env('DateLabel')}`;
-        //         cy.screenshot(screenshotFileName);
-        //         screenshots.push(screenshotFileName);
-        //         FailTF = false;
-        //     }
+        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
     });
+    // loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
+    //     createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용');
 
-    afterEach('Status Check', () => {
-        if (FailTF) {
-            const ScreenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(ScreenshotFileName);
-            if (!Cypress.platform.includes('win')) {
-                const CurrentFile = f.getFileName(__filename);
-                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
-            } else {
-                Screenshots.push(`${ScreenshotFileName}`);
-            }
-            FailTF = false;
-        }
-    });
-    after('Send Email', () => {
-        //   cy.visit(`${Cypress.env('Prod')}user/my/inference`);
-        //   cy.wait(5000);
+    //     cy.log('프로젝트 실행');
+    //     /* 프로젝트 Run */
+    //     cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
+    //     cy.get('.modeler__status')
+    //         .contains('실행', { timeout: 10 * 1000 })
+    //         .should('be.visible');
+    //     cy.get('.modeler__status')
+    //         .contains('완료', { timeout: 360 * 1000 })
+    //         .should('be.visible');
+    //     cy.wait(3 * 1000);
 
-        //   /* 인퍼런스 삭제 */
-        //   cy.get('tr.ng-star-inserted > :nth-child(5)')
-        //   .eq(0)
-        //   .invoke('text')
-        //   .then((text) => {
-        //     // 텍스트가 "중지" 또는 "대기"인 경우
-        //     if (text.includes('중지') || text.includes('대기')) {
-        //       cy.log('현재 상태: 중지, 대기');
-        //       cy.get(':nth-child(1) > :nth-child(14) > .btn').invoke('click');
-        //     }
-        //   else if(text.includes('실행')) {
-        //       // 텍스트가 "실행"인 경우
-        //       cy.log('현재 상태: 실행');
-        //       cy.get(':nth-child(11) > .btn').invoke('click');
-        //       cy.wait(15000);
-        //       cy.get(':nth-child(1) > :nth-child(14) > .btn').invoke('click');
-        //     }
-        //   });
-        //   cy.get('.btn-danger').invoke('click'); // 삭제
-        //   cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
+    //     inferenceServiceModule.InferenceCreate();
 
-        const TestRange = '1. 로그인 ';
+    //     inferenceServiceModule.InferenceRun();
 
-        emailModule.Email({
-            TestFails: TestFails,
-            EmailTitle: `Login Test ${Cypress.env('EmailTitle')}`,
-            TestRange: TestRange,
-            Screenshots: Screenshots,
-        });
-    });
+    //     /* 복사 버튼 대신 */
+    //     cy.get('[style="width: calc(100% - 76px);word-break: break-all"]')
+    //         .then($el => {
+    //             return $el.text();
+    //         })
+    //         .then($e2 => {
+    //             cy.get('.default-tab > ul > :nth-child(2) > button').click();
+    //             cy.wait(5 * 1000);
+    //             apiModule.api($e2, c.IMAGE);
+    //             cy.get('.flex-auto').contains('성공', {
+    //                 timeout: 15 * 1000,
+    //             });
+    //         });
+    // });
+    // afterEach('Status Fail', () => {
+    //     cy.visit('https://www.deepphi.ai/user/my/inference');
+    //     cy.wait(10000);
+
+    //     //서비스 실행 중지 & 서비스 삭제
+    //     if (cy.get('.card-content').contains('실행')) {
+    //         cy.get(':nth-child(1) > :nth-child(11) > .btn').realClick();
+    //         cy.wait(15000);
+    //         cy.log('인퍼런스 서비스 - 중지');
+    //         cy.get(':nth-child(1) > :nth-child(14) > .btn > .fa-solid').realClick();
+    //         cy.wait(3000);
+    //         cy.get('.btn-danger > .fa-solid').realClick();
+    //         cy.contains('인퍼런스 서비스가 삭제되었습니다', { timeout: 15000 }).should('be.visible');
+    //         cy.log('인퍼런스 서비스 - 삭제완료');
+    //     } else {
+    //         cy.log('에러 - 삭제할 프로젝트 없음');
+    //     }
+    //     if (FailTF) {
+    //         const screenshotFileName = `Login Test ${Cypress.env('DateLabel')}`;
+    //         cy.screenshot(screenshotFileName);
+    //         screenshots.push(screenshotFileName);
+    //         FailTF = false;
+    //     }
 });
+
+// afterEach('Status Check', () => {
+//     if (FailTF) {
+//         const ScreenshotFileName = `Dataset Upload Test ${Cypress.env('DateLabel')}`;
+//         cy.screenshot(ScreenshotFileName);
+//         if (!Cypress.platform.includes('win')) {
+//             const CurrentFile = f.getFileName(__filename);
+//             Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
+//         } else {
+//             Screenshots.push(`${ScreenshotFileName}`);
+//         }
+//         FailTF = false;
+//     }
+// });
+// after('Send Email', () => {
+//   cy.visit(`${Cypress.env('Prod')}user/my/inference`);
+//   cy.wait(5000);
+
+//   /* 인퍼런스 삭제 */
+//   cy.get('tr.ng-star-inserted > :nth-child(5)')
+//   .eq(0)
+//   .invoke('text')
+//   .then((text) => {
+//     // 텍스트가 "중지" 또는 "대기"인 경우
+//     if (text.includes('중지') || text.includes('대기')) {
+//       cy.log('현재 상태: 중지, 대기');
+//       cy.get(':nth-child(1) > :nth-child(14) > .btn').invoke('click');
+//     }
+//   else if(text.includes('실행')) {
+//       // 텍스트가 "실행"인 경우
+//       cy.log('현재 상태: 실행');
+//       cy.get(':nth-child(11) > .btn').invoke('click');
+//       cy.wait(15000);
+//       cy.get(':nth-child(1) > :nth-child(14) > .btn').invoke('click');
+//     }
+//   });
+//   cy.get('.btn-danger').invoke('click'); // 삭제
+//   cy.contains('인퍼런스 서비스가 삭제되었습니다.', { timeout: 30*1000 });
+
+//         const TestRange = '1. 로그인 ';
+
+//         emailModule.Email({
+//             TestFails: TestFails,
+//             EmailTitle: `Login Test ${Cypress.env('EmailTitle')}`,
+//             TestRange: TestRange,
+//             Screenshots: Screenshots,
+//         });
+//     });
+// });
 // createModule.createImageDataset('2D', 1, 1, '2D_CL_Case1', 'ImageDataset' + Cypress.env('DateLabel'));
 // createModule.createRecordDataset('자동화용 데이터셋.csv', 'RecordDataset' + Cypress.env('DateLabel'));
 // createModule.createRecordProject('RecordDataset' + Cypress.env('DateLabel'));

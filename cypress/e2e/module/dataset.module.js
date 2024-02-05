@@ -1,10 +1,14 @@
 const { CLASSIFICATION, SEGMENTATION, DETECTION, TRANSFORMATION, CASE1, CASE2 } = require('./constant.module');
 
-function settingImageDataset(LabelType, Content) {
+function settingImageDataset(LabelType, Content, Site = undefined) {
     // 첫번째 데이터셋 선택
     cy.log('첫번째 데이터셋 선택');
-    cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({ timeout: 70000 });
 
+    if (Site === 'Onprem') {
+        cy.get(':nth-child(2) > .dashboard-card > .dashboard-card__name > button').click();
+    } else {
+        cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click({ timeout: 70000 });
+    }
     // 타입별 기다리는 시간 조정 => 이후 오류시 일정 시간으로 통일 및 조정 필요
     if (LabelType == SEGMENTATION) {
         cy.wait(70000);
@@ -61,38 +65,57 @@ function settingImageDataset(LabelType, Content) {
     cy.contains('삭제');
     cy.get('.btn-danger').click();
     cy.wait(10000);
-    cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.');
+    if (Site === 'Onprem') {
+        cy.contains('최근 공유된 데이터셋', { timeout: 10 * 1000 });
+    } else {
+        cy.contains('데이터를 업로드하여 연구용 데이터셋을 만들 수 있습니다.', { timeout: 10 * 1000 });
+    }
 }
 
-function settingRecordDataset() {
+function settingRecordDataset(Site = undefined) {
     // 첫번째 데이터셋 선택
     cy.log('첫번째 데이터셋 선택');
-    cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click();
+    if (Site === 'Onprem') {
+        cy.get(':nth-child(2) > .dashboard-card > .dashboard-card__name > button').click();
+    } else {
+        cy.get(':nth-child(1) > .dashboard-card__item--body > .title').click();
+    }
 
     cy.wait(3000);
     cy.contains('삭제', { timeout: 10000 });
     cy.get('.fa-solid.fa-check', { timeout: 10000 }).eq(1).click({ force: true });
     cy.contains('샘플데이터', { timeout: 60000 }).should('be.visible');
 
-    /* 데이터셋 화면 나가기 */
-    cy.get('.btn-home').click();
-    cy.wait(5000);
+    /* 데이터셋 정보 변경 & 삭제 */
+    if (Site === 'Onprem') {
+        cy.get('.gnb__container > .gnb--logo').click();
+        cy.wait(5000);
+        cy.get('.gnb__nav > ul > :nth-child(1) > button').click();
+        cy.wait(3000);
+        cy.get('.default-tab > ul > :nth-child(2) > button').click();
+        cy.wait(3000);
+        cy.get(':nth-child(2) > .dashboard-card > .dashboard-card__control > .btn').click();
+        cy.get(':nth-child(2) > .dashboard-card > .dashboard-card__control > .list-dropdown').contains('삭제').click();
+    } else {
+        cy.get('.btn-home').click();
+        cy.wait(5000);
+        cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
+        cy.get(
+            ':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button',
+        ).click();
+        cy.get('.project-info__control > .btn').click();
+        cy.get('#dataset_name')
+            .clear()
+            .type(`Change${Cypress.env('DateLabel')}`);
+        cy.get('.modal-button-content > .btn-primary').click();
 
-    cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
-    cy.get(
-        ':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(1) > button',
-    ).click();
-    cy.get('.project-info__control > .btn').click();
-    cy.get('#dataset_name')
-        .clear()
-        .type(`Change${Cypress.env('DateLabel')}`);
-    cy.get('.modal-button-content > .btn-primary').click();
-
-    cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
-    cy.get(
-        ':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
-    ).click();
+        cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn').click();
+        cy.get(
+            ':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown > :nth-child(2) > button',
+        ).click();
+    }
     cy.get('.btn-danger').click();
+    cy.wait(1000);
     cy.contains('성공적으로 삭제되었습니다.').should('be.visible');
 }
 module.exports = {

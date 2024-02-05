@@ -10,11 +10,6 @@ function createImageDataset({
     Title,
     Detail = Title,
 }) {
-    const FolderPath = FolderName ? `${FolderName}/` : '';
-    cy.log(FolderPath);
-    // Create Dataset 클릭
-    cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-    cy.wait(5000);
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -35,6 +30,8 @@ function createImageDataset({
     // 2단계 Next 버튼 선택
     cy.get('.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click();
 
+    const FolderPath = FolderName ? `${FolderName}/` : '';
+    cy.log(FolderPath);
     const FilePathDataset = `image/${FolderPath}${Dataset}`;
     const FilePathLabel = `image/${FolderPath}${Label}`;
     cy.log(FilePathDataset);
@@ -113,10 +110,8 @@ function createRecordDataset({
     ValidationFileName = undefined,
     Title,
     Detail = Title,
+    Site = undefined,
 }) {
-    // Create Dataset 클릭
-    cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-    cy.wait(5000);
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -152,9 +147,17 @@ function createRecordDataset({
     // 2단계 Next 버튼 선택
     cy.get('.btn-primary').click();
 
-    // Dataset 업로드 확인
-    cy.wait(5000);
-    cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160 * 1000 }).should('not.exist');
+    if (Site === 'Onprem') {
+        cy.get('.default-tab > ul > :nth-child(2) > button').click();
+        cy.wait(5000);
+        cy.get('jhi-organization-record-dataset.ng-star-inserted')
+            .contains('업로드중에는 진입이 불가능합니다', { timeout: 160 * 1000 })
+            .should('not.exist');
+    } else {
+        // Dataset 업로드 확인
+        cy.wait(5000);
+        cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160 * 1000 }).should('not.exist');
+    }
 }
 
 function createRecordProject(Title, Detail = Title) {

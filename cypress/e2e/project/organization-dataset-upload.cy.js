@@ -29,6 +29,9 @@ describe('Organization Dataset Upload', () => {
         cy.get('.organization-changer__opener').click();
         cy.contains('자동화용 단체').click(); // 단체 선택
         cy.wait(5000);
+        // Create Dataset 클릭
+        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
         createModule.createImageDataset({
             Dimension: '2D',
             LabelType: c.CLASSIFICATION,
@@ -46,7 +49,9 @@ describe('Organization Dataset Upload', () => {
         cy.get('.organization-changer__opener').click();
         cy.contains('자동화용 단체').click(); // 단체 선택
         cy.wait(5000);
-
+        // Create Dataset 클릭
+        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
         createModule.createRecordDataset({
             TrainFileName: '자동화용 데이터셋.csv',
             TestFileName: '자동화용 데이터셋.csv',

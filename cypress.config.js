@@ -89,7 +89,7 @@ module.exports = defineConfig({
             ProdTest: 'http://st.deepphi.ai/',
             DisposableEmail: 'https://ruu.kr/',
             // 계정
-            AdminId: 'gosl8908@deepnoid.com',
+            AdminId: 'admin@deepnoid.com',
             KangTestId2: 'deepphi.auto2@ruu.kr',
             KangTestId3: 'deepphi.auto3@ruu.kr',
             KangTestId4: 'deepphi.auto4@ruu.kr',
@@ -99,6 +99,7 @@ module.exports = defineConfig({
             OnpremId: 'asdasdasd3@ruu.kr',
             KangTestPwd: 'test123!',
             supporttest: 'supporttest@ruu.kr',
+            adminPwd: 'deep1004!!',
             // 형식
             classification: 1,
             segmentation: 2,

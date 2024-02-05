@@ -35,10 +35,12 @@ describe('Support Test', () => {
     it('QA Test', () => {
         cy.visit(`${Cypress.env('Prod')}support/qa`);
         cy.get('.btn-primary').click();
+        cy.wait(3 * 1000);
         cy.get('.input-form').type(`자동화 테스트 ${Cypress.env('DateLabel')}`);
         cy.get('.note-editable > :nth-child(10)').type(`자동화 테스트 ${Cypress.env('DateLabel')}`);
         cy.get('.pull-right > .btn-primary').click();
         cy.contains('질문이 저장되었습니다.');
+        cy.wait(3 * 1000);
         cy.contains('자동화 테스트').click();
         cy.get('.btn-danger').click();
         cy.get('.modal-button-content > .btn-danger').click();
