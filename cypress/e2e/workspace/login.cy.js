@@ -36,9 +36,9 @@ describe('로그인', () => {
             .should('be.visible');
         cy.wait(3 * 1000);
 
-        inferenceServiceModule.InferenceCreate();
+        inferenceServiceModule.inferenceCreate();
 
-        inferenceServiceModule.InferenceRun();
+        inferenceServiceModule.inferenceRun();
 
         /* 복사 버튼 대신 */
         cy.get('[style="width: calc(100% - 76px);word-break: break-all"]')
