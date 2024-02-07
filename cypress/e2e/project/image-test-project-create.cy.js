@@ -38,7 +38,25 @@ describe('Image Test Project Create', () => {
         cy.get('.as-vertical > .flow > .modeler__status-panner > .modeler-header__run-action-button > .btn').click({
             force: true,
         });
-        cy.contains('실행', { timeout: 60000 }).should('be.visible');
+        cy.get('.modeler-header__run-action-button > .btn')
+            .contains('중지', { timeout: 30 * 1000 })
+            .should('be.visible');
+        const Status = cy
+            .get('.modeler__status')
+            .contains('완료', { timeout: 420 * 1000 })
+            .should('be.visible');
+
+        if (Status) {
+            cy.get(
+                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .btn',
+            ).click();
+            cy.get(
+                '.current > .test-project__item--header > .test-project__item--control > .list-dropdown-wrap > .list-dropdown',
+            )
+                .contains('삭제')
+                .click();
+            cy.get('.btn-danger').click();
+        }
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
@@ -57,12 +75,11 @@ describe('Image Test Project Create', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 이미지 평가 프로젝트 생성 2. 실행';
-
-        emailModule.Email(
-            TestFails,
-            `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            Screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Image Test Project Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

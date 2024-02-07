@@ -20,14 +20,15 @@ describe('Dataset Upload Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Onprem'), Cypress.env('OnpremId'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Dataset Upload test', () => {
-        cy.contains('이미지 데이터셋').click();
+        cy.get('.gnb__nav > ul > :nth-child(1) > button').contains('데이터셋').click();
         cy.wait(3 * 1000);
-        // Create Dataset 클릭
-        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+
+        /* 이미지 데이터셋 업로드 */
+        cy.contains('이미지 데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
         cy.wait(5000);
         createModule.createImageDataset({
             Dimension: '2D',
@@ -38,22 +39,29 @@ describe('Dataset Upload Test', () => {
             // Label: 'Label.csv',
             Title: `ImageDataset${Cypress.env('DateLabel')}`,
         });
-        datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
+
+        /* 이미지 데이터셋 세팅 */
+        datasetModule.settingImageDataset(c.CLASSIFICATION, '2D', 'Onprem');
     });
 
     it('Record Dataset Upload test', () => {
-        cy.contains('레코드 데이터셋').click();
+        cy.get('.gnb__nav > ul > :nth-child(1) > button').contains('데이터셋').click();
         cy.wait(3 * 1000);
-        // Create Dataset 클릭
-        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+
+        /* 레코드 데이터셋 업로드 */
+        cy.contains('레코드 데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
         cy.wait(5000);
         createModule.createRecordDataset({
             TrainFileName: '자동화용 데이터셋.csv',
             TestFileName: '자동화용 데이터셋.csv',
             ValidationFileName: '자동화용 데이터셋.csv',
             Title: `RecordDataset${Cypress.env('DateLabel')}`,
+            Site: 'Onprem',
         });
-        datasetModule.settingRecordDataset();
+
+        /* 레코드 데이터셋 세팅 */
+        cy.get('.default-tab > ul > :nth-child(2) > button').click();
+        datasetModule.settingRecordDataset('Onprem');
     });
     afterEach('Status Check', () => {
         if (FailTF) {

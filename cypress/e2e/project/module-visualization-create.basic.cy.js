@@ -104,12 +104,11 @@ describe('Record Project visualization Create Test', () => {
     });
     after('Send Email', () => {
         const TestRange = '1. 클랜징 모듈 시각화 2. 프로세싱 모듈 시각화 3. DL 모듈 시각화 4. ML 모듈 시각화 ';
-
-        emailModule.Email(
-            TestFails,
-            `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
-            TestRange,
-            Screenshots,
-        );
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Record Project Module Visualization Create Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

@@ -1,9 +1,15 @@
 const { CLASSIFICATION, SEGMENTATION, DETECTION, TRANSFORMATION, CASE1, CASE2 } = require('./constant.module');
 
-function createImageDataset(Dimension, LabelType, Structure, FileName, Title, Detail = Title) {
-    // Create Dataset 클릭
-    cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-    cy.wait(5000);
+function createImageDataset({
+    Dimension,
+    LabelType,
+    Structure,
+    FolderName = undefined,
+    Dataset,
+    Label = undefined,
+    Title,
+    Detail = Title,
+}) {
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -24,30 +30,35 @@ function createImageDataset(Dimension, LabelType, Structure, FileName, Title, De
     // 2단계 Next 버튼 선택
     cy.get('.ng-untouched > .create-dataset > .step-content-box > .page-button > .btn-primary').click();
 
+    const FolderPath = FolderName ? `${FolderName}/` : '';
+    cy.log(FolderPath);
+    const FilePathDataset = `image/${FolderPath}${Dataset}`;
+    const FilePathLabel = `image/${FolderPath}${Label}`;
+    cy.log(FilePathDataset);
     // 타입별 데이터셋 파일 첨부
     if (LabelType === CLASSIFICATION) {
         if (Structure === CASE1) {
             // Dataset 파일 첨부
             cy.get('input[accept=".zip"][type="file"]').attachFile({
                 // fileContent,
-                filePath: 'image/' + FileName + '/Dataset.zip',
-                fileName: 'Dataset.zip',
+                filePath: FilePathDataset,
+                fileName: Dataset,
                 mimeType: 'application/zip',
             });
         } else {
             // Dataset 파일 첨부
             cy.get('input[accept=".zip"][type="file"]').attachFile({
                 // fileContent,
-                filePath: 'image/' + FileName + '/Dataset.zip',
-                fileName: 'Dataset.zip',
+                filePath: FilePathDataset,
+                fileName: Dataset,
                 mimeType: 'application/zip',
             });
 
             // Label 파일 첨부
             cy.get('.mb20 > .file-input > .input-wrap > input[accept=".csv"][type="file"]').attachFile({
                 // fileContent,
-                filePath: 'image/' + FileName + '/Label.csv',
-                fileName: 'Label.csv',
+                filePath: FilePathLabel,
+                fileName: Label,
                 mimeType: 'application/csv',
             });
         }
@@ -55,16 +66,16 @@ function createImageDataset(Dimension, LabelType, Structure, FileName, Title, De
         // Dataset 파일 첨부
         cy.get('input[accept=".zip"][type="file"]').attachFile({
             // fileContent,
-            filePath: 'image/' + FileName + '/Dataset.zip',
-            fileName: 'Dataset.zip',
+            filePath: FilePathDataset,
+            fileName: Dataset,
             mimeType: 'application/zip',
         });
 
         // Label 파일 첨부
         cy.get('.mb20 > .file-input > .input-wrap > input[accept=".zip"][type="file"]').attachFile({
             // fileContent,
-            filePath: 'image/' + FileName + '/Label.csv',
-            fileName: 'Label.zip',
+            filePath: FilePathLabel,
+            fileName: Label,
             mimeType: 'application/zip',
         });
     }
@@ -93,10 +104,14 @@ function createImageProject(Title, Detail = Title) {
     cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
 }
 
-function createRecordDataset(TrainFileName, TestFileName, ValidationFileName, Title, Detail = Title) {
-    // Create Dataset 클릭
-    cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-    cy.wait(5000);
+function createRecordDataset({
+    TrainFileName,
+    TestFileName = undefined,
+    ValidationFileName = undefined,
+    Title,
+    Detail = Title,
+    Site = undefined,
+}) {
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -104,40 +119,45 @@ function createRecordDataset(TrainFileName, TestFileName, ValidationFileName, Ti
     // 1단계 Next 버튼 선택
     cy.get('.page-button > .btn').click();
 
+    const filePathTrain = `record/${TrainFileName}`;
+    const filePathTest = `record/${TestFileName}`;
+    const filePathValidation = `record/${ValidationFileName}`;
     // Dataset 파일 첨부
-    cy.get('input[accept=".csv"][type="file"]')
-        .eq(0)
-        .attachFile({
-            // fileContent,
-            filePath: 'record/' + TrainFileName,
-            fileName: TrainFileName,
-            mimeType: 'text/csv',
-        });
-    cy.get('input[accept=".csv"][type="file"]')
-        .eq(1)
-        .attachFile({
-            // fileContent,
-            filePath: 'record/' + TestFileName,
-            fileName: TestFileName,
-            mimeType: 'text/csv',
-        });
-    cy.get('input[accept=".csv"][type="file"]')
-        .eq(2)
-        .attachFile({
-            // fileContent,
-            filePath: 'record/' + ValidationFileName,
-            fileName: ValidationFileName,
-            mimeType: 'text/csv',
-        });
+    cy.get('input[accept=".csv"][type="file"]').eq(0).attachFile({
+        // fileContent,
+        filePath: filePathTrain,
+        fileName: TrainFileName,
+        mimeType: 'text/csv',
+    });
+    cy.get('input[accept=".csv"][type="file"]').eq(1).attachFile({
+        // fileContent,
+        filePath: filePathTest,
+        fileName: TestFileName,
+        mimeType: 'text/csv',
+    });
+    cy.get('input[accept=".csv"][type="file"]').eq(2).attachFile({
+        // fileContent,
+        filePath: filePathValidation,
+        fileName: ValidationFileName,
+        mimeType: 'text/csv',
+    });
 
     cy.get('em').click(); // 자동탐지 체크
 
     // 2단계 Next 버튼 선택
     cy.get('.btn-primary').click();
 
-    // Dataset 업로드 확인
-    cy.wait(5000);
-    cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160 * 1000 }).should('not.exist');
+    if (Site === 'Onprem') {
+        cy.get('.default-tab > ul > :nth-child(2) > button').click();
+        cy.wait(5000);
+        cy.get('jhi-organization-record-dataset.ng-star-inserted')
+            .contains('업로드중에는 진입이 불가능합니다', { timeout: 160 * 1000 })
+            .should('not.exist');
+    } else {
+        // Dataset 업로드 확인
+        cy.wait(5000);
+        cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160 * 1000 }).should('not.exist');
+    }
 }
 
 function createRecordProject(Title, Detail = Title) {

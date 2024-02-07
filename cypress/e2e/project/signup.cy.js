@@ -175,7 +175,11 @@ describe('SignUp', () => {
     });
     after('Send Email', () => {
         '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드 6. DISK 다운그레이드 7. DISK 구독 취소';
-
-        emailModule.Email(TestFails, `SignUp test ${Cypress.env('EmailTitle')}`, testRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `SignUp test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });

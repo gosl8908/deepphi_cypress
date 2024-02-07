@@ -28,10 +28,6 @@ describe('Record Project Create & Run', () => {
         cy.get(
             '.resource-setting__item-container.mb10 > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
         ).click(); // 머신러닝 cpu.4
-        cy.get('.cpu-gpu--selector > :nth-child(2) > div > .radio-item > em').click(); // 뉴럴 네트워크 CPU
-        cy.get(
-            ':nth-child(7) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
-        ).click(); // 뉴럴 네트워크 cpu.4
         cy.get('.btn-primary').click(); // 저장
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.contains('성공적으로 저장되었습니다.'); // 저장 확인
@@ -232,7 +228,33 @@ describe('Record Project Create & Run', () => {
         //프로젝트 Run
         cy.log('프로젝트 실행');
         cy.get('.modeler-header__run-action-button > .btn').click({ force: true });
-        cy.contains('중지', { timeout: 60000 }).should('be.visible');
+        cy.get('.modeler-header__run-action-button > .btn')
+            .contains('중지', { timeout: 30 * 1000 })
+            .should('be.visible');
+        const Status = cy
+            .get('.modeler__status')
+            .contains('완료', { timeout: 420 * 1000 })
+            .should('be.visible');
+
+        if (Status) {
+            cy.get('dt > p').then($url => {
+                // 텍스트 추출
+                const Title = $url.text();
+                cy.get('.btn-home').click();
+                cy.wait(5 * 1000);
+                cy.get('.search-box > .input-form').type(Title);
+                cy.get('.search-box > .btn-primary').click();
+                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn > .fas').click();
+                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown')
+                    .contains('삭제')
+                    .click();
+                cy.get('.btn-danger').click();
+                cy.wait(3 * 1000);
+                cy.get('.project-list--none')
+                    .contains('안녕하세요! DEEP:PHI 플랫폼 운영팀입니다.', { timeout: 10 * 1000 })
+                    .should('be.visible');
+            });
+        }
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
@@ -250,7 +272,11 @@ describe('Record Project Create & Run', () => {
     after('Send Email', () => {
         const TestRange =
             '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
-
-        emailModule.Email(TestFails, `Record Project Cteate Test ${Cypress.env('EmailTitle')}`, TestRange, Screenshots);
+        emailModule.Email({
+            TestFails: TestFails,
+            EmailTitle: `Record Project Cteate Test ${Cypress.env('EmailTitle')}`,
+            TestRange: TestRange,
+            Screenshots: Screenshots,
+        });
     });
 });
