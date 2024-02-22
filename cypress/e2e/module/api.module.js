@@ -47,10 +47,10 @@ function apiRequest(EndPoint, FormDataset) {
         cy.log(`HTTP_OK Value : ${HTTP_OK}`);
 
         if (response.status === HTTP_OK) {
-            const decoder = new TextDecoder('utf-8'); // ArrayBuffer의 데이터를 utf-8 문자열로 디코딩
-            const decodedText = decoder.decode(response.body); // ArrayBuffer 디코딩
+            const Decoder = new TextDecoder('utf-8'); // ArrayBuffer의 데이터를 utf-8 문자열로 디코딩
+            const DecodedText = Decoder.decode(response.body); // ArrayBuffer 디코딩
 
-            cy.log(decodedText); // 디코딩된 데이터 확인
+            cy.log(DecodedText); // 디코딩된 데이터 확인
 
             expect(response.status).to.eq(HTTP_OK); // 200 응답 코드 확인
         }
