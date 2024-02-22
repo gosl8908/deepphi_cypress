@@ -17,7 +17,7 @@ describe('Record Project Create & Run', () => {
     });
 
     it('Record Project Create & Run', () => {
-        createModule.createRecordProject('RecordProject' + Cypress.env('DateLabel'));
+        createModule.createProject(RECORD, 'RecordProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정

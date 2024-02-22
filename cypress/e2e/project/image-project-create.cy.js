@@ -17,7 +17,7 @@ describe('Image Project Create', () => {
     });
 
     it('Image Project Create', () => {
-        createModule.createImageProject('ImageProject' + Cypress.env('DateLabel'));
+        createModule.createProject(IMAGE, 'ImageProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정

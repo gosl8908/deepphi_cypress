@@ -112,10 +112,14 @@ function createImageDataset({
     cy.contains('설정을 완료하세요', { timeout: 30 * 1000 }).should('be.visible');
 }
 
-/* 이미지 프로젝트 생성 */
-function createImageProject(Title, Detail = Title) {
+/* 프로젝트 생성 */
+function createProject(Type, Title, Detail = Title) {
     cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
-    cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
+    if ((Type = IMAGE)) {
+        cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
+    } else if ((Type = RECORD)) {
+        cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // Record 선택
+    }
     cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
     cy.wait(3 * 1000);
     cy.get('#project_name').type(Title); // 프로젝트 타이틀 입력
@@ -196,18 +200,6 @@ function createRecordDataset({
     // Dataset 업로드 확인
     cy.wait(5000);
 }
-
-/* 레코드 프로젝트 생성 */
-function createRecordProject(Title, Detail = Title) {
-    cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
-    cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // Record 선택
-    cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
-    cy.wait(3 * 1000);
-    cy.get('#project_name').type(Title); // 프로젝트 타이틀 입력
-    cy.get('.note-editable').type(Detail); // 프로젝트 Detail 입력
-    cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
-}
-
 /* 평가 프로젝트 생성 */
 function createTestProject(Name, Site = undefined) {
     /* 프로젝트 검색 */
@@ -236,9 +228,8 @@ function createTestProject(Name, Site = undefined) {
 }
 
 module.exports = {
-    createImageProject: createImageProject,
+    createProject: createProject,
     createTestProject: createTestProject,
     createImageDataset: createImageDataset,
-    createRecordProject: createRecordProject,
     createRecordDataset: createRecordDataset,
 };

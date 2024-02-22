@@ -29,32 +29,45 @@ describe('Onprem Project invite Test', () => {
         /* 프로젝트 초대 */
         cy.wait(5 * 1000);
         cy.get('jhi-members > .user-info__list-box > .ng-star-inserted > .logo > img').eq(0).click();
-        cy.get('.mb10 > .btn').click();
-        cy.get('#invite_email').type(`${Cypress.env('OnpremId3')}`);
-        cy.get('#invite_role').select('관리자');
-        cy.get('.btn-primary').click();
-        cy.get(
-            'jhi-confirm-alert.ng-star-inserted > .modal-back > .modal-wrap > .modal-container > .modal-button-content > .btn-primary',
-        ).click();
-        cy.contains('초대를 수락하면 프로젝트의 멤버가 됩니다.', { timeout: 10 * 1000 });
-        cy.get('.modal-button-content > .btn').click();
-        cy.contains('(미수락)', { timeout: 5 * 1000 });
+        cy.get('.modal-content').then(cardContent => {
+            const NotAccepted1 = cardContent.text().includes('asdasdasd3@ruu.kr');
+            if (NotAccepted1) {
+            } else {
+                cy.get('.mb10 > .btn').click();
+                cy.get('#invite_email').type(`${Cypress.env('OnpremId3')}`);
+                cy.get('#invite_role').select('관리자');
+                cy.get('.btn-primary').click();
+                cy.get(
+                    'jhi-confirm-alert.ng-star-inserted > .modal-back > .modal-wrap > .modal-container > .modal-button-content > .btn-primary',
+                ).click();
+                cy.contains('초대를 수락하면 프로젝트의 멤버가 됩니다.', { timeout: 10 * 1000 });
+                cy.get('.modal-button-content > .btn').click();
+                cy.contains('(미수락)', { timeout: 5 * 1000 });
+            }
+        });
+        cy.get('.modal-content').then(cardContent => {
+            const NotAccepted2 = cardContent.text().includes('asdasdasd8@ruu.kr');
+            if (NotAccepted2) {
+            } else {
+                cy.get('.mb10 > .btn').click();
+                cy.get('#invite_email').type(`${Cypress.env('OnpremId8')}`);
+                cy.get('#invite_role').select('관리자');
+                cy.get('.btn-primary').click();
+                cy.get(
+                    'jhi-confirm-alert.ng-star-inserted > .modal-back > .modal-wrap > .modal-container > .modal-button-content > .btn-primary',
+                ).click();
+                cy.contains('초대를 수락하면 프로젝트의 멤버가 됩니다.', { timeout: 10 * 1000 });
+                cy.get('.modal-button-content > .btn').click();
+                cy.contains('(미수락)', { timeout: 5 * 1000 });
+            }
+        });
 
-        cy.get('.mb10 > .btn').click();
-        cy.get('#invite_email').type(`${Cypress.env('OnpremId8')}`);
-        cy.get('#invite_role').select('관리자');
-        cy.get('.btn-primary').click();
-        cy.get(
-            'jhi-confirm-alert.ng-star-inserted > .modal-back > .modal-wrap > .modal-container > .modal-button-content > .btn-primary',
-        ).click();
-        cy.contains('초대를 수락하면 프로젝트의 멤버가 됩니다.', { timeout: 10 * 1000 });
-        cy.get('.modal-button-content > .btn').click();
-        cy.contains('(미수락)', { timeout: 5 * 1000 });
         cy.get('.btn-primary').click();
     });
 
     it('Project invite accept', () => {
         loginModule.login(Cypress.env('Onprem'), Cypress.env('OnpremId3'), Cypress.env('KangTestPwd'));
+
         cy.get('#invite-bell > .fa-regular').click();
         cy.get('.invite-popup').contains('수락').click();
         cy.wait(10 * 1000);
