@@ -4,7 +4,7 @@ describe('인퍼런스 서비스 api test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
+        // loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPasswd'));
     });
     // 레코드 인퍼런스 api 호출
     it('인퍼런스 서비스 api test', () => {

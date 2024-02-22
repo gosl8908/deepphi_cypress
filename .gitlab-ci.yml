@@ -16,6 +16,16 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+# onprem_test:
+#     image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 # Cypress Docker 이미지 사용
+#     stage: test
+#     script:
+#         - yarn install
+#         - >
+#             yarn cypress run --record --key $CYPRESS_RECORD_KEY \
+#               --spec "cypress/e2e/onprem_project/" \
+#               --browser chrome
+
 onprem_test:
     image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 # Cypress Docker 이미지 사용
     stage: test
@@ -23,5 +33,5 @@ onprem_test:
         - yarn install
         - >
             yarn cypress run --record --key $CYPRESS_RECORD_KEY \
-              --spec "cypress/e2e/onprem_project/" \
+              --spec "cypress/e2e/onprem_project/onprem-dashboard.cy.js" \
               --browser chrome

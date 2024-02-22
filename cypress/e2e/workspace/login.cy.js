@@ -23,8 +23,9 @@ describe('로그인', () => {
     });
 
     it('test', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
-        datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
+        apiModule.api('https://onprem-inference.deepphi.ai/inference-202402151606/3.3', c.RECORD);
+        // loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        // datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
     });
     // loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
     //     createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용');

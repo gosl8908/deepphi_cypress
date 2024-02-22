@@ -34,6 +34,7 @@ function apiRequest(EndPoint, FormDataset) {
     cy.request({
         method: 'POST',
         url: EndPoint,
+        encoding: 'utf-8',
         failOnStatusCode: false,
         maxBodyLength: Infinity,
         headers: {
