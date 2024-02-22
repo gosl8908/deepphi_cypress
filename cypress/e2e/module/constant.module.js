@@ -8,6 +8,7 @@ export const TWO_DIMENSIONS = 1;
 export const THREE_DIMENSIONS = 2;
 export const CASE1 = 1;
 export const CASE2 = 2;
+export const ONPREM = 'Onprem';
 
 /* HTTPS STATIC CODE */
 /* 200번대 */
