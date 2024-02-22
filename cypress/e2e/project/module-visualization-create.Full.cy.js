@@ -1,4 +1,4 @@
-const { loginModule, visualizationModule, emailModule } = require('../module/manager.module.js');
+const { loginModule, visualizationModule, emailModule, functionModule: f } = require('../module/manager.module.js');
 
 describe('Record Project visualization Create Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
@@ -13,7 +13,7 @@ describe('Record Project visualization Create Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId2'), Cypress.env('KangTestPwd'));
     });
 
     it('Cleansing > Calculation Module visualization Create Test', () => {
@@ -165,13 +165,16 @@ describe('Record Project visualization Create Test', () => {
         visualizationModule.visualizationCreate('Decision Tree Classifier', '히트맵(Heat Map)');
         visualizationModule.visualizationCreate('Decision Tree Classifier', '상자 수염 그림(Box Plot)');
     });
-    afterEach('Status Fail', () => {
+    afterEach('Status Check', () => {
         if (FailTF) {
-            const ScreenshotFileName = `Record Project Module Visualization Create(Full)/Record Project Module Visualization Create Test ${Cypress.env(
-                'DateLabel',
-            )}`;
+            const ScreenshotFileName = `Record Project Module Visualization Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
-            Screenshots.push(ScreenshotFileName);
+            if (!Cypress.platform.includes('win')) {
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
+            } else {
+                Screenshots.push(`${ScreenshotFileName}`);
+            }
             FailTF = false;
         }
     });

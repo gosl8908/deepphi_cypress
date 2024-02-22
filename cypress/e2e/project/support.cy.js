@@ -12,7 +12,7 @@ describe('Support Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('Supporttest'), Cypress.env('KangTestPwd'));
     });
 
     it('FaQ Test', () => {
@@ -46,6 +46,7 @@ describe('Support Test', () => {
         cy.get('.modal-button-content > .btn-danger').click();
         cy.contains('질문이 삭제되었습니다.');
     });
+
     afterEach('Status Fail', () => {
         if (FailTF) {
             const ScreenshotFileName = `Support/Support test ${Cypress.env('DateLabel')}`;

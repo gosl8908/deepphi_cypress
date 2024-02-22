@@ -13,7 +13,7 @@ describe('Record Project Create & Run', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('Obs2TestId'), Cypress.env('ObsTestPwd'));
     });
 
     it('Record Project Create & Run', () => {
@@ -105,30 +105,42 @@ describe('Record Project Create & Run', () => {
             .realMouseUp();
         cy.wait(3000);
 
+        // 데이터셋 클릭
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
+        cy.wait(1000);
+
         //클렌징에서 프로세싱 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').realHover('mouse');
         cy.wait(3000);
-        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image')
             .realMouseDown({ force: true })
             .realMouseMove(100, 0)
             .realMouseUp()
             .realMouseUp();
         cy.wait(3000);
+
+        // 데이터셋 클릭
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
+        cy.wait(1000);
 
         //프로세싱에서 DNN-Classification 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(5) > image').realHover('mouse');
         cy.wait(3000);
-        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image')
             .realMouseDown({ force: true })
             .realMouseMove(100, 0)
             .realMouseUp()
             .realMouseUp();
         cy.wait(3000);
 
+        // 데이터셋 클릭
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
+        cy.wait(1000);
+
         //DNN-Classification에서 Decision Tree Classifier 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(7) > image').realHover('mouse');
         cy.wait(3000);
-        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(6) > image')
+        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image') // 호버 할때 표시되는 이미지 위치 고정
             .realMouseDown({ force: true })
             .realMouseMove(100, 0)
             .realMouseUp()

@@ -20,21 +20,16 @@ describe('Dataset Upload Test', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('Obs4TestId'), Cypress.env('ObsTestPwd'));
     });
 
     it('Image Dataset Upload test', () => {
-        cy.contains('이미지 데이터셋').click();
-        cy.wait(3 * 1000);
-        // Create Dataset 클릭
-        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-        cy.wait(5000);
         createModule.createImageDataset({
             Dimension: '2D',
             LabelType: c.CLASSIFICATION,
             Structure: c.CASE1,
             FolderName: '2D_CL_Case1',
-            Dataset: 'dataset.zip',
+            Dataset: 'Dataset.zip',
             // Label: 'Label.csv',
             Title: `ImageDataset${Cypress.env('DateLabel')}`,
         });
@@ -42,11 +37,6 @@ describe('Dataset Upload Test', () => {
     });
 
     it('Record Dataset Upload test', () => {
-        cy.contains('레코드 데이터셋').click();
-        cy.wait(3 * 1000);
-        // Create Dataset 클릭
-        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
-        cy.wait(5000);
         createModule.createRecordDataset({
             TrainFileName: '자동화용 데이터셋.csv',
             TestFileName: '자동화용 데이터셋.csv',
@@ -71,7 +61,6 @@ describe('Dataset Upload Test', () => {
     after('Send Email', () => {
         const TestRange =
             '1. 이미지 데이터셋 업로드 2. 변환 3. 사용 용도 수정 4. 데이터셋에 파일 포함 5. 레코드 데이터셋 업로드 6. 설정 완료';
-
         emailModule.Email({
             TestFails: TestFails,
             EmailTitle: `Dataset Upload Test ${Cypress.env('EmailTitle')}`,

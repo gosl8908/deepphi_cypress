@@ -96,10 +96,10 @@ describe('SignUp', () => {
         cy.get('.modal-button-content > .btn-primary').click(); // 확인
         cy.get(':nth-child(3) > dd > .flex-display > .input-form')
             .clear()
-            .type('name' + Cypress.env('Time')); // 닉네임 변경
+            .type('name' + Cypress.env('DateLabel')); // 닉네임 변경
         cy.wait(3000); // 3초 대기
         cy.get('.flex-display > .btn').click(); // 닉네임 체크
-        cy.contains('사용 가능한 닉네임입니다', { timeout: 10000 }).should('be.visible'); // 데이터셋 데이터
+        cy.contains('사용 가능한 닉네임입니다', { timeout: 10 * 1000 }).should('be.visible'); // 데이터셋 데이터
         cy.get('.modal-button-content > .btn').click(); // 팝업 확인
         cy.get('.col-30').select('병원'); // 기관 변경
         cy.get(':nth-child(1) > dd > .flex-display > .flex-auto').clear().type('기관Change'); // 기관명 변경
@@ -162,19 +162,20 @@ describe('SignUp', () => {
     });
     afterEach('Status Fail', () => {
         if (FailTF) {
-            const screenshotFileName = `SignUp/SignUp Test ${Cypress.env('DateLabel')}`;
-            cy.screenshot(screenshotFileName);
+            const ScreenshotFileName = `SignUp/SignUp Test ${Cypress.env('DateLabel')}`;
+            cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
-                const currentFile = f.getFileName(__filename);
-                Screenshots.push(`${currentFile}/${screenshotFileName}`);
+                const CurrentFile = f.getFileName(__filename);
+                Screenshots.push(`${CurrentFile}/${ScreenshotFileName}`);
             } else {
-                Screenshots.push(`${screenshotFileName}`);
+                Screenshots.push(`${ScreenshotFileName}`);
             }
             FailTF = false;
         }
     });
     after('Send Email', () => {
-        '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드 6. DISK 다운그레이드 7. DISK 구독 취소';
+        const TestRange =
+            '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드 6. DISK 다운그레이드 7. DISK 구독 취소';
         emailModule.Email({
             TestFails: TestFails,
             EmailTitle: `SignUp test ${Cypress.env('EmailTitle')}`,

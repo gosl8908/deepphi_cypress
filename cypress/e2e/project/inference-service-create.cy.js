@@ -22,7 +22,7 @@ describe('Inference Service Create', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Inference Service Create Test', () => {

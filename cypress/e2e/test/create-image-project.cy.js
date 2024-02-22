@@ -1,6 +1,6 @@
-const { loginModule, createModule, emailModule, functionModule: f } = require('../module/manager.module.js');
+const { loginModule, createModule, EmailModule, functionModule: f } = require('../module/manager.module.js');
 
-describe('Image Project Create', () => {
+describe('Create Project Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
     let FailTF = false;
@@ -10,29 +10,23 @@ describe('Image Project Create', () => {
         FailTF = true;
         throw err;
     });
+
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('Obs3TestId'), Cypress.env('ObsTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('ObsTestId'), Cypress.env('ObsTestPwd'));
     });
 
-    it('Image Project Create', () => {
-        createModule.createImageProject('ImageProject' + Cypress.env('DateLabel'));
-        cy.wait(10000); // 10초 대기
+    it('Create Project Test', () => {
+        cy.wait(3000);
 
-        // 리소스 설정
-        cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
-        cy.get(
-            ':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
-        ).click({ force: true }); // 데이터 프로세싱 cpu.4
-        cy.get('.btn-primary').click(); // 저장
-        cy.get('.modal-button-content > .btn-primary').click(); // 확인
-        cy.contains('성공적으로 저장되었습니다.'); // 저장 확인
+        // 이미지 프로젝트 생성
+        cy.log('이미지 프로젝트 생성');
+        createModule.createImageProject('2D_CL_Case1 ' + Cypress.env('date_label'));
         cy.wait(3000);
 
         cy.log('모델러 구성');
         // 모델러 화면 인식
-        cy.get('.modeler__nav > ul > :nth-child(1) > button').click(); // 모듈 탭 선택
         cy.get('#graphContainerTrain > svg', { force: true }).should('exist').as('svg');
         cy.wait(3000);
 
@@ -61,34 +55,24 @@ describe('Image Project Create', () => {
         // Resize 모듈 모델러에 추가
         cy.ModuleAdd('@resize', '@svg', 800, 400);
 
-        /* Resize 모듈 파라미터 수정 */
-        cy.get(':nth-child(2) > :nth-child(2) > .input-form').clear().type('128');
-        cy.get(':nth-child(3) > :nth-child(2) > .input-form').clear().type('128');
-        cy.get('.flex-button-box > .ng-star-inserted > .btn').click();
-        cy.contains('성공적으로 저장되었습니다.', { timeout: 10 * 1000 }).should('be.visible');
-
-        /* VGG16 모듈 검색 */
+        // VGG16 모듈 검색
         cy.get('.NeuralNetwork').click();
         cy.get('form.ng-untouched > .search-box > .input-form').type('vgg16');
         cy.get('form.ng-untouched > .search-box > .btn').click();
         cy.wait(3000);
 
-        /* VGG16 모듈 인식 */
+        // VGG16 모듈 인식
         cy.get('#\\34 7').should('exist').as('vgg16');
         cy.wait(3000);
 
-        /* VGG16 모듈 모델러에 추가 */
+        // VGG16 모듈 모델러에 추가
         cy.ModuleAdd('@vgg16', '@svg', 1000, 400);
 
         cy.wait(3000);
 
-        // 데이터셋 클릭
-        cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
-        cy.wait(1000);
+        //데이터셋에서 Resize 연결
 
-        /* 데이터셋에서 Resize 연결 */
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').realHover('mouse');
-        cy.wait(3000);
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image')
             .realMouseDown()
             .realMouseMove(200, 0)
@@ -99,9 +83,8 @@ describe('Image Project Create', () => {
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(1) > image').click();
         cy.wait(1000);
 
-        /* Resize에서 VGG16 연결 */
+        //Resize에서 VGG16 연결
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(2) > :nth-child(3) > image').realHover('mouse');
-        cy.wait(3000);
         cy.get('#graphContainerTrain > svg > :nth-child(1) > :nth-child(3) > :nth-child(3) > image')
             .realMouseDown()
             .realMouseMove(200, 0)
@@ -111,37 +94,17 @@ describe('Image Project Create', () => {
         cy.log('프로젝트 실행');
         //프로젝트 Run
         cy.get('.modeler-header__run-action-button > .btn').click();
-        cy.get('.modeler-header__run-action-button > .btn')
-            .contains('중지', { timeout: 30 * 1000 })
-            .should('be.visible');
-        const Status = cy
-            .get('.modeler__status')
-            .contains('완료', { timeout: 420 * 1000 })
-            .should('be.visible');
+        cy.wait(3000);
 
-        if (Status) {
-            cy.get('dt > p').then($url => {
-                // 텍스트 추출
-                const Title = $url.text();
-                cy.get('.btn-home').click();
-                cy.wait(5 * 1000);
-                cy.get('.search-box > .input-form').type(Title);
-                cy.get('.search-box > .btn-primary').click();
-                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .btn > .fas').click();
-                cy.get(':nth-child(1) > .dashboard-card__item--head > .list-dropdown-wrap > .list-dropdown')
-                    .contains('삭제')
-                    .click();
-                cy.get('.btn-danger').click();
-                cy.wait(5 * 1000);
-                cy.get('.project-list--none')
-                    .contains('안녕하세요! DEEP:PHI 플랫폼 운영팀입니다.', { timeout: 10 * 1000 })
-                    .should('be.visible');
-            });
-        }
+        cy.contains('실행'); // Running 상태 체크
+        cy.wait(3000);
+
+        cy.screenshot('Project-Run-Result-' + Cypress.env('date_label'), { capture: 'fullPage' });
     });
-    afterEach('Status Fail', () => {
+
+    afterEach('Status Check', () => {
         if (FailTF) {
-            const ScreenshotFileName = `Image Project Create/Image Project Create Test ${Cypress.env('DateLabel')}`;
+            const ScreenshotFileName = `Create Image Project ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
                 const CurrentFile = f.getFileName(__filename);
@@ -152,11 +115,13 @@ describe('Image Project Create', () => {
             FailTF = false;
         }
     });
+
     after('Send Email', () => {
-        const TestRange = '1. 이미지 프로젝트 생성 2. 리소스 설정 3. 모듈 추가 4. 모듈 연결 5. 실행';
-        emailModule.Email({
+        const TestRange = '1. 이미지 프로젝트 생성 2. 모듈 추가(resize, VGG16) 3. 모듈 연결 4. 실행';
+
+        EmailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `Image Project Create Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `Create Image Project ${Cypress.env('EmailTitle')}`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

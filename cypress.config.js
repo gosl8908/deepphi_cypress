@@ -1,26 +1,18 @@
-// const { defineConfig } = require("cypress");
-
-// module.exports = defineConfig({
-//   e2e: {
-//     setupNodeEvents(on, config) {
-//       // implement node event listeners here
-//     },
-//   },
-// });
-
-// cypress.config.js
+/* cypress.config.js */
 const nodemailer = require('nodemailer');
-const fs = require('fs');
 const { defineConfig } = require('cypress');
-// 리포트 추가
+/* 리포트 추가 */
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
+/* Email Account */
+const EamilId = 'gosl8908@deepnoid.com';
+const EamilPwd = 'rnrmf0801!';
+
 module.exports = defineConfig({
-    pageLoadTimeout: 60 * 1000,
-    viewportWidth: 1920,
+    viewportWidth: 1980,
     viewportHeight: 1080,
-    screenshotFolder: 'cypress/screenshots',
-    screenshotOnRunFailure: true,
+    pageLoadTimeout: 60000,
+    experimentalStudio: true,
     projectId: 'scq3m9',
     reporter: 'cypress-mochawesome-reporter',
     reporterOptions: {
@@ -32,9 +24,11 @@ module.exports = defineConfig({
     },
     e2e: {
         setupNodeEvents(on, config) {
+            // implement node event listeners here
             require('cypress-mochawesome-reporter/plugin')(on);
+
             on('task', {
-                sendEmail({ subject, body, screenshotFileNames }) {
+                sendEmail({ recipient, subject, body, screenshotFileNames }) {
                     const attachments = [];
 
                     if (screenshotFileNames && screenshotFileNames.length > 0) {
@@ -52,12 +46,12 @@ module.exports = defineConfig({
                         port: 587,
                         secure: false,
                         auth: {
-                            user: 'gosl8908@deepnoid.com',
-                            pass: 'rnrmf0801!',
+                            user: EamilId,
+                            pass: EamilPwd,
                         },
                     });
                     const mailOptions = {
-                        from: 'gosl8908@deepnoid.com',
+                        from: EamilId,
                         to: 'gosl8908@deepnoid.com',
                         subject: subject,
                         text: body,
@@ -78,7 +72,7 @@ module.exports = defineConfig({
         },
 
         env: {
-            // url
+            /* Site */
             Onprem: 'https://onprem.deepphi.ai/',
             Stg: 'http://st-home.deepphi.ai/',
             StgAdmin: 'https://st-admin.deepphi.ai/',
@@ -88,26 +82,48 @@ module.exports = defineConfig({
             ProdAdmin: 'https://admin.deepphi.ai/',
             ProdTest: 'http://st.deepphi.ai/',
             DisposableEmail: 'https://ruu.kr/',
-            // 계정
+
+            /* Id */
             AdminId: 'admin@deepnoid.com',
+            AutoTestId: 'deeptest1@deepnoid.com',
             KangTestId2: 'deepphi.auto2@ruu.kr',
             KangTestId3: 'deepphi.auto3@ruu.kr',
             KangTestId4: 'deepphi.auto4@ruu.kr',
             KangTestId5: 'deepphi.auto5@ruu.kr',
             KangTestId6: 'deepphi.auto6@ruu.kr',
-            AutoTestId: 'deeptest1@deepnoid.com',
-            OnpremId: 'asdasdasd3@ruu.kr',
-            KangTestPwd: 'test123!',
+            KangTestId7: 'deepphi.auto7@ruu.kr',
+            DeepPhiAutoId: 'deepphi.auto2@ruu.kr',
+            OnpremId3: 'asdasdasd3@ruu.kr',
+            OnpremId4: 'asdasdasd4@ruu.kr',
+            OnpremId5: 'asdasdasd5@ruu.kr',
+            OnpremId6: 'asdasdasd6@ruu.kr',
+            OnpremId7: 'asdasdasd7@ruu.kr',
+            OnpremId8: 'asdasdasd8@ruu.kr',
+            OnpremId9: 'asdasdasd9@ruu.kr',
+            OnpremId10: 'asdasdasd10@ruu.kr',
+            TestEmail: 'ckdeo1211@deepnoid.com',
+            AutoEmail: 'deepphi.auto@gmail.com',
+            ObsTestId: 'obskorea@ruu.kr',
+            Obs2TestId: 'obskorea2@ruu.kr',
+            Obs3TestId: 'obskorea3@ruu.kr',
+            Obs4TestId: 'obskorea4@ruu.kr',
+            Test1Id: 'qa1214@deepnoid.com',
+            Supporttest: 'supporttest@ruu.kr',
+            AdminPwd: 'deep1004!!',
             supporttest: 'supporttest@ruu.kr',
-            adminPwd: 'deep1004!!',
-            // 형식
-            classification: 1,
-            segmentation: 2,
-            detection: 3,
-            transformation: 4,
-            // 케이스
-            case1: 1,
-            case2: 2,
+            OnpremAdminId: 'admin@deepnoid.com',
+
+            /* Password */
+            ObsTestPwd: 'P@ssw0rd',
+            KangTestPwd: 'test123!',
+            TestPwd: 'deepp@ssw0rd',
+            AutoPwd: '12sqec34!',
+            Test1Pwd: 'qwe123..',
+            OnpremAdminPwd: 'deep1004!!',
+            OnpremTestPwd: 'qwe123##',
+
+            /* content */
+            EmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
         },
     },
 });

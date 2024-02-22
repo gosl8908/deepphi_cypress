@@ -13,7 +13,7 @@ describe('Image Test Project Create', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId3'), Cypress.env('KangTestPwd'));
     });
 
     it('Image Test Project Create', () => {

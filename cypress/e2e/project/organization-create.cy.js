@@ -10,14 +10,14 @@ describe('Organization Create', () => {
         FailTF = true;
         throw err;
     });
-    beforeEach(() => {
+    before(() => {
         cy.setDateToEnv();
         cy.getAll();
     });
 
     it('Organization Create', () => {
         // 로그인
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
         // 마이홈 이동
         cy.get('.btn__user_info').click(); // 프로필 선택
@@ -37,8 +37,8 @@ describe('Organization Create', () => {
         cy.get('.flex-display > :nth-child(2) > .btn').click(); // 단체 생성
         cy.get('#organization_select').select('기타'); // 분류 선택
         cy.get('#organization_name').type('자동화용 단체'); // 단체명 입력
-        cy.get('.flex-display > .btn-wrap > .btn').click({ force: true }); // 체크
-        cy.get('.modal-button-content > .btn-primary').click({ force: true }); // 생성
+        cy.get('.flex-display > .btn-wrap > .btn').click(); // 체크
+        cy.get('.modal-button-content > .btn-primary').click(); // 생성
         cy.wait(3000);
         cy.contains('단체 생성이 완료되었습니다.'); // 단체 생성 완료 확인
         cy.get('.modal-button-content > .btn').click(); // 확인
@@ -92,7 +92,7 @@ describe('Organization Create', () => {
 
     // 단체 크레딧 충전
     it('Organization Credit Charge', () => {
-        loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('AdminId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('ProdAdmin'), Cypress.env('Id'), Cypress.env('KangTestPwd'));
 
         /* 크레딧 충전 */
         cy.get(':nth-child(8) > a > span').click(); // 단체관리
@@ -121,7 +121,7 @@ describe('Organization Create', () => {
 
     // 단체 DISK 구독
     it('Organization DISK subscribe', () => {
-        loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
+        loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId'), Cypress.env('KangTestPwd'));
 
         // 크레딧 충전
         cy.get('.btn__user_info').click(); // 프로필 선택
