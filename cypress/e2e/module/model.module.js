@@ -4,7 +4,7 @@ function visitAndRun(SiteUrl, Title, Time = 3000) {
 
     cy.log('프로젝트 상태 확인');
     cy.get('.modeler__status')
-        .contains('완료')
+        .contains('완료', { timeout: 5 * 1000 })
         .then(project_status => {
             cy.log(project_status);
             //프로젝트 Run
@@ -18,7 +18,7 @@ function visitAndRun(SiteUrl, Title, Time = 3000) {
             // Running 상태 체크
             cy.log('Running 상태 체크');
             cy.wait(Time);
-            cy.get('.modeler__status').contains('실행');
+            cy.get('.modeler__status').contains('실행', { timeout: 3 * 1000 });
             cy.wait(3000);
 
             // 스크린샷
@@ -31,7 +31,7 @@ function visitAndCheck(SiteUrl, Title, Time = 3000) {
     cy.wait(Time);
 
     cy.log('프로젝트 상태 확인');
-    cy.get('.modeler__status').contains('완료');
+    cy.get('.modeler__status').contains('완료', { timeout: 3 * 1000 });
 
     // 스크린샷
     cy.screenshot(Title + Cypress.env('date_label'));

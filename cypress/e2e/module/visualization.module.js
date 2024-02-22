@@ -1,7 +1,14 @@
 function visualizationCreate(Module, Type) {
     /* 모듈 선택 */
-    cy.get('.flow__module--name').contains(Module).click();
-    cy.contains('시각화').click();
+    if (Module === 'Calculation' || Module === 'Scale') {
+        cy.wait(5 * 1000);
+        cy.get('.modeler__left__container > .content-scroll').contains(Module).click();
+    } else {
+        cy.wait(5 * 1000);
+        cy.get('.flow__module--name').contains(Module).click();
+    }
+    cy.wait(3 * 1000);
+    cy.contains('시각화', { timeout: 5 * 1000 }).click();
     cy.get('.visualization__item--creat-info > div > .btn').click();
 
     cy.get('dd > .input-form').select(Type);
@@ -52,12 +59,21 @@ function visualizationCreate(Module, Type) {
     cy.get('jhi-record-visualization-graph', { timeout: 60 * 1000 }).should('be.visible');
     // cy.screenshot('빈도그래프');
 
-    cy.get('.modeler-bottom__content').then(btn => {
-        const loading = btn.text().includes('계속하시겠습니까?');
-        if (loading) {
-            cy.get('.visualization-item__screen--control > .btn').click();
-        }
-    });
+    if (Module === 'Calculation' || Module === 'Scale') {
+        cy.get('.bottom-content').then(btn => {
+            const Loading = btn.text().includes('계속하시겠습니까?');
+            if (Loading) {
+                cy.get('.visualization-item__screen--control > .btn').click();
+            }
+        });
+    } else {
+        cy.get('.modeler-bottom__content').then(btn => {
+            const Loading = btn.text().includes('계속하시겠습니까?');
+            if (Loading) {
+                cy.get('.visualization-item__screen--control > .btn').click();
+            }
+        });
+    }
 
     /* 삭제 */
     cy.wait(3 * 1000);
