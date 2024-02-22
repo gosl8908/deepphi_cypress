@@ -28,7 +28,7 @@ jobs:
             - run: yarn add cypress@latest
 
             - name: Run Cypress tests
-              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem_project/onprem-signup.cy.js"
+              run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem_project/"
 #     dataset_upload_test:
 #         runs-on: ubuntu-latest
 #         needs: signup_test # signup_test 작업이 완료될 때까지 대기

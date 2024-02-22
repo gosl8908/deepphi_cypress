@@ -160,11 +160,3 @@ package-lock.json
 ######################
 # Cypress
 ######################
-cypress/downloads/
-cypress/videos/
-cypress/screenshots/
-cypress/reports/
-Image-Dataset.text
-cypress/fixtures/SignupTest.txt
-cypress/fixtures/PasswordLink.txt
-cypress/e2e/test/login.cy.js
