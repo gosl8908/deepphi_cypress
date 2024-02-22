@@ -1,4 +1,14 @@
-const { CLASSIFICATION, SEGMENTATION, DETECTION, TRANSFORMATION, CASE1, CASE2, ONPREM } = require('./constant.module');
+const {
+    CLASSIFICATION,
+    SEGMENTATION,
+    DETECTION,
+    TRANSFORMATION,
+    CASE1,
+    CASE2,
+    IMAGE,
+    RECORD,
+    ONPREM,
+} = require('./constant.module');
 
 function createImageDataset({
     Dimension,

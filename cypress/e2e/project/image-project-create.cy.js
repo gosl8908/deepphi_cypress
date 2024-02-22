@@ -1,4 +1,10 @@
-const { loginModule, createModule, emailModule, functionModule: f } = require('../module/manager.module.js');
+const {
+    loginModule,
+    createModule,
+    emailModule,
+    constantModule: c,
+    functionModule: f,
+} = require('../module/manager.module.js');
 
 describe('Image Project Create', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
@@ -17,7 +23,7 @@ describe('Image Project Create', () => {
     });
 
     it('Image Project Create', () => {
-        createModule.createProject(IMAGE, 'ImageProject' + Cypress.env('DateLabel'));
+        createModule.createProject(c.IMAGE, 'ImageProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
 
         // 리소스 설정
