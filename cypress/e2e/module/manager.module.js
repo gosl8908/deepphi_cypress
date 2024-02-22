@@ -2,10 +2,9 @@ const loginModule = require('./login.module.js');
 const createModule = require('./create.module.js');
 const modelModule = require('./model.module.js');
 const datasetModule = require('./dataset.module.js');
-const emailModule = require('./email.module.js');
 const apiModule = require('./api.module.js');
-const OldApiModule = require('./old.api.module.js');
 const constantModule = require('./constant.module.js');
+const emailModule = require('./email.module.js');
 const visualizationModule = require('./visualization.module.js');
 const inferenceServiceModule = require('./inference.service.js');
 const functionModule = require('./function.module.js');
@@ -16,10 +15,9 @@ module.exports = {
     createModule,
     modelModule,
     datasetModule,
-    emailModule,
-    constantModule,
-    OldApiModule,
     apiModule,
+    constantModule,
+    emailModule,
     visualizationModule,
     inferenceServiceModule,
     functionModule,
