@@ -1,4 +1,4 @@
-const { CLASSIFICATION, SEGMENTATION, DETECTION, TRANSFORMATION, CASE1, CASE2 } = require('./constant.module');
+const { CLASSIFICATION, SEGMENTATION, DETECTION, TRANSFORMATION, CASE1, CASE2, ONPREM } = require('./constant.module');
 
 function createImageDataset({
     Dimension,
@@ -7,9 +7,23 @@ function createImageDataset({
     FolderName = undefined,
     Dataset,
     Label = undefined,
+    Site = undefined,
     Title,
     Detail = Title,
 }) {
+    if (Site === ONPREM) {
+        cy.get('.gnb__nav > ul > :nth-child(1) > button').contains('데이터셋').click();
+        cy.wait(3 * 1000);
+        /* 이미지 데이터셋 업로드 */
+        cy.contains('이미지 데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
+    } else {
+        cy.contains('이미지 데이터셋').click();
+        cy.wait(3 * 1000);
+        /* Create Dataset 클릭 */
+        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
+    }
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -87,6 +101,10 @@ function createImageDataset({
         cy.wait(3700);
     }
 
+    // 데이터셋 검색
+    cy.get('.search-box > .input-form').type(Title);
+    cy.get('.search-box > .btn-primary').click();
+
     // Dataset 업로드 확인
     cy.contains('성공', { timeout: 15 * 1000 }).should('be.visible');
     cy.contains('압축 해제 중', { timeout: 30 * 1000 }).should('be.visible');
@@ -94,6 +112,7 @@ function createImageDataset({
     cy.contains('설정을 완료하세요', { timeout: 30 * 1000 }).should('be.visible');
 }
 
+/* 이미지 프로젝트 생성 */
 function createImageProject(Title, Detail = Title) {
     cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
     cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
@@ -104,6 +123,7 @@ function createImageProject(Title, Detail = Title) {
     cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
 }
 
+/* 레코드 데이터셋 생성 */
 function createRecordDataset({
     TrainFileName,
     TestFileName = undefined,
@@ -112,6 +132,20 @@ function createRecordDataset({
     Detail = Title,
     Site = undefined,
 }) {
+    if (Site === ONPREM) {
+        cy.get('.gnb__nav > ul > :nth-child(1) > button').contains('데이터셋').click();
+        cy.wait(3 * 1000);
+
+        /* 레코드 데이터셋 업로드 */
+        cy.contains('레코드 데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
+    } else {
+        cy.contains('레코드 데이터셋').click();
+        cy.wait(3 * 1000);
+        /* Create Dataset 클릭 */
+        cy.contains('데이터셋 업로드').click({ force: true }); // 데이터셋 업로드 화면 진입
+        cy.wait(5000);
+    }
     // Dataset title 입력
     cy.get('#dataset_name').type(Title);
     // Dataset Detail 입력
@@ -147,19 +181,23 @@ function createRecordDataset({
     // 2단계 Next 버튼 선택
     cy.get('.btn-primary').click();
 
-    if (Site === 'Onprem') {
+    if (Site === ONPREM) {
         cy.get('.default-tab > ul > :nth-child(2) > button').click();
         cy.wait(5000);
-        cy.get('jhi-organization-record-dataset.ng-star-inserted')
-            .contains('업로드중에는 진입이 불가능합니다', { timeout: 160 * 1000 })
-            .should('not.exist');
+
+        cy.get('.search-box > .input-form').type(Title);
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains('업로드중에는 진입이 불가능합니다', { timeout: 200 * 1000 }).should('not.exist');
     } else {
-        // Dataset 업로드 확인
-        cy.wait(5000);
-        cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 160 * 1000 }).should('not.exist');
+        cy.get('.search-box > .input-form').type(Title);
+        cy.get('.search-box > .btn-primary').click();
+        cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 200 * 1000 }).should('not.exist');
     }
+    // Dataset 업로드 확인
+    cy.wait(5000);
 }
 
+/* 레코드 프로젝트 생성 */
 function createRecordProject(Title, Detail = Title) {
     cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
     cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // Record 선택
@@ -170,25 +208,31 @@ function createRecordProject(Title, Detail = Title) {
     cy.get('.modal-button-content > .btn-primary').click(); // 프로젝트 생성 버튼 클릭
 }
 
-function createTestProject(Name) {
+/* 평가 프로젝트 생성 */
+function createTestProject(Name, Site = undefined) {
     /* 프로젝트 검색 */
     cy.get('.search-box > .input-form').type(Name);
     cy.get('.search-box > .btn-primary').click();
     cy.wait(3000);
-    cy.get('.title').click();
-    cy.wait(5000);
+    if (Site === ONPREM) {
+        cy.get('.dashboard-card__name > button').click();
+    } else {
+        cy.get('.title').click();
+    }
+
+    cy.wait(5 * 1000);
 
     // 평가 프로젝트 생성
     cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
-    cy.wait(3000);
+    cy.wait(3 * 1000);
     cy.get('.btn-floating > div').click({ force: true }); // 생성
-    cy.wait(3000);
+    cy.wait(3 * 1000);
     cy.get('.modal-button-content > .btn').click(); // 다음
-    cy.wait(1000);
+    cy.wait(1 * 1000);
     cy.get('.btn-primary').click(); // 다음
-    cy.wait(1000);
+    cy.wait(1 * 1000);
     cy.get('.btn-primary').click(); // 확인
-    cy.wait(5000);
+    cy.wait(5 * 1000);
 }
 
 module.exports = {
