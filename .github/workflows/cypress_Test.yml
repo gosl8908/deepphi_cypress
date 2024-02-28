@@ -22,6 +22,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '20.9.0'
+            - run: yarn add cypress@latest
             - name: Run Cypress tests
               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-dataset-upload.cy.js"
 #     dataset_upload_test:
