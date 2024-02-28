@@ -13,7 +13,7 @@ env:
 
 jobs:
     signup_test:
-        runs-on: ubuntu-20.04
+        runs-on: windows-latest
         container:
             image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
         steps:
@@ -23,7 +23,7 @@ jobs:
               with:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
-            - name: Run Cypress tests
+            - name: Run Cypress
               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-dataset-upload.cy.js"
 #     dataset_upload_test:
 #         runs-on: ubuntu-latest
