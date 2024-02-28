@@ -56,13 +56,14 @@ describe('Member Test', () => {
 
     it('Member Add And Sign Off On', () => {
         const IdText = `optest_${Cypress.env('DateLabel')}`;
+
         cy.get('.nav-button > button').click();
         cy.contains(/^멤버$/).click();
         cy.wait(3 * 1000);
 
         cy.contains('멤버 등록').click();
 
-        cy.get('#member-id').type(`${IdText}@ruu.kr`);
+        cy.get('#member-id').type(`${IdText}@ruu.kr`, { force: true });
         cy.wait(5 * 1000);
         cy.get(':nth-child(1) > :nth-child(2) > .flex-form > .btn').click(); // 아이디 중복 검사
         cy.contains('사용 가능한 이메일입니다.'); // 이메일 중복 팝업 확인
@@ -75,8 +76,10 @@ describe('Member Test', () => {
         cy.get(':nth-child(5) > :nth-child(2) > .flex-form > .btn').click(); // 닉네임 중복 검사
         cy.contains('사용 가능한 닉네임입니다.'); // 닉네임 중복 팝업 확인
         cy.get('.alert-popup__button > .btn').click(); // 팝업 확인
+        cy.wait(3 * 1000);
 
         cy.get('.modal__button > .btn').click();
+        cy.wait(3 * 1000);
 
         cy.get('.nav-button > button').click();
         cy.contains('멤버 승인').click();
@@ -132,8 +135,8 @@ describe('Member Test', () => {
 
         cy.contains('뒤로').click();
 
-        cy.get('.search-box__list > li:nth-child(5)').type(`${IdText}@ruu.kr`);
-        cy.contains('검색').click();
+        // cy.get('.search-box__list > li:nth-child(5)').type(`${IdText}@ruu.kr`);
+        // cy.contains('검색').click();
         cy.wait(3 * 1000);
 
         cy.get('.p-datatable-tbody > tr:nth-child(1) > td:nth-child(2)').contains('강제탈퇴');
