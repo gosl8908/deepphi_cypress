@@ -95,6 +95,7 @@ describe('Onprem SignUp', () => {
             cy.get('#username').type(text + '@ruu.kr');
             cy.get('#reset-password-btn').click();
             cy.contains('You will receive an email shortly with further instructions.', { timeout: 10 * 1000 });
+            cy.wait(5 * 1000);
             cy.get('#account__modal-close-btn').click();
         });
     });

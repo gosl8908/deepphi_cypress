@@ -22,22 +22,18 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '20.9.0'
-            - run: yarn add cypress@latest
 
             - name: Run Cypress tests
               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js" --quiet
 
-            - name: Upload JUnit test results
+            - name: Upload Cypress artifacts
               uses: actions/upload-artifact@v3
-              if: failure()
               with:
-                  name: cypress-screenshots
-                  path: cypress-/screenshots
-            - uses: actions/upload-artifact@v3
+                  name: cypress-artifacts
+                  path: |
+                      cypress/screenshots
+                      cypress/videos
               if: always()
-              with:
-                  name: cypress-videos
-                  path: cypress/videos
 
     # signup_test:
     #     runs-on: windows-latest
