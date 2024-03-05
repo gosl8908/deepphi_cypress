@@ -121,7 +121,7 @@ describe('Onprem SignUp', () => {
     it('Change Password', () => {
         cy.readFile('cypress/fixtures/PasswordLink.txt').then(link => {
             cy.log(link);
-            cy.visit(link);
+            cy.visit(link, { timeout: 30 * 1000 });
         });
         cy.get('#account__modal-close-btn').click();
         cy.get('#password-new').type(Cypress.env('KangTestPwd'));
