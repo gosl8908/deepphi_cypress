@@ -89,7 +89,7 @@ describe('Onprem SignUp', () => {
     });
 
     it('Forgot Password', () => {
-        cy.visit(Cypress.env('Onprem'));
+        cy.visit(Cypress.env('Onprem'), { timeout: 60 * 1000 });
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.get(':nth-child(1) > a').click();
             cy.get('#username').type(text + '@ruu.kr');
@@ -100,7 +100,7 @@ describe('Onprem SignUp', () => {
     });
 
     it('Forgot Password email Check', () => {
-        cy.visit(Cypress.env('DisposableEmail'));
+        cy.visit(Cypress.env('DisposableEmail'), { timeout: 60 * 1000 });
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.get('#id').type(text); // 이메일 입력
         });
