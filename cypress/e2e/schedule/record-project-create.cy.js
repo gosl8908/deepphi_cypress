@@ -9,11 +9,11 @@ const {
 describe('Record Project Create & Run', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -25,9 +25,11 @@ describe('Record Project Create & Run', () => {
     it('Record Project Create & Run', () => {
         createModule.createProject(c.RECORD, 'RecordProject' + Cypress.env('DateLabel'));
         cy.wait(10000); // 10초 대기
+        cy.contains('마이 데이터셋', { timeout: 30 * 1000 });
 
         // 리소스 설정
         cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
+        cy.wait(3 * 1000);
         cy.get(
             ':nth-child(5) > dd > .select-row__content > :nth-child(2) > .select-row__item > .radio-item > em',
         ).click(); // 데이터 프로세싱 cpu.4
@@ -267,15 +269,15 @@ describe('Record Project Create & Run', () => {
                     .contains('삭제')
                     .click();
                 cy.get('.btn-danger').click();
-                cy.wait(3 * 1000);
-                cy.get('.project-list--none')
+                cy.wait(20 * 1000);
+                cy.get('.project-list--none', { timeout: 30 * 1000 })
                     .contains('안녕하세요! DEEP:PHI 플랫폼 운영팀입니다.', { timeout: 10 * 1000 })
                     .should('be.visible');
             });
         }
     });
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Record Project Create/Record Project Create Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -284,7 +286,7 @@ describe('Record Project Create & Run', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -292,7 +294,7 @@ describe('Record Project Create & Run', () => {
             '1. 레코드 프로젝트 생성 2. 리소스 설정 3. 모듈 추가(Data Cleansing, Data Processing, DNN-Classification, Decision Tree Classifier) 4. 모듈 연결 5. 실행';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `Record Project Cteate Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Prod] Record Project Cteate`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

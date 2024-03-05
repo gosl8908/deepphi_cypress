@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Record Test Project Create', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -22,7 +22,8 @@ describe('Record Test Project Create', () => {
         cy.get('.search-box > .btn-primary').click();
         cy.wait(3000);
         cy.get('.title').click();
-        cy.wait(5000);
+        cy.wait(20 * 1000);
+        cy.contains('마이 데이터셋', { timeout: 30 * 1000 });
 
         // 평가 프로젝트 생성
         cy.get('.modeler__nav > ul > :nth-child(2) > button').click(); // 평가 프로젝트 탭
@@ -35,6 +36,7 @@ describe('Record Test Project Create', () => {
         cy.wait(1000);
         cy.get('.btn-primary').click(); // 확인
         cy.wait(5000);
+        cy.get('.btn__floating--exit > .btn__flow-floating').contains('학습', { timeout: 30 * 1000 });
 
         cy.log('프로젝트 실행');
         //프로젝트 Run
@@ -62,7 +64,7 @@ describe('Record Test Project Create', () => {
         }
     });
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Record Test Project Create/Record Test Project Create Test ${Cypress.env(
                 'DateLabel',
             )}`;
@@ -73,14 +75,14 @@ describe('Record Test Project Create', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
         const TestRange = '1. 레코드 평가 프로젝트 생성 2. 실행';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `Record Test Project Create Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Prod] Record Test Project Create`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

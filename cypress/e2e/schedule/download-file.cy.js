@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Download File Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -114,8 +114,10 @@ describe('Download File Test', () => {
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 파일
         cy.wait(3 * 1000);
         cy.get('.tab-item--result > button').click();
+        cy.wait(3 * 1000);
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
+        cy.wait(3 * 1000);
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 결과
         cy.wait(5 * 1000);
     });
@@ -147,6 +149,7 @@ describe('Download File Test', () => {
         cy.contains(/Resize_Files.*Resize_Files/, { timeout: 10 * 1000 }).should('be.visible'); // 이미지 프로세싱 파일 / 이미지 평가 프로세싱 파일
         cy.get('.search-box > .input-form').clear().type('DensNet121');
         cy.get('.search-box > .btn-primary').click();
+        cy.wait(3 * 1000);
         cy.contains(/DensNet121.*DensNet121.*DensNet121.*DensNet121/, {}).should('be.visible'); // AI 파일, AI 결과 / AI 파일, AI 결과
         cy.wait(3 * 1000);
     });
@@ -278,7 +281,7 @@ describe('Download File Test', () => {
     });
 
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Download File/Download File Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -287,7 +290,7 @@ describe('Download File Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -295,7 +298,7 @@ describe('Download File Test', () => {
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 이미지 프로젝트 파일 다운로드 4. 이미지 평가 프로젝트 파일 다운로드';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `Download File Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Prod] Download File`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

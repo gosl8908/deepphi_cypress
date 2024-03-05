@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('SignUp', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     before(() => {
@@ -161,7 +161,7 @@ describe('SignUp', () => {
         cy.contains('DISK 10GB 무료 서비스'); // 구독 취소 확인
     });
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `SignUp/SignUp Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -170,7 +170,7 @@ describe('SignUp', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -178,7 +178,7 @@ describe('SignUp', () => {
             '1. 회원가입 2. 로그인 3. 프로필 정보 변경 4. 비밀번호 변경 5. DISK 업그레이드 6. DISK 다운그레이드 7. DISK 구독 취소';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `SignUp test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Prod] SignUp`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });
