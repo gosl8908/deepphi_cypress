@@ -25,12 +25,8 @@ jobs:
             - run: yarn add cypress@latest
 
             - name: Run Cypress tests
-              run: |
-                  yarn cypress run
-                    --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
-                    --browser chrome
-                    --spec "cypress/e2e/onprem/onprem-signup.cy.js"
-                    --quiet
+              run: yarn cypress run
+                  --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js" --quiet
 
             - name: Upload Cypress artifacts
               uses: actions/upload-artifact@v3
