@@ -13,17 +13,18 @@ env:
 
 jobs:
     onprem_signup_test:
-        runs-on: windows-latest
+        runs-on: ubuntu-latest
+
         steps:
             - uses: actions/checkout@v2
-            - name: Setup Node.js
+
+            - name: Setup Node.js and Install Cypress
               uses: actions/setup-node@v3
               with:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
-            - name: Set Cypress browser version
-              run: npx cypress-browser-launcher install --chrome-version 118.0.5993.88
-            - name: Run Cypress
+
+            - name: Run Cypress tests
               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js"
 
     # signup_test:
