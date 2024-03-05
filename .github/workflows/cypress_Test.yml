@@ -21,6 +21,8 @@ jobs:
               with:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
+            - name: Set Cypress browser version
+              run: npx cypress-browser-launcher install --chrome-version 118.0.5993.88
             - name: Run Cypress
               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js"
 
