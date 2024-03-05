@@ -90,8 +90,8 @@ describe('Onprem SignUp', () => {
 
     it('Forgot Password', () => {
         cy.visit(Cypress.env('Onprem'), { timeout: 60 * 1000 });
+        cy.get(':nth-child(1) > a', { timeout: 30 * 1000 }).click();
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
-            cy.get(':nth-child(1) > a').click();
             cy.get('#username').type(text + '@ruu.kr');
             cy.get('#reset-password-btn').click();
             cy.contains('You will receive an email shortly with further instructions.', { timeout: 10 * 1000 });
