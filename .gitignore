@@ -160,3 +160,5 @@ package-lock.json
 ######################
 # Cypress
 ######################
+cypress/reports
+cypress/screenshots

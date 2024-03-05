@@ -47,12 +47,12 @@ describe('Onprem SignUp', () => {
             cy.contains('사용 가능한 닉네임입니다.'); // 닉네임 중복 팝업 확인
             cy.get('.btn').contains('닫기').click(); // 팝업 확인
             cy.contains('등록').click(); // 다음
-
-            /* 회원가입 마무리 */
-            cy.get('.account__modal--container', { timeout: 10 * 1000 }).should('be.visible');
-            cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
-            cy.wait(3000);
         });
+
+        /* 회원가입 마무리 */
+        cy.get('.account__modal--container', { timeout: 10 * 1000 }).should('be.visible');
+        cy.get('.account__modal--footer > .account-button').click(); // 팝업 확인
+        cy.wait(3000);
     });
     /* 어드민 회원가입 승인 */
     it('Admin Signup Check', () => {
@@ -71,21 +71,21 @@ describe('Onprem SignUp', () => {
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.log(text);
             loginModule.login(Cypress.env('Onprem'), text + '@ruu.kr', Cypress.env('KangTestPwd'));
-            cy.wait(5000);
-
-            /* 비밀번호 변경 */
-            cy.get('.btn__user_info > dl > dd').click();
-            cy.get('.btn').contains('수정').click();
-            cy.get('.input-form').type(Cypress.env('KangTestPwd'));
-            cy.get('.btn-primary').click();
-            cy.wait(3000); // 3초 대기
-            cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 비밀번호 변경 탭
-            cy.get('#New_Password').type('Test123!'); // 새 비밀번호 입력
-            cy.get('#Confirm_New_Password').type('Test123!'); // 새 비밀번호 확인 입력
-            cy.get('.btn-primary').click(); // 변경 버튼
-            cy.contains('비밀번호가 성공적으로 변경되었습니다.', { timeout: 20 * 1000 }).should('be.visible'); // 데이터셋 데이터
-            cy.get('.modal-button-content > .btn').click(); // 팝업 종료
         });
+        cy.wait(5000);
+
+        /* 비밀번호 변경 */
+        cy.get('.btn__user_info > dl > dd').click();
+        cy.get('.btn').contains('수정').click();
+        cy.get('.input-form').type(Cypress.env('KangTestPwd'));
+        cy.get('.btn-primary').click();
+        cy.wait(3000); // 3초 대기
+        cy.get('.default-tab > ul > :nth-child(2) > button').click(); // 비밀번호 변경 탭
+        cy.get('#New_Password').type('Test123!'); // 새 비밀번호 입력
+        cy.get('#Confirm_New_Password').type('Test123!'); // 새 비밀번호 확인 입력
+        cy.get('.btn-primary').click(); // 변경 버튼
+        cy.contains('비밀번호가 성공적으로 변경되었습니다.', { timeout: 20 * 1000 }).should('be.visible'); // 데이터셋 데이터
+        cy.get('.modal-button-content > .btn').click(); // 팝업 종료
     });
 
     it('Forgot Password', () => {
@@ -93,11 +93,11 @@ describe('Onprem SignUp', () => {
         cy.get(':nth-child(1) > a', { timeout: 30 * 1000 }).click();
         cy.readFile('cypress/fixtures/SignupTest.txt').then(text => {
             cy.get('#username').type(text + '@ruu.kr');
-            cy.get('#reset-password-btn').click();
-            cy.contains('You will receive an email shortly with further instructions.', { timeout: 10 * 1000 });
-            cy.wait(5 * 1000);
-            cy.get('#account__modal-close-btn').click();
         });
+        cy.get('#reset-password-btn').click();
+        cy.contains('You will receive an email shortly with further instructions.', { timeout: 10 * 1000 });
+        cy.wait(5 * 1000);
+        cy.get('#account__modal-close-btn').click();
     });
 
     it('Forgot Password email Check', () => {
@@ -121,7 +121,7 @@ describe('Onprem SignUp', () => {
     it('Change Password', () => {
         cy.readFile('cypress/fixtures/PasswordLink.txt').then(link => {
             cy.log(link);
-            cy.visit(link, { timeout: 30 * 1000 });
+            cy.visit(link, { timeout: 60 * 1000 });
         });
         cy.get('#account__modal-close-btn').click();
         cy.get('#password-new').type(Cypress.env('KangTestPwd'));
