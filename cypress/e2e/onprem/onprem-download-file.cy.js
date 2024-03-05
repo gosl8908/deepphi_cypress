@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Onprem Download File Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -133,6 +133,7 @@ describe('Onprem Download File Test', () => {
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 파일
         cy.wait(3 * 1000);
         cy.get('.tab-item--result > button').click();
+        cy.wait(3 * 1000);
         cy.get('.bottom__head--control > :nth-child(2)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 결과
@@ -243,6 +244,7 @@ describe('Onprem Download File Test', () => {
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 데이터
         cy.wait(3 * 1000);
         cy.get('.tab-item--record-result > button').click();
+        cy.wait(3 * 1000);
         cy.get('.bottom__head--control > :nth-child(1)').click();
         cy.get('.btn-primary').click();
         cy.contains('파일 압축이 완료되었습니다.', { timeout: 10 * 1000 }).should('be.visible'); // AI 결과
@@ -316,7 +318,7 @@ describe('Onprem Download File Test', () => {
     });
 
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Download File Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -325,7 +327,7 @@ describe('Onprem Download File Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
 
@@ -334,7 +336,7 @@ describe('Onprem Download File Test', () => {
             '1. 레코드 프로젝트 파일 다운로드 2. 레코드 평가 프로젝트 파일 다운로드 3. 인퍼런스 서비스 예측 이력 다운로드 4. 이미지 프로젝트 파일 다운로드 5. 이미지 평가 프로젝트 파일 다운로드';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `[Onprem] Download File Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Onprem] Download File`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });
