@@ -2,7 +2,7 @@ name: Cypress tests
 
 on:
     schedule:
-        - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행
+        - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행 (KCT: 8:00 AM)
 
     push:
         branches:
@@ -45,46 +45,61 @@ jobs:
             - name: Run Cypress tests
               run: yarn cypress run
                   --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/schedule/signup.cy.js"
-#     dataset_upload_test:
-#         runs-on: ubuntu-latest
-#         needs: signup_test # signup_test 작업이 완료될 때까지 대기
 
-#         container:
-#             image: cypress/browsers
+    onprem_dataset_upload_test:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
-#         steps:
-#             - uses: actions/checkout@v2
+        steps:
+            - uses: actions/checkout@v2
 
-#             - name: Setup Node.js and Install Cypress
-#               uses: actions/setup-node@v3
-#               with:
-#                   node-version: '20.9.0'
-#             - run: yarn add cypress@latest
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-#             - name: Run Cypress tests
-#               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/dataset-upload.cy.js"
-#               continue-on-error: true
+            - name: Run Cypress tests
+              run: yarn cypress run
+                  --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-dataset-upload.cy.js"
 
-#     image_project_create_test:
-#         runs-on: ubuntu-latest
-#         needs: dataset_upload_test
+    dataset_upload_test:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
-#         container:
-#             image: cypress/browsers
+        steps:
+            - uses: actions/checkout@v2
 
-#         steps:
-#             - uses: actions/checkout@v2
+            - name: Setup Node.js and Install Cypress
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-#             - name: Setup Node.js and Install Cypress
-#               uses: actions/setup-node@v3
-#               with:
-#                   node-version: '20.9.0'
-#             - run: yarn add cypress@latest
+            - name: Run Cypress tests
+              run: yarn cypress run
+                  --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/schedule/dataset-upload.cy.js"
 
-#             - name: Run Cypress tests
-#               run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js"
-#               continue-on-error: true
+    # image_project_create_test:
+    #     runs-on: ubuntu-latest
+    #     needs: dataset_upload_test
 
+    #     container:
+    #         image: cypress/browsers
+
+    #     steps:
+    #         - uses: actions/checkout@v2
+
+    #         - name: Setup Node.js and Install Cypress
+    #           uses: actions/setup-node@v3
+    #           with:
+    #               node-version: '20.9.0'
+    #         - run: yarn add cypress@latest
+
+    #         - name: Run Cypress tests
+    #           run: yarn cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/project/image-project-create.cy.js"
 #     image_test_project_create_test:
 #         runs-on: ubuntu-latest
 #         needs: image_project_create_test

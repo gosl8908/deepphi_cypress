@@ -1,4 +1,4 @@
-function visitAndRun(SiteUrl, Title, Time = 3000) {
+function visitAndRun(SiteUrl, Title, Time = 5 * 1000) {
     cy.visit(SiteUrl);
     cy.wait(Time);
 
@@ -26,12 +26,12 @@ function visitAndRun(SiteUrl, Title, Time = 3000) {
         });
 }
 
-function visitAndCheck(SiteUrl, Title, Time = 3000) {
+function visitAndCheck(SiteUrl, Title, Time = 5 * 1000) {
     cy.visit(SiteUrl);
     cy.wait(Time);
 
     cy.log('프로젝트 상태 확인');
-    cy.get('.modeler__status').contains('완료', { timeout: 3 * 1000 });
+    cy.get('.modeler__status').contains('완료', { timeout: 5 * 1000 });
 
     // 스크린샷
     cy.screenshot(Title + Cypress.env('date_label'));

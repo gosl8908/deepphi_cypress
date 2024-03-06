@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Onprem User Check Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -50,7 +50,7 @@ describe('Onprem User Check Test', () => {
     });
 
     afterEach('Status Check', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `User Check Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -59,14 +59,14 @@ describe('Onprem User Check Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
         const TestRange = '1. 멤버 검색 2. 멤버 강제 탈퇴 3. 변경이력 조회';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `[Onprem] User Check Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Onprem] User Check`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

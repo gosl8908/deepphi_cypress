@@ -13,7 +13,7 @@ function Email({ TestFails, EmailTitle, TestRange, Screenshots }) {
     cy.log('테스트가 성공적으로 완료되었습니다.');
 
     const EmailInfo = {
-        subject: `[자동화] ${EmailTitle}`,
+        subject: `${EmailTitle} 자동화 테스트 결과`,
         body: EmailBody,
         screenshotFileNames: Screenshots.map(name => name + '.png'), // 스크린샷 파일 이름들을 추가
     };

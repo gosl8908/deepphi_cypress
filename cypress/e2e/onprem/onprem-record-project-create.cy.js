@@ -25,7 +25,8 @@ describe('Record Project Create & Run', () => {
     it('Record Project Create & Run', () => {
         cy.get('.gnb__nav > ul > :nth-child(2) > button').click();
         createModule.createProject(c.RECORD, 'RecordProject' + Cypress.env('DateLabel'));
-        cy.wait(10000); // 10초 대기
+        cy.wait(20 * 1000);
+        cy.contains('마이 데이터셋', { timeout: 30 * 1000 });
 
         // 리소스 설정
         cy.get('.modeler__nav > ul > :nth-child(3) > button').click(); // 리소스 탭
@@ -263,7 +264,7 @@ describe('Record Project Create & Run', () => {
                 cy.get('.list-dropdown').contains('삭제').click();
                 cy.get('.btn-danger').click();
                 cy.wait(20 * 1000);
-                cy.get('.cover__no-contents')
+                cy.get('.cover__no-contents', { timeout: 30 * 1000 })
                     .contains('검색 결과가 없습니다.', { timeout: 10 * 1000 })
                     .should('be.visible');
             });

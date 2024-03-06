@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Onprem Dashboard Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -23,7 +23,6 @@ describe('Onprem Dashboard Test', () => {
             cy.get(':nth-child(1) > .sharing-dataset-card__title > .tag-name > dt').click();
             cy.contains(DatasetName);
         });
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -36,7 +35,6 @@ describe('Onprem Dashboard Test', () => {
             cy.get('.notice-container > :nth-child(1) > dl > dt').click();
             cy.contains(Notice);
         });
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -45,7 +43,6 @@ describe('Onprem Dashboard Test', () => {
 
         /* 이미지 데이터셋 생성 화면 이동 */
         cy.get('.info-card-banner > section > div > :nth-child(1)').click();
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -54,7 +51,6 @@ describe('Onprem Dashboard Test', () => {
 
         /* 레코드 데이터셋 생성 화면 이동 */
         cy.get('.info-card-banner > section > div > :nth-child(2)').click();
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -80,7 +76,6 @@ describe('Onprem Dashboard Test', () => {
                 // 프로젝트 이름 확인
                 cy.contains(ProjectName);
             });
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -106,7 +101,6 @@ describe('Onprem Dashboard Test', () => {
                 // 데이터셋 이름 확인
                 cy.contains(DatasetName);
             });
-        cy.wait(5 * 1000);
         cy.go('back');
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
@@ -115,7 +109,7 @@ describe('Onprem Dashboard Test', () => {
     });
 
     afterEach('Status Check', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Dashboard Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -124,7 +118,7 @@ describe('Onprem Dashboard Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -132,7 +126,7 @@ describe('Onprem Dashboard Test', () => {
             '1. 최근 공유된 데이터셋 진입 2. 공지사항 진입 3. 공유된 데이터셋 진입 4. 공유된 프로젝트 진입';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `[Onprem] Dashboard Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Onprem] Dashboard`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

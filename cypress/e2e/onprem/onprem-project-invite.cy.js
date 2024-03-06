@@ -3,11 +3,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Onprem Project invite Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -100,7 +100,7 @@ describe('Onprem Project invite Test', () => {
         cy.get('.invite-popup').contains('거절').click();
     });
     afterEach('Status Check', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Project invit Test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -109,7 +109,7 @@ describe('Onprem Project invite Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -117,7 +117,7 @@ describe('Onprem Project invite Test', () => {
 
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `[Onprem] Project invit Test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Onprem] Project invit`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });

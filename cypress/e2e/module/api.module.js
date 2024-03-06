@@ -31,10 +31,12 @@ function api(Url, Type) {
 function apiRequest(EndPoint, FormDataset) {
     cy.log('requset 호출');
 
+    cy.log(EndPoint);
+
     cy.request({
         method: 'POST',
-        url: EndPoint,
         encoding: 'utf-8',
+        url: EndPoint,
         failOnStatusCode: false,
         maxBodyLength: Infinity,
         headers: {

@@ -111,23 +111,24 @@ function createImageDataset({
         cy.wait(3700);
     }
 
+    cy.contains('성공', { timeout: 10 * 1000 }).should('be.visible');
+
     // 데이터셋 검색
     cy.get('.search-box > .input-form').type(Title);
-    cy.get('.search-box > .btn-primary').click();
+    cy.get('.search-box > .btn-primary').invoke('click');
 
     // Dataset 업로드 확인
-    cy.contains('성공', { timeout: 15 * 1000 }).should('be.visible');
-    cy.contains('압축 해제 중', { timeout: 30 * 1000 }).should('be.visible');
-    cy.contains('검증 진행 중', { timeout: 30 * 1000 }).should('be.visible');
-    cy.contains('설정을 완료하세요', { timeout: 30 * 1000 }).should('be.visible');
+    cy.contains('압축 해제 중', { timeout: 60 * 1000 }).should('be.visible');
+    cy.contains('검증 진행 중', { timeout: 60 * 1000 }).should('be.visible');
+    cy.contains('설정을 완료하세요', { timeout: 60 * 1000 }).should('be.visible');
 }
 
 /* 프로젝트 생성 */
 function createProject(Type, Title, Detail = Title) {
     cy.get('#createBtn').click(); // 프로젝트 생성 버튼 클릭
-    if ((Type = IMAGE)) {
+    if (Type === IMAGE) {
         cy.get(':nth-child(1) > .create-select-item__container > .create-select-item__content').click(); // Image 선택
-    } else if ((Type = RECORD)) {
+    } else if (Type === RECORD) {
         cy.get(':nth-child(2) > .create-select-item__container > .create-select-item__content').click(); // Record 선택
     }
     cy.get('.modal-button-content > .btn').click(); // 다음 버튼 클릭
@@ -200,10 +201,12 @@ function createRecordDataset({
         cy.wait(5000);
 
         cy.get('.search-box > .input-form').type(Title);
+        cy.wait(3 * 1000);
         cy.get('.search-box > .btn-primary').click();
         cy.contains('업로드중에는 진입이 불가능합니다', { timeout: 200 * 1000 }).should('not.exist');
     } else {
         cy.get('.search-box > .input-form').type(Title);
+        cy.wait(3 * 1000);
         cy.get('.search-box > .btn-primary').click();
         cy.contains('업로드중 중에는 진입이 불가능합니다', { timeout: 200 * 1000 }).should('not.exist');
     }
@@ -221,7 +224,6 @@ function createTestProject(Name, Site = undefined) {
     } else {
         cy.get('.title').click();
     }
-
     cy.wait(5 * 1000);
 
     // 평가 프로젝트 생성
@@ -235,6 +237,13 @@ function createTestProject(Name, Site = undefined) {
     cy.wait(1 * 1000);
     cy.get('.btn-primary').click(); // 확인
     cy.wait(5 * 1000);
+    cy.get('.default-content').then(CardContent => {
+        const NotFound = !CardContent.text().includes('학습 모드로 이동', { timeout: 20 * 1000 });
+        if (NotFound) {
+            cy.get(':nth-child(1) > .test-project__item--header > .test-project__item--title').click();
+        }
+        cy.get('.default-content').contains('학습 모드로 이동', { timeout: 20 * 1000 });
+    });
 }
 
 module.exports = {

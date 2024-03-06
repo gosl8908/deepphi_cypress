@@ -2,11 +2,11 @@ const { loginModule, emailModule, functionModule: f } = require('../module/manag
 describe('Onprem Share Test', () => {
     let TestFails = []; // 실패 원인을 저장할 변수
     let Screenshots = []; // 스크린샷을 저장할 배열
-    let FailTF = false;
+    let Failure = false;
     Cypress.on('fail', (err, runnable) => {
         const ErrMessage = err.message || '알 수 없는 이유로 실패함';
         !TestFails.includes(ErrMessage) && TestFails.push(ErrMessage);
-        FailTF = true;
+        Failure = true;
         throw err;
     });
     beforeEach(() => {
@@ -28,6 +28,7 @@ describe('Onprem Share Test', () => {
             .click();
         cy.get('.modal-button-content > .btn-primary').click();
         cy.contains('성공적으로 공유되었습니다.', { timeout: 5 * 1000 });
+        cy.wait(5 * 1000);
 
         /* 레코드 데이터셋 공유 */
         cy.get('.default-tab > ul > :nth-child(2) > button').click();
@@ -40,6 +41,7 @@ describe('Onprem Share Test', () => {
             .click();
         cy.get('.modal-button-content > .btn-primary').click();
         cy.contains('성공적으로 공유되었습니다.', { timeout: 5 * 1000 });
+        cy.wait(5 * 1000);
 
         /* 이미지 프로젝트 공유 */
         cy.get('.gnb__container').contains('프로젝트').click();
@@ -52,6 +54,7 @@ describe('Onprem Share Test', () => {
             .click();
         cy.get('.modal-button-content > .btn-primary').click();
         cy.contains('성공적으로 공유되었습니다.', { timeout: 5 * 1000 });
+        cy.wait(5 * 1000);
 
         /* 레코드 프로젝트 공유 */
         cy.get('.search-box > :nth-child(3)').click();
@@ -77,6 +80,7 @@ describe('Onprem Share Test', () => {
         cy.wait(3 * 1000);
         cy.get('.dashboard-card__name > button').click();
         cy.contains('데이터셋 포함된 파일', { timeout: 20 * 1000 }).should('be.visible');
+        cy.wait(5 * 1000);
 
         /* 레코드 데이터셋 공유 확인*/
         cy.get('.gnb__container').contains('데이터셋').click();
@@ -87,6 +91,7 @@ describe('Onprem Share Test', () => {
         cy.wait(3 * 1000);
         cy.get('.dashboard-card__name > button').click();
         cy.contains('샘플데이터', { timeout: 20 * 1000 }).should('be.visible');
+        cy.wait(5 * 1000);
 
         /* 이미지 프로젝트 공유 확인*/
         cy.get('.gnb__container').contains('프로젝트').click();
@@ -96,6 +101,7 @@ describe('Onprem Share Test', () => {
         cy.wait(3 * 1000);
         cy.get('.dashboard-card__name > button').click();
         cy.contains('이미지 프로젝트 공유용', { timeout: 20 * 1000 }).should('be.visible');
+        cy.wait(5 * 1000);
 
         /* 레코드 프로젝트 공유 확인*/
         cy.get('.gnb__container').contains('프로젝트').click();
@@ -153,7 +159,7 @@ describe('Onprem Share Test', () => {
     });
 
     afterEach('Status Fail', () => {
-        if (FailTF) {
+        if (Failure) {
             const ScreenshotFileName = `Share test ${Cypress.env('DateLabel')}`;
             cy.screenshot(ScreenshotFileName);
             if (!Cypress.platform.includes('win')) {
@@ -162,7 +168,7 @@ describe('Onprem Share Test', () => {
             } else {
                 Screenshots.push(`${ScreenshotFileName}`);
             }
-            FailTF = false;
+            Failure = false;
         }
     });
     after('Send Email', () => {
@@ -170,7 +176,7 @@ describe('Onprem Share Test', () => {
             '1. 이미지 데이터셋 공유 2. 레코드 데이터셋 공유 3. 이미지 프로젝트 공유 4. 레코드 프로젝트 공유';
         emailModule.Email({
             TestFails: TestFails,
-            EmailTitle: `[Onprem] Share test ${Cypress.env('EmailTitle')}`,
+            EmailTitle: `[${Cypress.env('EmailTitle')}][Onprem] Share`,
             TestRange: TestRange,
             Screenshots: Screenshots,
         });
