@@ -20,12 +20,12 @@ describe('로그인', () => {
     beforeEach(() => {
         cy.setDateToEnv();
         cy.getAll();
+        loginModule.login(Cypress.env('Onprem'), Cypress.env('OnpremId6'), Cypress.env('KangTestPwd'));
     });
 
     it('test', () => {
-        apiModule.api('https://onprem-inference.deepphi.ai/inference-202402151606/3.3', c.RECORD);
-        // loginModule.login(Cypress.env('Prod'), Cypress.env('AutoTestId'), Cypress.env('KangTestPwd'));
-        // datasetModule.settingImageDataset(c.CLASSIFICATION, '2D');
+        cy.visit('https://onprem-modeler.deepphi.ai/modeler/36739?testId=37154&loadedProjectPage=1');
+        cy.contains('Data Cleansing').click().type('{alt}v', { force: true });
     });
     // loginModule.login(Cypress.env('Prod'), Cypress.env('KangTestId6'), Cypress.env('KangTestPwd'));
     //     createModule.createTestProject('이미지 평가 프로젝트 자동화 확인용');
