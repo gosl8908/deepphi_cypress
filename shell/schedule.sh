@@ -1,6 +1,6 @@
 mkdir -p result
 
-NO_COLOR=1 yarn cypress run --record --key $CYPRESS_RECORD_KEY \
+NO_COLOR=1 yarn cypress run --record --key "${{ secrets.CYPRESS_RECORD_KEY }}" \
     --spec "cypress/e2e/schedule/signup.cy.js" \
     --browser chrome 2>&1 | tee ./result/orign.txt
 

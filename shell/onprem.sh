@@ -4,7 +4,7 @@ mkdir -p result
 # Cypress 테스트를 지정된 설정으로 실행하고 출력을 파일에 저장합니다.
 # 표준 출력 (stdout)과 표준 에러 (stderr)를 동시에 동일한 파일로 리다이렉트합니다.
 # tee 명령어를 사용하여 출력을 터미널에 표시하고 동시에 파일에 저장합니다.
-NO_COLOR=1 yarn cypress run --record --key $CYPRESS_RECORD_KEY \
+NO_COLOR=1 yarn cypress run --record --key "${{ secrets.CYPRESS_RECORD_KEY }}" \  #${{ secrets.CYPRESS_RECORD_KEY }}
     --spec "cypress/e2e/onprem/onprem-signup.cy.js" \
     --browser chrome 2>&1 | tee ./result/orign.txt
 
