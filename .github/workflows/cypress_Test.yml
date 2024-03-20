@@ -58,8 +58,9 @@ jobs:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
 
+            # cURL 설치 명령 수정
             - name: Install cURL
-              run: sudo apt-get update && sudo apt-get install curl -y
+              run: apt-get update && apt-get install -y curl
 
             - name: Grant execute permission to shell scripts
               run: chmod +x -R ./shell
