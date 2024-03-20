@@ -16,6 +16,22 @@
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
+# schedule:
+#     # Cypress Docker 이미지를 사용하여 테스트 환경을 설정합니다.
+#     image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+#     stage: test
+#     script:
+#         # 필요한 패키지를 설치합니다.
+#         - yarn install
+#         # cURL을 설치합니다.
+#         - apt-get update && apt-get install curl -y
+#         # 쉘 스크립트에 실행 권한을 부여합니다.
+#         - chmod +x -R ./shell
+#         # 쉘 스크립트 파일을 목록으로 출력합니다.
+#         - ls -la ./shell
+#         # 쉘 스크립트를 실행합니다.
+#         - ./shell/schedule.sh
+
 # onprem_test:
 #     image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 # Cypress Docker 이미지 사용
 #     stage: test
@@ -23,15 +39,5 @@
 #         - yarn install
 #         - >
 #             yarn cypress run --record --key $CYPRESS_RECORD_KEY \
-#               --spec "cypress/e2e/onprem_project/" \
+#               --spec "cypress/e2e/onprem_project/onprem-dashboard.cy.js"\
 #               --browser chrome
-
-onprem_test:
-    image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1 # Cypress Docker 이미지 사용
-    stage: test
-    script:
-        - yarn install
-        - >
-            yarn cypress run --record --key $CYPRESS_RECORD_KEY \
-              --spec "cypress/e2e/onprem_project/onprem-dashboard.cy.js"\
-              --browser chrome

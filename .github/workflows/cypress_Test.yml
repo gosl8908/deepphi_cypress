@@ -1,3 +1,35 @@
+# name: Cypress tests
+
+# on:
+#     schedule:
+#         - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행 (KCT: 8:00 AM)
+
+#     push:
+#         branches:
+#             - main
+
+# env:
+#     TZ: 'Asia/Seoul'
+
+# jobs:
+#     onprem_signup_test:
+#         runs-on: ubuntu-latest
+#         container:
+#             image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+
+#         steps:
+#             - uses: actions/checkout@v2
+
+#             - name: Setup Node.js and Install Cypress
+#               uses: actions/setup-node@v3
+#               with:
+#                   node-version: '20.9.0'
+#             - run: yarn add cypress@latest
+
+#             - name: Run Cypress tests
+#               run: yarn cypress run
+#                   --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js"
+
 name: Cypress tests
 
 on:
@@ -26,9 +58,17 @@ jobs:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
 
-            - name: Run Cypress tests
-              run: yarn cypress run
-                  --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/onprem/onprem-signup.cy.js"
+            - name: Install cURL
+              run: sudo apt-get update && sudo apt-get install curl -y
+
+            - name: Grant execute permission to shell scripts
+              run: chmod +x -R ./shell
+
+            - name: List shell script files
+              run: ls -la ./shell
+
+            - name: Execute shell script
+              run: ./shell/onprem.sh
 
     signup_test:
         runs-on: ubuntu-latest
@@ -42,9 +82,17 @@ jobs:
                   node-version: '20.9.0'
             - run: yarn add cypress@latest
 
-            - name: Run Cypress tests
-              run: yarn cypress run
-                  --record --key ${{ secrets.CYPRESS_RECORD_KEY }} --browser chrome --spec "cypress/e2e/schedule/signup.cy.js"
+            - name: Install cURL
+              run: sudo apt-get update && sudo apt-get install curl -y
+
+            - name: Grant execute permission to shell scripts
+              run: chmod +x -R ./shell
+
+            - name: List shell script files
+              run: ls -la ./shell
+
+            - name: Execute shell script
+              run: ./shell/schedule.sh
 
     # onprem_dataset_upload_test:
     #     runs-on: ubuntu-latest
