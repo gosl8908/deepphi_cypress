@@ -23,7 +23,7 @@ describe('Onprem Dashboard Test', () => {
             cy.get(':nth-child(1) > .sharing-dataset-card__title > .tag-name > dt').click();
             cy.contains(DatasetName);
         });
-        cy.go('back');
+        cy.go('back'); //뒤로가기
         cy.contains(
             '현재 연구에 이용할 수 있는 데이터셋이 존재하지 않습니다. 데이터셋을 등록해 연구에 활용 해보세요.',
             { timeout: 10 * 1000 },
