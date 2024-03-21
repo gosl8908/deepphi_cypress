@@ -74,6 +74,7 @@ jobs:
 
             - name: Execute shell script
               run: |
+                  export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
                   ./shell/onprem.sh
 
     # signup_test:
