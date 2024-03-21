@@ -27,7 +27,7 @@ export TO_EMAIL="gosl8908@deepnoid.com"
 
 # 이메일 계정 정보 설정 (보안상의 이유로 하드코딩하지 않고 Secrets를 사용하는 것이 좋음)
 export EMAIL_USERNAME="gosl8908@deepnoid.com"
-export EMAIL_PASSWORD="rnrmf0801"
+export EMAIL_PASSWORD="rnrmf0801!"
 
 # 이메일 전송 함수 호출
 send_email
