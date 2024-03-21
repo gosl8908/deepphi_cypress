@@ -77,34 +77,42 @@ jobs:
                   export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
                   ./shell/onprem.sh
 
-    # signup_test:
-    #     runs-on: ubuntu-latest
-    #     container:
-    #         image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
-    #     steps:
-    #         - uses: actions/checkout@v2
-    #         - name: Setup Node.js
-    #           uses: actions/setup-node@v3
-    #           with:
-    #               node-version: '20.9.0'
-    #         - run: yarn add cypress@latest
+    signup_test:
+        runs-on: ubuntu-latest
+        container:
+            image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
-    #         - name: Install cURL
-    #           run: sudo apt-get update && sudo apt-get install curl -y
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-    #         - name: Grant execute permission to shell scripts
-    #           run: chmod +x -R ./shell
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
-    #         - name: List shell script files
-    #           run: ls -la ./shell
+            - name: Install cURL
+              run: |
+                  apt-get update && apt-get install -y curl
 
-    #         - name: Execute shell script
-    #           run: ./shell/schedule.sh
+            - name: Grant execute permission to shell scripts
+              run: |
+                  chmod +x -R ./shell
+
+            - name: List shell script files
+              run: |
+                  ls -la ./shell
+
+            - name: Execute shell script
+              run: |
+                  export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
+                  ./shell/schedule.sh
 
     # onprem_dataset_upload_test:
     #     runs-on: ubuntu-latest
     #     container:
-    #         image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+    #         image: cypress/browsers
 
     #     steps:
     #         - uses: actions/checkout@v2

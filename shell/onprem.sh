@@ -8,6 +8,6 @@ sed -n '/Run Finished/,$p' ./result/orign.txt > ./result/result.txt
 
 export file_content=$(cat ./result/result.txt)
 export date=`date +"%Y-%m-%d %a" `
-export subject="onprem"
+export subject="onprem-Signup"
 
 sh ./shell/curl.sh

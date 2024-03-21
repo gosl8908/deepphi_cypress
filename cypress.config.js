@@ -9,7 +9,7 @@ const EamilId = 'gosl8908@deepnoid.com';
 const EamilPwd = 'gotjd0215!';
 
 module.exports = defineConfig({
-    viewportWidth: 1980,
+    viewportWidth: 1920,
     viewportHeight: 1080,
     pageLoadTimeout: 60000,
     experimentalStudio: true,
