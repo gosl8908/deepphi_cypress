@@ -58,6 +58,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   node-version: '20.9.0'
+            - run: yarn add cypress@latest
 
             - name: Install cURL
               run: |
