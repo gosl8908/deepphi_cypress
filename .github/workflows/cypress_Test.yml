@@ -60,12 +60,20 @@ jobs:
                   node-version: '20.9.0'
 
             - name: Install cURL
-              run: apt-get update && apt-get install -y curl
+              run: |
+                  apt-get update && apt-get install -y curl
+
+            - name: Grant execute permission to shell scripts
+              run: |
+                  chmod +x -R ./shell
+
+            - name: List shell script files
+              run: |
+                  ls -la ./shell
 
             - name: Execute shell script
               run: |
-                  chmod +x ./shell/curl.sh
-                  ./shell/curl.sh
+                  ./shell/onprem.sh
 
     # signup_test:
     #     runs-on: ubuntu-latest
