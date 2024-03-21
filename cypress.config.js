@@ -6,7 +6,7 @@ const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/li
 
 /* Email Account */
 const EamilId = 'gosl8908@deepnoid.com';
-const EamilPwd = 'rnrmf0801!';
+const EamilPwd = 'gotjd0215!';
 
 module.exports = defineConfig({
     viewportWidth: 1980,
