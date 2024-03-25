@@ -105,7 +105,8 @@ describe('Onprem SignUp', () => {
             cy.get('#id').type(text); // 이메일 입력
         });
         cy.contains('메일확인').click();
-        cy.contains('(Notice) Reset your password for DEEP:PHI', { timeout: 20 * 1000 })
+        cy.get('#content')
+            .contains('(Notice) Reset your password for DEEP:PHI', { timeout: 20 * 1000 })
             .should('be.visible')
             .click();
         cy.contains('Click To Reset Password');

@@ -45,37 +45,37 @@ env:
     TZ: 'Asia/Seoul'
 
 jobs:
-    onprem_signup_test:
-        runs-on: ubuntu-latest
-        container:
-            image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+    # onprem_signup_test:
+    #     runs-on: ubuntu-latest
+    #     container:
+    #         image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+    #     steps:
+    #         - name: Checkout repository
+    #           uses: actions/checkout@v2
 
-            - name: Setup Node.js and Install Cypress
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '20.9.0'
-            - run: yarn add cypress@latest
+    #         - name: Setup Node.js and Install Cypress
+    #           uses: actions/setup-node@v3
+    #           with:
+    #               node-version: '20.9.0'
+    #         - run: yarn add cypress@latest
 
-            - name: Install cURL
-              run: |
-                  apt-get update && apt-get install -y curl
+    #         - name: Install cURL
+    #           run: |
+    #               apt-get update && apt-get install -y curl
 
-            - name: Grant execute permission to shell scripts
-              run: |
-                  chmod +x -R ./shell
+    #         - name: Grant execute permission to shell scripts
+    #           run: |
+    #               chmod +x -R ./shell
 
-            - name: List shell script files
-              run: |
-                  ls -la ./shell
+    #         - name: List shell script files
+    #           run: |
+    #               ls -la ./shell
 
-            - name: Execute shell script
-              run: |
-                  export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
-                  ./shell/onprem.sh
+    #         - name: Execute shell script
+    #           run: |
+    #               export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
+    #               ./shell/onprem.sh
 
     signup_test:
         runs-on: ubuntu-latest

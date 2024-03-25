@@ -31,6 +31,7 @@ module.exports = defineConfig({
                 sendEmail({ recipient, subject, body, screenshotFileNames }) {
                     const attachments = [];
 
+                    /* 스크린샷 있는 경우 첨부 */
                     if (screenshotFileNames && screenshotFileNames.length > 0) {
                         screenshotFileNames.forEach(screenshotFileName => {
                             const path = `./cypress/screenshots/${screenshotFileName}`;
