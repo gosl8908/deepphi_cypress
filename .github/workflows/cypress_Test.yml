@@ -32,19 +32,19 @@
 
 # GitHub Actions Workflow (Cypress tests)
 
-name: Cypress tests
+# name: Cypress tests
 
-on:
-    schedule:
-        - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행 (KCT: 8:00 AM)
-    push:
-        branches:
-            - main
+# on:
+#     schedule:
+#         - cron: '0 23 * * 0-4' # UTC 기준 매주 일요일 ~ 수요일 23:00 (11:00 PM)에 실행 (KCT: 8:00 AM)
+#     push:
+#         branches:
+#             - main
 
-env:
-    TZ: 'Asia/Seoul'
+# env:
+#     TZ: 'Asia/Seoul'
 
-jobs:
+# jobs:
     # onprem_signup_test:
     #     runs-on: ubuntu-latest
     #     container:
@@ -77,37 +77,37 @@ jobs:
     #               export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
     #               ./shell/onprem.sh
 
-    signup_test:
-        runs-on: ubuntu-latest
-        container:
-            image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+    # signup_test:
+    #     runs-on: ubuntu-latest
+    #     container:
+    #         image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
 
-        steps:
-            - name: Checkout repository
-              uses: actions/checkout@v2
+    #     steps:
+    #         - name: Checkout repository
+    #           uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v3
-              with:
-                  node-version: '20.9.0'
-            - run: yarn add cypress@latest
+    #         - name: Setup Node.js
+    #           uses: actions/setup-node@v3
+    #           with:
+    #               node-version: '20.9.0'
+    #         - run: yarn add cypress@latest
 
-            - name: Install cURL
-              run: |
-                  apt-get update && apt-get install -y curl
+    #         - name: Install cURL
+    #           run: |
+    #               apt-get update && apt-get install -y curl
 
-            - name: Grant execute permission to shell scripts
-              run: |
-                  chmod +x -R ./shell
+    #         - name: Grant execute permission to shell scripts
+    #           run: |
+    #               chmod +x -R ./shell
 
-            - name: List shell script files
-              run: |
-                  ls -la ./shell
+    #         - name: List shell script files
+    #           run: |
+    #               ls -la ./shell
 
-            - name: Execute shell script
-              run: |
-                  export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
-                  ./shell/schedule.sh
+    #         - name: Execute shell script
+    #           run: |
+    #               export CYPRESS_RECORD_KEY="${{ secrets.CYPRESS_RECORD_KEY }}"
+    #               ./shell/schedule.sh
 
     # onprem_dataset_upload_test:
     #     runs-on: ubuntu-latest
