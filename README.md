@@ -1,4 +1,4 @@
-# Backoffice Automation Scripts
+# DEEP:PHI Automation Scripts
 
 이 프로젝트는 [Cypress](https://www.cypress.io/)를 활용하여 DEEP:PHI의 주요 기능을 자동화하고 테스트하기 위해 설계된 스크립트입니다.
 
