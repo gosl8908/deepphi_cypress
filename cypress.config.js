@@ -72,57 +72,6 @@ module.exports = defineConfig({
             });
         },
 
-        env: {
-            /* Site */
-            Onprem: 'https://onprem.deepphi.ai/',
-            Stg: 'http://st-home.deepphi.ai/',
-            StgAdmin: 'https://st-admin.deepphi.ai/',
-            Dev: 'https://dev-home.deepphi.ai/',
-            DevAdmin: 'https://dev-admin.deepphi.ai/',
-            Prod: 'https://www.deepphi.ai/',
-            ProdAdmin: 'https://admin.deepphi.ai/',
-            ProdTest: 'http://st.deepphi.ai/',
-            DisposableEmail: 'https://ruu.kr/',
-
-            /* Id */
-            AdminId: 'admin@deepnoid.com',
-            AutoTestId: 'deeptest1@deepnoid.com',
-            KangTestId2: 'deepphi.auto2@ruu.kr',
-            KangTestId3: 'deepphi.auto3@ruu.kr',
-            KangTestId4: 'deepphi.auto4@ruu.kr',
-            KangTestId5: 'deepphi.auto5@ruu.kr',
-            KangTestId6: 'deepphi.auto6@ruu.kr',
-            KangTestId7: 'deepphi.auto7@ruu.kr',
-            DeepPhiAutoId: 'deepphi.auto2@ruu.kr',
-            OnpremId3: 'asdasdasd3@ruu.kr',
-            OnpremId4: 'asdasdasd4@ruu.kr',
-            OnpremId5: 'asdasdasd5@ruu.kr',
-            OnpremId6: 'asdasdasd6@ruu.kr',
-            OnpremId7: 'asdasdasd7@ruu.kr',
-            OnpremId8: 'asdasdasd8@ruu.kr',
-            OnpremId9: 'asdasdasd9@ruu.kr',
-            OnpremId10: 'asdasdasd10@ruu.kr',
-            TestEmail: 'ckdeo1211@deepnoid.com',
-            AutoEmail: 'deepphi.auto@gmail.com',
-            ObsTestId: 'obskorea@ruu.kr',
-            Obs2TestId: 'obskorea2@ruu.kr',
-            Obs3TestId: 'obskorea3@ruu.kr',
-            Obs4TestId: 'obskorea4@ruu.kr',
-            Test1Id: 'qa1214@deepnoid.com',
-            Supporttest: 'supporttest@ruu.kr',
-            AdminPwd: 'deep1004!!',
-            supporttest: 'supporttest@ruu.kr',
-            OnpremAdminId: 'admin@deepnoid.com',
-
-            /* Password */
-            ObsTestPwd: 'P@ssw0rd',
-            KangTestPwd: 'test123!',
-            TestPwd: 'deepp@ssw0rd',
-            AutoPwd: '12sqec34!',
-            Test1Pwd: 'qwe123..',
-            OnpremAdminPwd: 'deep1004!!',
-            OnpremTestPwd: 'qwe123##',
-
             /* content */
             EmailBody: `Cypress 자동화 테스트 스위트가 성공적으로 완료되었습니다`,
         },
