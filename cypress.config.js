@@ -5,8 +5,8 @@ const { defineConfig } = require('cypress');
 const { beforeRunHook, afterRunHook } = require('cypress-mochawesome-reporter/lib');
 
 /* Email Account */
-const EamilId = 'gosl8908@deepnoid.com';
-const EamilPwd = 'gotjd0215!';
+const EamilId = process.env.deepphiEmail
+const EamilPwd = process.env.deepphiEmailPwd
 
 module.exports = defineConfig({
     viewportWidth: 1920,
